@@ -1,0 +1,14 @@
+node_modules
+dist
+coverage
+playwright-report
+test-results
+vite.config.ts
+playwright.config.ts
+jest.config.js
+tailwind.config.js
+postcss.config.js
+commitlint.config.js
+*.d.ts
+__mocks__
+public

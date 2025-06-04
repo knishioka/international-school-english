@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+
+  /* Custom focus styles for better accessibility */
+  *:focus {
+    @apply outline-none;
+  }
+
+  *:focus-visible {
+    @apply ring-4 ring-primary-400 ring-offset-2;
+  }
+
+  /* Button base styles */
+  button {
+    @apply transition-all duration-200;
+  }
+
+  /* Disable text selection for game elements */
+  .no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}
+
+@layer components {
+  /* Game card styles */
+  .game-card {
+    @apply bg-white rounded-2xl shadow-lg p-6 
+           transform transition-all duration-300 
+           hover:scale-105 hover:shadow-xl
+           cursor-pointer no-select;
+  }
+
+  /* Primary button */
+  .btn-primary {
+    @apply bg-primary-500 text-white font-bold
+           py-4 px-8 rounded-full text-lg
+           shadow-lg hover:bg-primary-600
+           active:scale-95 transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Secondary button */
+  .btn-secondary {
+    @apply bg-secondary-500 text-white font-bold
+           py-4 px-8 rounded-full text-lg
+           shadow-lg hover:bg-secondary-600
+           active:scale-95 transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Success animation */
+  .success-bounce {
+    animation: success-bounce 0.6s ease-out;
+  }
+
+  @keyframes success-bounce {
+    0% { transform: scale(0.8); opacity: 0; }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+}

@@ -1,0 +1,56 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# ステージングされたファイルをチェック
+FILES=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.(ts|tsx|js|jsx)$')
+
+if [ -z "$FILES" ]; then
+  echo "No TypeScript/JavaScript files to check"
+  exit 0
+fi
+
+echo "🔍 Running pre-commit checks..."
+
+# ESLint
+echo "📋 Running ESLint..."
+npx eslint $FILES --fix
+if [ $? -ne 0 ]; then
+  echo "❌ ESLint found errors. Please fix them before committing."
+  exit 1
+fi
+
+# Prettier
+echo "✨ Running Prettier..."
+npx prettier --write $FILES
+if [ $? -ne 0 ]; then
+  echo "❌ Prettier formatting failed."
+  exit 1
+fi
+
+# TypeScript
+echo "🔷 Running TypeScript checks..."
+npx tsc --noEmit
+if [ $? -ne 0 ]; then
+  echo "❌ TypeScript compilation failed."
+  exit 1
+fi
+
+# Unit tests
+echo "🧪 Running unit tests..."
+npm run test:unit -- --passWithNoTests
+if [ $? -ne 0 ]; then
+  echo "❌ Unit tests failed."
+  exit 1
+fi
+
+# Check for console.log in production code
+echo "🔎 Checking for console.log statements..."
+if grep -r "console\.\(log\|debug\)" $FILES --exclude-dir=__tests__ --exclude-dir=tests; then
+  echo "❌ Found console.log/debug statements in production code!"
+  exit 1
+fi
+
+# Re-add files after formatting
+git add $FILES
+
+echo "✅ All pre-commit checks passed!"
