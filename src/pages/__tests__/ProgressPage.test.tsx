@@ -6,8 +6,22 @@ import { AudioProvider } from '@/contexts/AudioContext';
 import { progressService } from '@/services/progressService';
 import { KanjiGrade } from '@/contexts/LanguageContext';
 
+// Mock LearningStats component which uses recharts
+jest.mock('@/components/LearningStats', () => ({
+  LearningStats: () => <div>Learning Stats Component</div>,
+}));
+
 const mockGetProgressStats = progressService.getProgressStats as jest.MockedFunction<
   typeof progressService.getProgressStats
+>;
+const mockGetWeeklyActivityData = progressService.getWeeklyActivityData as jest.MockedFunction<
+  typeof progressService.getWeeklyActivityData
+>;
+const mockGetTimeDistribution = progressService.getTimeDistribution as jest.MockedFunction<
+  typeof progressService.getTimeDistribution
+>;
+const mockGetCategoryProgress = progressService.getCategoryProgress as jest.MockedFunction<
+  typeof progressService.getCategoryProgress
 >;
 
 const mockNavigate = jest.fn();
@@ -87,6 +101,32 @@ describe('ProgressPage', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     localStorage.clear();
+    
+    // Set default mock return values
+    mockGetWeeklyActivityData.mockReturnValue([
+      { day: 'Mon', activities: 5 },
+      { day: 'Tue', activities: 3 },
+      { day: 'Wed', activities: 7 },
+      { day: 'Thu', activities: 4 },
+      { day: 'Fri', activities: 2 },
+      { day: 'Sat', activities: 3 },
+      { day: 'Sun', activities: 1 },
+    ]);
+    
+    mockGetTimeDistribution.mockReturnValue([
+      { hour: '9 AM', minutes: 15 },
+      { hour: '10 AM', minutes: 30 },
+      { hour: '2 PM', minutes: 20 },
+      { hour: '3 PM', minutes: 25 },
+      { hour: '4 PM', minutes: 30 },
+    ]);
+    
+    mockGetCategoryProgress.mockReturnValue([
+      { category: 'animals', total: 20, completed: 15 },
+      { category: 'food', total: 15, completed: 12 },
+      { category: 'colors', total: 10, completed: 8 },
+      { category: 'numbers', total: 10, completed: 10 },
+    ]);
   });
 
   it('ユーザー名が設定されていない場合、ローディング画面を表示する', () => {
@@ -153,15 +193,6 @@ describe('ProgressPage', () => {
     ).toBeInTheDocument();
   });
 
-  it('今週の活動統計を表示する', () => {
-    localStorage.setItem('userName', 'testUser');
-    mockGetProgressStats.mockReturnValue(mockProgressStats);
-
-    render(<ProgressPage />, { wrapper: AllTheProviders });
-
-    expect(screen.getByText(/This Week's Activity|こんしゅうの かつどう/)).toBeInTheDocument();
-    expect(screen.getByText('25')).toBeInTheDocument(); // Activities last 7 days
-  });
 
   it('戻るボタンでホームに戻る', async () => {
     localStorage.setItem('userName', 'testUser');

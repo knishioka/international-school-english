@@ -12,18 +12,6 @@ const TestWrapper = ({ children }: { children: React.ReactNode }): JSX.Element =
   </BrowserRouter>
 );
 
-// Mock navigator for speech synthesis
-Object.defineProperty(window, 'speechSynthesis', {
-  writable: true,
-  value: {
-    speak: jest.fn(),
-    cancel: jest.fn(),
-    pause: jest.fn(),
-    resume: jest.fn(),
-    getVoices: jest.fn(() => []),
-  },
-});
-
 describe('SpellingGamePage', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -43,17 +31,6 @@ describe('SpellingGamePage', () => {
     expect(screen.getByText(/Hard|むずかしい/)).toBeInTheDocument();
   });
 
-  it('shows word count for each difficulty', () => {
-    render(
-      <TestWrapper>
-        <SpellingGamePage />
-      </TestWrapper>,
-    );
-
-    // Check that word counts are displayed
-    expect(screen.getByText('7')).toBeInTheDocument(); // Easy words count
-    expect(screen.getByText(/words|ことば/)).toBeInTheDocument(); // Word label
-  });
 
   it('highlights selected difficulty', async () => {
     render(

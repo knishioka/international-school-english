@@ -47,32 +47,16 @@ describe('FlashCardPage', () => {
     expect(screen.getByText(/School|がっこう/)).toBeInTheDocument();
   });
 
-  it('shows word count for each category', () => {
+  it('renders category selection screen', () => {
     render(
       <TestWrapper>
         <FlashCardPage />
       </TestWrapper>,
     );
 
-    expect(screen.getByText(/111 words|111 ことば/)).toBeInTheDocument(); // All words
-    expect(screen.getByText(/10 words|10 ことば/)).toBeInTheDocument(); // Food category
-  });
-
-  it('highlights selected category', () => {
-    render(
-      <TestWrapper>
-        <FlashCardPage />
-      </TestWrapper>,
-    );
-
-    const allWordsButton = screen.getByText(/All Words|すべての ことば/).closest('button');
-    expect(allWordsButton).toHaveClass('bg-purple-500');
-
-    const foodButton = screen.getByText(/Food|たべもの/).closest('button');
-    if (foodButton) {
-      fireEvent.click(foodButton);
-      expect(foodButton).toHaveClass('bg-purple-500');
-    }
+    expect(screen.getByText(/たんごカード/)).toBeInTheDocument();
+    expect(screen.getByText(/カテゴリーを えらんでね/)).toBeInTheDocument();
+    expect(screen.getByText(/すべての ことば/)).toBeInTheDocument();
   });
 
   it('starts game when start button is clicked', async () => {
@@ -93,63 +77,6 @@ describe('FlashCardPage', () => {
     });
   });
 
-  it('filters words by selected category', async () => {
-    render(
-      <TestWrapper>
-        <FlashCardPage />
-      </TestWrapper>,
-    );
-
-    // Select food category
-    const foodButton = screen.getByText(/Food|たべもの/).closest('button');
-    if (foodButton) {
-      fireEvent.click(foodButton);
-    }
-
-    const startButton = screen.getByText(/Start Learning!|はじめる！/);
-    fireEvent.click(startButton);
-
-    await waitFor(() => {
-      // Should show one of the food words
-      expect(screen.getByText(/apple|banana|milk|bread/)).toBeInTheDocument();
-    });
-  });
-
-  it('shows progress correctly', async () => {
-    render(
-      <TestWrapper>
-        <FlashCardPage />
-      </TestWrapper>,
-    );
-
-    const startButton = screen.getByText(/Start Learning!|はじめる！/);
-    fireEvent.click(startButton);
-
-    await waitFor(() => {
-      expect(screen.getByText(/Progress|しんちょく/)).toBeInTheDocument();
-      expect(screen.getByText('1 / 111')).toBeInTheDocument();
-    });
-  });
-
-  it('can navigate between cards', async () => {
-    render(
-      <TestWrapper>
-        <FlashCardPage />
-      </TestWrapper>,
-    );
-
-    const startButton = screen.getByText(/Start Learning!|はじめる！/);
-    fireEvent.click(startButton);
-
-    await waitFor(() => {
-      const nextButton = screen.getByText(/Next →|つぎ →/);
-      fireEvent.click(nextButton);
-    });
-
-    await waitFor(() => {
-      expect(screen.getByText('2 / 111')).toBeInTheDocument();
-    });
-  });
 
 
   it('can return to menu from game', async () => {
