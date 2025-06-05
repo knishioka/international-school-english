@@ -56,6 +56,7 @@ jobs:
   test-e2e:
     name: E2E Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 15  # 15分でタイムアウト
     steps:
       - uses: actions/checkout@v4
       
@@ -69,23 +70,24 @@ jobs:
         run: npm ci
       
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps chromium  # Chromiumのみインストール
       
       - name: Run Playwright tests
         run: npm run test:e2e
+        timeout-minutes: 10  # テスト実行は10分でタイムアウト
       
       - name: Upload Playwright report
         uses: actions/upload-artifact@v4
-        if: always()
+        if: failure()  # 失敗時のみアップロード
         with:
           name: playwright-report
           path: playwright-report/
-          retention-days: 30
+          retention-days: 7  # 7日間保持
 
   build:
     name: Build
     runs-on: ubuntu-latest
-    needs: [lint, test-unit]
+    needs: [lint]  # test-unitと並列実行
     steps:
       - uses: actions/checkout@v4
       
