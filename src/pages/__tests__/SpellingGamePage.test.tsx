@@ -125,6 +125,33 @@ describe('SpellingGamePage', () => {
     });
   });
 
+  it('can type alphabet letters in input field', async () => {
+    render(
+      <TestWrapper>
+        <SpellingGamePage />
+      </TestWrapper>,
+    );
+
+    const startButton = screen.getByText(/Start Game!|はじめる！/);
+    fireEvent.click(startButton);
+
+    await waitFor(() => {
+      const inputField = screen.getByPlaceholderText(
+        /Type here|ここに かいてね/,
+      ) as HTMLInputElement;
+      expect(inputField).toBeInTheDocument();
+    });
+
+    const inputField = screen.getByPlaceholderText(/Type here|ここに かいてね/) as HTMLInputElement;
+
+    // Type 'hello' in the input field
+    fireEvent.change(inputField, { target: { value: 'hello' } });
+
+    await waitFor(() => {
+      expect(inputField.value).toBe('hello');
+    });
+  });
+
   it('displays alphabet buttons for input', async () => {
     render(
       <TestWrapper>
