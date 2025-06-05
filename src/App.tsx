@@ -6,12 +6,13 @@ import { WelcomePage } from './pages/WelcomePage';
 import { VocabularyGamePage } from './pages/VocabularyGamePage';
 import { StoryPage } from './pages/StoryPage';
 import { ProgressPage } from './pages/ProgressPage';
+import { config } from './config';
 
 function App(): JSX.Element {
   return (
     <LanguageProvider>
       <AudioProvider>
-        <Router>
+        <Router basename={config.baseUrl}>
           <Routes>
             <Route path="/" element={<WelcomePage />} />
             <Route path="/home" element={<HomePage />} />

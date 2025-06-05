@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { HomePage } from '../HomePage';
 import { LanguageProvider } from '@/contexts/LanguageContext';
@@ -66,7 +66,7 @@ describe('HomePage', () => {
     expect(progressButton.textContent).toContain('📊');
   });
 
-  it('ゲームカードをクリックできる', () => {
+  it('ゲームカードをクリックできる', async () => {
     const mockPlaySound = jest.fn();
     (AudioContext.useAudio as jest.Mock).mockReturnValue({
       playSound: mockPlaySound,
@@ -76,12 +76,15 @@ describe('HomePage', () => {
     render(<HomePage />, { wrapper: AllTheProviders });
 
     const vocabularyCard = screen.getByRole('button', { name: /Play たんご game/ });
-    fireEvent.click(vocabularyCard);
+    
+    await act(async () => {
+      fireEvent.click(vocabularyCard);
+    });
 
     expect(mockPlaySound).toHaveBeenCalledWith('click');
   });
 
-  it('進捗ボタンをクリックできる', () => {
+  it('進捗ボタンをクリックできる', async () => {
     const mockPlaySound = jest.fn();
     (AudioContext.useAudio as jest.Mock).mockReturnValue({
       playSound: mockPlaySound,
@@ -91,7 +94,10 @@ describe('HomePage', () => {
     render(<HomePage />, { wrapper: AllTheProviders });
 
     const progressButton = screen.getByText(/がくしゅうきろく/);
-    fireEvent.click(progressButton);
+    
+    await act(async () => {
+      fireEvent.click(progressButton);
+    });
 
     expect(mockPlaySound).toHaveBeenCalledWith('click');
   });

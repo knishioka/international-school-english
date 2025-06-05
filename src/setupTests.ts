@@ -4,6 +4,18 @@ import { toHaveNoViolations } from 'jest-axe';
 
 expect.extend(toHaveNoViolations);
 
+// Mock import.meta.env globally
+Object.defineProperty(globalThis, 'import', {
+  value: {
+    meta: {
+      env: {
+        BASE_URL: '/',
+      },
+    },
+  },
+  writable: true,
+});
+
 // Suppress React Router warnings in tests
 beforeAll(() => {
   const originalWarn = console.warn;
