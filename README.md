@@ -1,14 +1,27 @@
 # International School English Learning App / インターナショナルスクール英語学習アプリ
 
+[![CI Status](https://github.com/knishioka/international-school-english/workflows/CI/badge.svg)](https://github.com/knishioka/international-school-english/actions/workflows/ci.yml)
+[![Deploy Status](https://github.com/knishioka/international-school-english/workflows/Deploy%20to%20GitHub%20Pages/badge.svg)](https://github.com/knishioka/international-school-english/actions/workflows/deploy.yml)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Active-green)](https://knishioka.github.io/international-school-english/)
+
 A bilingual (Japanese/English) educational web application designed for Japanese children attending international schools to learn English through interactive games and stories.
 
 インターナショナルスクールに通う日本人の子供向けの、インタラクティブなゲームと物語を通じて英語を学ぶバイリンガル（日本語/英語）教育ウェブアプリケーションです。
 
+## 🎮 Play the App / アプリで遊ぶ
+
+🌐 **Live Demo / デモサイト**: [https://knishioka.github.io/international-school-english/](https://knishioka.github.io/international-school-english/)
+
+You can try the app directly in your browser without any installation!  
+インストール不要で、ブラウザから直接アプリをお試しいただけます！
+
 ## 🌟 Features / 機能
 
 ### 🎮 Interactive Learning Games / インタラクティブな学習ゲーム
+- **Flash Cards (単語カード)**: Learn vocabulary with 3D flip animations and pronunciation
+- **Spelling Game (スペルチェック)**: Practice spelling with difficulty levels and hints
 - **Sentence Practice (文章練習)**: Build English sentences by arranging words in the correct order
-- **Story Reading (物語)**: Educational stories with moral lessons, available in both languages
+- **Story Reading (物語)**: Educational stories with moral lessons, page-flip animations, and auto-play feature
 
 ### 🈁 Kanji Grade Level System / 漢字学年別システム
 - Adjustable kanji levels (Grade 1-6) for Japanese text
@@ -21,9 +34,10 @@ A bilingual (Japanese/English) educational web application designed for Japanese
 - Context-appropriate translations
 
 ### 📊 Progress Tracking / 学習進捗管理
-- Track learning progress
-- Achievement system
-- Visual progress indicators
+- Track learning progress for each game
+- Achievement system with visual rewards
+- Progress indicators and statistics
+- Data persisted locally for privacy
 
 ## 🚀 Getting Started / はじめに
 

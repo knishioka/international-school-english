@@ -57,14 +57,16 @@ describe('HomePage', () => {
     expect(header).toHaveTextContent('こんにちは, ! 👋');
   });
 
-  it('ゲームカードが3つ表示される', () => {
+  it('ゲームカードが4つ表示される', () => {
     render(<HomePage />, { wrapper: AllTheProviders });
 
-    expect(screen.getByText('アルファベット')).toBeInTheDocument();
+    expect(screen.getByText('たんごカード')).toBeInTheDocument();
+    expect(screen.getByText('スペルチェック')).toBeInTheDocument();
     expect(screen.getByText('ぶんしょうれんしゅう')).toBeInTheDocument();
     expect(screen.getByText('おはなし')).toBeInTheDocument();
 
-    expect(screen.getByText('🔤')).toBeInTheDocument();
+    expect(screen.getByText('📚')).toBeInTheDocument();
+    expect(screen.getByText('✏️')).toBeInTheDocument();
     expect(screen.getByText('📝')).toBeInTheDocument();
     expect(screen.getByText('📖')).toBeInTheDocument();
   });
@@ -77,7 +79,7 @@ describe('HomePage', () => {
     expect(progressButton.textContent).toContain('📊');
   });
 
-  it('アルファベットゲームカードをクリックできる', async () => {
+  it('スペルチェックゲームカードをクリックできる', async () => {
     const mockPlaySound = jest.fn();
     (AudioContext.useAudio as jest.Mock).mockReturnValue({
       playSound: mockPlaySound,
@@ -86,14 +88,14 @@ describe('HomePage', () => {
 
     render(<HomePage />, { wrapper: AllTheProviders });
 
-    const alphabetCard = screen.getByRole('button', { name: /Play アルファベット game/ });
+    const spellingCard = screen.getByRole('button', { name: /Play スペルチェック game/ });
 
     await act(async () => {
-      fireEvent.click(alphabetCard);
+      fireEvent.click(spellingCard);
     });
 
     expect(mockPlaySound).toHaveBeenCalledWith('click');
-    expect(mockNavigate).toHaveBeenCalledWith('/games/alphabet');
+    expect(mockNavigate).toHaveBeenCalledWith('/games/spelling');
   });
 
   it('文章練習ゲームカードをクリックできる', async () => {

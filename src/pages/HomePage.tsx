@@ -19,11 +19,18 @@ export function HomePage(): JSX.Element {
 
   const games = [
     {
-      id: 'alphabet',
-      title: t('alphabet'),
-      icon: '🔤',
+      id: 'flashcards',
+      title: t('language') === 'ja' ? 'たんごカード' : 'Flash Cards',
+      icon: '📚',
+      color: 'bg-green-100',
+      route: '/games/flashcards',
+    },
+    {
+      id: 'spelling',
+      title: t('language') === 'ja' ? 'スペルチェック' : 'Spelling',
+      icon: '✏️',
       color: 'bg-blue-100',
-      route: '/games/alphabet',
+      route: '/games/spelling',
     },
     {
       id: 'sentencePractice',
@@ -63,7 +70,7 @@ export function HomePage(): JSX.Element {
           <p className="text-xl text-gray-600">{t('letsPlay')}</p>
         </motion.header>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 max-w-6xl mx-auto">
           {games.map((game, index) => (
             <motion.div
               key={game.id}

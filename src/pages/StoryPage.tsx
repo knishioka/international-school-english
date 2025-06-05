@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useLanguage, KanjiGrade } from '@/contexts/LanguageContext';
 import { useAudio } from '@/contexts/AudioContext';
 import { KanjiGradeSelector } from '@/components/KanjiGradeSelector';
+import { PageFlip } from '@/components/PageFlip';
 import { progressService } from '@/services/progressService';
 
 interface Story {
@@ -1033,11 +1034,31 @@ export function StoryPage(): JSX.Element {
   const [currentPage, setCurrentPage] = useState(0);
   const [isReading, setIsReading] = useState(false);
   const [userName, setUserName] = useState('');
+  const [pageDirection, setPageDirection] = useState<'left' | 'right'>('right');
+  const [isAutoPlay, setIsAutoPlay] = useState(false);
 
   useEffect(() => {
     const name = localStorage.getItem('userName');
     setUserName(name ?? '');
   }, []);
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (!isAutoPlay || !selectedStory || isReading) {return;}
+
+    const autoPlayTimer = setTimeout(() => {
+      if (currentPage < selectedStory.pages.length - 1) {
+        void handleNextPage();
+      } else {
+        // Story finished
+        setIsAutoPlay(false);
+        void playSound('success');
+      }
+    }, 5000); // 5 seconds per page
+
+    return () => clearTimeout(autoPlayTimer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAutoPlay, currentPage, selectedStory, isReading]);
 
   const handleBack = async (): Promise<void> => {
     await playSound('click');
@@ -1070,10 +1091,11 @@ export function StoryPage(): JSX.Element {
       return;
     }
 
-    await playSound('click');
+    await playSound('pageFlip');
     const newPage = currentPage + 1;
 
     if (newPage < selectedStory.pages.length) {
+      setPageDirection('right');
       setCurrentPage(newPage);
     }
 
@@ -1089,8 +1111,9 @@ export function StoryPage(): JSX.Element {
   };
 
   const handlePrevPage = async (): Promise<void> => {
-    await playSound('click');
+    await playSound('pageFlip');
     if (currentPage > 0) {
+      setPageDirection('left');
       setCurrentPage(currentPage - 1);
     }
   };
@@ -1112,6 +1135,16 @@ export function StoryPage(): JSX.Element {
     setTimeout(() => {
       setIsReading(false);
     }, 3000);
+  };
+
+  const toggleAutoPlay = async (): Promise<void> => {
+    await playSound('click');
+    setIsAutoPlay(!isAutoPlay);
+    
+    // If starting auto-play and not on a page, start reading current page
+    if (!isAutoPlay && selectedStory) {
+      handleRead();
+    }
   };
 
   return (
@@ -1187,31 +1220,45 @@ export function StoryPage(): JSX.Element {
           </>
         ) : (
           // ストーリー表示画面
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentPage}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              className="bg-white rounded-3xl shadow-2xl p-8 md:p-12"
-            >
-              {/* ページ内容 */}
-              <div className="text-center mb-8">
-                <div className="text-8xl mb-6">{selectedStory.pages[currentPage].emoji}</div>
-                <p className="text-2xl font-medium text-gray-800 leading-relaxed">
-                  {language === 'ja'
-                    ? selectedStory.pages[currentPage].jaKanji[kanjiGrade]
-                    : selectedStory.pages[currentPage].text.en}
-                </p>
-                {language === 'ja' && (
-                  <p className="text-lg text-gray-500 mt-4">
-                    {selectedStory.pages[currentPage].text.en}
-                  </p>
-                )}
-              </div>
+          <PageFlip 
+            pageKey={currentPage} 
+            direction={pageDirection}
+            className="bg-white rounded-3xl shadow-2xl p-8 md:p-12"
+          >
+            {/* ページ内容 */}
+            <div className="text-center mb-8">
+              <motion.div
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ duration: 0.5, type: 'spring' }}
+                className="text-8xl mb-6"
+              >
+                {selectedStory.pages[currentPage].emoji}
+              </motion.div>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="text-2xl font-medium text-gray-800 leading-relaxed"
+              >
+                {language === 'ja'
+                  ? selectedStory.pages[currentPage].jaKanji[kanjiGrade]
+                  : selectedStory.pages[currentPage].text.en}
+              </motion.p>
+              {language === 'ja' && (
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                  className="text-lg text-gray-500 mt-4"
+                >
+                  {selectedStory.pages[currentPage].text.en}
+                </motion.p>
+              )}
+            </div>
 
-              {/* コントロール */}
-              <div className="flex justify-between items-center">
+            {/* コントロール */}
+            <div className="flex justify-between items-center">
                 <button
                   onClick={handlePrevPage}
                   disabled={currentPage === 0}
@@ -1227,21 +1274,38 @@ export function StoryPage(): JSX.Element {
                   ←
                 </button>
 
-                <button
-                  onClick={handleRead}
-                  disabled={isReading}
-                  className={`
-                    px-6 py-3 rounded-full font-medium transition-all
-                    ${
-                      isReading
-                        ? 'bg-yellow-300 text-gray-700 animate-pulse'
-                        : 'bg-green-500 text-white hover:bg-green-600'
-                    }
-                  `}
-                >
-                  {isReading ? '🔊' : '▶️'}
-                  {language === 'ja' ? 'よむ' : 'Read'}
-                </button>
+                <div className="flex gap-3">
+                  <button
+                    onClick={handleRead}
+                    disabled={isReading}
+                    className={`
+                      px-6 py-3 rounded-full font-medium transition-all
+                      ${
+                        isReading
+                          ? 'bg-yellow-300 text-gray-700 animate-pulse'
+                          : 'bg-green-500 text-white hover:bg-green-600'
+                      }
+                    `}
+                  >
+                    {isReading ? '🔊' : '▶️'}
+                    {language === 'ja' ? 'よむ' : 'Read'}
+                  </button>
+
+                  <button
+                    onClick={toggleAutoPlay}
+                    className={`
+                      px-4 py-3 rounded-full font-medium transition-all
+                      ${
+                        isAutoPlay
+                          ? 'bg-orange-500 text-white animate-pulse'
+                          : 'bg-purple-500 text-white hover:bg-purple-600'
+                      }
+                    `}
+                    title={language === 'ja' ? 'じどうさいせい' : 'Auto-play'}
+                  >
+                    {isAutoPlay ? '⏸️' : '🎬'}
+                  </button>
+                </div>
 
                 <button
                   onClick={handleNextPage}
@@ -1257,10 +1321,10 @@ export function StoryPage(): JSX.Element {
                 >
                   →
                 </button>
-              </div>
+            </div>
 
-              {/* ページインジケーター */}
-              <div className="flex justify-center gap-2 mt-6">
+            {/* ページインジケーター */}
+            <div className="flex justify-center gap-2 mt-6">
                 {selectedStory.pages.map((_, index) => (
                   <div
                     key={index}
@@ -1270,10 +1334,10 @@ export function StoryPage(): JSX.Element {
                     `}
                   />
                 ))}
-              </div>
+            </div>
 
-              {/* 最後のページで教訓を表示 */}
-              {currentPage === selectedStory.pages.length - 1 && (
+            {/* 最後のページで教訓を表示 */}
+            {currentPage === selectedStory.pages.length - 1 && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -1288,9 +1352,8 @@ export function StoryPage(): JSX.Element {
                       : selectedStory.lesson.en}
                   </p>
                 </motion.div>
-              )}
-            </motion.div>
-          </AnimatePresence>
+            )}
+          </PageFlip>
         )}
       </div>
     </div>
