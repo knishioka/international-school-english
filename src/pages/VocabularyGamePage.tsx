@@ -1697,7 +1697,7 @@ export function VocabularyGamePage(): JSX.Element {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [currentGame, setCurrentGame] = useState<WordOrderGame | null>(null);
-  const [showHint, setShowHint] = useState(false);
+  const [hintLevel, setHintLevel] = useState(0);
   const [score, setScore] = useState(0);
   const [userName, setUserName] = useState('');
 
@@ -1727,7 +1727,7 @@ export function VocabularyGamePage(): JSX.Element {
       selectedWords: [],
       isCorrect: null,
     });
-    setShowHint(false);
+    setHintLevel(0);
   };
 
   const handleWordClick = async (word: string, fromSelected: boolean): Promise<void> => {
@@ -1765,10 +1765,11 @@ export function VocabularyGamePage(): JSX.Element {
     const isCorrect = userAnswer === sentenceWithoutPunctuation;
     setCurrentGame({ ...currentGame, isCorrect });
 
-    // Calculate score based on correctness and sentence length
+    // Calculate score based on correctness, sentence length, and hint level
     const baseScore = isCorrect ? currentGame.sentence.words.length * 10 : 5;
-    const bonusScore = isCorrect ? (showHint ? 0 : 20) : 0; // Bonus for not using hint
-    const totalScore = baseScore + bonusScore;
+    const hintPenalty = isCorrect ? hintLevel * 10 : 0; // -10 points per hint level
+    const bonusScore = isCorrect && hintLevel === 0 ? 20 : 0; // Bonus for no hints
+    const totalScore = Math.max(baseScore - hintPenalty + bonusScore, 10); // Minimum 10 points
 
     if (isCorrect) {
       setScore(score + totalScore);
@@ -1811,9 +1812,55 @@ export function VocabularyGamePage(): JSX.Element {
     speak(currentGame.sentence.english, 'en');
   };
 
-  const toggleHint = async (): Promise<void> => {
+  const getHintText = (): string => {
+    if (!currentGame) {
+      return '';
+    }
+
+    const { sentence } = currentGame;
+
+    switch (hintLevel) {
+      case 1:
+        // Level 1: Number of words and basic structure
+        return language === 'ja'
+          ? `${sentence.words.length}個の単語を使います。`
+          : `Use ${sentence.words.length} words to make the sentence.`;
+
+      case 2: {
+        // Level 2: First word and sentence type
+        const sentenceType = sentence.english.endsWith('?')
+          ? language === 'ja'
+            ? '質問文'
+            : 'question'
+          : sentence.english.endsWith('!')
+            ? language === 'ja'
+              ? '感嘆文'
+              : 'exclamation'
+            : language === 'ja'
+              ? '平叙文'
+              : 'statement';
+        return language === 'ja'
+          ? `最初の単語は「${sentence.words[0]}」です。これは${sentenceType}です。`
+          : `The first word is "${sentence.words[0]}". This is a ${sentenceType}.`;
+      }
+
+      case 3: {
+        // Level 3: First half of the sentence
+        const halfLength = Math.ceil(sentence.words.length / 2);
+        const firstHalf = sentence.words.slice(0, halfLength).join(' ');
+        return language === 'ja' ? `文の前半: ${firstHalf}...` : `First half: ${firstHalf}...`;
+      }
+
+      default:
+        return '';
+    }
+  };
+
+  const showNextHint = async (): Promise<void> => {
     await playSound('click');
-    setShowHint(!showHint);
+    if (hintLevel < 3) {
+      setHintLevel(hintLevel + 1);
+    }
   };
 
   const nextSentence = async (): Promise<void> => {
@@ -1914,10 +1961,15 @@ export function VocabularyGamePage(): JSX.Element {
                     🔊 {language === 'ja' ? 'きく' : 'Listen'}
                   </button>
                   <button
-                    onClick={toggleHint}
-                    className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors"
+                    onClick={showNextHint}
+                    disabled={hintLevel >= 3}
+                    className={`px-4 py-2 rounded-lg transition-colors ${
+                      hintLevel >= 3
+                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                        : 'bg-yellow-500 text-white hover:bg-yellow-600'
+                    }`}
                   >
-                    💡 {language === 'ja' ? 'ヒント' : 'Hint'}
+                    💡 {language === 'ja' ? `ヒント (${hintLevel}/3)` : `Hint (${hintLevel}/3)`}
                   </button>
                 </div>
               </div>
@@ -1928,13 +1980,17 @@ export function VocabularyGamePage(): JSX.Element {
                   : currentGame.sentence.english}
               </div>
 
-              {showHint && (
+              {hintLevel > 0 && (
                 <motion.div
+                  key={hintLevel}
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
-                  className="text-lg text-gray-600 italic"
+                  className="mt-3 p-3 bg-yellow-50 rounded-lg"
                 >
-                  {currentGame.sentence.english}
+                  <div className="text-sm font-medium text-yellow-800 mb-1">
+                    {language === 'ja' ? `ヒントレベル ${hintLevel}` : `Hint Level ${hintLevel}`}
+                  </div>
+                  <div className="text-base text-gray-700">{getHintText()}</div>
                 </motion.div>
               )}
             </div>

@@ -131,6 +131,46 @@ describe('VocabularyGamePage', () => {
     });
   });
 
+  it('shows progressive hints when hint button is clicked', async () => {
+    render(<VocabularyGamePage />, { wrapper: AllTheProviders });
+
+    // Select a sentence
+    const sentenceCard = screen.getByText('I eat breakfast every morning.');
+    await act(async () => {
+      fireEvent.click(sentenceCard);
+    });
+
+    // Initial state - no hint
+    expect(screen.queryByText(/ヒントレベル/)).not.toBeInTheDocument();
+
+    // Click hint button - Level 1
+    const hintButton = screen.getByRole('button', { name: /ヒント|Hint/ });
+    await act(async () => {
+      fireEvent.click(hintButton);
+    });
+
+    expect(screen.getByText(/ヒントレベル 1|Hint Level 1/)).toBeInTheDocument();
+    expect(screen.getByText(/個の単語|words to make/)).toBeInTheDocument();
+
+    // Click hint button - Level 2
+    await act(async () => {
+      fireEvent.click(screen.getByRole('button', { name: /ヒント|Hint/ }));
+    });
+    expect(screen.getByText(/ヒントレベル 2|Hint Level 2/)).toBeInTheDocument();
+    expect(screen.getByText(/最初の単語|first word/)).toBeInTheDocument();
+
+    // Click hint button - Level 3
+    await act(async () => {
+      fireEvent.click(screen.getByRole('button', { name: /ヒント|Hint/ }));
+    });
+    expect(screen.getByText(/ヒントレベル 3|Hint Level 3/)).toBeInTheDocument();
+    expect(screen.getByText(/文の前半|First half/)).toBeInTheDocument();
+
+    // Hint button should be disabled after level 3
+    const disabledHintButton = screen.getByRole('button', { name: /ヒント|Hint/ });
+    expect(disabledHintButton).toBeDisabled();
+  });
+
   it('間違った順序で単語を選んだ場合エラーメッセージを表示する', async () => {
     render(<VocabularyGamePage />, { wrapper: AllTheProviders });
 
@@ -318,13 +358,13 @@ describe('VocabularyGamePage', () => {
       fireEvent.click(checkButton);
     });
 
-    // ヒント使用時はボーナスなしの50点
+    // ヒントレベル1使用時: (5 words * 10) - (1 * 10) + 0 = 40点
     await waitFor(() => {
       expect(progressService.updateSentencePracticeProgress).toHaveBeenCalledWith(
         'testUser',
         '1',
         true,
-        50, // score (5 words * 10 + 0 bonus for using hint)
+        40, // score: base 50 - hint penalty 10
       );
     });
   });
