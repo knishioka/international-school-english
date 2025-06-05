@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useAudio } from '@/contexts/AudioContext';
 import { GameCard } from '@/components/GameCard';
+import { KanjiGradeSelector } from '@/components/KanjiGradeSelector';
 
 export function HomePage(): JSX.Element {
   const { t } = useLanguage();
   const { playSound } = useAudio();
+  const navigate = useNavigate();
   const [userName, setUserName] = useState('');
 
   useEffect(() => {
@@ -15,13 +18,6 @@ export function HomePage(): JSX.Element {
   }, []);
 
   const games = [
-    {
-      id: 'alphabet',
-      title: t('alphabet'),
-      icon: '🔤',
-      color: 'bg-primary-100',
-      route: '/games/alphabet',
-    },
     {
       id: 'vocabulary',
       title: t('vocabulary'),
@@ -38,10 +34,9 @@ export function HomePage(): JSX.Element {
     },
   ];
 
-  const handleGameClick = async (_route: string): Promise<void> => {
+  const handleGameClick = async (route: string): Promise<void> => {
     await playSound('click');
-    // Navigation will be implemented later
-    // TODO: Implement navigation to game routes
+    navigate(route);
   };
 
   return (
@@ -52,13 +47,16 @@ export function HomePage(): JSX.Element {
           animate={{ opacity: 1, y: 0 }}
           className="text-center py-8"
         >
+          <div className="flex justify-end mb-4">
+            <KanjiGradeSelector />
+          </div>
           <h1 className="text-5xl font-display font-bold text-gray-800 mb-2">
             {t('hello')}, {userName}! 👋
           </h1>
           <p className="text-xl text-gray-600">{t('letsPlay')}</p>
         </motion.header>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 max-w-2xl mx-auto">
           {games.map((game, index) => (
             <motion.div
               key={game.id}
@@ -82,7 +80,13 @@ export function HomePage(): JSX.Element {
           transition={{ delay: 0.5 }}
           className="text-center"
         >
-          <button onClick={() => handleGameClick('/progress')} className="btn-secondary">
+          <button
+            onClick={async () => {
+              await playSound('click');
+              navigate('/progress');
+            }}
+            className="btn-secondary"
+          >
             {t('myProgress')} 📊
           </button>
         </motion.div>

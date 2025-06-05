@@ -1,74 +1,161 @@
-# Grade 1 English Learning App
+# International School English Learning App / インターナショナルスクール英語学習アプリ
 
-インターナショナルスクール1年生向けの英語学習アプリケーション
+A bilingual (Japanese/English) educational web application designed for Japanese children attending international schools to learn English through interactive games and stories.
 
-## 概要
+インターナショナルスクールに通う日本人の子供向けの、インタラクティブなゲームと物語を通じて英語を学ぶバイリンガル（日本語/英語）教育ウェブアプリケーションです。
 
-このアプリケーションは、6-7歳の子どもたちが楽しく英語を学べるよう設計されています。日本語と英語のバイリンガル対応で、視覚・聴覚・触覚を活用したマルチセンサリー学習アプローチを採用しています。
+## 🌟 Features / 機能
 
-## 主な機能
+### 🎮 Interactive Learning Games / インタラクティブな学習ゲーム
+- **Sentence Practice (文章練習)**: Build English sentences by arranging words in the correct order
+- **Story Reading (物語)**: Educational stories with moral lessons, available in both languages
 
-- 🔤 **アルファベット学習**: フォニックスと文字認識
-- 📚 **語彙学習**: 日常生活で使う基本単語
-- 📖 **ストーリー**: 簡単な英語の物語
-- 🎮 **インタラクティブゲーム**: ドラッグ&ドロップ、音声認識
-- 📊 **進捗管理**: 学習の記録と成果の可視化
-- 🌐 **オフライン対応**: インターネットなしでも学習可能
+### 🈁 Kanji Grade Level System / 漢字学年別システム
+- Adjustable kanji levels (Grade 1-6) for Japanese text
+- Ensures age-appropriate kanji usage based on Japanese Ministry of Education guidelines
+- Same content displayed with different kanji complexity
 
-## 技術スタック
+### 🌐 Bilingual Support / バイリンガル対応
+- Full Japanese and English language support
+- Easy language switching
+- Context-appropriate translations
 
-- **フロントエンド**: React 18 + TypeScript
-- **ビルドツール**: Vite
-- **スタイリング**: Tailwind CSS
-- **アニメーション**: Framer Motion
-- **状態管理**: Zustand
-- **テスト**: Jest + React Testing Library + Playwright
-- **品質管理**: ESLint + Prettier + Husky
+### 📊 Progress Tracking / 学習進捗管理
+- Track learning progress
+- Achievement system
+- Visual progress indicators
 
-## 開発環境のセットアップ
+## 🚀 Getting Started / はじめに
+
+### Prerequisites / 前提条件
+- Node.js 18+ 
+- npm or yarn
+
+### Installation / インストール
 
 ```bash
-# リポジトリのクローン
-git clone [repository-url]
-cd grade-1-english
+# Clone the repository
+git clone https://github.com/knishioka/international-school-english.git
+cd international-school-english
 
-# 依存関係のインストール
+# Install dependencies
 npm install
 
-# 開発サーバーの起動
+# Start development server
 npm run dev
 ```
 
-## 利用可能なスクリプト
+The app will be available at `http://localhost:3000`
+
+### Building for Production / 本番ビルド
 
 ```bash
-npm run dev          # 開発サーバー起動
-npm run build        # プロダクションビルド
-npm run test         # すべてのテスト実行
-npm run test:unit    # ユニットテストのみ
-npm run test:e2e     # E2Eテスト
-npm run lint         # Lintチェック
-npm run typecheck    # 型チェック
+# Build the application
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-## プロジェクト構造
+## 🧪 Testing / テスト
+
+```bash
+# Run unit tests
+npm test
+
+# Run E2E tests
+npm run test:e2e
+
+# Run E2E tests with UI
+npm run test:e2e:ui
+```
+
+## 📁 Project Structure / プロジェクト構成
 
 ```
-src/
-├── components/      # 再利用可能なコンポーネント
-├── contexts/        # React Context (言語、音声)
-├── pages/           # ページコンポーネント
-├── services/        # ビジネスロジック
-├── stores/          # 状態管理
-├── styles/          # グローバルスタイル
-├── types/           # TypeScript型定義
-└── utils/           # ユーティリティ関数
+grade-1-english/
+├── src/
+│   ├── components/        # Reusable UI components
+│   ├── contexts/         # React contexts (Language, Audio)
+│   ├── data/            # Static data and kanji reference
+│   ├── pages/           # Page components
+│   ├── utils/           # Utility functions
+│   └── styles/          # Global styles
+├── tests/
+│   └── e2e/            # End-to-end tests
+├── docs/               # Documentation
+│   ├── KANJI_REFERENCE.md
+│   └── KANJI_IMPLEMENTATION_GUIDE.md
+└── public/             # Static assets
 ```
 
-## 貢献方法
+## 🎯 Key Features Explained / 主要機能の説明
 
-[CONTRIBUTING.md](./CONTRIBUTING.md) を参照してください。
+### Kanji Grade System / 漢字学年システム
+The app displays Japanese text with kanji appropriate to the selected grade level:
+- **Grade 1**: Mostly hiragana with basic 80 kanji
+- **Grade 2**: 240 cumulative kanji
+- **Grade 3-6**: Progressively more complex kanji
 
-## ライセンス
+Example:
+- Grade 1: `わたしは まいあさ あさごはんを たべます。`
+- Grade 3: `私は 毎朝 朝ごはんを 食べます。`
+- Grade 6: `私は 毎朝 朝ご飯を 食べます。`
 
-MIT License
+### Sentence Practice Game / 文章練習ゲーム
+Students learn sentence structure by:
+1. Viewing a sentence in Japanese
+2. Selecting English words in the correct order
+3. Receiving immediate feedback
+4. Progressing through different categories (Daily Life, School, Nature, Family)
+
+## 🛠️ Technology Stack / 技術スタック
+
+- **React 18** - UI framework
+- **TypeScript** - Type safety
+- **Vite** - Build tool
+- **Tailwind CSS** - Styling
+- **Framer Motion** - Animations
+- **Jest & React Testing Library** - Unit testing
+- **Playwright** - E2E testing
+
+## 📝 Development Guidelines / 開発ガイドライン
+
+### Code Quality / コード品質
+- ESLint and Prettier for code formatting
+- Husky for pre-commit hooks
+- TypeScript strict mode enabled
+- Comprehensive test coverage
+
+### Commit Convention / コミット規約
+Follow conventional commits:
+- `feat:` New features
+- `fix:` Bug fixes
+- `docs:` Documentation changes
+- `test:` Test additions/changes
+- `refactor:` Code refactoring
+
+## 🤝 Contributing / 貢献
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+## 📄 License / ライセンス
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👥 Authors / 著者
+
+- **Ken Nishioka** - Initial work - [knishioka](https://github.com/knishioka)
+
+## 🙏 Acknowledgments / 謝辞
+
+- Japanese Ministry of Education for kanji curriculum guidelines
+- All contributors and testers
+
+## 📞 Support / サポート
+
+For support, please open an issue in the GitHub repository.
+
+---
+
+Made with ❤️ for first-grade English learners / 小学1年生の英語学習者のために作られました

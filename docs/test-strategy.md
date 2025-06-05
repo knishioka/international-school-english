@@ -2,7 +2,7 @@
 
 ## 概要
 
-このドキュメントは、Grade 1 English Learning Appのテスト戦略と実装ガイドラインを定義します。
+このドキュメントは、International School English Learning Appのテスト戦略と実装ガイドラインを定義します。
 子ども向けアプリケーションとして、品質と信頼性を最優先事項として扱います。
 
 ## テストピラミッド

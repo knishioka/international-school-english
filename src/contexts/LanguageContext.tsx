@@ -1,10 +1,13 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 export type Language = 'en' | 'ja';
+export type KanjiGrade = 1 | 2 | 3 | 4 | 5 | 6;
 
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
+  kanjiGrade: KanjiGrade;
+  setKanjiGrade: (grade: KanjiGrade) => void;
   t: (key: string) => string;
 }
 
@@ -20,6 +23,10 @@ const translations = {
     vocabulary: 'Vocabulary',
     stories: 'Stories',
     myProgress: 'My Progress',
+    back: 'Back',
+    read: 'Read',
+    next: 'Next',
+    previous: 'Previous',
   },
   ja: {
     welcome: 'えいごをまなぼう！',
@@ -32,6 +39,10 @@ const translations = {
     vocabulary: 'たんご',
     stories: 'おはなし',
     myProgress: 'がくしゅうきろく',
+    back: 'もどる',
+    read: 'よむ',
+    next: 'つぎ',
+    previous: 'まえ',
   },
 };
 
@@ -39,13 +50,14 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export function LanguageProvider({ children }: { children: ReactNode }): JSX.Element {
   const [language, setLanguage] = useState<Language>('ja');
+  const [kanjiGrade, setKanjiGrade] = useState<KanjiGrade>(1);
 
   const t = (key: string): string => {
     return translations[language][key as keyof (typeof translations)['en']] || key;
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, kanjiGrade, setKanjiGrade, t }}>
       {children}
     </LanguageContext.Provider>
   );

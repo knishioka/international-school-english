@@ -48,14 +48,12 @@ describe('HomePage', () => {
     expect(header).toHaveTextContent('こんにちは, ! 👋');
   });
 
-  it('ゲームカードが3つ表示される', () => {
+  it('ゲームカードが2つ表示される', () => {
     render(<HomePage />, { wrapper: AllTheProviders });
 
-    expect(screen.getByText('アルファベット')).toBeInTheDocument();
     expect(screen.getByText('たんご')).toBeInTheDocument();
     expect(screen.getByText('おはなし')).toBeInTheDocument();
 
-    expect(screen.getByText('🔤')).toBeInTheDocument();
     expect(screen.getByText('📚')).toBeInTheDocument();
     expect(screen.getByText('📖')).toBeInTheDocument();
   });
@@ -77,8 +75,8 @@ describe('HomePage', () => {
 
     render(<HomePage />, { wrapper: AllTheProviders });
 
-    const alphabetCard = screen.getByRole('button', { name: /Play アルファベット game/ });
-    fireEvent.click(alphabetCard);
+    const vocabularyCard = screen.getByRole('button', { name: /Play たんご game/ });
+    fireEvent.click(vocabularyCard);
 
     expect(mockPlaySound).toHaveBeenCalledWith('click');
   });

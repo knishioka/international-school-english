@@ -1,4 +1,4 @@
-# Contributing to Grade 1 English Learning App
+# Contributing to International School English Learning App
 
 このプロジェクトへの貢献を歓迎します！以下のガイドラインに従ってください。
 
@@ -13,7 +13,7 @@
 ```bash
 # リポジトリのクローン
 git clone [repository-url]
-cd grade-1-english
+cd international-school-english
 
 # 依存関係のインストール
 npm install
