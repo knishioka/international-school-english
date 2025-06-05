@@ -18,7 +18,7 @@ test.describe('Kanji Level Functionality', () => {
     await expect(kanjiSelector).toHaveValue('1');
 
     // Navigate to sentence practice game
-    await page.click('div:has-text("ぶんしょう れんしゅう")');
+    await page.click('div:has-text("ぶんしょうれんしゅう")');
     await expect(page).toHaveURL('http://localhost:3000/games/vocabulary');
 
     // First sentence should show grade 1 kanji (mostly hiragana)
@@ -32,7 +32,7 @@ test.describe('Kanji Level Functionality', () => {
     await expect(kanjiSelector).toHaveValue('3');
 
     // Go back to sentence practice
-    await page.click('div:has-text("ぶんしょう れんしゅう")');
+    await page.click('div:has-text("ぶんしょうれんしゅう")');
 
     // Should now show grade 3 kanji
     await expect(page.locator('text=私は 毎朝 朝ごはんを 食べます。')).toBeVisible();
@@ -72,7 +72,7 @@ test.describe('Kanji Level Functionality', () => {
     await kanjiSelector.selectOption('4');
 
     // Navigate to sentence practice
-    await page.click('div:has-text("ぶんしょう れんしゅう")');
+    await page.click('div:has-text("ぶんしょうれんしゅう")');
 
     // Select a sentence to play
     await page.click('button:has-text("私は 毎朝 朝ご飯を 食べます。")');

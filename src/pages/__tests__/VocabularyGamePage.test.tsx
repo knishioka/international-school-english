@@ -72,7 +72,7 @@ describe('VocabularyGamePage', () => {
   it('カテゴリーボタンを表示する', () => {
     render(<VocabularyGamePage />, { wrapper: AllTheProviders });
     // デフォルトは日本語なので、日本語のカテゴリー名を確認
-    expect(screen.getByText('すべての ぶんしょう')).toBeInTheDocument();
+    expect(screen.getByText('すべてのぶんしょう')).toBeInTheDocument();
     expect(screen.getByText('にちじょう')).toBeInTheDocument();
     expect(screen.getByText('がっこう')).toBeInTheDocument();
     expect(screen.getByText('しぜん')).toBeInTheDocument();

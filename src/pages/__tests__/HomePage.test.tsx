@@ -51,7 +51,7 @@ describe('HomePage', () => {
   it('ゲームカードが2つ表示される', () => {
     render(<HomePage />, { wrapper: AllTheProviders });
 
-    expect(screen.getByText('ぶんしょう れんしゅう')).toBeInTheDocument();
+    expect(screen.getByText('ぶんしょうれんしゅう')).toBeInTheDocument();
     expect(screen.getByText('おはなし')).toBeInTheDocument();
 
     expect(screen.getByText('📝')).toBeInTheDocument();
@@ -61,7 +61,7 @@ describe('HomePage', () => {
   it('進捗ボタンが表示される', () => {
     render(<HomePage />, { wrapper: AllTheProviders });
 
-    const progressButton = screen.getByText(/がくしゅう.+きろく/);
+    const progressButton = screen.getByText(/がくしゅうきろく/);
     expect(progressButton).toBeInTheDocument();
     expect(progressButton.textContent).toContain('📊');
   });
@@ -75,7 +75,7 @@ describe('HomePage', () => {
 
     render(<HomePage />, { wrapper: AllTheProviders });
 
-    const vocabularyCard = screen.getByRole('button', { name: /Play ぶんしょう れんしゅう game/ });
+    const vocabularyCard = screen.getByRole('button', { name: /Play ぶんしょうれんしゅう game/ });
 
     await act(async () => {
       fireEvent.click(vocabularyCard);
@@ -93,7 +93,7 @@ describe('HomePage', () => {
 
     render(<HomePage />, { wrapper: AllTheProviders });
 
-    const progressButton = screen.getByText(/がくしゅう.+きろく/);
+    const progressButton = screen.getByText(/がくしゅうきろく/);
 
     await act(async () => {
       fireEvent.click(progressButton);

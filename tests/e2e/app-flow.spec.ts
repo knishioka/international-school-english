@@ -67,7 +67,7 @@ test.describe('アプリケーション基本フロー', () => {
 
     // 各ゲームカードの存在確認
     await expect(page.getByText('アルファベット')).toBeVisible();
-    await expect(page.getByText('ぶんしょう れんしゅう')).toBeVisible();
+    await expect(page.getByText('ぶんしょうれんしゅう')).toBeVisible();
     await expect(page.getByText('おはなし')).toBeVisible();
 
     // ゲームカードのホバー効果を確認（視覚的確認用）

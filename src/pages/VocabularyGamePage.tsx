@@ -267,7 +267,7 @@ const sentences: Sentence[] = [
 ];
 
 const categories = [
-  { id: 'all', name: { en: 'All Sentences', ja: 'すべての ぶんしょう' }, emoji: '📝' },
+  { id: 'all', name: { en: 'All Sentences', ja: 'すべてのぶんしょう' }, emoji: '📝' },
   { id: 'daily', name: { en: 'Daily Life', ja: 'にちじょう' }, emoji: '🏠' },
   { id: 'school', name: { en: 'School', ja: 'がっこう' }, emoji: '🏫' },
   { id: 'nature', name: { en: 'Nature', ja: 'しぜん' }, emoji: '🌳' },
