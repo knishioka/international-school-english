@@ -194,7 +194,7 @@ export function SpellingGamePage(): JSX.Element {
   const [score, setScore] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const filteredWords = spellingWords.filter(word => word.difficulty === selectedDifficulty);
+  const filteredWords = spellingWords.filter((word) => word.difficulty === selectedDifficulty);
 
   useEffect(() => {
     if (gameStarted && inputRef.current) {
@@ -231,7 +231,9 @@ export function SpellingGamePage(): JSX.Element {
   };
 
   const handleSubmit = async (): Promise<void> => {
-    if (!currentWord || userInput.trim() === '') {return;}
+    if (!currentWord || userInput.trim() === '') {
+      return;
+    }
 
     const correct = userInput.trim() === currentWord.word;
     setIsCorrect(correct);
@@ -239,12 +241,18 @@ export function SpellingGamePage(): JSX.Element {
     if (correct) {
       await playSound('success');
       speak(currentWord.word, 'en');
-      
+
       // Calculate score based on difficulty and hint usage
       let points = 10;
-      if (selectedDifficulty === 'medium') {points = 15;}
-      if (selectedDifficulty === 'hard') {points = 20;}
-      if (!showHint) {points += 5;} // Bonus for not using hint
+      if (selectedDifficulty === 'medium') {
+        points = 15;
+      }
+      if (selectedDifficulty === 'hard') {
+        points = 20;
+      }
+      if (!showHint) {
+        points += 5;
+      } // Bonus for not using hint
 
       setScore(score + points);
     } else {
@@ -254,7 +262,7 @@ export function SpellingGamePage(): JSX.Element {
 
   const handleNext = async (): Promise<void> => {
     await playSound('click');
-    
+
     const nextIndex = currentIndex + 1;
     if (nextIndex < filteredWords.length) {
       setCurrentWord(filteredWords[nextIndex]);
@@ -269,7 +277,9 @@ export function SpellingGamePage(): JSX.Element {
   };
 
   const handlePlayAudio = async (): Promise<void> => {
-    if (!currentWord) {return;}
+    if (!currentWord) {
+      return;
+    }
     await playSound('click');
     speak(currentWord.word, 'en');
   };
@@ -313,7 +323,7 @@ export function SpellingGamePage(): JSX.Element {
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
               {language === 'ja' ? 'レベルを えらんでね' : 'Choose Your Level'}
             </h2>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto mb-8">
               {difficulties.map((difficulty, index) => (
                 <motion.button
@@ -321,12 +331,15 @@ export function SpellingGamePage(): JSX.Element {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  onClick={() => handleDifficultySelect(difficulty.id as 'easy' | 'medium' | 'hard')}
+                  onClick={() =>
+                    handleDifficultySelect(difficulty.id as 'easy' | 'medium' | 'hard')
+                  }
                   className={`
                     p-6 rounded-2xl transition-all hover:scale-105
-                    ${selectedDifficulty === difficulty.id
-                      ? 'bg-blue-500 text-white shadow-lg'
-                      : 'bg-white text-gray-800 hover:bg-blue-50 shadow-md'
+                    ${
+                      selectedDifficulty === difficulty.id
+                        ? 'bg-blue-500 text-white shadow-lg'
+                        : 'bg-white text-gray-800 hover:bg-blue-50 shadow-md'
                     }
                   `}
                 >
@@ -335,7 +348,8 @@ export function SpellingGamePage(): JSX.Element {
                     {language === 'ja' ? difficulty.name.ja : difficulty.name.en}
                   </div>
                   <div className="text-sm mt-1 opacity-75">
-                    {spellingWords.filter(w => w.difficulty === difficulty.id).length} {language === 'ja' ? 'ことば' : 'words'}
+                    {spellingWords.filter((w) => w.difficulty === difficulty.id).length}{' '}
+                    {language === 'ja' ? 'ことば' : 'words'}
                   </div>
                 </motion.button>
               ))}
@@ -413,9 +427,7 @@ export function SpellingGamePage(): JSX.Element {
           {/* 単語情報 */}
           <div className="text-center mb-8">
             <div className="text-8xl mb-4">{currentWord.emoji}</div>
-            <div className="text-2xl font-bold text-gray-800 mb-2">
-              {currentWord.japanese}
-            </div>
+            <div className="text-2xl font-bold text-gray-800 mb-2">{currentWord.japanese}</div>
             <div className="flex justify-center gap-4 mb-4">
               <button
                 onClick={handlePlayAudio}
@@ -430,7 +442,7 @@ export function SpellingGamePage(): JSX.Element {
                 💡 {language === 'ja' ? 'ヒント' : 'Hint'}
               </button>
             </div>
-            
+
             {showHint && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
@@ -457,7 +469,7 @@ export function SpellingGamePage(): JSX.Element {
               placeholder={language === 'ja' ? 'ここに かいてね...' : 'Type here...'}
               disabled={isCorrect !== null}
             />
-            
+
             {/* ヒント表示: 文字数 */}
             <div className="text-center mt-2 text-gray-500">
               {currentWord.word.length} {language === 'ja' ? 'もじ' : 'letters'}
@@ -472,9 +484,10 @@ export function SpellingGamePage(): JSX.Element {
                 disabled={userInput.trim() === ''}
                 className={`
                   px-8 py-3 rounded-full text-lg font-medium transition-all
-                  ${userInput.trim() === ''
-                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                    : 'bg-green-500 text-white hover:bg-green-600 shadow-lg'
+                  ${
+                    userInput.trim() === ''
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : 'bg-green-500 text-white hover:bg-green-600 shadow-lg'
                   }
                 `}
               >
@@ -487,10 +500,7 @@ export function SpellingGamePage(): JSX.Element {
                   animate={{ opacity: 1, scale: 1 }}
                   className={`
                     px-6 py-3 rounded-full text-lg font-medium
-                    ${isCorrect
-                      ? 'bg-green-100 text-green-700'
-                      : 'bg-red-100 text-red-700'
-                    }
+                    ${isCorrect ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}
                   `}
                 >
                   {isCorrect
@@ -501,16 +511,19 @@ export function SpellingGamePage(): JSX.Element {
                       ? 'ちがうよ 😅'
                       : 'Try again 😅'}
                 </motion.div>
-                
+
                 {isCorrect ? (
                   <button
                     onClick={handleNext}
                     className="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors shadow-lg"
                   >
                     {currentIndex === filteredWords.length - 1
-                      ? language === 'ja' ? 'おわり' : 'Finish'
-                      : language === 'ja' ? 'つぎへ' : 'Next'
-                    }
+                      ? language === 'ja'
+                        ? 'おわり'
+                        : 'Finish'
+                      : language === 'ja'
+                        ? 'つぎへ'
+                        : 'Next'}
                   </button>
                 ) : (
                   <button
@@ -534,9 +547,7 @@ export function SpellingGamePage(): JSX.Element {
               <p className="text-gray-700">
                 {language === 'ja' ? 'せいかい:' : 'Correct spelling:'}
               </p>
-              <p className="text-2xl font-bold text-gray-900 mt-1 font-mono">
-                {currentWord.word}
-              </p>
+              <p className="text-2xl font-bold text-gray-900 mt-1 font-mono">{currentWord.word}</p>
             </motion.div>
           )}
         </motion.div>
@@ -555,10 +566,7 @@ export function SpellingGamePage(): JSX.Element {
                 {language === 'ja' ? 'おつかれさま！' : 'Great Job!'}
               </h2>
               <p className="text-xl text-gray-600 mb-4">
-                {language === 'ja' 
-                  ? `スコア: ${score} てん！` 
-                  : `Final Score: ${score} points!`
-                }
+                {language === 'ja' ? `スコア: ${score} てん！` : `Final Score: ${score} points!`}
               </p>
               <button
                 onClick={() => setGameStarted(false)}

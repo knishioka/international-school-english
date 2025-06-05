@@ -31,8 +31,8 @@ const vocabularyWords: VocabularyWord[] = [
     emoji: '🍎',
     example: {
       english: 'I like red apples.',
-      japanese: 'あかい りんごが すきです。'
-    }
+      japanese: 'あかい りんごが すきです。',
+    },
   },
   {
     id: '2',
@@ -44,8 +44,8 @@ const vocabularyWords: VocabularyWord[] = [
     emoji: '🍌',
     example: {
       english: 'Bananas are yellow.',
-      japanese: 'バナナは きいろです。'
-    }
+      japanese: 'バナナは きいろです。',
+    },
   },
   {
     id: '3',
@@ -57,8 +57,8 @@ const vocabularyWords: VocabularyWord[] = [
     emoji: '🥛',
     example: {
       english: 'I drink milk every day.',
-      japanese: 'まいにち ぎゅうにゅうを のみます。'
-    }
+      japanese: 'まいにち ぎゅうにゅうを のみます。',
+    },
   },
   {
     id: '4',
@@ -70,8 +70,8 @@ const vocabularyWords: VocabularyWord[] = [
     emoji: '🍞',
     example: {
       english: 'I eat bread for breakfast.',
-      japanese: 'あさごはんに パンを たべます。'
-    }
+      japanese: 'あさごはんに パンを たべます。',
+    },
   },
   // Animals - 動物
   {
@@ -84,8 +84,8 @@ const vocabularyWords: VocabularyWord[] = [
     emoji: '🐱',
     example: {
       english: 'The cat is sleeping.',
-      japanese: 'ねこが ねています。'
-    }
+      japanese: 'ねこが ねています。',
+    },
   },
   {
     id: '6',
@@ -97,8 +97,8 @@ const vocabularyWords: VocabularyWord[] = [
     emoji: '🐶',
     example: {
       english: 'My dog is very cute.',
-      japanese: 'わたしの いぬは とても かわいいです。'
-    }
+      japanese: 'わたしの いぬは とても かわいいです。',
+    },
   },
   {
     id: '7',
@@ -110,8 +110,8 @@ const vocabularyWords: VocabularyWord[] = [
     emoji: '🐦',
     example: {
       english: 'Birds can fly in the sky.',
-      japanese: 'とりは そらを とべます。'
-    }
+      japanese: 'とりは そらを とべます。',
+    },
   },
   {
     id: '8',
@@ -123,8 +123,8 @@ const vocabularyWords: VocabularyWord[] = [
     emoji: '🐟',
     example: {
       english: 'Fish live in the water.',
-      japanese: 'さかなは みずの なかに すんでいます。'
-    }
+      japanese: 'さかなは みずの なかに すんでいます。',
+    },
   },
   // Colors - 色
   {
@@ -137,8 +137,8 @@ const vocabularyWords: VocabularyWord[] = [
     emoji: '🔴',
     example: {
       english: 'The apple is red.',
-      japanese: 'りんごは あかいです。'
-    }
+      japanese: 'りんごは あかいです。',
+    },
   },
   {
     id: '10',
@@ -150,8 +150,8 @@ const vocabularyWords: VocabularyWord[] = [
     emoji: '🔵',
     example: {
       english: 'The sky is blue.',
-      japanese: 'そらは あおいです。'
-    }
+      japanese: 'そらは あおいです。',
+    },
   },
   {
     id: '11',
@@ -163,8 +163,8 @@ const vocabularyWords: VocabularyWord[] = [
     emoji: '🟡',
     example: {
       english: 'The sun is yellow.',
-      japanese: 'たいようは きいろです。'
-    }
+      japanese: 'たいようは きいろです。',
+    },
   },
   {
     id: '12',
@@ -176,8 +176,8 @@ const vocabularyWords: VocabularyWord[] = [
     emoji: '🟢',
     example: {
       english: 'Leaves are green.',
-      japanese: 'はっぱは みどりです。'
-    }
+      japanese: 'はっぱは みどりです。',
+    },
   },
   // Family - 家族
   {
@@ -190,8 +190,8 @@ const vocabularyWords: VocabularyWord[] = [
     emoji: '👩',
     example: {
       english: 'My mother is kind.',
-      japanese: 'わたしの おかあさんは やさしいです。'
-    }
+      japanese: 'わたしの おかあさんは やさしいです。',
+    },
   },
   {
     id: '14',
@@ -203,8 +203,8 @@ const vocabularyWords: VocabularyWord[] = [
     emoji: '👨',
     example: {
       english: 'My father works hard.',
-      japanese: 'わたしの おとうさんは よく はたらきます。'
-    }
+      japanese: 'わたしの おとうさんは よく はたらきます。',
+    },
   },
   {
     id: '15',
@@ -216,8 +216,8 @@ const vocabularyWords: VocabularyWord[] = [
     emoji: '👧',
     example: {
       english: 'My sister likes dolls.',
-      japanese: 'わたしの いもうとは にんぎょうが すきです。'
-    }
+      japanese: 'わたしの いもうとは にんぎょうが すきです。',
+    },
   },
   // School - 学校
   {
@@ -230,8 +230,8 @@ const vocabularyWords: VocabularyWord[] = [
     emoji: '📚',
     example: {
       english: 'I read a book every night.',
-      japanese: 'まいばん ほんを よみます。'
-    }
+      japanese: 'まいばん ほんを よみます。',
+    },
   },
   {
     id: '17',
@@ -243,8 +243,8 @@ const vocabularyWords: VocabularyWord[] = [
     emoji: '✏️',
     example: {
       english: 'I write with a pencil.',
-      japanese: 'えんぴつで かきます。'
-    }
+      japanese: 'えんぴつで かきます。',
+    },
   },
   {
     id: '18',
@@ -256,9 +256,9 @@ const vocabularyWords: VocabularyWord[] = [
     emoji: '🏫',
     example: {
       english: 'I go to school every day.',
-      japanese: 'まいにち がっこうに いきます。'
-    }
-  }
+      japanese: 'まいにち がっこうに いきます。',
+    },
+  },
 ];
 
 const categories = [
@@ -278,9 +278,10 @@ export function FlashCardPage(): JSX.Element {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
 
-  const filteredWords = selectedCategory === 'all' 
-    ? vocabularyWords 
-    : vocabularyWords.filter(word => word.category === selectedCategory);
+  const filteredWords =
+    selectedCategory === 'all'
+      ? vocabularyWords
+      : vocabularyWords.filter((word) => word.category === selectedCategory);
 
   const currentWord = filteredWords[currentIndex];
 
@@ -350,7 +351,7 @@ export function FlashCardPage(): JSX.Element {
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
               {language === 'ja' ? 'カテゴリーを えらんでね' : 'Choose a Category'}
             </h2>
-            
+
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
               {categories.map((category, index) => (
                 <motion.button
@@ -361,9 +362,10 @@ export function FlashCardPage(): JSX.Element {
                   onClick={() => handleCategorySelect(category.id)}
                   className={`
                     p-6 rounded-2xl transition-all hover:scale-105
-                    ${selectedCategory === category.id
-                      ? 'bg-purple-500 text-white shadow-lg'
-                      : 'bg-white text-gray-800 hover:bg-purple-50 shadow-md'
+                    ${
+                      selectedCategory === category.id
+                        ? 'bg-purple-500 text-white shadow-lg'
+                        : 'bg-white text-gray-800 hover:bg-purple-50 shadow-md'
                     }
                   `}
                 >
@@ -372,10 +374,10 @@ export function FlashCardPage(): JSX.Element {
                     {language === 'ja' ? category.name.ja : category.name.en}
                   </div>
                   <div className="text-sm mt-1 opacity-75">
-                    {category.id === 'all' 
-                      ? vocabularyWords.length 
-                      : vocabularyWords.filter(w => w.category === category.id).length
-                    } {language === 'ja' ? 'ことば' : 'words'}
+                    {category.id === 'all'
+                      ? vocabularyWords.length
+                      : vocabularyWords.filter((w) => w.category === category.id).length}{' '}
+                    {language === 'ja' ? 'ことば' : 'words'}
                   </div>
                 </motion.button>
               ))}
@@ -409,11 +411,10 @@ export function FlashCardPage(): JSX.Element {
             ←
           </button>
           <h1 className="text-2xl font-display font-bold text-gray-800">
-            {categories.find(c => c.id === selectedCategory)?.emoji}{' '}
-            {language === 'ja' 
-              ? categories.find(c => c.id === selectedCategory)?.name.ja
-              : categories.find(c => c.id === selectedCategory)?.name.en
-            }
+            {categories.find((c) => c.id === selectedCategory)?.emoji}{' '}
+            {language === 'ja'
+              ? categories.find((c) => c.id === selectedCategory)?.name.ja
+              : categories.find((c) => c.id === selectedCategory)?.name.en}
           </h1>
           <div className="w-10" />
         </div>
@@ -447,10 +448,9 @@ export function FlashCardPage(): JSX.Element {
               {language === 'ja' ? 'おつかれさま！' : 'Great job!'}
             </p>
             <p className="text-gray-600">
-              {language === 'ja' 
-                ? 'すべての たんごを おぼえましたね！' 
-                : 'You\'ve reviewed all the words!'
-              }
+              {language === 'ja'
+                ? 'すべての たんごを おぼえましたね！'
+                : "You've reviewed all the words!"}
             </p>
           </motion.div>
         )}

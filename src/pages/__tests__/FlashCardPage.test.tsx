@@ -7,9 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 const TestWrapper = ({ children }: { children: React.ReactNode }): JSX.Element => (
   <BrowserRouter>
     <LanguageProvider>
-      <AudioProvider>
-        {children}
-      </AudioProvider>
+      <AudioProvider>{children}</AudioProvider>
     </LanguageProvider>
   </BrowserRouter>
 );
@@ -36,7 +34,7 @@ describe('FlashCardPage', () => {
     render(
       <TestWrapper>
         <FlashCardPage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     expect(screen.getByText(/Flash Cards|たんごカード/)).toBeInTheDocument();
@@ -53,7 +51,7 @@ describe('FlashCardPage', () => {
     render(
       <TestWrapper>
         <FlashCardPage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     expect(screen.getByText(/18 words|18 ことば/)).toBeInTheDocument(); // All words
@@ -64,7 +62,7 @@ describe('FlashCardPage', () => {
     render(
       <TestWrapper>
         <FlashCardPage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const allWordsButton = screen.getByText(/All Words|すべての ことば/).closest('button');
@@ -81,14 +79,16 @@ describe('FlashCardPage', () => {
     render(
       <TestWrapper>
         <FlashCardPage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const startButton = screen.getByText(/Start Learning!|はじめる！/);
     fireEvent.click(startButton);
 
     await waitFor(() => {
-      expect(screen.queryByText(/Choose a Category|カテゴリーを えらんでね/)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(/Choose a Category|カテゴリーを えらんでね/),
+      ).not.toBeInTheDocument();
       expect(screen.getByText('apple')).toBeInTheDocument();
     });
   });
@@ -97,7 +97,7 @@ describe('FlashCardPage', () => {
     render(
       <TestWrapper>
         <FlashCardPage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     // Select food category
@@ -119,7 +119,7 @@ describe('FlashCardPage', () => {
     render(
       <TestWrapper>
         <FlashCardPage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const startButton = screen.getByText(/Start Learning!|はじめる！/);
@@ -135,7 +135,7 @@ describe('FlashCardPage', () => {
     render(
       <TestWrapper>
         <FlashCardPage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const startButton = screen.getByText(/Start Learning!|はじめる！/);
@@ -155,7 +155,7 @@ describe('FlashCardPage', () => {
     render(
       <TestWrapper>
         <FlashCardPage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     // Select a single category to make it easier to reach the end
@@ -178,7 +178,9 @@ describe('FlashCardPage', () => {
 
     await waitFor(() => {
       expect(screen.getByText(/Great job!|おつかれさま！/)).toBeInTheDocument();
-      expect(screen.getByText(/You've reviewed all the words!|すべての たんごを おぼえましたね！/)).toBeInTheDocument();
+      expect(
+        screen.getByText(/You've reviewed all the words!|すべての たんごを おぼえましたね！/),
+      ).toBeInTheDocument();
       expect(screen.getByText('🎉')).toBeInTheDocument();
     });
   });
@@ -187,7 +189,7 @@ describe('FlashCardPage', () => {
     render(
       <TestWrapper>
         <FlashCardPage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const startButton = screen.getByText(/Start Learning!|はじめる！/);
@@ -207,7 +209,7 @@ describe('FlashCardPage', () => {
     render(
       <TestWrapper>
         <FlashCardPage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     expect(screen.getByText(/Flash Cards|たんごカード/)).toBeInTheDocument();

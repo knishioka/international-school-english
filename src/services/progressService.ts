@@ -332,6 +332,98 @@ class ProgressService {
   public clearProgress(): void {
     localStorage.removeItem(STORAGE_KEY);
   }
+
+  public getWeeklyActivityData(userName: string): Array<{
+    day: string;
+    activities: number;
+    score: number;
+  }> {
+    const progress = this.getUserProgress(userName);
+    const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    const today = new Date();
+    const result = [];
+
+    for (let i = 6; i >= 0; i--) {
+      const date = new Date(today);
+      date.setDate(today.getDate() - i);
+      const dateStr = date.toISOString().split('T')[0];
+      const dayIndex = date.getDay();
+      const dayName = weekDays[dayIndex === 0 ? 6 : dayIndex - 1];
+
+      const dailyData = progress.dailyProgress.find((dp) => dp.date === dateStr);
+      
+      result.push({
+        day: dayName,
+        activities: dailyData 
+          ? dailyData.sentencePracticeCompleted + dailyData.storiesRead 
+          : 0,
+        score: dailyData ? dailyData.totalScore : 0,
+      });
+    }
+
+    return result;
+  }
+
+  public getCategoryProgress(userName: string): Array<{
+    category: string;
+    completed: number;
+    total: number;
+  }> {
+    const progress = this.getUserProgress(userName);
+    
+    // These are placeholder totals - in a real app, these would come from actual content
+    return [
+      {
+        category: 'spelling',
+        completed: 0, // Would track spelling game progress
+        total: 15,
+      },
+      {
+        category: 'vocabulary',
+        completed: 0, // Would track flashcard progress
+        total: 18,
+      },
+      {
+        category: 'stories',
+        completed: progress.stories.filter((s) => s.completed).length,
+        total: 6,
+      },
+      {
+        category: 'sentences',
+        completed: progress.sentencePractice.filter((s) => s.completed).length,
+        total: 20,
+      },
+    ];
+  }
+
+  public getTimeDistribution(userName: string): Array<{
+    activity: string;
+    minutes: number;
+  }> {
+    const progress = this.getUserProgress(userName);
+    const last7Days = progress.dailyProgress.slice(-7);
+    
+    const distribution = {
+      spelling: 0,
+      vocabulary: 0,
+      stories: 0,
+      sentences: 0,
+    };
+
+    // Estimate time based on activities (this is simplified)
+    last7Days.forEach((day) => {
+      distribution.sentences += day.sentencePracticeCompleted * 3; // 3 minutes per sentence
+      distribution.stories += day.storiesRead * 5; // 5 minutes per story
+    });
+
+    // Add some placeholder data for spelling and vocabulary
+    distribution.spelling = Math.round(progress.totalTimeSpent * 0.25);
+    distribution.vocabulary = Math.round(progress.totalTimeSpent * 0.2);
+
+    return Object.entries(distribution)
+      .filter(([_, minutes]) => minutes > 0)
+      .map(([activity, minutes]) => ({ activity, minutes }));
+  }
 }
 
 export const progressService = new ProgressService();

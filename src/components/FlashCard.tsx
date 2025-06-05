@@ -48,10 +48,12 @@ export function FlashCard({
 
   const handleSpeak = async (): Promise<void> => {
     await playSound('click');
-    const textToSpeak = isFlipped 
-      ? (language === 'ja' ? word.japanese : word.english)
+    const textToSpeak = isFlipped
+      ? language === 'ja'
+        ? word.japanese
+        : word.english
       : word.english;
-    
+
     speak(textToSpeak, isFlipped && language === 'ja' ? 'ja' : 'en');
   };
 
@@ -112,9 +114,7 @@ export function FlashCard({
           <div className="absolute inset-0 w-full h-full backface-hidden bg-white rounded-2xl shadow-xl border-4 border-blue-200">
             <div className="flex flex-col items-center justify-center h-full p-6">
               <div className="text-6xl mb-4">{word.emoji}</div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">
-                {word.english}
-              </h2>
+              <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">{word.english}</h2>
               <p className="text-lg text-gray-600 text-center">
                 {language === 'ja' ? 'タップして日本語を見る' : 'Tap to see Japanese'}
               </p>
@@ -136,12 +136,8 @@ export function FlashCard({
           <div className="absolute inset-0 w-full h-full backface-hidden bg-white rounded-2xl shadow-xl border-4 border-pink-200 rotate-y-180">
             <div className="flex flex-col items-center justify-center h-full p-6">
               <div className="text-6xl mb-4">{word.emoji}</div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">
-                {word.japanese}
-              </h2>
-              <p className="text-lg text-gray-600 mb-2 text-center">
-                {word.romaji}
-              </p>
+              <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">{word.japanese}</h2>
+              <p className="text-lg text-gray-600 mb-2 text-center">{word.romaji}</p>
               <p className="text-sm text-gray-500 text-center">
                 {language === 'ja' ? 'タップして英語に戻る' : 'Tap to see English'}
               </p>
@@ -166,9 +162,9 @@ export function FlashCard({
         <motion.div
           className="mt-6 w-full"
           initial={{ opacity: 0, height: 0 }}
-          animate={{ 
-            opacity: showExample ? 1 : 0, 
-            height: showExample ? 'auto' : 0 
+          animate={{
+            opacity: showExample ? 1 : 0,
+            height: showExample ? 'auto' : 0,
           }}
           transition={{ duration: 0.3 }}
         >
@@ -189,9 +185,10 @@ export function FlashCard({
           disabled={isFirst}
           className={`
             px-6 py-3 rounded-full font-medium transition-all
-            ${isFirst 
-              ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
-              : 'bg-gray-500 text-white hover:bg-gray-600'
+            ${
+              isFirst
+                ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                : 'bg-gray-500 text-white hover:bg-gray-600'
             }
           `}
         >
@@ -204,10 +201,13 @@ export function FlashCard({
               onClick={toggleExample}
               className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors"
             >
-              {showExample 
-                ? (language === 'ja' ? 'かくす' : 'Hide') 
-                : (language === 'ja' ? 'れいぶん' : 'Example')
-              }
+              {showExample
+                ? language === 'ja'
+                  ? 'かくす'
+                  : 'Hide'
+                : language === 'ja'
+                  ? 'れいぶん'
+                  : 'Example'}
             </button>
           )}
           <button
@@ -223,9 +223,10 @@ export function FlashCard({
           disabled={isLast}
           className={`
             px-6 py-3 rounded-full font-medium transition-all
-            ${isLast
-              ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-              : 'bg-green-500 text-white hover:bg-green-600'
+            ${
+              isLast
+                ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                : 'bg-green-500 text-white hover:bg-green-600'
             }
           `}
         >

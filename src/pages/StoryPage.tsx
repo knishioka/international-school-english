@@ -1044,7 +1044,9 @@ export function StoryPage(): JSX.Element {
 
   // Auto-play functionality
   useEffect(() => {
-    if (!isAutoPlay || !selectedStory || isReading) {return;}
+    if (!isAutoPlay || !selectedStory || isReading) {
+      return;
+    }
 
     const autoPlayTimer = setTimeout(() => {
       if (currentPage < selectedStory.pages.length - 1) {
@@ -1140,7 +1142,7 @@ export function StoryPage(): JSX.Element {
   const toggleAutoPlay = async (): Promise<void> => {
     await playSound('click');
     setIsAutoPlay(!isAutoPlay);
-    
+
     // If starting auto-play and not on a page, start reading current page
     if (!isAutoPlay && selectedStory) {
       handleRead();
@@ -1220,8 +1222,8 @@ export function StoryPage(): JSX.Element {
           </>
         ) : (
           // ストーリー表示画面
-          <PageFlip 
-            pageKey={currentPage} 
+          <PageFlip
+            pageKey={currentPage}
             direction={pageDirection}
             className="bg-white rounded-3xl shadow-2xl p-8 md:p-12"
           >
@@ -1259,10 +1261,10 @@ export function StoryPage(): JSX.Element {
 
             {/* コントロール */}
             <div className="flex justify-between items-center">
-                <button
-                  onClick={handlePrevPage}
-                  disabled={currentPage === 0}
-                  className={`
+              <button
+                onClick={handlePrevPage}
+                disabled={currentPage === 0}
+                className={`
                     px-4 py-2 rounded-lg font-medium transition-all
                     ${
                       currentPage === 0
@@ -1270,15 +1272,15 @@ export function StoryPage(): JSX.Element {
                         : 'bg-blue-500 text-white hover:bg-blue-600'
                     }
                   `}
-                >
-                  ←
-                </button>
+              >
+                ←
+              </button>
 
-                <div className="flex gap-3">
-                  <button
-                    onClick={handleRead}
-                    disabled={isReading}
-                    className={`
+              <div className="flex gap-3">
+                <button
+                  onClick={handleRead}
+                  disabled={isReading}
+                  className={`
                       px-6 py-3 rounded-full font-medium transition-all
                       ${
                         isReading
@@ -1286,14 +1288,14 @@ export function StoryPage(): JSX.Element {
                           : 'bg-green-500 text-white hover:bg-green-600'
                       }
                     `}
-                  >
-                    {isReading ? '🔊' : '▶️'}
-                    {language === 'ja' ? 'よむ' : 'Read'}
-                  </button>
+                >
+                  {isReading ? '🔊' : '▶️'}
+                  {language === 'ja' ? 'よむ' : 'Read'}
+                </button>
 
-                  <button
-                    onClick={toggleAutoPlay}
-                    className={`
+                <button
+                  onClick={toggleAutoPlay}
+                  className={`
                       px-4 py-3 rounded-full font-medium transition-all
                       ${
                         isAutoPlay
@@ -1301,16 +1303,16 @@ export function StoryPage(): JSX.Element {
                           : 'bg-purple-500 text-white hover:bg-purple-600'
                       }
                     `}
-                    title={language === 'ja' ? 'じどうさいせい' : 'Auto-play'}
-                  >
-                    {isAutoPlay ? '⏸️' : '🎬'}
-                  </button>
-                </div>
+                  title={language === 'ja' ? 'じどうさいせい' : 'Auto-play'}
+                >
+                  {isAutoPlay ? '⏸️' : '🎬'}
+                </button>
+              </div>
 
-                <button
-                  onClick={handleNextPage}
-                  disabled={currentPage === selectedStory.pages.length - 1}
-                  className={`
+              <button
+                onClick={handleNextPage}
+                disabled={currentPage === selectedStory.pages.length - 1}
+                className={`
                     px-4 py-2 rounded-lg font-medium transition-all
                     ${
                       currentPage === selectedStory.pages.length - 1
@@ -1318,40 +1320,40 @@ export function StoryPage(): JSX.Element {
                         : 'bg-blue-500 text-white hover:bg-blue-600'
                     }
                   `}
-                >
-                  →
-                </button>
+              >
+                →
+              </button>
             </div>
 
             {/* ページインジケーター */}
             <div className="flex justify-center gap-2 mt-6">
-                {selectedStory.pages.map((_, index) => (
-                  <div
-                    key={index}
-                    className={`
+              {selectedStory.pages.map((_, index) => (
+                <div
+                  key={index}
+                  className={`
                       w-2 h-2 rounded-full transition-all
                       ${index === currentPage ? 'bg-blue-500 w-8' : 'bg-gray-300'}
                     `}
-                  />
-                ))}
+                />
+              ))}
             </div>
 
             {/* 最後のページで教訓を表示 */}
             {currentPage === selectedStory.pages.length - 1 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mt-8 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 border-2 border-blue-200"
-                >
-                  <h3 className="text-lg font-bold text-gray-800 mb-2 text-center">
-                    {language === 'ja' ? 'きょうの まなび' : "Today's Lesson"} 🌟
-                  </h3>
-                  <p className="text-center text-lg font-medium text-blue-800">
-                    {language === 'ja'
-                      ? selectedStory.lesson.jaKanji[kanjiGrade]
-                      : selectedStory.lesson.en}
-                  </p>
-                </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-8 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 border-2 border-blue-200"
+              >
+                <h3 className="text-lg font-bold text-gray-800 mb-2 text-center">
+                  {language === 'ja' ? 'きょうの まなび' : "Today's Lesson"} 🌟
+                </h3>
+                <p className="text-center text-lg font-medium text-blue-800">
+                  {language === 'ja'
+                    ? selectedStory.lesson.jaKanji[kanjiGrade]
+                    : selectedStory.lesson.en}
+                </p>
+              </motion.div>
             )}
           </PageFlip>
         )}

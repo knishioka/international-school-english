@@ -8,7 +8,12 @@ interface PageFlipProps {
   className?: string;
 }
 
-export function PageFlip({ children, pageKey, direction = 'right', className = '' }: PageFlipProps): JSX.Element {
+export function PageFlip({
+  children,
+  pageKey,
+  direction = 'right',
+  className = '',
+}: PageFlipProps): JSX.Element {
   const pageVariants = {
     initial: {
       opacity: 0,

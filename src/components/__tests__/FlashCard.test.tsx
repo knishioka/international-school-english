@@ -13,15 +13,13 @@ const mockWord = {
   emoji: '🍎',
   example: {
     english: 'I like red apples.',
-    japanese: 'あかい りんごが すきです。'
-  }
+    japanese: 'あかい りんごが すきです。',
+  },
 };
 
 const TestWrapper = ({ children }: { children: React.ReactNode }): JSX.Element => (
   <LanguageProvider>
-    <AudioProvider>
-      {children}
-    </AudioProvider>
+    <AudioProvider>{children}</AudioProvider>
   </LanguageProvider>
 );
 
@@ -44,7 +42,7 @@ describe('FlashCard', () => {
     render(
       <TestWrapper>
         <FlashCard {...defaultProps} />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     expect(screen.getByText('apple')).toBeInTheDocument();
@@ -57,7 +55,7 @@ describe('FlashCard', () => {
     render(
       <TestWrapper>
         <FlashCard {...defaultProps} />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const card = screen.getByText('apple').closest('.cursor-pointer');
@@ -77,7 +75,7 @@ describe('FlashCard', () => {
     render(
       <TestWrapper>
         <FlashCard {...defaultProps} />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const exampleButton = screen.getByRole('button', { name: /Example|れいぶん/ });
@@ -93,7 +91,7 @@ describe('FlashCard', () => {
     render(
       <TestWrapper>
         <FlashCard {...defaultProps} />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const nextButton = screen.getByText(/Next →|つぎ →/);
@@ -106,7 +104,7 @@ describe('FlashCard', () => {
     render(
       <TestWrapper>
         <FlashCard {...defaultProps} />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const previousButton = screen.getByText(/← Previous|← まえ/);
@@ -119,7 +117,7 @@ describe('FlashCard', () => {
     render(
       <TestWrapper>
         <FlashCard {...defaultProps} isFirst />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const previousButton = screen.getByText(/← Previous|← まえ/);
@@ -130,7 +128,7 @@ describe('FlashCard', () => {
     render(
       <TestWrapper>
         <FlashCard {...defaultProps} isLast />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const nextButton = screen.getByText(/Next →|つぎ →/);
@@ -141,22 +139,22 @@ describe('FlashCard', () => {
     render(
       <TestWrapper>
         <FlashCard {...defaultProps} currentIndex={4} totalCount={10} />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     expect(screen.getByText('5 / 10')).toBeInTheDocument();
-    
+
     const progressBar = document.querySelector('.bg-gradient-to-r');
     expect(progressBar).toHaveStyle('width: 50%');
   });
 
   it('renders without example when example is not provided', () => {
     const wordWithoutExample = { ...mockWord, example: undefined };
-    
+
     render(
       <TestWrapper>
         <FlashCard {...defaultProps} word={wordWithoutExample} />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     expect(screen.queryByText(/Example|れいぶん/)).not.toBeInTheDocument();
@@ -166,7 +164,7 @@ describe('FlashCard', () => {
     render(
       <TestWrapper>
         <FlashCard {...defaultProps} />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     // The initial render should show English on the front

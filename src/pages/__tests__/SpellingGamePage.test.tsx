@@ -7,9 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 const TestWrapper = ({ children }: { children: React.ReactNode }): JSX.Element => (
   <BrowserRouter>
     <LanguageProvider>
-      <AudioProvider>
-        {children}
-      </AudioProvider>
+      <AudioProvider>{children}</AudioProvider>
     </LanguageProvider>
   </BrowserRouter>
 );
@@ -35,7 +33,7 @@ describe('SpellingGamePage', () => {
     render(
       <TestWrapper>
         <SpellingGamePage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     expect(screen.getByText(/Spelling Game|スペルチェック/)).toBeInTheDocument();
@@ -49,7 +47,7 @@ describe('SpellingGamePage', () => {
     render(
       <TestWrapper>
         <SpellingGamePage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     expect(screen.getByText(/5 words|5 ことば/)).toBeInTheDocument(); // Easy words
@@ -59,7 +57,7 @@ describe('SpellingGamePage', () => {
     render(
       <TestWrapper>
         <SpellingGamePage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const easyButton = screen.getByText(/Easy|かんたん/).closest('button');
@@ -76,7 +74,7 @@ describe('SpellingGamePage', () => {
     render(
       <TestWrapper>
         <SpellingGamePage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const startButton = screen.getByText(/Start Game!|はじめる！/);
@@ -92,7 +90,7 @@ describe('SpellingGamePage', () => {
     render(
       <TestWrapper>
         <SpellingGamePage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const startButton = screen.getByText(/Start Game!|はじめる！/);
@@ -109,7 +107,7 @@ describe('SpellingGamePage', () => {
     render(
       <TestWrapper>
         <SpellingGamePage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const startButton = screen.getByText(/Start Game!|はじめる！/);
@@ -129,7 +127,7 @@ describe('SpellingGamePage', () => {
     render(
       <TestWrapper>
         <SpellingGamePage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const startButton = screen.getByText(/Start Game!|はじめる！/);
@@ -138,7 +136,7 @@ describe('SpellingGamePage', () => {
     await waitFor(() => {
       const input = screen.getByPlaceholderText(/Type here|ここに かいてね/);
       fireEvent.change(input, { target: { value: 'cat' } });
-      
+
       const submitButton = screen.getByText(/Check Answer|こたえをみる/);
       fireEvent.click(submitButton);
     });
@@ -152,7 +150,7 @@ describe('SpellingGamePage', () => {
     render(
       <TestWrapper>
         <SpellingGamePage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const startButton = screen.getByText(/Start Game!|はじめる！/);
@@ -161,7 +159,7 @@ describe('SpellingGamePage', () => {
     await waitFor(() => {
       const input = screen.getByPlaceholderText(/Type here|ここに かいてね/);
       fireEvent.change(input, { target: { value: 'wrong' } });
-      
+
       const submitButton = screen.getByText(/Check Answer|こたえをみる/);
       fireEvent.click(submitButton);
     });
@@ -177,7 +175,7 @@ describe('SpellingGamePage', () => {
     render(
       <TestWrapper>
         <SpellingGamePage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const startButton = screen.getByText(/Start Game!|はじめる！/);
@@ -186,7 +184,7 @@ describe('SpellingGamePage', () => {
     await waitFor(() => {
       const input = screen.getByPlaceholderText(/Type here|ここに かいてね/);
       fireEvent.change(input, { target: { value: 'cat' } });
-      
+
       const submitButton = screen.getByText(/Check Answer|こたえをみる/);
       fireEvent.click(submitButton);
     });
@@ -205,7 +203,7 @@ describe('SpellingGamePage', () => {
     render(
       <TestWrapper>
         <SpellingGamePage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const startButton = screen.getByText(/Start Game!|はじめる！/);
@@ -227,7 +225,7 @@ describe('SpellingGamePage', () => {
     render(
       <TestWrapper>
         <SpellingGamePage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const startButton = screen.getByText(/Start Game!|はじめる！/);
@@ -247,7 +245,7 @@ describe('SpellingGamePage', () => {
     render(
       <TestWrapper>
         <SpellingGamePage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const startButton = screen.getByText(/Start Game!|はじめる！/);
@@ -263,7 +261,7 @@ describe('SpellingGamePage', () => {
     render(
       <TestWrapper>
         <SpellingGamePage />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     const startButton = screen.getByText(/Start Game!|はじめる！/);

@@ -8,6 +8,7 @@ import { FlashCardPage } from './pages/FlashCardPage';
 import { SpellingGamePage } from './pages/SpellingGamePage';
 import { StoryPage } from './pages/StoryPage';
 import { ProgressPage } from './pages/ProgressPage';
+import { PWAInstallPrompt } from './components/PWAInstallPrompt';
 import { config } from './config';
 
 function App(): JSX.Element {
@@ -24,6 +25,7 @@ function App(): JSX.Element {
             <Route path="/games/stories" element={<StoryPage />} />
             <Route path="/progress" element={<ProgressPage />} />
           </Routes>
+          <PWAInstallPrompt />
         </Router>
       </AudioProvider>
     </LanguageProvider>
