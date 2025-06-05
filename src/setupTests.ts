@@ -49,9 +49,9 @@ beforeAll(() => {
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: jest.fn().mockImplementation((query) => ({
+  value: jest.fn().mockImplementation((query: string) => ({
     matches: false,
-    media: query || '',
+    media: query ?? '',
     onchange: null,
     addListener: jest.fn(),
     removeListener: jest.fn(),
@@ -93,14 +93,15 @@ class MockSpeechSynthesisUtterance {
   rate: number = 1;
   pitch: number = 1;
   volume: number = 1;
-  voice: any = null;
-  onstart: any = null;
-  onend: any = null;
-  onerror: any = null;
-  onpause: any = null;
-  onresume: any = null;
-  onmark: any = null;
-  onboundary: any = null;
+  voice: SpeechSynthesisVoice | null = null;
+  onstart: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => unknown) | null = null;
+  onend: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => unknown) | null = null;
+  onerror: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisErrorEvent) => unknown) | null =
+    null;
+  onpause: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => unknown) | null = null;
+  onresume: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => unknown) | null = null;
+  onmark: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => unknown) | null = null;
+  onboundary: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => unknown) | null = null;
   addEventListener = jest.fn();
   removeEventListener = jest.fn();
   dispatchEvent = jest.fn();
@@ -110,7 +111,7 @@ class MockSpeechSynthesisUtterance {
   }
 }
 
-global.SpeechSynthesisUtterance = MockSpeechSynthesisUtterance as any;
+global.SpeechSynthesisUtterance = MockSpeechSynthesisUtterance as typeof SpeechSynthesisUtterance;
 
 // Mock window.scrollTo (framer-motion で使用)
 Object.defineProperty(window, 'scrollTo', {

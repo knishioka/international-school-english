@@ -101,26 +101,25 @@ describe('ProgressPage', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     localStorage.clear();
-    
+
     // Set default mock return values
     mockGetWeeklyActivityData.mockReturnValue([
-      { day: 'Mon', activities: 5 },
-      { day: 'Tue', activities: 3 },
-      { day: 'Wed', activities: 7 },
-      { day: 'Thu', activities: 4 },
-      { day: 'Fri', activities: 2 },
-      { day: 'Sat', activities: 3 },
-      { day: 'Sun', activities: 1 },
+      { day: 'Mon', activities: 5, score: 85 },
+      { day: 'Tue', activities: 3, score: 92 },
+      { day: 'Wed', activities: 7, score: 78 },
+      { day: 'Thu', activities: 4, score: 88 },
+      { day: 'Fri', activities: 2, score: 95 },
+      { day: 'Sat', activities: 3, score: 82 },
+      { day: 'Sun', activities: 1, score: 90 },
     ]);
-    
+
     mockGetTimeDistribution.mockReturnValue([
-      { hour: '9 AM', minutes: 15 },
-      { hour: '10 AM', minutes: 30 },
-      { hour: '2 PM', minutes: 20 },
-      { hour: '3 PM', minutes: 25 },
-      { hour: '4 PM', minutes: 30 },
+      { activity: 'Flash Cards', minutes: 15 },
+      { activity: 'Sentence Practice', minutes: 30 },
+      { activity: 'Stories', minutes: 20 },
+      { activity: 'Spelling', minutes: 25 },
     ]);
-    
+
     mockGetCategoryProgress.mockReturnValue([
       { category: 'animals', total: 20, completed: 15 },
       { category: 'food', total: 15, completed: 12 },
@@ -192,7 +191,6 @@ describe('ProgressPage', () => {
       ),
     ).toBeInTheDocument();
   });
-
 
   it('戻るボタンでホームに戻る', async () => {
     localStorage.setItem('userName', 'testUser');
