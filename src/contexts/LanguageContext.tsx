@@ -20,13 +20,14 @@ const translations = {
     enterName: 'Enter your name',
     letsPlay: "Let's Play!",
     alphabet: 'Alphabet',
-    vocabulary: 'Vocabulary',
-    stories: 'Stories',
+    sentencePractice: 'Sentence Practice',
+    stories: 'Story Time',
     myProgress: 'My Progress',
     back: 'Back',
     read: 'Read',
     next: 'Next',
     previous: 'Previous',
+    chooseGrade: 'Choose Grade',
   },
   ja: {
     welcome: 'えいごをまなぼう！',
@@ -36,13 +37,48 @@ const translations = {
     enterName: 'なまえをいれてね',
     letsPlay: 'あそぼう！',
     alphabet: 'アルファベット',
-    vocabulary: 'たんご',
+    sentencePractice: 'ぶんしょうれんしゅう',
     stories: 'おはなし',
     myProgress: 'がくしゅうきろく',
     back: 'もどる',
     read: 'よむ',
     next: 'つぎ',
     previous: 'まえ',
+    chooseGrade: 'がくねんをえらぶ',
+  },
+};
+
+// 学年別の日本語表記
+const kanjiTranslations: { [key in KanjiGrade]: { [key: string]: string } } = {
+  1: {
+    sentencePractice: 'ぶんしょう れんしゅう',
+    stories: 'おはなし',
+    myProgress: 'がくしゅう きろく',
+  },
+  2: {
+    sentencePractice: '文しょう れんしゅう',
+    stories: 'お話',
+    myProgress: '学しゅう きろく',
+  },
+  3: {
+    sentencePractice: '文章 練習',
+    stories: 'お話',
+    myProgress: '学習 記録',
+  },
+  4: {
+    sentencePractice: '文章 練習',
+    stories: 'お話',
+    myProgress: '学習 記録',
+  },
+  5: {
+    sentencePractice: '文章 練習',
+    stories: 'お話',
+    myProgress: '学習 記録',
+  },
+  6: {
+    sentencePractice: '文章 練習',
+    stories: 'お話',
+    myProgress: '学習 記録',
   },
 };
 
@@ -53,7 +89,19 @@ export function LanguageProvider({ children }: { children: ReactNode }): JSX.Ele
   const [kanjiGrade, setKanjiGrade] = useState<KanjiGrade>(1);
 
   const t = (key: string): string => {
-    return translations[language][key as keyof (typeof translations)['en']] || key;
+    // 英語の場合は通常の翻訳を返す
+    if (language === 'en') {
+      return translations[language][key as keyof (typeof translations)['en']] || key;
+    }
+
+    // 日本語の場合、まず学年別の翻訳を確認
+    const kanjiTranslation = kanjiTranslations[kanjiGrade]?.[key];
+    if (kanjiTranslation) {
+      return kanjiTranslation;
+    }
+
+    // 学年別翻訳がない場合は通常の翻訳を返す
+    return translations[language][key as keyof (typeof translations)['ja']] || key;
   };
 
   return (

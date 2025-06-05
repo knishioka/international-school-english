@@ -23,7 +23,7 @@ test.describe('Updated App Features', () => {
     await expect(gameCards).toHaveCount(2);
 
     // Verify vocabulary and stories games exist
-    await expect(page.locator('text=たんご')).toBeVisible();
+    await expect(page.locator('text=ぶんしょう れんしゅう')).toBeVisible();
     await expect(page.locator('text=おはなし')).toBeVisible();
 
     // Verify alphabet game does not exist

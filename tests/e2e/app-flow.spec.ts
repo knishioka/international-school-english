@@ -67,7 +67,7 @@ test.describe('アプリケーション基本フロー', () => {
 
     // 各ゲームカードの存在確認
     await expect(page.getByText('アルファベット')).toBeVisible();
-    await expect(page.getByText('たんご')).toBeVisible();
+    await expect(page.getByText('ぶんしょう れんしゅう')).toBeVisible();
     await expect(page.getByText('おはなし')).toBeVisible();
 
     // ゲームカードのホバー効果を確認（視覚的確認用）
@@ -129,7 +129,7 @@ test.describe('アプリケーション基本フロー', () => {
     await page.waitForTimeout(1500);
 
     // ゲームカードのクリックアニメーション
-    const vocabularyCard = page.getByRole('button', { name: /Play たんご game/ });
+    const vocabularyCard = page.getByRole('button', { name: /Play ぶんしょうれんしゅう game/ });
     await vocabularyCard.click({ force: true });
 
     // ボタンのクリック効果を視覚的に確認

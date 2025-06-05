@@ -19,9 +19,9 @@ export function HomePage(): JSX.Element {
 
   const games = [
     {
-      id: 'vocabulary',
-      title: t('vocabulary'),
-      icon: '📚',
+      id: 'sentencePractice',
+      title: t('sentencePractice'),
+      icon: '📝',
       color: 'bg-secondary-100',
       route: '/games/vocabulary',
     },

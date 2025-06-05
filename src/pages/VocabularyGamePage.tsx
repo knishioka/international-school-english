@@ -96,7 +96,7 @@ const sentences: Sentence[] = [
       6: '私は 毎日 学校で 英語を 勉強します。',
     },
     words: ['I', 'study', 'English', 'at', 'school', 'every', 'day'],
-    emoji: '📚',
+    emoji: '📝',
     category: 'school',
   },
   {

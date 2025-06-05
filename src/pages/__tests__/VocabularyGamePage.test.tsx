@@ -39,7 +39,7 @@ describe('VocabularyGamePage', () => {
   it('文章練習のタイトルを表示する', () => {
     render(<VocabularyGamePage />, { wrapper: AllTheProviders });
     expect(screen.getByText(/Sentence Practice|ぶんしょうれんしゅう/)).toBeInTheDocument();
-    expect(screen.getByText('📝')).toBeInTheDocument();
+    expect(screen.getAllByText('📝').length).toBeGreaterThan(0);
   });
 
   it('カテゴリーボタンを表示する', () => {

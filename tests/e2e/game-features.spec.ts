@@ -34,7 +34,7 @@ test.describe('International School English Game Features', () => {
 
     // Verify game cards are visible
     const alphabetCard = page.locator('div:has-text("Alphabet Game")').first();
-    const vocabularyCard = page.locator('div:has-text("Vocabulary")').first();
+    const vocabularyCard = page.locator('div:has-text("Sentence Practice")').first();
     const storyCard = page.locator('div:has-text("Story Time")').first();
 
     await expect(alphabetCard).toBeVisible();
@@ -64,8 +64,8 @@ test.describe('International School English Game Features', () => {
     await page.click('button:has-text("Back to Home")');
     await page.waitForURL('**/home');
 
-    // 4. Test the Vocabulary game
-    await page.locator('div:has-text("Vocabulary")').first().click();
+    // 4. Test the Sentence Practice game
+    await page.locator('div:has-text("Sentence Practice")').first().click();
     await page.waitForURL('**/vocabulary');
     await page.waitForLoadState('networkidle');
 
@@ -146,8 +146,6 @@ test.describe('International School English Game Features', () => {
 
     // Verify progress page elements
     await expect(page.locator('text=/progress|achievements|score/i')).toBeVisible();
-
-    console.log('All tests completed successfully!');
   });
 
   test('should handle errors gracefully', async ({ page }) => {
@@ -159,7 +157,6 @@ test.describe('International School English Game Features', () => {
 
     // Check if app handles 404 gracefully
     const bodyText = await page.textContent('body');
-    console.log('404 Page content:', bodyText);
   });
 });
 
@@ -169,7 +166,6 @@ test.describe('Server Health Check', () => {
     try {
       const response = await page.goto('http://localhost:3000');
       expect(response?.status()).toBe(200);
-      console.log('✓ Development server is running on http://localhost:3000');
     } catch (error) {
       console.error('✗ Development server is not accessible:', error);
       throw error;

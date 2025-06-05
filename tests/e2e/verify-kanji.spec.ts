@@ -17,7 +17,7 @@ test.describe('Manual Kanji Verification', () => {
       fullPage: true,
     });
 
-    // Navigate to vocabulary using the card
+    // Navigate to sentence practice using the card
     const vocabCard = page.locator('.bg-secondary-100').first();
     await vocabCard.click();
 
@@ -42,7 +42,7 @@ test.describe('Manual Kanji Verification', () => {
     await kanjiSelector.selectOption('3');
     await page.waitForTimeout(500);
 
-    // Go to vocabulary again
+    // Go to sentence practice again
     await vocabCard.click();
     await page.waitForURL('**/games/vocabulary');
     await page.waitForTimeout(1000);

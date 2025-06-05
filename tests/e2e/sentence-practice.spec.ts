@@ -20,9 +20,9 @@ test.describe('Sentence Practice Game', () => {
     await expect(page).toHaveURL('http://localhost:3000/home');
     await expect(page.locator('h1')).toContainText('Hello, Test Student!');
 
-    // 3. Navigate to the vocabulary game and check that it now shows "Sentence Practice"
-    // Click on the vocabulary game card
-    await page.click('div:has-text("Vocabulary")');
+    // 3. Navigate to the sentence practice game and check that it shows "Sentence Practice"
+    // Click on the sentence practice game card
+    await page.click('div:has-text("Sentence Practice")');
 
     // Verify we're on the vocabulary game page
     await expect(page).toHaveURL('http://localhost:3000/games/vocabulary');
@@ -66,7 +66,7 @@ test.describe('Sentence Practice Game', () => {
     await page.click('button:has-text("English")');
     await page.fill('input[placeholder="Enter your name"]', 'Test Student');
     await page.click('button:has-text("Let\'s Play!")');
-    await page.click('div:has-text("Vocabulary")');
+    await page.click('div:has-text("Sentence Practice")');
 
     // Select a sentence
     await page.click('button:has-text("My mother makes delicious cookies.")');
@@ -100,7 +100,7 @@ test.describe('Sentence Practice Game', () => {
     await page.click('button:has-text("English")');
     await page.fill('input[placeholder="Enter your name"]', 'Test Student');
     await page.click('button:has-text("Let\'s Play!")');
-    await page.click('div:has-text("Vocabulary")');
+    await page.click('div:has-text("Sentence Practice")');
 
     // Select a sentence
     await page.click('button:has-text("Beautiful flowers bloom in the spring.")');
