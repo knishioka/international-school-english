@@ -46,7 +46,11 @@ export function FlashCard({
     setIsFlipped(!isFlipped);
   };
 
-  const handleSpeak = async (): Promise<void> => {
+  const handleSpeak = async (e?: React.MouseEvent | React.TouchEvent): Promise<void> => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     await playSound('click');
     const textToSpeak = isFlipped
       ? language === 'ja'
@@ -120,10 +124,8 @@ export function FlashCard({
               </p>
               <div className="absolute bottom-4 right-4">
                 <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleSpeak();
-                  }}
+                  type="button"
+                  onClick={handleSpeak}
                   className="p-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors"
                 >
                   🔊
@@ -143,10 +145,8 @@ export function FlashCard({
               </p>
               <div className="absolute bottom-4 right-4">
                 <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleSpeak();
-                  }}
+                  type="button"
+                  onClick={handleSpeak}
                   className="p-3 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition-colors"
                 >
                   🔊
@@ -179,16 +179,23 @@ export function FlashCard({
       )}
 
       {/* コントロールボタン */}
-      <div className="flex justify-between items-center w-full mt-6">
+      <div className="flex justify-between items-center w-full mt-6 relative z-10">
         <button
-          onClick={handlePrevious}
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (!isFirst) {
+              handlePrevious();
+            }
+          }}
           disabled={isFirst}
           className={`
-            px-6 py-3 rounded-full font-medium transition-all
+            px-6 py-3 rounded-full font-medium transition-all select-none
             ${
               isFirst
                 ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                : 'bg-gray-500 text-white hover:bg-gray-600'
+                : 'bg-gray-500 text-white hover:bg-gray-600 active:bg-gray-700'
             }
           `}
         >
@@ -198,8 +205,13 @@ export function FlashCard({
         <div className="flex gap-3">
           {word.example && (
             <button
-              onClick={toggleExample}
-              className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors"
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleExample();
+              }}
+              className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 active:bg-yellow-700 transition-colors select-none"
             >
               {showExample
                 ? language === 'ja'
@@ -211,22 +223,34 @@ export function FlashCard({
             </button>
           )}
           <button
-            onClick={handleFlip}
-            className="px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              handleFlip();
+            }}
+            className="px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 active:bg-purple-700 transition-colors select-none"
           >
             {language === 'ja' ? 'ひっくりかえす' : 'Flip'}
           </button>
         </div>
 
         <button
-          onClick={handleNext}
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (!isLast) {
+              handleNext();
+            }
+          }}
           disabled={isLast}
           className={`
-            px-6 py-3 rounded-full font-medium transition-all
+            px-6 py-3 rounded-full font-medium transition-all select-none
             ${
               isLast
                 ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                : 'bg-green-500 text-white hover:bg-green-600'
+                : 'bg-green-500 text-white hover:bg-green-600 active:bg-green-700'
             }
           `}
         >

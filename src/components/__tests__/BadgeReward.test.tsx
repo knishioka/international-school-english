@@ -65,7 +65,9 @@ describe('BadgeReward', () => {
     );
 
     // Progress text should be shown
-    expect(screen.getByText(/1 \/ \d+ badges unlocked|1 \/ \d+ バッジ かくとく/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/1 \/ \d+ badges unlocked|1 \/ \d+ バッジ かくとく/),
+    ).toBeInTheDocument();
   });
 
   it('highlights unlocked badges', () => {
@@ -76,7 +78,9 @@ describe('BadgeReward', () => {
     );
 
     // Rookie badge should be unlocked (100 points requirement, user has 250)
-    const rookieBadge = screen.getByText(/Rookie Learner|しんじん がくしゅうしゃ/).closest('button');
+    const rookieBadge = screen
+      .getByText(/Rookie Learner|しんじん がくしゅうしゃ/)
+      .closest('button');
     expect(rookieBadge).toHaveClass('bg-green-500');
   });
 
@@ -152,7 +156,9 @@ describe('BadgeReward', () => {
       </TestWrapper>,
     );
 
-    const championBadge = screen.getByText(/Learning Champion|がくしゅう チャンピオン/).closest('button');
+    const championBadge = screen
+      .getByText(/Learning Champion|がくしゅう チャンピオン/)
+      .closest('button');
     if (championBadge) {
       fireEvent.click(championBadge);
     }
@@ -177,7 +183,9 @@ describe('BadgeReward', () => {
     );
 
     // Consistent Learner should be unlocked
-    const consistentBadge = screen.getByText(/Consistent Learner|まいにち がくしゅう/).closest('button');
+    const consistentBadge = screen
+      .getByText(/Consistent Learner|まいにち がくしゅう/)
+      .closest('button');
     expect(consistentBadge).toHaveClass('bg-orange-500');
 
     // Precise Thinker should be unlocked
@@ -192,10 +200,10 @@ describe('BadgeReward', () => {
       </TestWrapper>,
     );
 
-    const progressBar = screen.getByText(/badges unlocked|バッジ かくとく/)
-      .parentElement
-      ?.querySelector('.bg-gradient-to-r');
-    
+    const progressBar = screen
+      .getByText(/badges unlocked|バッジ かくとく/)
+      .parentElement?.querySelector('.bg-gradient-to-r');
+
     expect(progressBar).toBeInTheDocument();
   });
 });

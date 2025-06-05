@@ -53,7 +53,9 @@ describe('LearningStats', () => {
 
     expect(screen.getByText(/Weekly Activity|しゅうかん かつどう/)).toBeInTheDocument();
     expect(screen.getByText(/Score Progress|スコア しんちょく/)).toBeInTheDocument();
-    expect(screen.getByText(/Study Time Distribution|がくしゅう じかん ぶんぷ/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Study Time Distribution|がくしゅう じかん ぶんぷ/),
+    ).toBeInTheDocument();
     expect(screen.getByText(/Progress by Category|カテゴリー べつ しんちょく/)).toBeInTheDocument();
   });
 

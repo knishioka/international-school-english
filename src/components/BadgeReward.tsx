@@ -214,9 +214,7 @@ export function BadgeReward({
                 className={`
                   relative p-4 rounded-xl transition-all
                   ${
-                    isUnlocked
-                      ? `${badge.color} text-white shadow-lg`
-                      : 'bg-gray-100 text-gray-400'
+                    isUnlocked ? `${badge.color} text-white shadow-lg` : 'bg-gray-100 text-gray-400'
                   }
                 `}
               >

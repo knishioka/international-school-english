@@ -32,7 +32,7 @@ export function PWAInstallPrompt(): JSX.Element | null {
     const handleBeforeInstallPrompt = (e: Event): void => {
       e.preventDefault();
       setDeferredPrompt(e as BeforeInstallPromptEvent);
-      
+
       // Show prompt after a delay to not be too intrusive
       setTimeout(() => {
         setShowPrompt(true);
@@ -52,17 +52,17 @@ export function PWAInstallPrompt(): JSX.Element | null {
     }
 
     await playSound('click');
-    
+
     // Show the install prompt
     await deferredPrompt.prompt();
-    
+
     // Wait for the user's response
     const { outcome } = await deferredPrompt.userChoice;
-    
+
     if (outcome === 'accepted') {
       setIsInstalled(true);
     }
-    
+
     // Clear the prompt
     setDeferredPrompt(null);
     setShowPrompt(false);
@@ -71,7 +71,7 @@ export function PWAInstallPrompt(): JSX.Element | null {
   const handleDismiss = async (): Promise<void> => {
     await playSound('click');
     setShowPrompt(false);
-    
+
     // Don't show again for a week
     localStorage.setItem('pwa-prompt-dismissed', Date.now().toString());
   };
@@ -104,9 +104,7 @@ export function PWAInstallPrompt(): JSX.Element | null {
             <div className="text-4xl">📱</div>
             <div className="flex-1">
               <h3 className="text-lg font-bold text-gray-800 mb-2">
-                {language === 'ja' 
-                  ? 'アプリをインストール' 
-                  : 'Install Our App'}
+                {language === 'ja' ? 'アプリをインストール' : 'Install Our App'}
               </h3>
               <p className="text-sm text-gray-600 mb-4">
                 {language === 'ja'

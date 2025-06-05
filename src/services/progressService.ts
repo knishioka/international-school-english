@@ -351,12 +351,10 @@ class ProgressService {
       const dayName = weekDays[dayIndex === 0 ? 6 : dayIndex - 1];
 
       const dailyData = progress.dailyProgress.find((dp) => dp.date === dateStr);
-      
+
       result.push({
         day: dayName,
-        activities: dailyData 
-          ? dailyData.sentencePracticeCompleted + dailyData.storiesRead 
-          : 0,
+        activities: dailyData ? dailyData.sentencePracticeCompleted + dailyData.storiesRead : 0,
         score: dailyData ? dailyData.totalScore : 0,
       });
     }
@@ -370,7 +368,7 @@ class ProgressService {
     total: number;
   }> {
     const progress = this.getUserProgress(userName);
-    
+
     // These are placeholder totals - in a real app, these would come from actual content
     return [
       {
@@ -402,7 +400,7 @@ class ProgressService {
   }> {
     const progress = this.getUserProgress(userName);
     const last7Days = progress.dailyProgress.slice(-7);
-    
+
     const distribution = {
       spelling: 0,
       vocabulary: 0,

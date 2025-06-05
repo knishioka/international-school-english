@@ -27,9 +27,15 @@ export function ProgressPage(): JSX.Element {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
   const [stats, setStats] = useState<ProgressStats | null>(null);
-  const [weeklyData, setWeeklyData] = useState<Array<{ day: string; activities: number; score: number }>>([]);
-  const [categoryProgress, setCategoryProgress] = useState<Array<{ category: string; completed: number; total: number }>>([]);
-  const [timeDistribution, setTimeDistribution] = useState<Array<{ activity: string; minutes: number }>>([]);
+  const [weeklyData, setWeeklyData] = useState<
+    Array<{ day: string; activities: number; score: number }>
+  >([]);
+  const [categoryProgress, setCategoryProgress] = useState<
+    Array<{ category: string; completed: number; total: number }>
+  >([]);
+  const [timeDistribution, setTimeDistribution] = useState<
+    Array<{ activity: string; minutes: number }>
+  >([]);
 
   useEffect(() => {
     const name = localStorage.getItem('userName');
@@ -38,7 +44,7 @@ export function ProgressPage(): JSX.Element {
     if (name !== null && name.length > 0) {
       const progressStats = progressService.getProgressStats(name);
       setStats(progressStats);
-      
+
       // Get chart data
       setWeeklyData(progressService.getWeeklyActivityData(name));
       setCategoryProgress(progressService.getCategoryProgress(name));
@@ -265,7 +271,12 @@ export function ProgressPage(): JSX.Element {
         </motion.div>
 
         {/* バッジ・報酬システム */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="mb-8">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+          className="mb-8"
+        >
           <BadgeReward
             totalScore={stats.totalScore}
             streakDays={stats.streakDays}
@@ -280,7 +291,7 @@ export function ProgressPage(): JSX.Element {
           <h3 className="text-xl font-bold text-gray-800 mb-4">
             {language === 'ja' ? 'がくしゅう とうけい' : 'Learning Statistics'} 📊
           </h3>
-          
+
           <LearningStats
             weeklyData={weeklyData}
             categoryProgress={categoryProgress}
