@@ -17,6 +17,15 @@ const mockPlaySound = jest.fn();
 jest.mock('@/services/progressService', () => ({
   progressService: {
     getProgressStats: jest.fn(),
+    getWeeklyActivityData: jest.fn(),
+    getUserProgress: jest.fn(),
+    updateSentencePracticeProgress: jest.fn(),
+    updateStoryProgress: jest.fn(),
+    getCategoryProgress: jest.fn(),
+    getTimeDistribution: jest.fn(),
+    updateKanjiGrade: jest.fn(),
+    getDailyProgressData: jest.fn(),
+    clearProgress: jest.fn(),
   },
 }));
 

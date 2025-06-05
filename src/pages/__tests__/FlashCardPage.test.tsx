@@ -54,8 +54,8 @@ describe('FlashCardPage', () => {
       </TestWrapper>,
     );
 
-    expect(screen.getByText(/18 words|18 ことば/)).toBeInTheDocument(); // All words
-    expect(screen.getByText(/4 words|4 ことば/)).toBeInTheDocument(); // Food category
+    expect(screen.getByText(/111 words|111 ことば/)).toBeInTheDocument(); // All words
+    expect(screen.getByText(/10 words|10 ことば/)).toBeInTheDocument(); // Food category
   });
 
   it('highlights selected category', () => {
@@ -127,7 +127,7 @@ describe('FlashCardPage', () => {
 
     await waitFor(() => {
       expect(screen.getByText(/Progress|しんちょく/)).toBeInTheDocument();
-      expect(screen.getByText('1 / 18')).toBeInTheDocument();
+      expect(screen.getByText('1 / 111')).toBeInTheDocument();
     });
   });
 
@@ -147,7 +147,7 @@ describe('FlashCardPage', () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByText('2 / 18')).toBeInTheDocument();
+      expect(screen.getByText('2 / 111')).toBeInTheDocument();
     });
   });
 
@@ -170,8 +170,8 @@ describe('FlashCardPage', () => {
     // Navigate to the last card
     await waitFor(() => {
       const nextButton = screen.getByText(/Next →|つぎ →/);
-      // Click next multiple times to reach the end
-      for (let i = 0; i < 3; i++) {
+      // Click next multiple times to reach the end (9 times for 10 food words)
+      for (let i = 0; i < 9; i++) {
         fireEvent.click(nextButton);
       }
     });

@@ -87,7 +87,7 @@ describe('FlashCard', () => {
     });
   });
 
-  it('calls onNext when next button is clicked', () => {
+  it('calls onNext when next button is clicked', async () => {
     render(
       <TestWrapper>
         <FlashCard {...defaultProps} />
@@ -97,10 +97,12 @@ describe('FlashCard', () => {
     const nextButton = screen.getByText(/Next →|つぎ →/);
     fireEvent.click(nextButton);
 
-    expect(defaultProps.onNext).toHaveBeenCalledTimes(1);
+    await waitFor(() => {
+      expect(defaultProps.onNext).toHaveBeenCalledTimes(1);
+    });
   });
 
-  it('calls onPrevious when previous button is clicked', () => {
+  it('calls onPrevious when previous button is clicked', async () => {
     render(
       <TestWrapper>
         <FlashCard {...defaultProps} />
@@ -110,7 +112,9 @@ describe('FlashCard', () => {
     const previousButton = screen.getByText(/← Previous|← まえ/);
     fireEvent.click(previousButton);
 
-    expect(defaultProps.onPrevious).toHaveBeenCalledTimes(1);
+    await waitFor(() => {
+      expect(defaultProps.onPrevious).toHaveBeenCalledTimes(1);
+    });
   });
 
   it('disables previous button when isFirst is true', () => {
@@ -135,7 +139,7 @@ describe('FlashCard', () => {
     expect(nextButton).toBeDisabled();
   });
 
-  it('updates progress bar correctly', () => {
+  it('updates progress bar correctly', async () => {
     render(
       <TestWrapper>
         <FlashCard {...defaultProps} currentIndex={4} totalCount={10} />
@@ -144,8 +148,10 @@ describe('FlashCard', () => {
 
     expect(screen.getByText('5 / 10')).toBeInTheDocument();
 
-    const progressBar = document.querySelector('.bg-gradient-to-r');
-    expect(progressBar).toHaveStyle('width: 50%');
+    await waitFor(() => {
+      const progressBar = document.querySelector('.bg-gradient-to-r');
+      expect(progressBar).toHaveAttribute('style', expect.stringContaining('width: 50%'));
+    });
   });
 
   it('renders without example when example is not provided', () => {

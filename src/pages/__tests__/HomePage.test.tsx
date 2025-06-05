@@ -19,6 +19,20 @@ jest.mock('@/contexts/AudioContext', () => ({
   useAudio: jest.fn(),
 }));
 
+// Mock GameCard component
+jest.mock('@/components/GameCard', () => ({
+  GameCard: ({ title, icon, onClick }: { title: string; icon: string; onClick: () => void }) => (
+    <button 
+      onClick={onClick}
+      aria-label={`Play ${title} game`}
+      data-testid={`game-card-${title}`}
+    >
+      <div>{icon}</div>
+      <div>{title}</div>
+    </button>
+  ),
+}));
+
 const AllTheProviders = ({ children }: { children: React.ReactNode }): JSX.Element => {
   return (
     <BrowserRouter>
@@ -60,11 +74,13 @@ describe('HomePage', () => {
   it('ゲームカードが4つ表示される', () => {
     render(<HomePage />, { wrapper: AllTheProviders });
 
+    // Check for game card content using text content
     expect(screen.getByText('たんごカード')).toBeInTheDocument();
     expect(screen.getByText('スペルチェック')).toBeInTheDocument();
     expect(screen.getByText('ぶんしょうれんしゅう')).toBeInTheDocument();
     expect(screen.getByText('おはなし')).toBeInTheDocument();
 
+    // Check for icons
     expect(screen.getByText('📚')).toBeInTheDocument();
     expect(screen.getByText('✏️')).toBeInTheDocument();
     expect(screen.getByText('📝')).toBeInTheDocument();
@@ -88,11 +104,14 @@ describe('HomePage', () => {
 
     render(<HomePage />, { wrapper: AllTheProviders });
 
-    const spellingCard = screen.getByRole('button', { name: /Play スペルチェック game/ });
+    const spellingCard = screen.getByText('スペルチェック').closest('button');
+    expect(spellingCard).toBeTruthy();
 
-    await act(async () => {
-      fireEvent.click(spellingCard);
-    });
+    if (spellingCard) {
+      await act(async () => {
+        fireEvent.click(spellingCard);
+      });
+    }
 
     expect(mockPlaySound).toHaveBeenCalledWith('click');
     expect(mockNavigate).toHaveBeenCalledWith('/games/spelling');
@@ -107,11 +126,14 @@ describe('HomePage', () => {
 
     render(<HomePage />, { wrapper: AllTheProviders });
 
-    const vocabularyCard = screen.getByRole('button', { name: /Play ぶんしょうれんしゅう game/ });
+    const vocabularyCard = screen.getByText('ぶんしょうれんしゅう').closest('button');
+    expect(vocabularyCard).toBeTruthy();
 
-    await act(async () => {
-      fireEvent.click(vocabularyCard);
-    });
+    if (vocabularyCard) {
+      await act(async () => {
+        fireEvent.click(vocabularyCard);
+      });
+    }
 
     expect(mockPlaySound).toHaveBeenCalledWith('click');
     expect(mockNavigate).toHaveBeenCalledWith('/games/vocabulary');

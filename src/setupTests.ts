@@ -16,6 +16,27 @@ Object.defineProperty(globalThis, 'import', {
   writable: true,
 });
 
+// グローバルクリーンアップ
+beforeEach(() => {
+  // LocalStorageをクリア
+  localStorage.clear();
+  sessionStorage.clear();
+  
+  // すべてのタイマーをクリア
+  jest.clearAllTimers();
+  
+  // DOMをクリーンアップ
+  document.body.innerHTML = '';
+  
+  // すべてのモックをリセット
+  jest.clearAllMocks();
+});
+
+afterEach(() => {
+  // 各テスト後にクリーンアップ
+  jest.restoreAllMocks();
+});
+
 // Suppress React Router warnings in tests
 beforeAll(() => {
   const originalWarn = console.warn;
@@ -86,4 +107,35 @@ global.SpeechSynthesisUtterance = jest.fn().mockImplementation((text) => ({
   addEventListener: jest.fn(),
   removeEventListener: jest.fn(),
   dispatchEvent: jest.fn(),
+}));
+
+// Mock window.scrollTo (framer-motion で使用)
+Object.defineProperty(window, 'scrollTo', {
+  value: jest.fn(),
+  writable: true,
+});
+
+// Mock requestAnimationFrame
+Object.defineProperty(window, 'requestAnimationFrame', {
+  value: (callback: FrameRequestCallback) => setTimeout(callback, 0),
+  writable: true,
+});
+
+Object.defineProperty(window, 'cancelAnimationFrame', {
+  value: (id: number) => clearTimeout(id),
+  writable: true,
+});
+
+// Mock ResizeObserver
+global.ResizeObserver = jest.fn().mockImplementation(() => ({
+  observe: jest.fn(),
+  unobserve: jest.fn(),
+  disconnect: jest.fn(),
+}));
+
+// Mock IntersectionObserver
+global.IntersectionObserver = jest.fn().mockImplementation(() => ({
+  observe: jest.fn(),
+  unobserve: jest.fn(),
+  disconnect: jest.fn(),
 }));

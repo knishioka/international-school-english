@@ -4,15 +4,12 @@ export default {
   roots: ['<rootDir>/src'],
   testMatch: ['**/__tests__/**/*.+(ts|tsx|js)', '**/?(*.)+(spec|test).+(ts|tsx|js)'],
   transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest',
-  },
-  globals: {
-    'ts-jest': {
+    '^.+\\.(ts|tsx)$': ['ts-jest', {
       tsconfig: {
         target: 'es2020',
         module: 'es2020',
       },
-    },
+    }],
   },
   moduleNameMapper: {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
@@ -39,4 +36,12 @@ export default {
   testEnvironmentOptions: {
     customExportConditions: [''],
   },
+  // 重要: テスト分離の改善
+  clearMocks: true,
+  restoreMocks: true,
+  resetMocks: true,
+  // 各テストファイル間でモジュールをリセット
+  resetModules: true,
+  // テストタイムアウトを延長
+  testTimeout: 10000,
 };

@@ -760,7 +760,7 @@ const sentences: Sentence[] = [
   // Time & Calendar - 時間とカレンダー
   {
     id: '46',
-    english: 'I wake up at seven o\'clock.',
+    english: "I wake up at seven o'clock.",
     japanese: 'わたしは しちじに おきます。',
     jaKanji: {
       1: 'わたしは 七じに おきます。',
@@ -770,7 +770,7 @@ const sentences: Sentence[] = [
       5: 'わたしは 七時に 起きます。',
       6: '私は 七時に 起きます。',
     },
-    words: ['I', 'wake', 'up', 'at', 'seven', 'o\'clock'],
+    words: ['I', 'wake', 'up', 'at', 'seven', "o'clock"],
     emoji: '⏰',
     category: 'time',
   },
