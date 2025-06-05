@@ -46,28 +46,33 @@ export function ProgressPage(): JSX.Element {
   ): { title: string; description: string; icon: string } => {
     const achievements = {
       first_sentence: {
-        title: language === 'ja' ? 'はじめての ぶんしょう' : 'First Sentence',
+        title: language === 'ja' ? t('sentencePractice') + ' スタート' : 'First Sentence',
         description:
           language === 'ja'
-            ? 'はじめての ぶんしょうを かんせい！'
+            ? 'はじめての ' + t('sentencePractice') + 'を かんせい！'
             : 'Completed your first sentence!',
         icon: '🌟',
       },
       first_story: {
-        title: language === 'ja' ? 'はじめての おはなし' : 'First Story',
+        title: language === 'ja' ? 'はじめての ' + t('stories') : 'First Story',
         description:
-          language === 'ja' ? 'はじめての おはなしを よんだ！' : 'Read your first story!',
+          language === 'ja'
+            ? 'はじめての ' + t('stories') + 'を よんだ！'
+            : 'Read your first story!',
         icon: '📖',
       },
       sentence_master: {
-        title: language === 'ja' ? 'ぶんしょう マスター' : 'Sentence Master',
+        title: language === 'ja' ? t('sentencePractice') + ' マスター' : 'Sentence Master',
         description:
-          language === 'ja' ? '10この ぶんしょうを かんせい！' : 'Completed 10 sentences!',
+          language === 'ja'
+            ? '10この ' + t('sentencePractice') + 'を かんせい！'
+            : 'Completed 10 sentences!',
         icon: '🏆',
       },
       story_reader: {
-        title: language === 'ja' ? 'おはなし はかせ' : 'Story Expert',
-        description: language === 'ja' ? 'すべての おはなしを よんだ！' : 'Read all stories!',
+        title: language === 'ja' ? t('stories') + ' はかせ' : 'Story Expert',
+        description:
+          language === 'ja' ? 'すべての ' + t('stories') + 'を よんだ！' : 'Read all stories!',
         icon: '📚',
       },
       week_streak: {
@@ -128,7 +133,7 @@ export function ProgressPage(): JSX.Element {
         >
           <h2 className="text-2xl font-bold text-gray-800 mb-4">
             {userName !== '' ? `${userName}の ` : ''}
-            {language === 'ja' ? 'がくしゅう きろく' : 'Learning Record'}
+            {language === 'ja' ? t('myProgress') : 'Learning Record'}
           </h2>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
@@ -144,7 +149,7 @@ export function ProgressPage(): JSX.Element {
               <div className="text-3xl mb-2">📝</div>
               <div className="text-2xl font-bold text-green-600">{stats.completedSentences}</div>
               <div className="text-sm text-gray-600">
-                {language === 'ja' ? 'かんせい ぶんしょう' : 'Completed Sentences'}
+                {language === 'ja' ? 'かんせい ' + t('sentencePractice') : 'Completed Sentences'}
               </div>
             </div>
 
@@ -152,7 +157,7 @@ export function ProgressPage(): JSX.Element {
               <div className="text-3xl mb-2">📖</div>
               <div className="text-2xl font-bold text-purple-600">{stats.completedStories}</div>
               <div className="text-sm text-gray-600">
-                {language === 'ja' ? 'よんだ おはなし' : 'Stories Read'}
+                {language === 'ja' ? 'よんだ ' + t('stories') : 'Stories Read'}
               </div>
             </div>
 

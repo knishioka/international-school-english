@@ -122,7 +122,7 @@ describe('ProgressPage', () => {
     render(<ProgressPage />, { wrapper: AllTheProviders });
 
     expect(screen.getByText(/Achievements|アチーブメント/)).toBeInTheDocument();
-    expect(screen.getAllByText(/はじめての ぶんしょう/).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/ぶんしょう れんしゅう スタート/).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/はじめての おはなし/).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/しゅうかん チャンピオン/).length).toBeGreaterThan(0);
   });
@@ -222,9 +222,9 @@ describe('ProgressPage', () => {
     render(<ProgressPage />, { wrapper: AllTheProviders });
 
     // All achievement types should be displayed
-    expect(screen.getAllByText(/はじめての ぶんしょう/).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/ぶんしょう れんしゅう スタート/).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/はじめての おはなし/).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/ぶんしょう マスター/).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/ぶんしょう れんしゅう マスター/).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/おはなし はかせ/).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/しゅうかん チャンピオン/).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/スコア チャンピオン/).length).toBeGreaterThan(0);
