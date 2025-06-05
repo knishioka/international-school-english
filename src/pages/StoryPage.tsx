@@ -7,9 +7,9 @@ import { KanjiGradeSelector } from '@/components/KanjiGradeSelector';
 
 interface Story {
   id: string;
-  title: { en: string; ja: string };
-  description: { en: string; ja: string };
-  lesson: { en: string; ja: string };
+  title: { en: string; ja: string; jaKanji: { [key in KanjiGrade]: string } };
+  description: { en: string; ja: string; jaKanji: { [key in KanjiGrade]: string } };
+  lesson: { en: string; ja: string; jaKanji: { [key in KanjiGrade]: string } };
   category: 'moral' | 'friendship' | 'nature' | 'responsibility' | 'courage' | 'patience';
   minGrade: KanjiGrade;
   pages: {
@@ -22,14 +22,41 @@ interface Story {
 const stories: Story[] = [
   {
     id: '1',
-    title: { en: 'The Kind Rabbit', ja: 'やさしいうさぎ' },
+    title: {
+      en: 'The Kind Rabbit',
+      ja: 'やさしいうさぎ',
+      jaKanji: {
+        1: 'やさしい うさぎ',
+        2: 'やさしい うさぎ',
+        3: '優しい うさぎ',
+        4: '優しい 兎',
+        5: '優しい 兎',
+        6: '優しい 兎',
+      },
+    },
     description: {
       en: 'Learn about kindness and sharing',
       ja: 'やさしさと わけあうことを まなぼう',
+      jaKanji: {
+        1: 'やさしさと 分けあうことを 学ぼう',
+        2: 'やさしさと 分け合うことを 学ぼう',
+        3: '優しさと 分け合うことを 学ぼう',
+        4: '優しさと 分け合うことを 学ぼう',
+        5: '優しさと 分け合うことを 学ぼう',
+        6: '優しさと 分け合うことを 学ぼう',
+      },
     },
     lesson: {
       en: 'Sharing with others brings happiness to everyone',
       ja: 'みんなと わけあうことは みんなを しあわせに します',
+      jaKanji: {
+        1: 'みんなと 分けあうことは みんなを しあわせに します',
+        2: 'みんなと 分け合うことは みんなを 幸せに します',
+        3: '皆と 分け合うことは 皆を 幸せに します',
+        4: '皆と 分け合うことは 皆を 幸せに します',
+        5: '皆と 分け合うことは 皆を 幸せに します',
+        6: '皆と 分け合うことは 皆を 幸せに します',
+      },
     },
     category: 'moral',
     minGrade: 1,
@@ -158,14 +185,41 @@ const stories: Story[] = [
   },
   {
     id: '2',
-    title: { en: 'The Rainbow After Rain', ja: 'あめのあとのにじ' },
+    title: {
+      en: 'The Rainbow After Rain',
+      ja: 'あめのあとのにじ',
+      jaKanji: {
+        1: '雨のあとの にじ',
+        2: '雨の後の にじ',
+        3: '雨の後の 虹',
+        4: '雨の後の 虹',
+        5: '雨の後の 虹',
+        6: '雨の後の 虹',
+      },
+    },
     description: {
       en: 'Learn about weather and finding beauty after difficulties',
       ja: 'てんきと こまったあとの うつくしさを まなぼう',
+      jaKanji: {
+        1: 'てんきと こまったあとの 美しさを 学ぼう',
+        2: '天気と 困った後の 美しさを 学ぼう',
+        3: '天気と 困った後の 美しさを 学ぼう',
+        4: '天気と 困った後の 美しさを 学ぼう',
+        5: '天気と 困った後の 美しさを 学ぼう',
+        6: '天気と 困った後の 美しさを 学ぼう',
+      },
     },
     lesson: {
       en: 'After every storm comes a rainbow - be patient and hopeful',
       ja: 'どんな あらしの あとにも にじが でます - しんぼうづよく きぼうを もって',
+      jaKanji: {
+        1: 'どんな あらしの あとにも にじが 出ます - しんぼう強く 希ぼうを もって',
+        2: 'どんな あらしの 後にも にじが 出ます - 辛抱強く 希望を 持って',
+        3: 'どんな 嵐の 後にも 虹が 出ます - 辛抱強く 希望を 持って',
+        4: 'どんな 嵐の 後にも 虹が 出ます - 辛抱強く 希望を 持って',
+        5: 'どんな 嵐の 後にも 虹が 出ます - 辛抱強く 希望を 持って',
+        6: 'どんな 嵐の 後にも 虹が 出ます - 辛抱強く 希望を 持って',
+      },
     },
     category: 'patience',
     minGrade: 1,
@@ -294,14 +348,41 @@ const stories: Story[] = [
   },
   {
     id: '3',
-    title: { en: 'The Honest Boy', ja: 'しょうじきな おとこのこ' },
+    title: {
+      en: 'The Honest Boy',
+      ja: 'しょうじきな おとこのこ',
+      jaKanji: {
+        1: '正じきな 男の子',
+        2: '正直な 男の子',
+        3: '正直な 男の子',
+        4: '正直な 男の子',
+        5: '正直な 男の子',
+        6: '正直な 男の子',
+      },
+    },
     description: {
       en: 'Learn about honesty and trust',
       ja: 'しょうじきさと しんらいについて まなぼう',
+      jaKanji: {
+        1: '正じきさと 信らいについて 学ぼう',
+        2: '正直さと 信らいについて 学ぼう',
+        3: '正直さと 信頼について 学ぼう',
+        4: '正直さと 信頼について 学ぼう',
+        5: '正直さと 信頼について 学ぼう',
+        6: '正直さと 信頼について 学ぼう',
+      },
     },
     lesson: {
       en: 'Honesty is always the best choice',
       ja: 'しょうじきで いることが いつも いちばん',
+      jaKanji: {
+        1: '正じきで いることが いつも 一ばん',
+        2: '正直で いることが いつも 一番',
+        3: '正直で いることが いつも 一番',
+        4: '正直で いることが 何時も 一番',
+        5: '正直で いることが 何時も 一番',
+        6: '正直で 居ることが 何時も 一番',
+      },
     },
     category: 'moral',
     minGrade: 1,
@@ -430,14 +511,41 @@ const stories: Story[] = [
   },
   {
     id: '4',
-    title: { en: 'The Brave Little Mouse', ja: 'ゆうかんな ちいさな ねずみ' },
+    title: {
+      en: 'The Brave Little Mouse',
+      ja: 'ゆうかんな ちいさな ねずみ',
+      jaKanji: {
+        1: 'ゆうかんな 小さな ねずみ',
+        2: 'ゆうかんな 小さな ねずみ',
+        3: '勇かんな 小さな ねずみ',
+        4: '勇敢な 小さな 鼠',
+        5: '勇敢な 小さな 鼠',
+        6: '勇敢な 小さな 鼠',
+      },
+    },
     description: {
       en: 'Learn about courage and helping others',
       ja: 'ゆうきと たすけあいについて まなぼう',
+      jaKanji: {
+        1: 'ゆうきと 助けあいについて 学ぼう',
+        2: '勇気と 助け合いについて 学ぼう',
+        3: '勇気と 助け合いについて 学ぼう',
+        4: '勇気と 助け合いについて 学ぼう',
+        5: '勇気と 助け合いについて 学ぼう',
+        6: '勇気と 助け合いについて 学ぼう',
+      },
     },
     lesson: {
       en: 'Even the smallest can be the bravest',
       ja: 'ちいさくても ゆうかんに なれる',
+      jaKanji: {
+        1: '小さくても ゆうかんに なれる',
+        2: '小さくても 勇かんに なれる',
+        3: '小さくても 勇敢に なれる',
+        4: '小さくても 勇敢に なれる',
+        5: '小さくても 勇敢に なれる',
+        6: '小さくても 勇敢に なれる',
+      },
     },
     category: 'courage',
     minGrade: 1,
@@ -566,14 +674,41 @@ const stories: Story[] = [
   },
   {
     id: '5',
-    title: { en: 'The Responsible Ant', ja: 'せきにんかんの ある あり' },
+    title: {
+      en: 'The Responsible Ant',
+      ja: 'せきにんかんの ある あり',
+      jaKanji: {
+        1: 'せきにんかんの ある あり',
+        2: 'せきにんかんの ある あり',
+        3: '責任かんの ある あり',
+        4: '責任感の ある あり',
+        5: '責任感の ある 蟻',
+        6: '責任感の ある 蟻',
+      },
+    },
     description: {
       en: 'Learn about responsibility and preparation',
       ja: 'せきにんと じゅんびについて まなぼう',
+      jaKanji: {
+        1: 'せきにんと じゅんびについて 学ぼう',
+        2: 'せきにんと 準びについて 学ぼう',
+        3: '責任と 準備について 学ぼう',
+        4: '責任と 準備について 学ぼう',
+        5: '責任と 準備について 学ぼう',
+        6: '責任と 準備について 学ぼう',
+      },
     },
     lesson: {
       en: 'Working hard today makes tomorrow easier',
       ja: 'きょう がんばることが あしたを らくに します',
+      jaKanji: {
+        1: '今日 がんばることが あしたを らくに します',
+        2: '今日 がんばることが 明日を らくに します',
+        3: '今日 頑張ることが 明日を 楽に します',
+        4: '今日 頑張ることが 明日を 楽に します',
+        5: '今日 頑張ることが 明日を 楽に します',
+        6: '今日 頑張ることが 明日を 楽に します',
+      },
     },
     category: 'responsibility',
     minGrade: 1,
@@ -702,14 +837,41 @@ const stories: Story[] = [
   },
   {
     id: '6',
-    title: { en: 'The Tree of Friendship', ja: 'ゆうじょうの き' },
+    title: {
+      en: 'The Tree of Friendship',
+      ja: 'ゆうじょうの き',
+      jaKanji: {
+        1: 'ゆうじょうの 木',
+        2: 'ゆうじょうの 木',
+        3: '友じょうの 木',
+        4: '友情の 木',
+        5: '友情の 木',
+        6: '友情の 木',
+      },
+    },
     description: {
       en: 'Learn about nurturing friendships',
       ja: 'ゆうじょうを そだてることを まなぼう',
+      jaKanji: {
+        1: 'ゆうじょうを そだてることを 学ぼう',
+        2: 'ゆうじょうを 育てることを 学ぼう',
+        3: '友じょうを 育てることを 学ぼう',
+        4: '友情を 育てることを 学ぼう',
+        5: '友情を 育てることを 学ぼう',
+        6: '友情を 育てることを 学ぼう',
+      },
     },
     lesson: {
       en: 'Friendship grows when we care for each other',
       ja: 'おたがいを たいせつに すると ゆうじょうは そだちます',
+      jaKanji: {
+        1: 'おたがいを 大せつに すると ゆうじょうは そだちます',
+        2: 'お互いを 大切に すると ゆうじょうは 育ちます',
+        3: 'お互いを 大切に すると 友じょうは 育ちます',
+        4: 'お互いを 大切に すると 友情は 育ちます',
+        5: 'お互いを 大切に すると 友情は 育ちます',
+        6: 'お互いを 大切に すると 友情は 育ちます',
+      },
     },
     category: 'friendship',
     minGrade: 1,
@@ -938,7 +1100,7 @@ export function StoryPage(): JSX.Element {
           <h1 className="text-3xl font-display font-bold text-gray-800">
             {selectedStory
               ? language === 'ja'
-                ? selectedStory.title.ja
+                ? selectedStory.title.jaKanji[kanjiGrade]
                 : selectedStory.title.en
               : t('stories')}{' '}
             📖
@@ -964,15 +1126,17 @@ export function StoryPage(): JSX.Element {
                   className="bg-white rounded-2xl shadow-lg p-8 text-left hover:shadow-xl transition-shadow"
                 >
                   <h2 className="text-2xl font-bold mb-2 text-gray-800">
-                    {language === 'ja' ? story.title.ja : story.title.en}
+                    {language === 'ja' ? story.title.jaKanji[kanjiGrade] : story.title.en}
                   </h2>
                   <p className="text-sm text-gray-600 mb-2">
-                    {language === 'ja' ? story.description.ja : story.description.en}
+                    {language === 'ja'
+                      ? story.description.jaKanji[kanjiGrade]
+                      : story.description.en}
                   </p>
                   <div className="bg-blue-50 rounded-lg p-3 mb-4">
                     <p className="text-sm font-medium text-blue-800">
                       <span className="text-xs">📚 </span>
-                      {language === 'ja' ? story.lesson.ja : story.lesson.en}
+                      {language === 'ja' ? story.lesson.jaKanji[kanjiGrade] : story.lesson.en}
                     </p>
                   </div>
                   <div className="flex justify-between items-center">
@@ -1090,7 +1254,9 @@ export function StoryPage(): JSX.Element {
                     {language === 'ja' ? 'きょうの まなび' : "Today's Lesson"} 🌟
                   </h3>
                   <p className="text-center text-lg font-medium text-blue-800">
-                    {language === 'ja' ? selectedStory.lesson.ja : selectedStory.lesson.en}
+                    {language === 'ja'
+                      ? selectedStory.lesson.jaKanji[kanjiGrade]
+                      : selectedStory.lesson.en}
                   </p>
                 </motion.div>
               )}
