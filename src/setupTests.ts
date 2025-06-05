@@ -25,9 +25,6 @@ beforeEach(() => {
   // すべてのタイマーをクリア
   jest.clearAllTimers();
   
-  // DOMをクリーンアップ
-  document.body.innerHTML = '';
-  
   // すべてのモックをリセット
   jest.clearAllMocks();
 });

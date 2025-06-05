@@ -7,7 +7,7 @@ import { GameCard } from '@/components/GameCard';
 import { KanjiGradeSelector } from '@/components/KanjiGradeSelector';
 
 export function HomePage(): JSX.Element {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { playSound } = useAudio();
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
@@ -20,14 +20,14 @@ export function HomePage(): JSX.Element {
   const games = [
     {
       id: 'flashcards',
-      title: t('language') === 'ja' ? 'たんごカード' : 'Flash Cards',
+      title: language === 'ja' ? 'たんごカード' : 'Flash Cards',
       icon: '📚',
       color: 'bg-green-100',
       route: '/games/flashcards',
     },
     {
       id: 'spelling',
-      title: t('language') === 'ja' ? 'スペルチェック' : 'Spelling',
+      title: language === 'ja' ? 'スペルチェック' : 'Spelling',
       icon: '✏️',
       color: 'bg-blue-100',
       route: '/games/spelling',
