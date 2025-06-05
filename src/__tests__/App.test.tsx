@@ -10,6 +10,11 @@ jest.mock('../pages/HomePage', () => ({
   HomePage: () => <div>Home Page</div>,
 }));
 
+// Mock PWAInstallPrompt to avoid matchMedia issues
+jest.mock('../components/PWAInstallPrompt', () => ({
+  PWAInstallPrompt: () => null,
+}));
+
 describe('App', () => {
   it('ウェルカムページがデフォルトで表示される', () => {
     render(<App />);

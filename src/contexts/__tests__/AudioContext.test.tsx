@@ -68,7 +68,11 @@ describe('AudioContext', () => {
     });
 
     expect(global.speechSynthesis.speak).toHaveBeenCalled();
-    const utterance = (global.speechSynthesis.speak as jest.Mock).mock.calls[0][0];
+    const mockCalls = (global.speechSynthesis.speak as jest.Mock).mock.calls;
+    expect(mockCalls).toHaveLength(1);
+    
+    const utterance = mockCalls[0][0];
+    expect(utterance).toBeDefined();
     expect(utterance.text).toBe('Hello');
     expect(utterance.lang).toBe('en-US');
     expect(utterance.rate).toBe(0.8);
@@ -84,7 +88,10 @@ describe('AudioContext', () => {
       result.current.speak('こんにちは', 'ja');
     });
 
-    const utterance = (global.speechSynthesis.speak as jest.Mock).mock.calls[0][0];
+    expect(global.speechSynthesis.speak).toHaveBeenCalled();
+    const mockCalls = (global.speechSynthesis.speak as jest.Mock).mock.calls;
+    const utterance = mockCalls[0][0];
+    expect(utterance).toBeDefined();
     expect(utterance.lang).toBe('ja-JP');
   });
 

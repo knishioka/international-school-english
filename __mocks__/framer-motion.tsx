@@ -1,9 +1,26 @@
 import React from 'react';
 
 // Framer Motion の完全なモック
-const createMockComponent = (Component: string) => 
-  React.forwardRef<any, any>(({ children, whileHover, whileTap, whileFocus, whileDrag, animate, initial, exit, transition, variants, layout, layoutId, ...props }, ref) => 
-    React.createElement(Component, { ...props, ref }, children)
+const createMockComponent = (Component: string) =>
+  React.forwardRef<any, any>(
+    (
+      {
+        children,
+        whileHover,
+        whileTap,
+        whileFocus,
+        whileDrag,
+        animate,
+        initial,
+        exit,
+        transition,
+        variants,
+        layout,
+        layoutId,
+        ...props
+      },
+      ref,
+    ) => React.createElement(Component, { ...props, ref }, children),
   );
 
 export const motion = {
@@ -34,7 +51,9 @@ export const motion = {
   label: createMockComponent('label'),
 };
 
-export const AnimatePresence: React.FC<{ children: React.ReactNode }> = ({ children }) => <>{children}</>;
+export const AnimatePresence: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <>{children}</>
+);
 
 export const useAnimation = () => ({
   start: jest.fn(() => Promise.resolve()),
@@ -80,9 +99,15 @@ export const useIsPresent = () => true;
 export const useReducedMotion = () => false;
 export const useReducedMotionConfig = () => ({ reducedMotion: 'never' as const });
 
-export const LayoutGroup: React.FC<{ children: React.ReactNode }> = ({ children }) => <>{children}</>;
-export const LazyMotion: React.FC<{ children: React.ReactNode; features: any }> = ({ children }) => <>{children}</>;
-export const MotionConfig: React.FC<{ children: React.ReactNode }> = ({ children }) => <>{children}</>;
+export const LayoutGroup: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <>{children}</>
+);
+export const LazyMotion: React.FC<{ children: React.ReactNode; features: any }> = ({
+  children,
+}) => <>{children}</>;
+export const MotionConfig: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <>{children}</>
+);
 
 export const domAnimation = {};
 export const domMax = {};

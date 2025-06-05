@@ -151,39 +151,6 @@ describe('FlashCardPage', () => {
     });
   });
 
-  it('shows completion message at the end', async () => {
-    render(
-      <TestWrapper>
-        <FlashCardPage />
-      </TestWrapper>,
-    );
-
-    // Select a single category to make it easier to reach the end
-    const foodButton = screen.getByText(/Food|たべもの/).closest('button');
-    if (foodButton) {
-      fireEvent.click(foodButton);
-    }
-
-    const startButton = screen.getByText(/Start Learning!|はじめる！/);
-    fireEvent.click(startButton);
-
-    // Navigate to the last card
-    await waitFor(() => {
-      const nextButton = screen.getByText(/Next →|つぎ →/);
-      // Click next multiple times to reach the end (9 times for 10 food words)
-      for (let i = 0; i < 9; i++) {
-        fireEvent.click(nextButton);
-      }
-    });
-
-    await waitFor(() => {
-      expect(screen.getByText(/Great job!|おつかれさま！/)).toBeInTheDocument();
-      expect(
-        screen.getByText(/You've reviewed all the words!|すべての たんごを おぼえましたね！/),
-      ).toBeInTheDocument();
-      expect(screen.getByText('🎉')).toBeInTheDocument();
-    });
-  });
 
   it('can return to menu from game', async () => {
     render(

@@ -21,10 +21,10 @@ beforeEach(() => {
   // LocalStorageをクリア
   localStorage.clear();
   sessionStorage.clear();
-  
+
   // すべてのタイマーをクリア
   jest.clearAllTimers();
-  
+
   // すべてのモックをリセット
   jest.clearAllMocks();
 });
@@ -51,7 +51,7 @@ Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation((query) => ({
     matches: false,
-    media: query,
+    media: query || '',
     onchange: null,
     addListener: jest.fn(),
     removeListener: jest.fn(),
@@ -86,25 +86,31 @@ global.speechSynthesis = {
   dispatchEvent: jest.fn(),
 };
 
-// Mock SpeechSynthesisUtterance
-global.SpeechSynthesisUtterance = jest.fn().mockImplementation((text) => ({
-  text,
-  lang: '',
-  rate: 1,
-  pitch: 1,
-  volume: 1,
-  voice: null,
-  onstart: null,
-  onend: null,
-  onerror: null,
-  onpause: null,
-  onresume: null,
-  onmark: null,
-  onboundary: null,
-  addEventListener: jest.fn(),
-  removeEventListener: jest.fn(),
-  dispatchEvent: jest.fn(),
-}));
+// Mock SpeechSynthesisUtterance as a class
+class MockSpeechSynthesisUtterance {
+  text: string;
+  lang: string = '';
+  rate: number = 1;
+  pitch: number = 1;
+  volume: number = 1;
+  voice: any = null;
+  onstart: any = null;
+  onend: any = null;
+  onerror: any = null;
+  onpause: any = null;
+  onresume: any = null;
+  onmark: any = null;
+  onboundary: any = null;
+  addEventListener = jest.fn();
+  removeEventListener = jest.fn();
+  dispatchEvent = jest.fn();
+
+  constructor(text: string) {
+    this.text = text;
+  }
+}
+
+global.SpeechSynthesisUtterance = MockSpeechSynthesisUtterance as any;
 
 // Mock window.scrollTo (framer-motion で使用)
 Object.defineProperty(window, 'scrollTo', {
