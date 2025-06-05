@@ -5,6 +5,14 @@ import { LanguageProvider } from '@/contexts/LanguageContext';
 import { AudioProvider } from '@/contexts/AudioContext';
 import * as AudioContext from '@/contexts/AudioContext';
 
+const mockNavigate = jest.fn();
+
+// Mock the navigation
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockNavigate,
+}));
+
 // Mock the useAudio hook
 jest.mock('@/contexts/AudioContext', () => ({
   ...jest.requireActual('@/contexts/AudioContext'),
@@ -24,6 +32,7 @@ const AllTheProviders = ({ children }: { children: React.ReactNode }): JSX.Eleme
 describe('HomePage', () => {
   beforeEach(() => {
     localStorage.clear();
+    jest.clearAllMocks();
     // Setup default mock for useAudio
     (AudioContext.useAudio as jest.Mock).mockReturnValue({
       playSound: jest.fn(),
@@ -48,12 +57,14 @@ describe('HomePage', () => {
     expect(header).toHaveTextContent('こんにちは, ! 👋');
   });
 
-  it('ゲームカードが2つ表示される', () => {
+  it('ゲームカードが3つ表示される', () => {
     render(<HomePage />, { wrapper: AllTheProviders });
 
+    expect(screen.getByText('アルファベット')).toBeInTheDocument();
     expect(screen.getByText('ぶんしょうれんしゅう')).toBeInTheDocument();
     expect(screen.getByText('おはなし')).toBeInTheDocument();
 
+    expect(screen.getByText('🔤')).toBeInTheDocument();
     expect(screen.getByText('📝')).toBeInTheDocument();
     expect(screen.getByText('📖')).toBeInTheDocument();
   });
@@ -66,7 +77,26 @@ describe('HomePage', () => {
     expect(progressButton.textContent).toContain('📊');
   });
 
-  it('ゲームカードをクリックできる', async () => {
+  it('アルファベットゲームカードをクリックできる', async () => {
+    const mockPlaySound = jest.fn();
+    (AudioContext.useAudio as jest.Mock).mockReturnValue({
+      playSound: mockPlaySound,
+      speak: jest.fn(),
+    });
+
+    render(<HomePage />, { wrapper: AllTheProviders });
+
+    const alphabetCard = screen.getByRole('button', { name: /Play アルファベット game/ });
+
+    await act(async () => {
+      fireEvent.click(alphabetCard);
+    });
+
+    expect(mockPlaySound).toHaveBeenCalledWith('click');
+    expect(mockNavigate).toHaveBeenCalledWith('/games/alphabet');
+  });
+
+  it('文章練習ゲームカードをクリックできる', async () => {
     const mockPlaySound = jest.fn();
     (AudioContext.useAudio as jest.Mock).mockReturnValue({
       playSound: mockPlaySound,
@@ -82,6 +112,7 @@ describe('HomePage', () => {
     });
 
     expect(mockPlaySound).toHaveBeenCalledWith('click');
+    expect(mockNavigate).toHaveBeenCalledWith('/games/vocabulary');
   });
 
   it('進捗ボタンをクリックできる', async () => {
