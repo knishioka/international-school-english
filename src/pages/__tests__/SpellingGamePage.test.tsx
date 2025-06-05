@@ -31,7 +31,6 @@ describe('SpellingGamePage', () => {
     expect(screen.getByText(/Hard|むずかしい/)).toBeInTheDocument();
   });
 
-
   it('highlights selected difficulty', async () => {
     render(
       <TestWrapper>
@@ -47,7 +46,7 @@ describe('SpellingGamePage', () => {
     const mediumButton = screen.getByText(/Medium|ふつう/).closest('button');
     if (mediumButton) {
       fireEvent.click(mediumButton);
-      
+
       // Wait for state update
       await waitFor(() => {
         expect(mediumButton).toHaveClass('bg-blue-500');
@@ -90,8 +89,6 @@ describe('SpellingGamePage', () => {
     });
   });
 
-
-
   it('can return to difficulty selection', async () => {
     render(
       <TestWrapper>
@@ -128,4 +125,167 @@ describe('SpellingGamePage', () => {
     });
   });
 
+  it('displays alphabet buttons for input', async () => {
+    render(
+      <TestWrapper>
+        <SpellingGamePage />
+      </TestWrapper>,
+    );
+
+    const startButton = screen.getByText(/Start Game!|はじめる！/);
+    fireEvent.click(startButton);
+
+    await waitFor(() => {
+      // Check that all alphabet buttons are displayed
+      for (const letter of 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')) {
+        expect(screen.getByText(letter)).toBeInTheDocument();
+      }
+      // Check backspace button
+      expect(screen.getByText('⌫')).toBeInTheDocument();
+    });
+  });
+
+  it('can input text using alphabet buttons', async () => {
+    render(
+      <TestWrapper>
+        <SpellingGamePage />
+      </TestWrapper>,
+    );
+
+    const startButton = screen.getByText(/Start Game!|はじめる！/);
+    fireEvent.click(startButton);
+
+    await waitFor(() => {
+      const inputField = screen.getByPlaceholderText(
+        /Type here|ここに かいてね/,
+      ) as HTMLInputElement;
+      expect(inputField.value).toBe('');
+    });
+
+    // Click some letters
+    const buttonC = screen.getByRole('button', { name: 'C' });
+    await waitFor(() => expect(buttonC).toBeInTheDocument());
+
+    fireEvent.click(buttonC);
+
+    await waitFor(() => {
+      const inputField = screen.getByPlaceholderText(
+        /Type here|ここに かいてね/,
+      ) as HTMLInputElement;
+      expect(inputField.value).toBe('c');
+    });
+
+    const buttonA = screen.getByRole('button', { name: 'A' });
+    fireEvent.click(buttonA);
+
+    await waitFor(() => {
+      const inputField = screen.getByPlaceholderText(
+        /Type here|ここに かいてね/,
+      ) as HTMLInputElement;
+      expect(inputField.value).toBe('ca');
+    });
+
+    const buttonT = screen.getByRole('button', { name: 'T' });
+    fireEvent.click(buttonT);
+
+    await waitFor(() => {
+      const inputField = screen.getByPlaceholderText(
+        /Type here|ここに かいてね/,
+      ) as HTMLInputElement;
+      expect(inputField.value).toBe('cat');
+    });
+  });
+
+  it('can delete text using backspace button', async () => {
+    render(
+      <TestWrapper>
+        <SpellingGamePage />
+      </TestWrapper>,
+    );
+
+    const startButton = screen.getByText(/Start Game!|はじめる！/);
+    fireEvent.click(startButton);
+
+    await waitFor(() => {
+      const inputField = screen.getByPlaceholderText(
+        /Type here|ここに かいてね/,
+      ) as HTMLInputElement;
+      expect(inputField).toBeInTheDocument();
+    });
+
+    // Type some letters
+    const buttonA = screen.getByRole('button', { name: 'A' });
+    const buttonB = screen.getByRole('button', { name: 'B' });
+    const buttonC = screen.getByRole('button', { name: 'C' });
+
+    fireEvent.click(buttonA);
+
+    await waitFor(() => {
+      const inputField = screen.getByPlaceholderText(
+        /Type here|ここに かいてね/,
+      ) as HTMLInputElement;
+      expect(inputField.value).toBe('a');
+    });
+
+    fireEvent.click(buttonB);
+
+    await waitFor(() => {
+      const inputField = screen.getByPlaceholderText(
+        /Type here|ここに かいてね/,
+      ) as HTMLInputElement;
+      expect(inputField.value).toBe('ab');
+    });
+
+    fireEvent.click(buttonC);
+
+    await waitFor(() => {
+      const inputField = screen.getByPlaceholderText(
+        /Type here|ここに かいてね/,
+      ) as HTMLInputElement;
+      expect(inputField.value).toBe('abc');
+    });
+
+    // Click backspace
+    const backspaceButton = screen.getByRole('button', { name: '⌫' });
+    fireEvent.click(backspaceButton);
+
+    await waitFor(() => {
+      const inputField = screen.getByPlaceholderText(
+        /Type here|ここに かいてね/,
+      ) as HTMLInputElement;
+      expect(inputField.value).toBe('ab');
+    });
+  });
+
+  it('disables alphabet buttons after answer is checked', async () => {
+    render(
+      <TestWrapper>
+        <SpellingGamePage />
+      </TestWrapper>,
+    );
+
+    const startButton = screen.getByText(/Start Game!|はじめる！/);
+    fireEvent.click(startButton);
+
+    await waitFor(() => {
+      const inputField = screen.getByPlaceholderText(
+        /Type here|ここに かいてね/,
+      ) as HTMLInputElement;
+      fireEvent.change(inputField, { target: { value: 'test' } });
+    });
+
+    const checkButton = screen.getByText(/Check Answer|こたえをみる/);
+    fireEvent.click(checkButton);
+
+    await waitFor(() => {
+      // All alphabet buttons should be disabled
+      for (const letter of 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')) {
+        const button = screen.getByText(letter).closest('button');
+        expect(button).toBeDisabled();
+      }
+      // Backspace should also be disabled
+      const backspaceButton = screen.getByText('⌫').closest('button');
+      expect(backspaceButton).toBeDisabled();
+    });
+  });
 });

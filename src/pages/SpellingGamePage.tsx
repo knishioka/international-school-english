@@ -295,6 +295,20 @@ export function SpellingGamePage(): JSX.Element {
     setIsCorrect(null);
   };
 
+  const handleAlphabetClick = async (letter: string): Promise<void> => {
+    await playSound('click');
+    if (isCorrect === null) {
+      setUserInput(userInput + letter.toLowerCase());
+    }
+  };
+
+  const handleBackspace = async (): Promise<void> => {
+    await playSound('click');
+    if (isCorrect === null && userInput.length > 0) {
+      setUserInput(userInput.slice(0, -1));
+    }
+  };
+
   if (!gameStarted) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-blue-100 to-indigo-100 p-4">
@@ -473,6 +487,43 @@ export function SpellingGamePage(): JSX.Element {
             {/* ヒント表示: 文字数 */}
             <div className="text-center mt-2 text-gray-500">
               {currentWord.word.length} {language === 'ja' ? 'もじ' : 'letters'}
+            </div>
+
+            {/* アルファベットボタン */}
+            <div className="mt-6">
+              <div className="grid grid-cols-7 gap-2 max-w-lg mx-auto">
+                {'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map((letter) => (
+                  <button
+                    key={letter}
+                    onClick={() => handleAlphabetClick(letter)}
+                    disabled={isCorrect !== null}
+                    className={`
+                      p-3 text-lg font-bold rounded-lg transition-all
+                      ${
+                        isCorrect !== null
+                          ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                          : 'bg-blue-500 text-white hover:bg-blue-600 active:scale-95 shadow-sm'
+                      }
+                    `}
+                  >
+                    {letter}
+                  </button>
+                ))}
+                <button
+                  onClick={handleBackspace}
+                  disabled={isCorrect !== null || userInput.length === 0}
+                  className={`
+                    col-span-2 p-3 text-lg font-bold rounded-lg transition-all
+                    ${
+                      isCorrect !== null || userInput.length === 0
+                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                        : 'bg-red-500 text-white hover:bg-red-600 active:scale-95 shadow-sm'
+                    }
+                  `}
+                >
+                  ⌫
+                </button>
+              </div>
             </div>
           </div>
 
