@@ -132,8 +132,8 @@ jobs:
         uses: treosh/lighthouse-ci-action@v10
         with:
           urls: |
-            http://localhost:3000
-            http://localhost:3000/games
+            http://localhost:3000/international-school-english/
+            http://localhost:3000/international-school-english/home
           configPath: './lighthouserc.json'
           uploadArtifacts: true
           temporaryPublicStorage: true
