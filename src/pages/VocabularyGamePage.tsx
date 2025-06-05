@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage, KanjiGrade } from '@/contexts/LanguageContext';
 import { useAudio } from '@/contexts/AudioContext';
+import { KanjiGradeSelector } from '@/components/KanjiGradeSelector';
 
 interface Sentence {
   id: string;
@@ -405,6 +406,11 @@ export function VocabularyGamePage(): JSX.Element {
 
         {!currentGame ? (
           <>
+            {/* 漢字レベル選択 */}
+            <div className="flex justify-center mb-4">
+              <KanjiGradeSelector />
+            </div>
+
             {/* カテゴリー選択 */}
             <div className="flex flex-wrap gap-2 justify-center mb-6">
               {categories.map((category) => (

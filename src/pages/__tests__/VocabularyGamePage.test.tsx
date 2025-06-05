@@ -76,13 +76,14 @@ describe('VocabularyGamePage', () => {
 
     // 単語を順番にクリック
     await waitFor(() => screen.getByText('I'));
-    
+
     // 個別に各単語をクリック（shuffleされている可能性があるため）
     const words = ['I', 'eat', 'breakfast', 'every', 'morning'];
     for (const word of words) {
-      const wordButton = screen.getAllByText(word).find(el => 
-        el.closest('button') && !el.closest('button')?.disabled
-      );
+      const wordButton = screen.getAllByText(word).find((el) => {
+        const button = el.closest('button');
+        return button !== null && !button.disabled;
+      });
       if (wordButton) {
         await act(async () => {
           fireEvent.click(wordButton);
@@ -114,7 +115,7 @@ describe('VocabularyGamePage', () => {
 
     // 間違った順序で単語をクリック
     await waitFor(() => screen.getByText('breakfast'));
-    
+
     await act(async () => {
       fireEvent.click(screen.getByText('breakfast'));
       fireEvent.click(screen.getByText('I'));
@@ -146,7 +147,7 @@ describe('VocabularyGamePage', () => {
     // ヒントボタンをクリック
     await waitFor(() => screen.getByText(/Hint|ヒント/));
     const hintButton = screen.getByText(/Hint|ヒント/);
-    
+
     await act(async () => {
       fireEvent.click(hintButton);
     });
@@ -163,7 +164,7 @@ describe('VocabularyGamePage', () => {
     render(<VocabularyGamePage />, { wrapper: AllTheProviders });
 
     const backButton = screen.getByLabelText('Back to home');
-    
+
     await act(async () => {
       fireEvent.click(backButton);
     });
