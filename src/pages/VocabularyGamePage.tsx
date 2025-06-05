@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage, KanjiGrade } from '@/contexts/LanguageContext';
 import { useAudio } from '@/contexts/AudioContext';
 import { KanjiGradeSelector } from '@/components/KanjiGradeSelector';
+import { progressService } from '@/services/progressService';
 
 interface Sentence {
   id: string;
@@ -288,6 +289,12 @@ export function VocabularyGamePage(): JSX.Element {
   const [currentGame, setCurrentGame] = useState<WordOrderGame | null>(null);
   const [showHint, setShowHint] = useState(false);
   const [score, setScore] = useState(0);
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    const name = localStorage.getItem('userName');
+    setUserName(name ?? '');
+  }, []);
 
   const filteredSentences =
     selectedCategory === 'all'
@@ -348,9 +355,27 @@ export function VocabularyGamePage(): JSX.Element {
     const isCorrect = userAnswer === sentenceWithoutPunctuation;
     setCurrentGame({ ...currentGame, isCorrect });
 
+    // Calculate score based on correctness and sentence length
+    const baseScore = isCorrect ? currentGame.sentence.words.length * 10 : 5;
+    const bonusScore = isCorrect ? (showHint ? 0 : 20) : 0; // Bonus for not using hint
+    const totalScore = baseScore + bonusScore;
+
+    if (isCorrect) {
+      setScore(score + totalScore);
+    }
+
+    // Save progress to localStorage
+    if (userName.length > 0) {
+      progressService.updateSentencePracticeProgress(
+        userName,
+        currentGame.sentence.id,
+        isCorrect,
+        totalScore,
+      );
+    }
+
     if (isCorrect) {
       await playSound('success');
-      setScore(score + 1);
       speak(currentGame.sentence.english, 'en');
     } else {
       await playSound('error');

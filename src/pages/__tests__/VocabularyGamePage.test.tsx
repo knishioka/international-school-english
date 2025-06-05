@@ -3,10 +3,18 @@ import { BrowserRouter } from 'react-router-dom';
 import { VocabularyGamePage } from '../VocabularyGamePage';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { AudioProvider } from '@/contexts/AudioContext';
+import { progressService } from '@/services/progressService';
 
 const mockNavigate = jest.fn();
 const mockPlaySound = jest.fn();
 const mockSpeak = jest.fn();
+
+// Mock progress service
+jest.mock('@/services/progressService', () => ({
+  progressService: {
+    updateSentencePracticeProgress: jest.fn(),
+  },
+}));
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -21,6 +29,24 @@ jest.mock('@/contexts/AudioContext', () => ({
   }),
 }));
 
+// Mock localStorage
+const localStorageMock = (() => {
+  let store: Record<string, string> = {};
+  return {
+    getItem: (key: string) => store[key] || null,
+    setItem: (key: string, value: string) => {
+      store[key] = value.toString();
+    },
+    clear: () => {
+      store = {};
+    },
+  };
+})();
+
+Object.defineProperty(window, 'localStorage', {
+  value: localStorageMock,
+});
+
 const AllTheProviders = ({ children }: { children: React.ReactNode }): JSX.Element => {
   return (
     <BrowserRouter>
@@ -34,6 +60,7 @@ const AllTheProviders = ({ children }: { children: React.ReactNode }): JSX.Eleme
 describe('VocabularyGamePage', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    localStorage.clear();
   });
 
   it('文章練習のタイトルを表示する', () => {
@@ -170,5 +197,135 @@ describe('VocabularyGamePage', () => {
     });
 
     expect(mockNavigate).toHaveBeenCalledWith('/home');
+  });
+
+  it('ユーザー名が設定されている場合、正解時に進捗を保存する', async () => {
+    // ユーザー名を設定
+    localStorage.setItem('userName', 'testUser');
+
+    render(<VocabularyGamePage />, { wrapper: AllTheProviders });
+
+    // 文章を選択
+    const sentenceCard = screen.getByText('I eat breakfast every morning.');
+    await act(async () => {
+      fireEvent.click(sentenceCard);
+    });
+
+    // 正しい順序で単語を選択
+    await waitFor(() => screen.getByText('I'));
+
+    const words = ['I', 'eat', 'breakfast', 'every', 'morning'];
+    for (const word of words) {
+      const wordButton = screen.getAllByText(word).find((el) => {
+        const button = el.closest('button');
+        return button !== null && !button.disabled;
+      });
+      if (wordButton) {
+        await act(async () => {
+          fireEvent.click(wordButton);
+        });
+      }
+    }
+
+    // 答えをチェック
+    const checkButton = screen.getByText(/Check Answer|こたえをみる/);
+    await act(async () => {
+      fireEvent.click(checkButton);
+    });
+
+    // 進捗保存が呼ばれることを確認
+    await waitFor(() => {
+      expect(progressService.updateSentencePracticeProgress).toHaveBeenCalledWith(
+        'testUser',
+        '1', // sentence ID
+        true, // isCorrect
+        70, // score (5 words * 10 + 20 bonus for no hint)
+      );
+    });
+  });
+
+  it('ユーザー名が設定されていない場合、進捗を保存しない', async () => {
+    render(<VocabularyGamePage />, { wrapper: AllTheProviders });
+
+    // 文章を選択して完了
+    const sentenceCard = screen.getByText('I eat breakfast every morning.');
+    await act(async () => {
+      fireEvent.click(sentenceCard);
+    });
+
+    await waitFor(() => screen.getByText('I'));
+
+    const words = ['I', 'eat', 'breakfast', 'every', 'morning'];
+    for (const word of words) {
+      const wordButton = screen.getAllByText(word).find((el) => {
+        const button = el.closest('button');
+        return button !== null && !button.disabled;
+      });
+      if (wordButton) {
+        await act(async () => {
+          fireEvent.click(wordButton);
+        });
+      }
+    }
+
+    const checkButton = screen.getByText(/Check Answer|こたえをみる/);
+    await act(async () => {
+      fireEvent.click(checkButton);
+    });
+
+    // 進捗保存が呼ばれないことを確認
+    await waitFor(() => {
+      expect(progressService.updateSentencePracticeProgress).not.toHaveBeenCalled();
+    });
+  });
+
+  it('ヒントを使用した場合、スコアが減る', async () => {
+    localStorage.setItem('userName', 'testUser');
+
+    render(<VocabularyGamePage />, { wrapper: AllTheProviders });
+
+    // 文章を選択
+    const sentenceCard = screen.getByText('I eat breakfast every morning.');
+    await act(async () => {
+      fireEvent.click(sentenceCard);
+    });
+
+    // ヒントを使用
+    await waitFor(() => screen.getByText(/Hint|ヒント/));
+    const hintButton = screen.getByText(/Hint|ヒント/);
+    await act(async () => {
+      fireEvent.click(hintButton);
+    });
+
+    // 正しい順序で単語を選択
+    await waitFor(() => screen.getByText('I'));
+
+    const words = ['I', 'eat', 'breakfast', 'every', 'morning'];
+    for (const word of words) {
+      const wordButton = screen.getAllByText(word).find((el) => {
+        const button = el.closest('button');
+        return button !== null && !button.disabled;
+      });
+      if (wordButton) {
+        await act(async () => {
+          fireEvent.click(wordButton);
+        });
+      }
+    }
+
+    const checkButton = screen.getByText(/Check Answer|こたえをみる/);
+    await act(async () => {
+      fireEvent.click(checkButton);
+    });
+
+    // ヒント使用時はボーナスなしの50点
+    await waitFor(() => {
+      expect(progressService.updateSentencePracticeProgress).toHaveBeenCalledWith(
+        'testUser',
+        '1',
+        true,
+        50, // score (5 words * 10 + 0 bonus for using hint)
+      );
+    });
   });
 });

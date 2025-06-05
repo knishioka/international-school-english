@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage, KanjiGrade } from '@/contexts/LanguageContext';
 import { useAudio } from '@/contexts/AudioContext';
 import { KanjiGradeSelector } from '@/components/KanjiGradeSelector';
+import { progressService } from '@/services/progressService';
 
 interface Story {
   id: string;
@@ -1031,6 +1032,12 @@ export function StoryPage(): JSX.Element {
   const [selectedStory, setSelectedStory] = useState<Story | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [isReading, setIsReading] = useState(false);
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    const name = localStorage.getItem('userName');
+    setUserName(name ?? '');
+  }, []);
 
   const handleBack = async (): Promise<void> => {
     await playSound('click');
@@ -1046,6 +1053,16 @@ export function StoryPage(): JSX.Element {
     await playSound('click');
     setSelectedStory(story);
     setCurrentPage(0);
+
+    // Save initial reading progress
+    if (userName.length > 0) {
+      progressService.updateStoryProgress(
+        userName,
+        story.id,
+        1, // First page
+        story.pages.length,
+      );
+    }
   };
 
   const handleNextPage = async (): Promise<void> => {
@@ -1054,8 +1071,20 @@ export function StoryPage(): JSX.Element {
     }
 
     await playSound('click');
-    if (currentPage < selectedStory.pages.length - 1) {
-      setCurrentPage(currentPage + 1);
+    const newPage = currentPage + 1;
+
+    if (newPage < selectedStory.pages.length) {
+      setCurrentPage(newPage);
+    }
+
+    // Save reading progress
+    if (userName.length > 0 && selectedStory !== null) {
+      progressService.updateStoryProgress(
+        userName,
+        selectedStory.id,
+        newPage + 1, // Pages read (1-indexed)
+        selectedStory.pages.length,
+      );
     }
   };
 
