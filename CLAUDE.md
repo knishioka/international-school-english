@@ -27,6 +27,10 @@ npm run test:e2e  # Playwright E2Eテスト
 npm run lint
 npm run typecheck
 npm run test:unit
+
+# プッシュ前の確認（必須）
+# 以下のコマンドをすべて実行し、エラーがないことを確認してからpushすること
+npm run lint && npm run typecheck && npm run test:unit
 ```
 
 ### プロジェクト構造
