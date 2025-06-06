@@ -66,7 +66,7 @@ describe('StoryPage', () => {
   it('ストーリー一覧を表示する', () => {
     render(<StoryPage />, { wrapper: AllTheProviders });
 
-    expect(screen.getByText(/stories|おはなし/)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /stories|おはなし/ })).toBeInTheDocument();
     expect(screen.getByText('やさしい うさぎ')).toBeInTheDocument();
     expect(screen.getByText('雨のあとの にじ')).toBeInTheDocument();
     expect(screen.getByText('正じきな 男の子')).toBeInTheDocument();
