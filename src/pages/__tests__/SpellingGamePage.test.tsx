@@ -84,7 +84,7 @@ describe('SpellingGamePage', () => {
     await waitFor(() => {
       // Just check that game UI is displayed, not specific words
       expect(screen.getByText(/Type the spelling|スペルを いれてね/)).toBeInTheDocument();
-      expect(screen.getByPlaceholderText(/Type here|ここに かいてね/)).toBeInTheDocument();
+      expect(screen.getByText(/ここに かいてね|Type here/)).toBeInTheDocument();
       expect(screen.getByText(/Check Answer|こたえをみる/)).toBeInTheDocument();
     });
   });
@@ -125,33 +125,6 @@ describe('SpellingGamePage', () => {
     });
   });
 
-  it('can type alphabet letters in input field', async () => {
-    render(
-      <TestWrapper>
-        <SpellingGamePage />
-      </TestWrapper>,
-    );
-
-    const startButton = screen.getByText(/Start Game!|はじめる！/);
-    fireEvent.click(startButton);
-
-    await waitFor(() => {
-      const inputField = screen.getByPlaceholderText(
-        /Type here|ここに かいてね/,
-      ) as HTMLInputElement;
-      expect(inputField).toBeInTheDocument();
-    });
-
-    const inputField = screen.getByPlaceholderText(/Type here|ここに かいてね/) as HTMLInputElement;
-
-    // Type 'hello' in the input field
-    fireEvent.change(inputField, { target: { value: 'hello' } });
-
-    await waitFor(() => {
-      expect(inputField.value).toBe('hello');
-    });
-  });
-
   it('displays alphabet buttons for input', async () => {
     render(
       <TestWrapper>
@@ -183,43 +156,23 @@ describe('SpellingGamePage', () => {
     fireEvent.click(startButton);
 
     await waitFor(() => {
-      const inputField = screen.getByPlaceholderText(
-        /Type here|ここに かいてね/,
-      ) as HTMLInputElement;
-      expect(inputField.value).toBe('');
+      const placeholder = screen.getByText(/ここに かいてね|Type here/);
+      expect(placeholder).toBeInTheDocument();
     });
 
     // Click some letters
     const buttonC = screen.getByRole('button', { name: 'C' });
-    await waitFor(() => expect(buttonC).toBeInTheDocument());
-
     fireEvent.click(buttonC);
-
-    await waitFor(() => {
-      const inputField = screen.getByPlaceholderText(
-        /Type here|ここに かいてね/,
-      ) as HTMLInputElement;
-      expect(inputField.value).toBe('c');
-    });
 
     const buttonA = screen.getByRole('button', { name: 'A' });
     fireEvent.click(buttonA);
-
-    await waitFor(() => {
-      const inputField = screen.getByPlaceholderText(
-        /Type here|ここに かいてね/,
-      ) as HTMLInputElement;
-      expect(inputField.value).toBe('ca');
-    });
 
     const buttonT = screen.getByRole('button', { name: 'T' });
     fireEvent.click(buttonT);
 
     await waitFor(() => {
-      const inputField = screen.getByPlaceholderText(
-        /Type here|ここに かいてね/,
-      ) as HTMLInputElement;
-      expect(inputField.value).toBe('cat');
+      const inputDisplay = screen.getByText('cat');
+      expect(inputDisplay).toBeInTheDocument();
     });
   });
 
@@ -246,30 +199,13 @@ describe('SpellingGamePage', () => {
     const buttonC = screen.getByRole('button', { name: 'C' });
 
     fireEvent.click(buttonA);
-
-    await waitFor(() => {
-      const inputField = screen.getByPlaceholderText(
-        /Type here|ここに かいてね/,
-      ) as HTMLInputElement;
-      expect(inputField.value).toBe('a');
-    });
-
     fireEvent.click(buttonB);
-
-    await waitFor(() => {
-      const inputField = screen.getByPlaceholderText(
-        /Type here|ここに かいてね/,
-      ) as HTMLInputElement;
-      expect(inputField.value).toBe('ab');
-    });
 
     fireEvent.click(buttonC);
 
     await waitFor(() => {
-      const inputField = screen.getByPlaceholderText(
-        /Type here|ここに かいてね/,
-      ) as HTMLInputElement;
-      expect(inputField.value).toBe('abc');
+      const inputDisplay = screen.getByText('abc');
+      expect(inputDisplay).toBeInTheDocument();
     });
 
     // Click backspace
@@ -277,10 +213,8 @@ describe('SpellingGamePage', () => {
     fireEvent.click(backspaceButton);
 
     await waitFor(() => {
-      const inputField = screen.getByPlaceholderText(
-        /Type here|ここに かいてね/,
-      ) as HTMLInputElement;
-      expect(inputField.value).toBe('ab');
+      const inputDisplay = screen.getByText('ab');
+      expect(inputDisplay).toBeInTheDocument();
     });
   });
 
@@ -294,12 +228,10 @@ describe('SpellingGamePage', () => {
     const startButton = screen.getByText(/Start Game!|はじめる！/);
     fireEvent.click(startButton);
 
-    await waitFor(() => {
-      const inputField = screen.getByPlaceholderText(
-        /Type here|ここに かいてね/,
-      ) as HTMLInputElement;
-      fireEvent.change(inputField, { target: { value: 'test' } });
-    });
+    // Type 'cat' by clicking alphabet buttons
+    fireEvent.click(screen.getByRole('button', { name: 'C' }));
+    fireEvent.click(screen.getByRole('button', { name: 'A' }));
+    fireEvent.click(screen.getByRole('button', { name: 'T' }));
 
     const checkButton = screen.getByText(/Check Answer|こたえをみる/);
     fireEvent.click(checkButton);
