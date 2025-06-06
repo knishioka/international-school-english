@@ -5,16 +5,10 @@
 @layer base {
   html {
     @apply antialiased;
-    /* Prevent font loading layout shifts */
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
   }
 
   body {
     @apply bg-gray-50 text-gray-900;
-    /* Improve rendering performance */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
 
   /* Custom focus styles for better accessibility */
@@ -28,7 +22,7 @@
 
   /* Button base styles */
   button {
-    @apply transition-transform transition-opacity duration-200;
+    @apply transition-all duration-200;
   }
 
   /* Disable text selection for game elements */

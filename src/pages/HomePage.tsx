@@ -59,7 +59,6 @@ export function HomePage(): JSX.Element {
         <motion.header
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, ease: 'easeOut' }}
           className="text-center py-8"
         >
           <div className="flex justify-end mb-4">
@@ -77,11 +76,7 @@ export function HomePage(): JSX.Element {
               key={game.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: index * 0.1,
-                duration: 0.3,
-                ease: 'easeOut',
-              }}
+              transition={{ delay: index * 0.1 }}
             >
               <GameCard
                 title={game.title}

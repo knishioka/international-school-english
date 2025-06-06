@@ -108,13 +108,11 @@ export function FlashCard({
         onClick={handleFlip}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        initial={false}
       >
         <motion.div
           className="absolute inset-0 w-full h-full preserve-3d"
           animate={{ rotateY: isFlipped ? 180 : 0 }}
           transition={{ duration: 0.6 }}
-          initial={false}
         >
           {/* 表面（英語） */}
           <div className="absolute inset-0 w-full h-full backface-hidden bg-white rounded-2xl shadow-xl border-4 border-blue-200">
