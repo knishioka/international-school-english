@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -1039,6 +1039,7 @@ export function SpellingGamePage(): JSX.Element {
   const { language } = useLanguage();
   const { playSound, speak } = useAudio();
   const navigate = useNavigate();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [selectedDifficulty, setSelectedDifficulty] = useState<'easy' | 'medium' | 'hard'>('easy');
   const [currentWord, setCurrentWord] = useState<SpellingWord | null>(null);
@@ -1052,7 +1053,9 @@ export function SpellingGamePage(): JSX.Element {
   const filteredWords = spellingWords.filter((word) => word.difficulty === selectedDifficulty);
 
   useEffect(() => {
-    // No need to focus since we're using button input
+    if (gameStarted && inputRef.current) {
+      inputRef.current.focus();
+    }
   }, [gameStarted, currentWord]);
 
   const startGame = (): void => {
@@ -1077,6 +1080,10 @@ export function SpellingGamePage(): JSX.Element {
     await playSound('click');
     setSelectedDifficulty(difficulty);
     setGameStarted(false);
+  };
+
+  const handleInputChange = (value: string): void => {
+    setUserInput(value.toLowerCase());
   };
 
   const handleSubmit = async (): Promise<void> => {
@@ -1317,13 +1324,16 @@ export function SpellingGamePage(): JSX.Element {
             <label className="block text-lg font-medium text-gray-700 mb-2">
               {language === 'ja' ? 'スペルを いれてね:' : 'Type the spelling:'}
             </label>
-            <div className="w-full px-4 py-3 text-xl border-2 border-gray-300 rounded-lg text-center font-mono bg-white min-h-[3.5rem] flex items-center justify-center">
-              {userInput || (
-                <span className="text-gray-400">
-                  {language === 'ja' ? 'ここに かいてね...' : 'Type here...'}
-                </span>
-              )}
-            </div>
+            <input
+              ref={inputRef}
+              type="text"
+              value={userInput}
+              onChange={(e) => handleInputChange(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
+              className="w-full px-4 py-3 text-xl border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none text-center font-mono"
+              placeholder={language === 'ja' ? 'ここに かいてね...' : 'Type here...'}
+              disabled={isCorrect !== null}
+            />
 
             {/* ヒント表示: 文字数 */}
             <div className="text-center mt-2 text-gray-500">
