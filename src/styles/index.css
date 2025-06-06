@@ -5,10 +5,16 @@
 @layer base {
   html {
     @apply antialiased;
+    /* Prevent font loading layout shifts */
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
   }
 
   body {
     @apply bg-gray-50 text-gray-900;
+    /* Improve rendering performance */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   /* Custom focus styles for better accessibility */
@@ -22,7 +28,7 @@
 
   /* Button base styles */
   button {
-    @apply transition-all duration-200;
+    @apply transition-transform transition-opacity duration-200;
   }
 
   /* Disable text selection for game elements */
@@ -46,7 +52,7 @@
     @apply bg-primary-500 text-white font-bold
            py-4 px-8 rounded-full text-lg
            shadow-lg hover:bg-primary-600
-           active:scale-95 transition-all duration-200
+           active:scale-95 transition-colors transition-transform duration-200
            disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
@@ -55,7 +61,7 @@
     @apply bg-secondary-500 text-white font-bold
            py-4 px-8 rounded-full text-lg
            shadow-lg hover:bg-secondary-600
-           active:scale-95 transition-all duration-200
+           active:scale-95 transition-colors transition-transform duration-200
            disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
