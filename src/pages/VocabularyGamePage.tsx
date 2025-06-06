@@ -1700,6 +1700,8 @@ export function VocabularyGamePage(): JSX.Element {
   const [hintLevel, setHintLevel] = useState(0);
   const [score, setScore] = useState(0);
   const [userName, setUserName] = useState('');
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 20;
 
   useEffect(() => {
     const name = localStorage.getItem('userName');
@@ -1710,6 +1712,18 @@ export function VocabularyGamePage(): JSX.Element {
     selectedCategory === 'all'
       ? sentences
       : sentences.filter((item) => item.category === selectedCategory);
+
+  // ページネーション計算
+  const totalPages = Math.ceil(filteredSentences.length / itemsPerPage);
+  const paginatedSentences = filteredSentences.slice(
+    currentPage * itemsPerPage,
+    (currentPage + 1) * itemsPerPage,
+  );
+
+  // カテゴリ変更時にページをリセット
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [selectedCategory]);
 
   const shuffleArray = <T,>(array: T[]): T[] => {
     const shuffled = [...array];
@@ -1915,16 +1929,15 @@ export function VocabularyGamePage(): JSX.Element {
             </div>
 
             {/* 文章選択グリッド */}
-            <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <AnimatePresence mode="popLayout">
-                {filteredSentences.map((sentence, index) => (
+            <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <AnimatePresence>
+                {paginatedSentences.map((sentence, index) => (
                   <motion.button
                     key={sentence.id}
-                    layout
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.2, delay: index * 0.05 }}
+                    transition={{ duration: 0.2, delay: Math.min(index * 0.02, 0.3) }}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => startGame(sentence)}
@@ -1941,6 +1954,29 @@ export function VocabularyGamePage(): JSX.Element {
                 ))}
               </AnimatePresence>
             </motion.div>
+
+            {/* ページネーションコントロール */}
+            {totalPages > 1 && (
+              <div className="flex justify-center items-center gap-4 mt-8">
+                <button
+                  onClick={() => setCurrentPage(Math.max(0, currentPage - 1))}
+                  disabled={currentPage === 0}
+                  className="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-300 hover:bg-blue-600 transition-colors"
+                >
+                  {language === 'ja' ? 'まえ' : 'Previous'}
+                </button>
+                <span className="text-gray-700">
+                  {currentPage + 1} / {totalPages}
+                </span>
+                <button
+                  onClick={() => setCurrentPage(Math.min(totalPages - 1, currentPage + 1))}
+                  disabled={currentPage === totalPages - 1}
+                  className="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-300 hover:bg-blue-600 transition-colors"
+                >
+                  {language === 'ja' ? 'つぎ' : 'Next'}
+                </button>
+              </div>
+            )}
           </>
         ) : (
           /* ゲーム画面 */
