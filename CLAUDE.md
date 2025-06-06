@@ -120,6 +120,16 @@ npm run lint && npm run typecheck && npm run test:unit
 
 ## Git規約
 
+### Pre-commitフック
+このプロジェクトではHuskyによるpre-commitフックが設定されています。コミット時に自動的に以下のチェックが実行されます：
+
+- ESLint（自動修正含む）
+- Prettier（コードフォーマット）
+- TypeScriptの型チェック
+- ユニットテスト
+
+**重要**: pre-commitフックを絶対に無視しないでください。エラーが発生した場合は、必ず修正してからコミットしてください。
+
 ### コミットメッセージ
 ```
 <type>(<scope>): <subject>
