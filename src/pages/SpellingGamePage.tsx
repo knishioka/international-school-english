@@ -1191,22 +1191,16 @@ export function SpellingGamePage(): JSX.Element {
           </div>
 
           {/* 難易度選択 */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-8"
-          >
+          <motion.div initial={false} className="text-center mb-8">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
               {language === 'ja' ? 'レベルを えらんでね' : 'Choose Your Level'}
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto mb-8">
-              {difficulties.map((difficulty, index) => (
+              {difficulties.map((difficulty) => (
                 <motion.button
                   key={difficulty.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
+                  initial={false}
                   onClick={() =>
                     handleDifficultySelect(difficulty.id as 'easy' | 'medium' | 'hard')
                   }
@@ -1232,8 +1226,7 @@ export function SpellingGamePage(): JSX.Element {
             </div>
 
             <motion.button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={false}
               transition={{ delay: 0.5 }}
               onClick={startGame}
               className="px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-xl font-bold rounded-full hover:from-blue-600 hover:to-indigo-600 transition-all transform hover:scale-105 shadow-lg"
@@ -1295,11 +1288,7 @@ export function SpellingGamePage(): JSX.Element {
         </div>
 
         {/* メインコンテンツ */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl shadow-lg p-8 mb-6"
-        >
+        <motion.div initial={false} className="bg-white rounded-2xl shadow-lg p-8 mb-6">
           {/* 単語情報 */}
           <div className="text-center mb-8">
             <div className="text-8xl mb-4">{currentWord.emoji}</div>
@@ -1452,11 +1441,7 @@ export function SpellingGamePage(): JSX.Element {
 
           {/* 正解表示 */}
           {isCorrect === false && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mt-4 p-4 bg-yellow-50 rounded-lg text-center"
-            >
+            <motion.div initial={false} className="mt-4 p-4 bg-yellow-50 rounded-lg text-center">
               <p className="text-gray-700">
                 {language === 'ja' ? 'せいかい:' : 'Correct spelling:'}
               </p>
@@ -1468,12 +1453,7 @@ export function SpellingGamePage(): JSX.Element {
         {/* 完了画面 */}
         <AnimatePresence>
           {currentIndex === filteredWords.length - 1 && isCorrect === true && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="text-center"
-            >
+            <motion.div initial={false} exit={{ opacity: 0, y: -20 }} className="text-center">
               <div className="text-6xl mb-4">🎉</div>
               <h2 className="text-3xl font-bold text-gray-800 mb-2">
                 {language === 'ja' ? 'おつかれさま！' : 'Great Job!'}

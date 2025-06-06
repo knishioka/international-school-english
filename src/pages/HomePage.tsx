@@ -56,11 +56,7 @@ export function HomePage(): JSX.Element {
   return (
     <div className="min-h-screen bg-gradient-to-b from-yellow-100 to-orange-100 p-4">
       <div className="max-w-6xl mx-auto">
-        <motion.header
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center py-8"
-        >
+        <motion.header initial={false} className="text-center py-8">
           <div className="flex justify-end mb-4">
             <KanjiGradeSelector />
           </div>
@@ -71,13 +67,8 @@ export function HomePage(): JSX.Element {
         </motion.header>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 max-w-6xl mx-auto">
-          {games.map((game, index) => (
-            <motion.div
-              key={game.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-            >
+          {games.map((game) => (
+            <motion.div key={game.id} initial={false}>
               <GameCard
                 title={game.title}
                 icon={game.icon}
@@ -88,12 +79,7 @@ export function HomePage(): JSX.Element {
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="text-center"
-        >
+        <motion.div initial={false} className="text-center">
           <button
             onClick={async () => {
               await playSound('click');

@@ -140,11 +140,7 @@ export function ProgressPage(): JSX.Element {
         </div>
 
         {/* ユーザー情報 */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl shadow-lg p-6 mb-6"
-        >
+        <motion.div initial={false} className="bg-white rounded-2xl shadow-lg p-6 mb-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">
             {userName !== '' ? `${userName}の ` : ''}
             {language === 'ja' ? t('myProgress') : 'Learning Record'}
@@ -210,21 +206,19 @@ export function ProgressPage(): JSX.Element {
         </motion.div>
 
         {/* アチーブメント */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
+        <motion.div initial={false}>
           <h3 className="text-xl font-bold text-gray-800 mb-4">
             {language === 'ja' ? 'アチーブメント' : 'Achievements'} 🏆
           </h3>
 
           {stats.achievements.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              {stats.achievements.map((achievementId, index) => {
+              {stats.achievements.map((achievementId) => {
                 const achievement = getAchievementInfo(achievementId);
                 return (
                   <motion.div
                     key={achievementId}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 * index }}
+                    initial={false}
                     className="bg-white rounded-xl p-4 shadow-lg ring-2 ring-yellow-400"
                   >
                     <div className="flex items-center gap-4">
@@ -252,7 +246,7 @@ export function ProgressPage(): JSX.Element {
         </motion.div>
 
         {/* 今週の活動 */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
+        <motion.div initial={false}>
           <h3 className="text-xl font-bold text-gray-800 mb-4">
             {language === 'ja' ? 'こんしゅうの かつどう' : "This Week's Activity"} 📈
           </h3>
@@ -271,12 +265,7 @@ export function ProgressPage(): JSX.Element {
         </motion.div>
 
         {/* バッジ・報酬システム */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="mb-8"
-        >
+        <motion.div initial={false} className="mb-8">
           <BadgeReward
             totalScore={stats.totalScore}
             streakDays={stats.streakDays}
@@ -287,7 +276,7 @@ export function ProgressPage(): JSX.Element {
         </motion.div>
 
         {/* 学習統計グラフ */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
+        <motion.div initial={false}>
           <h3 className="text-xl font-bold text-gray-800 mb-4">
             {language === 'ja' ? 'がくしゅう とうけい' : 'Learning Statistics'} 📊
           </h3>
@@ -300,12 +289,7 @@ export function ProgressPage(): JSX.Element {
         </motion.div>
 
         {/* 励ましのメッセージ */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.0 }}
-          className="text-center mt-8"
-        >
+        <motion.div initial={false} className="text-center mt-8">
           <p className="text-lg text-gray-700 bg-white/50 rounded-lg p-4">
             {language === 'ja'
               ? 'まいにち すこしずつ がんばろう！ 🌈'

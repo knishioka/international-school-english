@@ -28,13 +28,13 @@ export function WelcomePage(): JSX.Element {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-200 to-purple-200 flex items-center justify-center p-4">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={false}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full"
       >
         <motion.h1
-          initial={{ scale: 0.8 }}
+          initial={false}
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: 'spring' }}
           className="text-4xl font-display font-bold text-center mb-8 text-primary-600"

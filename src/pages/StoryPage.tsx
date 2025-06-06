@@ -4562,9 +4562,7 @@ export function StoryPage(): JSX.Element {
                 {selectedStory.pages[currentPage].emoji}
               </motion.div>
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
+                initial={false}
                 className="text-2xl font-medium text-gray-800 leading-relaxed"
               >
                 {language === 'ja'
@@ -4572,12 +4570,7 @@ export function StoryPage(): JSX.Element {
                   : selectedStory.pages[currentPage].text.en}
               </motion.p>
               {language === 'ja' && (
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 }}
-                  className="text-lg text-gray-500 mt-4"
-                >
+                <motion.p initial={false} className="text-lg text-gray-500 mt-4">
                   {selectedStory.pages[currentPage].text.en}
                 </motion.p>
               )}
@@ -4665,8 +4658,7 @@ export function StoryPage(): JSX.Element {
             {/* 最後のページで教訓を表示 */}
             {currentPage === selectedStory.pages.length - 1 && (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={false}
                 className="mt-8 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 border-2 border-blue-200"
               >
                 <h3 className="text-lg font-bold text-gray-800 mb-2 text-center">

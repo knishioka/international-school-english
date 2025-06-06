@@ -1419,22 +1419,16 @@ export function FlashCardPage(): JSX.Element {
           </div>
 
           {/* カテゴリー選択 */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-8"
-          >
+          <motion.div initial={false} className="text-center mb-8">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
               {language === 'ja' ? 'カテゴリーを えらんでね' : 'Choose a Category'}
             </h2>
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
-              {categories.map((category, index) => (
+              {categories.map((category) => (
                 <motion.button
                   key={category.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
+                  initial={false}
                   onClick={() => handleCategorySelect(category.id)}
                   className={`
                     p-6 rounded-2xl transition-all hover:scale-105
@@ -1460,9 +1454,7 @@ export function FlashCardPage(): JSX.Element {
             </div>
 
             <motion.button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
+              initial={false}
               onClick={handleStartGame}
               className="mt-8 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xl font-bold rounded-full hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-lg"
             >
@@ -1496,11 +1488,7 @@ export function FlashCardPage(): JSX.Element {
         </div>
 
         {/* フラッシュカード */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex justify-center"
-        >
+        <motion.div initial={false} className="flex justify-center">
           <FlashCard
             word={currentWord}
             onNext={handleNext}
@@ -1514,11 +1502,7 @@ export function FlashCardPage(): JSX.Element {
 
         {/* 完了メッセージ */}
         {currentIndex === filteredWords.length - 1 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mt-8"
-          >
+          <motion.div initial={false} className="text-center mt-8">
             <div className="text-4xl mb-2">🎉</div>
             <p className="text-xl font-bold text-gray-800">
               {language === 'ja' ? 'おつかれさま！' : 'Great job!'}

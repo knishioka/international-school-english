@@ -1768,6 +1768,19 @@ export function VocabularyGamePage(): JSX.Element {
     }
   };
 
+  const handleUndo = async (): Promise<void> => {
+    if (!currentGame || currentGame.selectedWords.length === 0 || currentGame.isCorrect !== null) {
+      return;
+    }
+
+    await playSound('click');
+
+    // 最後に選択した単語を削除
+    const newSelected = [...currentGame.selectedWords];
+    newSelected.pop();
+    setCurrentGame({ ...currentGame, selectedWords: newSelected });
+  };
+
   const checkAnswer = async (): Promise<void> => {
     if (!currentGame) {
       return;
@@ -1980,11 +1993,7 @@ export function VocabularyGamePage(): JSX.Element {
           </>
         ) : (
           /* ゲーム画面 */
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-4xl mx-auto"
-          >
+          <motion.div initial={false} className="max-w-4xl mx-auto">
             {/* 問題文 */}
             <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
               <div className="flex items-center justify-between mb-4">
@@ -2055,6 +2064,18 @@ export function VocabularyGamePage(): JSX.Element {
                   ))
                 )}
               </div>
+
+              {/* 戻るボタン */}
+              {currentGame.selectedWords.length > 0 && currentGame.isCorrect === null && (
+                <div className="mt-3 flex justify-end">
+                  <button
+                    onClick={handleUndo}
+                    className="px-3 py-1 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors text-sm"
+                  >
+                    ⤺ {language === 'ja' ? 'もどす' : 'Undo'}
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* 選択可能な単語 */}
