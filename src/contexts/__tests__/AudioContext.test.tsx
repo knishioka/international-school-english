@@ -44,8 +44,6 @@ describe('AudioContext', () => {
       volume: 1,
     }));
 
-    const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
-
     const { result } = renderHook(() => useAudio(), {
       wrapper: AudioProvider,
     });
@@ -54,38 +52,45 @@ describe('AudioContext', () => {
       await result.current.playSound('click');
     });
 
-    expect(consoleSpy).toHaveBeenCalledWith('Failed to play sound:', expect.any(Error));
-    consoleSpy.mockRestore();
+    // Error is silently caught, so we just verify it doesn't throw
+    expect(mockPlay).toHaveBeenCalled();
   });
 
   it('テキスト読み上げが正しく動作する', () => {
+    jest.useFakeTimers();
     const { result } = renderHook(() => useAudio(), {
       wrapper: AudioProvider,
     });
 
     act(() => {
       result.current.speak('Hello', 'en');
+      jest.runAllTimers();
     });
 
+    expect(global.speechSynthesis.cancel).toHaveBeenCalled();
     expect(global.speechSynthesis.speak).toHaveBeenCalled();
     const mockCalls = (global.speechSynthesis.speak as jest.Mock).mock.calls;
     expect(mockCalls).toHaveLength(1);
-    
+
     const utterance = mockCalls[0][0];
     expect(utterance).toBeDefined();
     expect(utterance.text).toBe('Hello');
     expect(utterance.lang).toBe('en-US');
     expect(utterance.rate).toBe(0.8);
     expect(utterance.pitch).toBe(1.1);
+
+    jest.useRealTimers();
   });
 
   it('日本語の読み上げが正しく設定される', () => {
+    jest.useFakeTimers();
     const { result } = renderHook(() => useAudio(), {
       wrapper: AudioProvider,
     });
 
     act(() => {
       result.current.speak('こんにちは', 'ja');
+      jest.runAllTimers();
     });
 
     expect(global.speechSynthesis.speak).toHaveBeenCalled();
@@ -93,6 +98,8 @@ describe('AudioContext', () => {
     const utterance = mockCalls[0][0];
     expect(utterance).toBeDefined();
     expect(utterance.lang).toBe('ja-JP');
+
+    jest.useRealTimers();
   });
 
   it('プロバイダー外で使用するとエラーになる', () => {

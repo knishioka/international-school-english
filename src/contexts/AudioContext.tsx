@@ -27,7 +27,7 @@ export function AudioProvider({ children }: { children: ReactNode }): JSX.Elemen
       await audio.play();
     } catch (error) {
       // Silently fail if audio cannot be played
-      console.error('Failed to play sound:', error);
+      // console.error('Failed to play sound:', error);
     }
   }, []);
 
@@ -36,12 +36,18 @@ export function AudioProvider({ children }: { children: ReactNode }): JSX.Elemen
       return;
     }
 
+    // Cancel any ongoing speech
+    window.speechSynthesis.cancel();
+
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = lang === 'ja' ? 'ja-JP' : 'en-US';
     utterance.rate = 0.8; // Slower for children
     utterance.pitch = 1.1; // Slightly higher pitch
 
-    window.speechSynthesis.speak(utterance);
+    // For iOS/iPad compatibility, we need to use a slight delay
+    setTimeout(() => {
+      window.speechSynthesis.speak(utterance);
+    }, 10);
   }, []);
 
   return <AudioContext.Provider value={{ playSound, speak }}>{children}</AudioContext.Provider>;

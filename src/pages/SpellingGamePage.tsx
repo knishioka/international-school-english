@@ -1096,7 +1096,10 @@ export function SpellingGamePage(): JSX.Element {
 
     if (correct) {
       await playSound('success');
-      speak(currentWord.word, 'en');
+      // Add delay for iOS compatibility
+      setTimeout(() => {
+        speak(currentWord.word, 'en');
+      }, 100);
 
       // Calculate score based on difficulty and hint usage
       let points = 10;
@@ -1137,7 +1140,10 @@ export function SpellingGamePage(): JSX.Element {
       return;
     }
     await playSound('click');
-    speak(currentWord.word, 'en');
+    // Add a small delay for better iOS compatibility
+    setTimeout(() => {
+      speak(currentWord.word, 'en');
+    }, 100);
   };
 
   const toggleHint = async (): Promise<void> => {
