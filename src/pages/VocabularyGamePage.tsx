@@ -1713,9 +1713,37 @@ export function VocabularyGamePage(): JSX.Element {
       ? sentences
       : sentences.filter((item) => item.category === selectedCategory);
 
+  // Shuffle array based on current hour
+  const shuffleArrayWithSeed = (array: Sentence[], seed: number): Sentence[] => {
+    const shuffled = [...array];
+    let currentIndex = shuffled.length;
+    
+    // Use seed to generate pseudo-random numbers
+    const random = (index: number): number => {
+      const x = Math.sin(seed + index) * 10000;
+      return x - Math.floor(x);
+    };
+    
+    while (currentIndex > 0) {
+      const randomIndex = Math.floor(random(currentIndex) * currentIndex);
+      currentIndex--;
+      [shuffled[currentIndex], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[currentIndex]];
+    }
+    
+    return shuffled;
+  };
+
+  // Get shuffled sentences based on current hour
+  const getShuffledSentences = (): Sentence[] => {
+    const currentHour = Math.floor(Date.now() / (1000 * 60 * 60)); // Current hour since epoch
+    return shuffleArrayWithSeed(filteredSentences, currentHour);
+  };
+
+  const shuffledSentences = getShuffledSentences();
+
   // ページネーション計算
-  const totalPages = Math.ceil(filteredSentences.length / itemsPerPage);
-  const paginatedSentences = filteredSentences.slice(
+  const totalPages = Math.ceil(shuffledSentences.length / itemsPerPage);
+  const paginatedSentences = shuffledSentences.slice(
     currentPage * itemsPerPage,
     (currentPage + 1) * itemsPerPage,
   );

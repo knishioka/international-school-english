@@ -1359,7 +1359,34 @@ export function FlashCardPage(): JSX.Element {
       ? vocabularyWords
       : vocabularyWords.filter((word) => word.category === selectedCategory);
 
-  const currentWord = filteredWords[currentIndex];
+  // Shuffle array based on current hour
+  const shuffleArrayWithSeed = (array: typeof vocabularyWords, seed: number): typeof vocabularyWords => {
+    const shuffled = [...array];
+    let currentIndex = shuffled.length;
+    
+    // Use seed to generate pseudo-random numbers
+    const random = (index: number): number => {
+      const x = Math.sin(seed + index) * 10000;
+      return x - Math.floor(x);
+    };
+    
+    while (currentIndex > 0) {
+      const randomIndex = Math.floor(random(currentIndex) * currentIndex);
+      currentIndex--;
+      [shuffled[currentIndex], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[currentIndex]];
+    }
+    
+    return shuffled;
+  };
+
+  // Get shuffled words based on current hour
+  const getShuffledWords = (): typeof vocabularyWords => {
+    const currentHour = Math.floor(Date.now() / (1000 * 60 * 60)); // Current hour since epoch
+    return shuffleArrayWithSeed(filteredWords, currentHour);
+  };
+
+  const shuffledWords = getShuffledWords();
+  const currentWord = shuffledWords[currentIndex];
 
   useEffect(() => {
     setCurrentIndex(0);
@@ -1382,7 +1409,7 @@ export function FlashCardPage(): JSX.Element {
   };
 
   const handleNext = (): void => {
-    if (currentIndex < filteredWords.length - 1) {
+    if (currentIndex < shuffledWords.length - 1) {
       setCurrentIndex(currentIndex + 1);
     }
   };
@@ -1494,14 +1521,14 @@ export function FlashCardPage(): JSX.Element {
             onNext={handleNext}
             onPrevious={handlePrevious}
             isFirst={currentIndex === 0}
-            isLast={currentIndex === filteredWords.length - 1}
+            isLast={currentIndex === shuffledWords.length - 1}
             currentIndex={currentIndex}
-            totalCount={filteredWords.length}
+            totalCount={shuffledWords.length}
           />
         </motion.div>
 
         {/* 完了メッセージ */}
-        {currentIndex === filteredWords.length - 1 && (
+        {currentIndex === shuffledWords.length - 1 && (
           <motion.div initial={false} className="text-center mt-8">
             <div className="text-4xl mb-2">🎉</div>
             <p className="text-xl font-bold text-gray-800">

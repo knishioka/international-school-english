@@ -1052,6 +1052,32 @@ export function SpellingGamePage(): JSX.Element {
 
   const filteredWords = spellingWords.filter((word) => word.difficulty === selectedDifficulty);
 
+  // Shuffle array based on current hour
+  const shuffleArrayWithSeed = (array: SpellingWord[], seed: number): SpellingWord[] => {
+    const shuffled = [...array];
+    let currentIndex = shuffled.length;
+    
+    // Use seed to generate pseudo-random numbers
+    const random = (index: number): number => {
+      const x = Math.sin(seed + index) * 10000;
+      return x - Math.floor(x);
+    };
+    
+    while (currentIndex > 0) {
+      const randomIndex = Math.floor(random(currentIndex) * currentIndex);
+      currentIndex--;
+      [shuffled[currentIndex], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[currentIndex]];
+    }
+    
+    return shuffled;
+  };
+
+  // Get shuffled words based on current hour
+  const getShuffledWords = (): SpellingWord[] => {
+    const currentHour = Math.floor(Date.now() / (1000 * 60 * 60)); // Current hour since epoch
+    return shuffleArrayWithSeed(filteredWords, currentHour);
+  };
+
   useEffect(() => {
     if (gameStarted && inputRef.current) {
       inputRef.current.focus();
@@ -1059,7 +1085,7 @@ export function SpellingGamePage(): JSX.Element {
   }, [gameStarted, currentWord]);
 
   const startGame = (): void => {
-    const words = filteredWords;
+    const words = getShuffledWords();
     if (words.length > 0) {
       setCurrentWord(words[0]);
       setCurrentIndex(0);
@@ -1123,8 +1149,9 @@ export function SpellingGamePage(): JSX.Element {
     await playSound('click');
 
     const nextIndex = currentIndex + 1;
-    if (nextIndex < filteredWords.length) {
-      setCurrentWord(filteredWords[nextIndex]);
+    const shuffledWords = getShuffledWords();
+    if (nextIndex < shuffledWords.length) {
+      setCurrentWord(shuffledWords[nextIndex]);
       setCurrentIndex(nextIndex);
       setUserInput('');
       setShowHint(false);
