@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useAudio } from '@/contexts/AudioContext';
 import { GameCard } from '@/components/GameCard';
@@ -56,7 +55,7 @@ export function HomePage(): JSX.Element {
   return (
     <div className="min-h-screen bg-gradient-to-b from-yellow-100 to-orange-100 p-4">
       <div className="max-w-6xl mx-auto">
-        <motion.header initial={false} className="text-center py-8">
+        <header className="text-center py-8">
           <div className="flex justify-end mb-4">
             <KanjiGradeSelector />
           </div>
@@ -64,22 +63,21 @@ export function HomePage(): JSX.Element {
             {t('hello')}, {userName}! 👋
           </h1>
           <p className="text-xl text-gray-600">{t('letsPlay')}</p>
-        </motion.header>
+        </header>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 max-w-6xl mx-auto">
           {games.map((game) => (
-            <motion.div key={game.id} initial={false}>
-              <GameCard
-                title={game.title}
-                icon={game.icon}
-                color={game.color}
-                onClick={() => handleGameClick(game.route)}
-              />
-            </motion.div>
+            <GameCard
+              key={game.id}
+              title={game.title}
+              icon={game.icon}
+              color={game.color}
+              onClick={() => handleGameClick(game.route)}
+            />
           ))}
         </div>
 
-        <motion.div initial={false} className="text-center">
+        <div className="text-center">
           <button
             onClick={async () => {
               await playSound('click');
@@ -89,7 +87,7 @@ export function HomePage(): JSX.Element {
           >
             {t('myProgress')} 📊
           </button>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

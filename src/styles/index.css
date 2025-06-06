@@ -46,7 +46,7 @@
     @apply bg-primary-500 text-white font-bold
            py-4 px-8 rounded-full text-lg
            shadow-lg hover:bg-primary-600
-           active:scale-95 transition-colors transition-transform duration-200
+           active:scale-95 transition-colors duration-200
            disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
@@ -55,7 +55,7 @@
     @apply bg-secondary-500 text-white font-bold
            py-4 px-8 rounded-full text-lg
            shadow-lg hover:bg-secondary-600
-           active:scale-95 transition-colors transition-transform duration-200
+           active:scale-95 transition-colors duration-200
            disabled:opacity-50 disabled:cursor-not-allowed;
   }
 

@@ -1993,7 +1993,7 @@ export function VocabularyGamePage(): JSX.Element {
           </>
         ) : (
           /* ゲーム画面 */
-          <motion.div initial={false} className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             {/* 問題文 */}
             <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
               <div className="flex items-center justify-between mb-4">
@@ -2181,7 +2181,7 @@ export function VocabularyGamePage(): JSX.Element {
                 </p>
               </motion.div>
             )}
-          </motion.div>
+          </div>
         )}
       </div>
     </div>
