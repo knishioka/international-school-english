@@ -1692,7 +1692,7 @@ interface WordOrderGame {
 }
 
 export function VocabularyGamePage(): JSX.Element {
-  const { language, kanjiGrade } = useLanguage();
+  const { t, language, kanjiGrade } = useLanguage();
   const { playSound, speak } = useAudio();
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -1717,19 +1717,22 @@ export function VocabularyGamePage(): JSX.Element {
   const shuffleArrayWithSeed = (array: Sentence[], seed: number): Sentence[] => {
     const shuffled = [...array];
     let currentIndex = shuffled.length;
-    
+
     // Use seed to generate pseudo-random numbers
     const random = (index: number): number => {
       const x = Math.sin(seed + index) * 10000;
       return x - Math.floor(x);
     };
-    
+
     while (currentIndex > 0) {
       const randomIndex = Math.floor(random(currentIndex) * currentIndex);
       currentIndex--;
-      [shuffled[currentIndex], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[currentIndex]];
+      [shuffled[currentIndex], shuffled[randomIndex]] = [
+        shuffled[randomIndex],
+        shuffled[currentIndex],
+      ];
     }
-    
+
     return shuffled;
   };
 
@@ -1936,7 +1939,7 @@ export function VocabularyGamePage(): JSX.Element {
             ←
           </button>
           <h1 className="text-3xl font-display font-bold text-gray-800">
-            {language === 'ja' ? 'ぶんしょうれんしゅう' : 'Sentence Practice'} 📝
+            {t('sentencePractice')} 📝
           </h1>
           <div className="text-lg font-bold text-purple-600">Score: {score}</div>
         </div>
