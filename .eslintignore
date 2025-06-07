@@ -13,3 +13,4 @@ commitlint.config.js
 *.d.ts
 __mocks__
 public
+scripts

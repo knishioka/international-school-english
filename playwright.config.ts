@@ -1,5 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 
+// ポート設定: 環境変数 > デフォルト値
+const PORT = process.env.VITE_PORT || '3000';
+
 export default defineConfig({
   testDir: './tests/e2e',
   timeout: process.env.CI ? 15 * 1000 : 30 * 1000, // CIでは15秒に短縮
@@ -16,7 +19,7 @@ export default defineConfig({
     ['junit', { outputFile: 'test-results/junit.xml' }],
   ],
   use: {
-    baseURL: 'http://localhost:3000/international-school-english',
+    baseURL: `http://localhost:${PORT}/international-school-english`,
     trace: process.env.CI ? 'off' : 'on-first-retry', // CIではトレース無効
     screenshot: 'off', // スクリーンショット無効
     video: 'off', // ビデオ録画無効
@@ -33,8 +36,8 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:3000/international-school-english',
+    command: process.env.VITE_PORT ? `VITE_PORT=${PORT} npm run dev` : 'npm run dev',
+    url: `http://localhost:${PORT}/international-school-english`,
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
   },

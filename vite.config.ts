@@ -47,7 +47,8 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3000,
+    port: parseInt(process.env.VITE_PORT || '3000'),
+    strictPort: false, // ポートが使用中の場合は次の空きポートを使用
     open: true,
   },
   build: {

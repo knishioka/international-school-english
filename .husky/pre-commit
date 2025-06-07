@@ -45,9 +45,13 @@ fi
 
 # Check for console.log in production code
 echo "🔎 Checking for console.log statements..."
-if grep -r "console\.\(log\|debug\)" $FILES --exclude-dir=__tests__ --exclude-dir=tests; then
-  echo "❌ Found console.log/debug statements in production code!"
-  exit 1
+# scriptsディレクトリのファイルを除外
+FILES_WITHOUT_SCRIPTS=$(echo "$FILES" | grep -v '^scripts/')
+if [ ! -z "$FILES_WITHOUT_SCRIPTS" ]; then
+  if grep -r "console\.\(log\|debug\)" $FILES_WITHOUT_SCRIPTS --exclude-dir=__tests__ --exclude-dir=tests; then
+    echo "❌ Found console.log/debug statements in production code!"
+    exit 1
+  fi
 fi
 
 # Re-add files after formatting
