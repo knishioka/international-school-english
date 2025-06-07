@@ -16,7 +16,7 @@ export default defineConfig({
     ['junit', { outputFile: 'test-results/junit.xml' }],
   ],
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:3000/international-school-english',
     trace: process.env.CI ? 'off' : 'on-first-retry', // CIではトレース無効
     screenshot: 'off', // スクリーンショット無効
     video: 'off', // ビデオ録画無効
@@ -34,7 +34,7 @@ export default defineConfig({
 
   webServer: {
     command: 'npm run dev',
-    url: 'http://localhost:3000',
+    url: 'http://localhost:3000/international-school-english',
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
   },

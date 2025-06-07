@@ -17,6 +17,13 @@ test.describe('漢字レベル機能', () => {
 
     // 文章練習に移動して漢字が変更されているか確認
     await page.click('text=文章練習');
-    await expect(page.getByText('わたしは 毎朝 朝ごはんを 食べます。')).toBeVisible();
+
+    // 3年生の漢字が使われている文章が表示されることを確認（シャッフルされているので、漢字が含まれていることを確認）
+    await expect(
+      page
+        .locator('button')
+        .filter({ hasText: /[食毎朝]/ })
+        .first(),
+    ).toBeVisible();
   });
 });

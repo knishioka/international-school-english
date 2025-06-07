@@ -18,6 +18,9 @@ test.describe('基本的なアプリフロー', () => {
 
     // ゲームカードが表示される
     await expect(page.getByText('たんごカード')).toBeVisible();
-    await expect(page.getByText('ぶんしょうれんしゅう')).toBeVisible();
+    // 文章練習カードが表示される（漢字レベルによって表示が変わる）
+    await expect(
+      page.locator('text=/ぶんしょうれんしゅう|文しょうれんしゅう|文章練習/'),
+    ).toBeVisible();
   });
 });
