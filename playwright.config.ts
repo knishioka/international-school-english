@@ -37,8 +37,10 @@ export default defineConfig({
 
   webServer: {
     command: process.env.VITE_PORT ? `VITE_PORT=${PORT} npm run dev` : 'npm run dev',
-    url: `http://localhost:${PORT}/international-school-english`,
+    url: `http://localhost:${PORT}/international-school-english/`,
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
+    stdout: 'pipe',
+    stderr: 'pipe',
   },
 });

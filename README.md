@@ -74,15 +74,28 @@ npm run preview
 ## 🧪 Testing / テスト
 
 ```bash
-# Run unit tests
+# Run all tests (unit + E2E)
 npm test
 
-# Run E2E tests
+# Run unit tests only
+npm run test:unit
+
+# Run E2E tests (production build on port 4173)
 npm run test:e2e
 
-# Run E2E tests with UI
-npm run test:e2e:ui
+# Run E2E tests with development server (for debugging)
+npm run test:e2e:dev
+
+# Run E2E tests with custom port
+VITE_TEST_PORT=5000 npm run test:e2e
 ```
+
+### Port Management / ポート管理
+The app uses different ports for development and testing to avoid conflicts:
+- Development server: Port 3000 (configurable via `VITE_PORT`)
+- E2E test server: Port 4173 (configurable via `VITE_TEST_PORT`)
+
+See [Port Management Guide](docs/PORT_MANAGEMENT.md) for details.
 
 ## 📁 Project Structure / プロジェクト構成
 

@@ -1,11 +1,14 @@
 node_modules
 dist
+dist-test
 coverage
 playwright-report
 test-results
 tests/e2e
 vite.config.ts
+vite.config.test.ts
 playwright.config.ts
+playwright.config.test.ts
 jest.config.js
 tailwind.config.js
 postcss.config.js

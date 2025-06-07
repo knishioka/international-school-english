@@ -15,13 +15,17 @@
 ```bash
 # 開発サーバー起動
 npm run dev
+npm run dev:auto-port  # 自動的に空きポートを検出
 
 # ビルド
 npm run build
+npm run build:test  # E2Eテスト用ビルド
 
 # テスト実行
-npm run test
-npm run test:e2e  # Playwright E2Eテスト
+npm run test  # 全テスト（unit + E2E）
+npm run test:unit  # ユニットテストのみ
+npm run test:e2e  # E2Eテスト（本番ビルド、ポート4173）
+npm run test:e2e:dev  # E2Eテスト（開発サーバー、デバッグ用）
 
 # コード品質チェック（コミット前に必ず実行）
 npm run lint
@@ -30,8 +34,29 @@ npm run test:unit
 
 # プッシュ前の確認（必須）
 # 以下のコマンドをすべて実行し、エラーがないことを確認してからpushすること
-npm run lint && npm run typecheck && npm run test:unit
+npm run lint && npm run typecheck && npm run test:unit && npm run test:e2e
 ```
+
+### ポート管理
+開発環境でのポート競合を避けるため、以下の設定が可能：
+
+- **開発サーバー**: デフォルト3000番（`VITE_PORT`で変更可能）
+- **E2Eテストサーバー**: デフォルト4173番（`VITE_TEST_PORT`で変更可能）
+
+```bash
+# カスタムポートで開発
+VITE_PORT=5173 npm run dev
+
+# カスタムポートでE2Eテスト
+VITE_TEST_PORT=5000 npm run test:e2e
+```
+
+**重要**: E2Eテストは開発サーバーとは独立した本番ビルドを使用します。これにより：
+- 開発中の作業に影響を与えない
+- 本番環境に近い状態でテスト
+- ポート競合を回避
+
+詳細は`docs/PORT_MANAGEMENT.md`を参照。
 
 ### プロジェクト構造
 ```
