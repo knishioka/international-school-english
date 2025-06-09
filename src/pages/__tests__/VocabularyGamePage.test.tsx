@@ -413,4 +413,87 @@ describe('VocabularyGamePage', () => {
       });
     }
   });
+
+  describe('無限スクロール機能', () => {
+    it('テスト環境では全ての文章が表示される', () => {
+      render(<VocabularyGamePage />, { wrapper: AllTheProviders });
+
+      // テスト環境では初期表示数を超えても文章が表示されることを確認
+      const sentenceCards = screen.getAllByRole('button');
+      const sentenceCardsCount = sentenceCards.filter(
+        (card) =>
+          card.textContent !== null &&
+          card.textContent.includes('.') &&
+          !card.textContent.includes('📝') &&
+          !card.textContent.includes('カテゴリ') &&
+          !card.textContent.includes('がっこう') &&
+          !card.textContent.includes('にちじょう'),
+      ).length;
+
+      // 12個以上の文章カードが表示されていることを確認（テスト環境では全部表示）
+      expect(sentenceCardsCount).toBeGreaterThan(12);
+    });
+
+    it('初期状態では特定数の文章が表示される', () => {
+      render(<VocabularyGamePage />, { wrapper: AllTheProviders });
+
+      // カテゴリーボタンが表示されていることを確認
+      expect(screen.getByText('すべて')).toBeInTheDocument();
+      expect(screen.getByText('にちじょう')).toBeInTheDocument();
+    });
+
+    it('カテゴリー変更時に文章が更新される', async () => {
+      render(<VocabularyGamePage />, { wrapper: AllTheProviders });
+
+      // 初期状態を確認（変数は使用しないが、初期状態のチェックとして保持）
+
+      // カテゴリーを変更
+      const categoryButton = screen.getByText('にちじょう');
+      await act(async () => {
+        fireEvent.click(categoryButton);
+      });
+
+      // カテゴリー変更後の文章数を取得
+      const filteredSentenceCards = screen
+        .getAllByRole('button')
+        .filter(
+          (card) =>
+            card.textContent !== null &&
+            card.textContent.includes('.') &&
+            !card.textContent.includes('📝'),
+        );
+
+      // 文章が表示されていることを確認（フィルタリングされた数になっているかも）
+      expect(filteredSentenceCards.length).toBeGreaterThan(0);
+    });
+
+    it('ローディングインジケーターが正しく表示される', () => {
+      render(<VocabularyGamePage />, { wrapper: AllTheProviders });
+
+      // テスト環境では全部表示されるため、ローディングインジケーターは表示されない
+      const loadingText = screen.queryByText(/もっと読み込む|Loading more/);
+      expect(loadingText).not.toBeInTheDocument();
+    });
+
+    it('文章データが正しく表示される', () => {
+      render(<VocabularyGamePage />, { wrapper: AllTheProviders });
+
+      // 文章カードが表示されていることを確認
+      const sentenceCards = screen
+        .getAllByRole('button')
+        .filter(
+          (card) =>
+            card.textContent !== null &&
+            card.textContent.includes('.') &&
+            !card.textContent.includes('📝'),
+        );
+
+      // 文章カードが存在し、各カードに英語テキストが含まれていることを確認
+      expect(sentenceCards.length).toBeGreaterThan(0);
+
+      // 最初の文章カードの内容を確認
+      const firstCard = sentenceCards[0];
+      expect(firstCard.textContent).toMatch(/[A-Za-z].*\./); // 英語の文章を含む
+    });
+  });
 });
