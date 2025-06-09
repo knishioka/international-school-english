@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useAudio } from '@/contexts/AudioContext';
 import { KanjiGradeSelector } from '@/components/KanjiGradeSelector';
@@ -1701,15 +1701,25 @@ export function VocabularyGamePage(): JSX.Element {
   const [score, setScore] = useState(0);
   const [userName, setUserName] = useState('');
   const [displayedItems, setDisplayedItems] = useState(12);
+  const [isInitializing, setIsInitializing] = useState(true);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const name = localStorage.getItem('userName');
     setUserName(name ?? '');
+    // Small delay to ensure smooth initial render
+    const timer = setTimeout(() => {
+      setIsInitializing(false);
+    }, 50);
+    return () => clearTimeout(timer);
   }, []);
 
-  const filteredSentences = filterByCategory(sentences, selectedCategory);
+  // メモ化してフィルタリングされた文章を取得
+  const filteredSentences = useMemo(
+    () => filterByCategory(sentences, selectedCategory),
+    [selectedCategory],
+  );
 
   // メモ化してシャッフルされた文章を取得
   const shuffledSentences = useMemo(
@@ -1959,7 +1969,11 @@ export function VocabularyGamePage(): JSX.Element {
           <div className="text-lg font-bold text-purple-600">Score: {score}</div>
         </div>
 
-        {!currentGame ? (
+        {isInitializing ? (
+          <div className="flex justify-center items-center min-h-[400px]">
+            <div className="animate-spin rounded-full h-12 w-12 border-2 border-purple-500 border-t-transparent" />
+          </div>
+        ) : !currentGame ? (
           <>
             {/* 漢字レベル選択 */}
             <div className="flex justify-center mb-4">
@@ -1990,31 +2004,23 @@ export function VocabularyGamePage(): JSX.Element {
             {/* 文章選択グリッド */}
             <motion.div
               ref={scrollContainerRef}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 min-h-[400px]"
             >
-              <AnimatePresence>
-                {visibleSentences.map((sentence) => (
-                  <motion.button
-                    key={sentence.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => startGame(sentence)}
-                    className="bg-white rounded-2xl shadow-lg p-6 text-left hover:shadow-xl transition-all"
-                  >
-                    <div className="text-4xl mb-3">{sentence.emoji}</div>
-                    <div className="text-base font-medium text-gray-800 mb-2">
-                      {sentence.english}
-                    </div>
-                    <div className="text-sm text-gray-600">
-                      {language === 'ja' ? sentence.jaKanji[kanjiGrade] : sentence.english}
-                    </div>
-                  </motion.button>
-                ))}
-              </AnimatePresence>
+              {visibleSentences.map((sentence) => (
+                <motion.button
+                  key={sentence.id}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => startGame(sentence)}
+                  className="bg-white rounded-2xl shadow-lg p-6 text-left hover:shadow-xl transition-all"
+                >
+                  <div className="text-4xl mb-3">{sentence.emoji}</div>
+                  <div className="text-base font-medium text-gray-800 mb-2">{sentence.english}</div>
+                  <div className="text-sm text-gray-600">
+                    {language === 'ja' ? sentence.jaKanji[kanjiGrade] : sentence.english}
+                  </div>
+                </motion.button>
+              ))}
             </motion.div>
 
             {/* 読み込みインジケーター */}

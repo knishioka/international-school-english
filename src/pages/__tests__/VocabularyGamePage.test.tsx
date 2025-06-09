@@ -63,14 +63,23 @@ describe('VocabularyGamePage', () => {
     localStorage.clear();
   });
 
-  it('文章練習のタイトルを表示する', () => {
+  it('文章練習のタイトルを表示する', async () => {
     render(<VocabularyGamePage />, { wrapper: AllTheProviders });
-    expect(screen.getByText(/Sentence Practice|ぶんしょうれんしゅう/)).toBeInTheDocument();
-    expect(screen.getAllByText('📝').length).toBeGreaterThan(0);
+
+    // Check if the title is present (it should be visible even during loading)
+    const title = screen.getByRole('heading', { level: 1 });
+    expect(title).toHaveTextContent(/Sentence Practice|ぶんしょうれんしゅう/);
+    expect(title).toHaveTextContent('📝');
   });
 
-  it('カテゴリーボタンを表示する', () => {
+  it('カテゴリーボタンを表示する', async () => {
     render(<VocabularyGamePage />, { wrapper: AllTheProviders });
+
+    // Wait for loading to complete
+    await waitFor(() => {
+      expect(screen.queryByText('すべて')).toBeInTheDocument();
+    });
+
     // デフォルトは日本語なので、日本語のカテゴリー名を確認
     const allButtons = screen.getAllByRole('button');
     const categoryButtons = allButtons.filter(
@@ -85,6 +94,11 @@ describe('VocabularyGamePage', () => {
 
   it('文章カードをクリックするとゲームが開始される', async () => {
     render(<VocabularyGamePage />, { wrapper: AllTheProviders });
+
+    // Wait for loading to complete
+    await waitFor(() => {
+      expect(screen.queryByText('すべて')).toBeInTheDocument();
+    });
 
     // 最初の文章カードを取得（シャッフルされているため特定の文章は使わない）
     const sentenceCards = screen.getAllByRole('button');
@@ -415,8 +429,13 @@ describe('VocabularyGamePage', () => {
   });
 
   describe('無限スクロール機能', () => {
-    it('テスト環境では全ての文章が表示される', () => {
+    it('テスト環境では全ての文章が表示される', async () => {
       render(<VocabularyGamePage />, { wrapper: AllTheProviders });
+
+      // Wait for loading to complete
+      await waitFor(() => {
+        expect(screen.queryByText('すべて')).toBeInTheDocument();
+      });
 
       // テスト環境では初期表示数を超えても文章が表示されることを確認
       const sentenceCards = screen.getAllByRole('button');
@@ -434,8 +453,13 @@ describe('VocabularyGamePage', () => {
       expect(sentenceCardsCount).toBeGreaterThan(12);
     });
 
-    it('初期状態では特定数の文章が表示される', () => {
+    it('初期状態では特定数の文章が表示される', async () => {
       render(<VocabularyGamePage />, { wrapper: AllTheProviders });
+
+      // Wait for loading to complete
+      await waitFor(() => {
+        expect(screen.queryByText('すべて')).toBeInTheDocument();
+      });
 
       // カテゴリーボタンが表示されていることを確認
       expect(screen.getByText('すべて')).toBeInTheDocument();
@@ -444,6 +468,11 @@ describe('VocabularyGamePage', () => {
 
     it('カテゴリー変更時に文章が更新される', async () => {
       render(<VocabularyGamePage />, { wrapper: AllTheProviders });
+
+      // Wait for loading to complete
+      await waitFor(() => {
+        expect(screen.queryByText('すべて')).toBeInTheDocument();
+      });
 
       // 初期状態を確認（変数は使用しないが、初期状態のチェックとして保持）
 
@@ -475,8 +504,13 @@ describe('VocabularyGamePage', () => {
       expect(loadingText).not.toBeInTheDocument();
     });
 
-    it('文章データが正しく表示される', () => {
+    it('文章データが正しく表示される', async () => {
       render(<VocabularyGamePage />, { wrapper: AllTheProviders });
+
+      // Wait for loading to complete
+      await waitFor(() => {
+        expect(screen.queryByText('すべて')).toBeInTheDocument();
+      });
 
       // 文章カードが表示されていることを確認
       const sentenceCards = screen
