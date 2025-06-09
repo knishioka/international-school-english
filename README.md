@@ -100,19 +100,31 @@ See [Port Management Guide](docs/PORT_MANAGEMENT.md) for details.
 ## 📁 Project Structure / プロジェクト構成
 
 ```
-grade-1-english/
+international-school-english/
 ├── src/
 │   ├── components/        # Reusable UI components
 │   ├── contexts/         # React contexts (Language, Audio)
-│   ├── data/            # Static data and kanji reference
+│   ├── data/            # Static data files
+│   │   ├── vocabularyWords.ts  # Flash card vocabulary
+│   │   ├── sentences.ts        # Sentence practice data
+│   │   ├── spellingWords.ts    # Spelling game words
+│   │   ├── stories.ts          # Story content
+│   │   └── categories.ts       # Common categories
+│   ├── hooks/           # Custom React hooks
 │   ├── pages/           # Page components
+│   ├── services/        # Business logic
+│   ├── types/           # TypeScript type definitions
 │   ├── utils/           # Utility functions
 │   └── styles/          # Global styles
 ├── tests/
+│   ├── unit/           # Unit tests
 │   └── e2e/            # End-to-end tests
 ├── docs/               # Documentation
-│   ├── KANJI_REFERENCE.md
-│   └── KANJI_IMPLEMENTATION_GUIDE.md
+│   ├── ARCHITECTURE.md         # Architecture design
+│   ├── MAINTENANCE.md         # Maintenance guide
+│   ├── KANJI_REFERENCE.md     # Kanji reference
+│   ├── KANJI_IMPLEMENTATION_GUIDE.md  # Kanji implementation
+│   └── PORT_MANAGEMENT.md     # Port configuration
 └── public/             # Static assets
 ```
 
@@ -154,6 +166,18 @@ Students learn sentence structure by:
 - TypeScript strict mode enabled
 - Comprehensive test coverage
 
+### Architecture / アーキテクチャ
+- Component-based architecture with React
+- Separation of concerns (data, logic, UI)
+- Type-safe development with TypeScript
+- See [Architecture Guide](docs/ARCHITECTURE.md) for details
+
+### Maintenance / メンテナンス
+- Regular dependency updates
+- Performance monitoring
+- Content management guidelines
+- See [Maintenance Guide](docs/MAINTENANCE.md) for details
+
 ### Commit Convention / コミット規約
 Follow conventional commits:
 - `feat:` New features
@@ -161,6 +185,7 @@ Follow conventional commits:
 - `docs:` Documentation changes
 - `test:` Test additions/changes
 - `refactor:` Code refactoring
+- `chore:` Maintenance tasks
 
 ## 🤝 Contributing / 貢献
 

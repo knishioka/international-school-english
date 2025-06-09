@@ -2,6 +2,8 @@
 
 このドキュメントはAIアシスタント（Claude等）がこのプロジェクトで作業する際の重要な情報とガイドラインをまとめたものです。
 
+> **クイックリファレンス**: よく使うコマンドや手順は[CLAUDE_QUICK_REFERENCE.md](docs/CLAUDE_QUICK_REFERENCE.md)を参照してください。
+
 ## プロジェクト概要
 
 - **プロジェクト名**: International School English Learning App
@@ -61,18 +63,22 @@ VITE_TEST_PORT=5000 npm run test:e2e
 ### プロジェクト構造
 ```
 /src
-  /components    # Reactコンポーネント
+  /components    # 再利用可能なUIコンポーネント
+  /contexts     # React Context（グローバル状態管理）
+  /data         # 静的データファイル（語彙、文章、ストーリー等）
   /hooks        # カスタムフック
   /pages        # ページコンポーネント
   /services     # ビジネスロジック
-  /stores       # 状態管理（Zustand）
+  /types        # TypeScript型定義
   /utils        # ユーティリティ関数
-  /assets       # 画像、音声ファイル
   /styles       # グローバルスタイル
 /tests
   /unit         # ユニットテスト
   /e2e          # Playwrightテスト
+/docs           # プロジェクトドキュメント
 ```
+
+**詳細**: `docs/ARCHITECTURE.md`を参照
 
 ## コーディング規約
 
@@ -199,8 +205,33 @@ Types:
 - **LocalStorage制限**: 5MB以内に収める
 - **PWAインストール**: HTTPSが必須
 
-## 連絡先・リソース
+## 関連ドキュメント
 
-- 設計書: `/project-plan.md`
-- テスト計画: `/docs/test-strategy.md`
-- コントリビューション: `/CONTRIBUTING.md`
+### 必読ドキュメント
+- **アーキテクチャ設計**: `docs/ARCHITECTURE.md` - システム設計と実装パターン
+- **メンテナンスガイド**: `docs/MAINTENANCE.md` - 日常的なメンテナンス手順
+- **漢字実装ガイド**: `docs/KANJI_IMPLEMENTATION_GUIDE.md` - 漢字レベル機能の実装詳細
+
+### リファレンス
+- **テスト戦略**: `docs/test-strategy.md` - テストの書き方と実行方法
+- **ポート管理**: `docs/PORT_MANAGEMENT.md` - 開発環境のポート設定
+- **漢字リファレンス**: `docs/KANJI_REFERENCE.md` - 学年別漢字一覧
+- **コントリビューション**: `CONTRIBUTING.md` - 貢献方法
+
+### 重要な作業手順
+
+#### 新機能追加時
+1. `docs/ARCHITECTURE.md`で設計パターンを確認
+2. 該当するデータファイルを`src/data/`に追加
+3. テストを書く（`docs/test-strategy.md`参照）
+4. ドキュメントを更新
+
+#### コンテンツ更新時
+1. `docs/MAINTENANCE.md`の「コンテンツの更新」セクションを参照
+2. 該当するデータファイルを編集
+3. テストを実行して確認
+
+#### トラブルシューティング
+1. まず`docs/MAINTENANCE.md`の「デバッグ手順」を確認
+2. 解決しない場合は`docs/ARCHITECTURE.md`で設計を理解
+3. それでも解決しない場合はIssueを作成
