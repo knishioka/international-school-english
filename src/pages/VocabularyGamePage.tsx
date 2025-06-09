@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -1700,8 +1700,9 @@ export function VocabularyGamePage(): JSX.Element {
   const [hintLevel, setHintLevel] = useState(0);
   const [score, setScore] = useState(0);
   const [userName, setUserName] = useState('');
-  const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 20;
+  const [displayedItems, setDisplayedItems] = useState(20);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const name = localStorage.getItem('userName');
@@ -1716,17 +1717,40 @@ export function VocabularyGamePage(): JSX.Element {
     [filteredSentences],
   );
 
-  // ページネーション計算
-  const totalPages = Math.ceil(shuffledSentences.length / itemsPerPage);
-  const paginatedSentences = shuffledSentences.slice(
-    currentPage * itemsPerPage,
-    (currentPage + 1) * itemsPerPage,
+  // 表示する文章のリスト
+  const visibleSentences = useMemo(
+    () => shuffledSentences.slice(0, displayedItems),
+    [shuffledSentences, displayedItems],
   );
 
-  // カテゴリ変更時にページをリセット
+  // カテゴリ変更時に表示アイテム数をリセット
   useEffect(() => {
-    setCurrentPage(0);
+    setDisplayedItems(20);
   }, [selectedCategory]);
+
+  // Intersection Observerを使った無限スクロールの実装
+  useEffect(() => {
+    const loadMoreElement = loadMoreRef.current;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && displayedItems < shuffledSentences.length) {
+          setDisplayedItems((prev) => Math.min(prev + 10, shuffledSentences.length));
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    if (loadMoreElement) {
+      observer.observe(loadMoreElement);
+    }
+
+    return () => {
+      if (loadMoreElement) {
+        observer.unobserve(loadMoreElement);
+      }
+    };
+  }, [displayedItems, shuffledSentences.length]);
 
   // 単語をランダムにシャッフル（時間に依存しない真のランダム）
   const shuffleArray = <T,>(array: T[]): T[] => {
@@ -1960,12 +1984,18 @@ export function VocabularyGamePage(): JSX.Element {
             </div>
 
             {/* 文章選択グリッド */}
-            <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <AnimatePresence mode="wait">
-                {paginatedSentences.map((sentence) => (
+            <motion.div
+              ref={scrollContainerRef}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+            >
+              <AnimatePresence>
+                {visibleSentences.map((sentence) => (
                   <motion.button
                     key={sentence.id}
-                    initial={false}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => startGame(sentence)}
@@ -1983,26 +2013,15 @@ export function VocabularyGamePage(): JSX.Element {
               </AnimatePresence>
             </motion.div>
 
-            {/* ページネーションコントロール */}
-            {totalPages > 1 && (
-              <div className="flex justify-center items-center gap-4 mt-8">
-                <button
-                  onClick={() => setCurrentPage(Math.max(0, currentPage - 1))}
-                  disabled={currentPage === 0}
-                  className="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-300 hover:bg-blue-600 transition-colors"
-                >
-                  {language === 'ja' ? 'まえ' : 'Previous'}
-                </button>
-                <span className="text-gray-700">
-                  {currentPage + 1} / {totalPages}
-                </span>
-                <button
-                  onClick={() => setCurrentPage(Math.min(totalPages - 1, currentPage + 1))}
-                  disabled={currentPage === totalPages - 1}
-                  className="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-300 hover:bg-blue-600 transition-colors"
-                >
-                  {language === 'ja' ? 'つぎ' : 'Next'}
-                </button>
+            {/* 読み込みインジケーター */}
+            {displayedItems < shuffledSentences.length && (
+              <div ref={loadMoreRef} className="flex justify-center items-center py-8">
+                <div className="flex items-center gap-2 text-gray-600">
+                  <div className="animate-spin rounded-full h-6 w-6 border-2 border-purple-500 border-t-transparent" />
+                  <span className="text-sm">
+                    {language === 'ja' ? 'もっと読み込む...' : 'Loading more...'}
+                  </span>
+                </div>
               </div>
             )}
           </>
