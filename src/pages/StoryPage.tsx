@@ -4543,14 +4543,19 @@ export function StoryPage(): JSX.Element {
               </motion.div>
               <motion.p
                 initial={false}
-                className="text-2xl font-medium text-gray-800 leading-relaxed"
+                className={`font-medium text-gray-800 leading-relaxed ${
+                  language === 'ja' ? 'text-2xl' : 'text-3xl'
+                }`}
               >
                 {language === 'ja'
                   ? selectedStory.pages[currentPage].jaKanji[kanjiGrade]
                   : selectedStory.pages[currentPage].text.en}
               </motion.p>
               {language === 'ja' && (
-                <motion.p initial={false} className="text-lg text-gray-500 mt-4">
+                <motion.p
+                  initial={false}
+                  className="text-xl text-gray-600 mt-6 leading-relaxed font-medium"
+                >
                   {selectedStory.pages[currentPage].text.en}
                 </motion.p>
               )}
