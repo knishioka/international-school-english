@@ -116,6 +116,9 @@ export const gameSpecificCategories = {
 /**
  * ゲーム種別に応じたカテゴリー取得
  */
+// Export sentence categories for direct use
+export const sentenceCategories = getCategoriesForGame('sentences');
+
 export function getCategoriesForGame(
   gameType: 'vocabulary' | 'sentences' | 'spelling' | 'stories',
 ): Category[] {

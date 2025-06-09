@@ -1,21 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useLanguage, KanjiGrade } from '@/contexts/LanguageContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { useAudio } from '@/contexts/AudioContext';
 import { KanjiGradeSelector } from '@/components/KanjiGradeSelector';
 import { progressService } from '@/services/progressService';
+import { sentences } from '@/data/sentences';
+import { sentenceCategories } from '@/data/categories';
+import { shuffleArrayWithSeed, getHourlyShuffleSeed, filterByCategory } from '@/utils/arrayUtils';
+import type { Sentence } from '@/types/vocabulary';
 
-interface Sentence {
-  id: string;
-  english: string;
-  japanese: string;
-  jaKanji: { [key in KanjiGrade]: string };
-  words: string[];
-  emoji: string;
-  category: string;
-}
-
+// 以下のハードコードされたデータは削除（src/data/sentences.tsに移動済み）
+/*
 const sentences: Sentence[] = [
   // Daily Life - 日常生活
   {
@@ -1659,7 +1655,10 @@ const sentences: Sentence[] = [
     category: 'holidays',
   },
 ];
+*/
 
+// 以下のハードコードされたカテゴリは削除（src/data/categories.tsに移動済み）
+/*
 const categories = [
   { id: 'all', name: { en: 'All Sentences', ja: 'すべてのぶんしょう' }, emoji: '📝' },
   { id: 'daily', name: { en: 'Daily Life', ja: 'にちじょう' }, emoji: '🏠' },
@@ -1683,6 +1682,7 @@ const categories = [
   { id: 'shopping', name: { en: 'Shopping', ja: 'かいもの' }, emoji: '🛒' },
   { id: 'holidays', name: { en: 'Holidays', ja: 'きゅうじつ' }, emoji: '🎉' },
 ];
+*/
 
 interface WordOrderGame {
   sentence: Sentence;
@@ -1708,41 +1708,13 @@ export function VocabularyGamePage(): JSX.Element {
     setUserName(name ?? '');
   }, []);
 
-  const filteredSentences =
-    selectedCategory === 'all'
-      ? sentences
-      : sentences.filter((item) => item.category === selectedCategory);
+  const filteredSentences = filterByCategory(sentences, selectedCategory);
 
-  // Shuffle array based on current hour
-  const shuffleArrayWithSeed = (array: Sentence[], seed: number): Sentence[] => {
-    const shuffled = [...array];
-    let currentIndex = shuffled.length;
-
-    // Use seed to generate pseudo-random numbers
-    const random = (index: number): number => {
-      const x = Math.sin(seed + index) * 10000;
-      return x - Math.floor(x);
-    };
-
-    while (currentIndex > 0) {
-      const randomIndex = Math.floor(random(currentIndex) * currentIndex);
-      currentIndex--;
-      [shuffled[currentIndex], shuffled[randomIndex]] = [
-        shuffled[randomIndex],
-        shuffled[currentIndex],
-      ];
-    }
-
-    return shuffled;
-  };
-
-  // Get shuffled sentences based on current hour
-  const getShuffledSentences = (): Sentence[] => {
-    const currentHour = Math.floor(Date.now() / (1000 * 60 * 60)); // Current hour since epoch
-    return shuffleArrayWithSeed(filteredSentences, currentHour);
-  };
-
-  const shuffledSentences = getShuffledSentences();
+  // メモ化してシャッフルされた文章を取得
+  const shuffledSentences = useMemo(
+    () => shuffleArrayWithSeed(filteredSentences, getHourlyShuffleSeed()),
+    [filteredSentences],
+  );
 
   // ページネーション計算
   const totalPages = Math.ceil(shuffledSentences.length / itemsPerPage);
@@ -1756,6 +1728,7 @@ export function VocabularyGamePage(): JSX.Element {
     setCurrentPage(0);
   }, [selectedCategory]);
 
+  // 単語をランダムにシャッフル（時間に依存しない真のランダム）
   const shuffleArray = <T,>(array: T[]): T[] => {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
@@ -1953,7 +1926,21 @@ export function VocabularyGamePage(): JSX.Element {
 
             {/* カテゴリー選択 */}
             <div className="flex flex-wrap gap-2 justify-center mb-6">
-              {categories.map((category) => (
+              <button
+                onClick={() => handleCategoryChange('all')}
+                className={`
+                  px-4 py-2 rounded-full text-sm font-medium transition-all
+                  ${
+                    selectedCategory === 'all'
+                      ? 'bg-purple-500 text-white shadow-lg'
+                      : 'bg-white text-gray-700 hover:bg-purple-100'
+                  }
+                `}
+              >
+                <span className="mr-1">📝</span>
+                {language === 'ja' ? 'すべて' : 'All'}
+              </button>
+              {sentenceCategories.map((category) => (
                 <button
                   key={category.id}
                   onClick={() => handleCategoryChange(category.id)}

@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useAudio } from '@/contexts/AudioContext';
 import { FlashCard } from '@/components/FlashCard';
 import { vocabularyCategories, getVocabularyByCategory } from '@/data/vocabularyWords';
-import type { VocabularyWord } from '@/types/vocabulary';
+import { shuffleArrayWithSeed, getHourlyShuffleSeed } from '@/utils/arrayUtils';
 
 export function FlashCardPage(): JSX.Element {
   const { language } = useLanguage();
@@ -17,36 +17,12 @@ export function FlashCardPage(): JSX.Element {
 
   const filteredWords = getVocabularyByCategory(selectedCategory);
 
-  // Shuffle array based on current hour
-  const shuffleArrayWithSeed = (array: VocabularyWord[], seed: number): VocabularyWord[] => {
-    const shuffled = [...array];
-    let currentIndex = shuffled.length;
+  // メモ化して再計算を防ぐ
+  const shuffledWords = useMemo(
+    () => shuffleArrayWithSeed(filteredWords, getHourlyShuffleSeed()),
+    [filteredWords],
+  );
 
-    // Use seed to generate pseudo-random numbers
-    const random = (index: number): number => {
-      const x = Math.sin(seed + index) * 10000;
-      return x - Math.floor(x);
-    };
-
-    while (currentIndex > 0) {
-      const randomIndex = Math.floor(random(currentIndex) * currentIndex);
-      currentIndex--;
-      [shuffled[currentIndex], shuffled[randomIndex]] = [
-        shuffled[randomIndex],
-        shuffled[currentIndex],
-      ];
-    }
-
-    return shuffled;
-  };
-
-  // Get shuffled words based on current hour
-  const getShuffledWords = (): VocabularyWord[] => {
-    const currentHour = Math.floor(Date.now() / (1000 * 60 * 60)); // Current hour since epoch
-    return shuffleArrayWithSeed(filteredWords, currentHour);
-  };
-
-  const shuffledWords = getShuffledWords();
   const currentWord = shuffledWords[currentIndex];
 
   useEffect(() => {

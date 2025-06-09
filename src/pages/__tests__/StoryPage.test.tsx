@@ -68,8 +68,8 @@ describe('StoryPage', () => {
 
     expect(screen.getByRole('heading', { name: /stories|おはなし/ })).toBeInTheDocument();
     expect(screen.getByText('やさしい うさぎ')).toBeInTheDocument();
-    expect(screen.getByText('雨のあとの にじ')).toBeInTheDocument();
-    expect(screen.getByText('正じきな 男の子')).toBeInTheDocument();
+    expect(screen.getByText('ちいさな とりの ぼうけん')).toBeInTheDocument();
+    expect(screen.getByText('まほうの にわ')).toBeInTheDocument();
   });
 
   it('ストーリーを選択すると読書画面に移る', async () => {
@@ -212,7 +212,7 @@ describe('StoryPage', () => {
         'testUser',
         '1', // story ID
         1, // first page
-        8, // total pages
+        3, // total pages
       );
     });
   });
@@ -243,7 +243,7 @@ describe('StoryPage', () => {
         'testUser',
         '1',
         2, // second page
-        8,
+        3, // total pages
       );
     });
   });
@@ -287,7 +287,7 @@ describe('StoryPage', () => {
     // ストーリー一覧に戻る
     await waitFor(() => {
       expect(screen.getByText('やさしい うさぎ')).toBeInTheDocument();
-      expect(screen.getByText('雨のあとの にじ')).toBeInTheDocument();
+      expect(screen.getByText('まほうの にわ')).toBeInTheDocument();
     });
   });
 

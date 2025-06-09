@@ -1,37 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { useLanguage, KanjiGrade } from '@/contexts/LanguageContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { useAudio } from '@/contexts/AudioContext';
 import { KanjiGradeSelector } from '@/components/KanjiGradeSelector';
 import { PageFlip } from '@/components/PageFlip';
 import { progressService } from '@/services/progressService';
+import { stories } from '@/data/stories';
+import type { Story } from '@/types/vocabulary';
 
-interface Story {
-  id: string;
-  title: { en: string; ja: string; jaKanji: { [key in KanjiGrade]: string } };
-  description: { en: string; ja: string; jaKanji: { [key in KanjiGrade]: string } };
-  lesson: { en: string; ja: string; jaKanji: { [key in KanjiGrade]: string } };
-  category:
-    | 'moral'
-    | 'friendship'
-    | 'nature'
-    | 'responsibility'
-    | 'courage'
-    | 'patience'
-    | 'imagination'
-    | 'empathy'
-    | 'logic'
-    | 'self-esteem'
-    | 'diversity';
-  minGrade: KanjiGrade;
-  pages: {
-    text: { en: string; ja: string };
-    jaKanji: { [key in KanjiGrade]: string };
-    emoji: string;
-  }[];
-}
-
+// 以下のハードコードされたデータは削除（src/data/stories.tsに移動済み）
+/*
 const stories: Story[] = [
   {
     id: '1',
@@ -4315,6 +4294,7 @@ const stories: Story[] = [
     ],
   },
 ];
+*/
 
 const getCategoryEmoji = (category: Story['category']): string => {
   const emojis = {

@@ -1,20 +1,14 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useAudio } from '@/contexts/AudioContext';
+import { spellingWords } from '@/data/spellingWords';
+import { shuffleArrayWithSeed, getHourlyShuffleSeed } from '@/utils/arrayUtils';
+import type { SpellingWord } from '@/types/vocabulary';
 
-interface SpellingWord {
-  id: string;
-  word: string;
-  japanese: string;
-  category: string;
-  hint: string;
-  image: string;
-  emoji: string;
-  difficulty: 'easy' | 'medium' | 'hard';
-}
-
+// 以下のハードコードされたデータは削除（src/data/spellingWords.tsに移動済み）
+/*
 const spellingWords: SpellingWord[] = [
   // Easy words - 3-4 letters
   {
@@ -1028,6 +1022,7 @@ const spellingWords: SpellingWord[] = [
     difficulty: 'hard',
   },
 ];
+*/
 
 const difficulties = [
   { id: 'easy', name: { en: 'Easy (3-4 letters)', ja: 'かんたん (3-4もじ)' }, emoji: '😊' },
@@ -1052,34 +1047,11 @@ export function SpellingGamePage(): JSX.Element {
 
   const filteredWords = spellingWords.filter((word) => word.difficulty === selectedDifficulty);
 
-  // Shuffle array based on current hour
-  const shuffleArrayWithSeed = (array: SpellingWord[], seed: number): SpellingWord[] => {
-    const shuffled = [...array];
-    let currentIndex = shuffled.length;
-
-    // Use seed to generate pseudo-random numbers
-    const random = (index: number): number => {
-      const x = Math.sin(seed + index) * 10000;
-      return x - Math.floor(x);
-    };
-
-    while (currentIndex > 0) {
-      const randomIndex = Math.floor(random(currentIndex) * currentIndex);
-      currentIndex--;
-      [shuffled[currentIndex], shuffled[randomIndex]] = [
-        shuffled[randomIndex],
-        shuffled[currentIndex],
-      ];
-    }
-
-    return shuffled;
-  };
-
-  // Get shuffled words based on current hour
-  const getShuffledWords = (): SpellingWord[] => {
-    const currentHour = Math.floor(Date.now() / (1000 * 60 * 60)); // Current hour since epoch
-    return shuffleArrayWithSeed(filteredWords, currentHour);
-  };
+  // メモ化してシャッフルされた単語を取得
+  const shuffledWords = useMemo(
+    () => shuffleArrayWithSeed(filteredWords, getHourlyShuffleSeed()),
+    [filteredWords],
+  );
 
   useEffect(() => {
     if (gameStarted && inputRef.current) {
@@ -1088,9 +1060,8 @@ export function SpellingGamePage(): JSX.Element {
   }, [gameStarted, currentWord]);
 
   const startGame = (): void => {
-    const words = getShuffledWords();
-    if (words.length > 0) {
-      setCurrentWord(words[0]);
+    if (shuffledWords.length > 0) {
+      setCurrentWord(shuffledWords[0]);
       setCurrentIndex(0);
       setGameStarted(true);
       setUserInput('');
@@ -1152,7 +1123,6 @@ export function SpellingGamePage(): JSX.Element {
     await playSound('click');
 
     const nextIndex = currentIndex + 1;
-    const shuffledWords = getShuffledWords();
     if (nextIndex < shuffledWords.length) {
       setCurrentWord(shuffledWords[nextIndex]);
       setCurrentIndex(nextIndex);
