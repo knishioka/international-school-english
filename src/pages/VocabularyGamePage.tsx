@@ -1975,13 +1975,10 @@ export function VocabularyGamePage(): JSX.Element {
             {/* 文章選択グリッド */}
             <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <AnimatePresence mode="wait">
-                {paginatedSentences.map((sentence, index) => (
+                {paginatedSentences.map((sentence) => (
                   <motion.button
                     key={sentence.id}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.2, delay: Math.min(index * 0.02, 0.3) }}
+                    initial={false}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => startGame(sentence)}
@@ -2059,8 +2056,7 @@ export function VocabularyGamePage(): JSX.Element {
               {hintLevel > 0 && (
                 <motion.div
                   key={hintLevel}
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
+                  initial={false}
                   className="mt-3 p-3 bg-yellow-50 rounded-lg"
                 >
                   <div className="text-sm font-medium text-yellow-800 mb-1">
@@ -2082,8 +2078,7 @@ export function VocabularyGamePage(): JSX.Element {
                   currentGame.selectedWords.map((word, index) => (
                     <motion.button
                       key={`selected-${index}`}
-                      initial={{ opacity: 0, y: -20 }}
-                      animate={{ opacity: 1, y: 0 }}
+                      initial={false}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => handleWordClick(word, true)}
@@ -2125,9 +2120,7 @@ export function VocabularyGamePage(): JSX.Element {
                   return (
                     <motion.button
                       key={`word-${index}`}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: index * 0.05 }}
+                      initial={false}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => handleWordClick(word, false)}
@@ -2168,8 +2161,7 @@ export function VocabularyGamePage(): JSX.Element {
               ) : (
                 <>
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                    initial={false}
                     className={`
                       px-6 py-3 rounded-full text-lg font-medium
                       ${
@@ -2199,11 +2191,7 @@ export function VocabularyGamePage(): JSX.Element {
 
             {/* 正解表示 */}
             {currentGame.isCorrect === false && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mt-4 p-4 bg-yellow-50 rounded-lg text-center"
-              >
+              <motion.div initial={false} className="mt-4 p-4 bg-yellow-50 rounded-lg text-center">
                 <p className="text-gray-700">
                   {language === 'ja' ? 'せいかい:' : 'Correct answer:'}
                 </p>
