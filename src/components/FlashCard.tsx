@@ -104,12 +104,14 @@ export function FlashCard({
 
       {/* フラッシュカード */}
       <motion.div
+        initial={false}
         className="relative w-80 h-96 cursor-pointer perspective-1000"
         onClick={handleFlip}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
       >
         <motion.div
+          initial={false}
           className="absolute inset-0 w-full h-full preserve-3d"
           animate={{ rotateY: isFlipped ? 180 : 0 }}
           transition={{ duration: 0.6 }}

@@ -1974,7 +1974,7 @@ export function VocabularyGamePage(): JSX.Element {
 
             {/* 文章選択グリッド */}
             <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <AnimatePresence>
+              <AnimatePresence mode="wait">
                 {paginatedSentences.map((sentence, index) => (
                   <motion.button
                     key={sentence.id}
@@ -2024,7 +2024,7 @@ export function VocabularyGamePage(): JSX.Element {
           </>
         ) : (
           /* ゲーム画面 */
-          <div className="max-w-4xl mx-auto">
+          <motion.div key={currentGame?.sentence.id} initial={false} className="max-w-4xl mx-auto">
             {/* 問題文 */}
             <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
               <div className="flex items-center justify-between mb-4">
@@ -2212,7 +2212,7 @@ export function VocabularyGamePage(): JSX.Element {
                 </p>
               </motion.div>
             )}
-          </div>
+          </motion.div>
         )}
       </div>
     </div>

@@ -1056,19 +1056,22 @@ export function SpellingGamePage(): JSX.Element {
   const shuffleArrayWithSeed = (array: SpellingWord[], seed: number): SpellingWord[] => {
     const shuffled = [...array];
     let currentIndex = shuffled.length;
-    
+
     // Use seed to generate pseudo-random numbers
     const random = (index: number): number => {
       const x = Math.sin(seed + index) * 10000;
       return x - Math.floor(x);
     };
-    
+
     while (currentIndex > 0) {
       const randomIndex = Math.floor(random(currentIndex) * currentIndex);
       currentIndex--;
-      [shuffled[currentIndex], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[currentIndex]];
+      [shuffled[currentIndex], shuffled[randomIndex]] = [
+        shuffled[randomIndex],
+        shuffled[currentIndex],
+      ];
     }
-    
+
     return shuffled;
   };
 
@@ -1315,7 +1318,11 @@ export function SpellingGamePage(): JSX.Element {
         </div>
 
         {/* メインコンテンツ */}
-        <motion.div initial={false} className="bg-white rounded-2xl shadow-lg p-8 mb-6">
+        <motion.div
+          key={currentWord.id}
+          initial={false}
+          className="bg-white rounded-2xl shadow-lg p-8 mb-6"
+        >
           {/* 単語情報 */}
           <div className="text-center mb-8">
             <div className="text-8xl mb-4">{currentWord.emoji}</div>
@@ -1478,7 +1485,7 @@ export function SpellingGamePage(): JSX.Element {
         </motion.div>
 
         {/* 完了画面 */}
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {currentIndex === filteredWords.length - 1 && isCorrect === true && (
             <motion.div initial={false} exit={{ opacity: 0, y: -20 }} className="text-center">
               <div className="text-6xl mb-4">🎉</div>

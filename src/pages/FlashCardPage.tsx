@@ -1360,22 +1360,28 @@ export function FlashCardPage(): JSX.Element {
       : vocabularyWords.filter((word) => word.category === selectedCategory);
 
   // Shuffle array based on current hour
-  const shuffleArrayWithSeed = (array: typeof vocabularyWords, seed: number): typeof vocabularyWords => {
+  const shuffleArrayWithSeed = (
+    array: typeof vocabularyWords,
+    seed: number,
+  ): typeof vocabularyWords => {
     const shuffled = [...array];
     let currentIndex = shuffled.length;
-    
+
     // Use seed to generate pseudo-random numbers
     const random = (index: number): number => {
       const x = Math.sin(seed + index) * 10000;
       return x - Math.floor(x);
     };
-    
+
     while (currentIndex > 0) {
       const randomIndex = Math.floor(random(currentIndex) * currentIndex);
       currentIndex--;
-      [shuffled[currentIndex], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[currentIndex]];
+      [shuffled[currentIndex], shuffled[randomIndex]] = [
+        shuffled[randomIndex],
+        shuffled[currentIndex],
+      ];
     }
-    
+
     return shuffled;
   };
 
@@ -1517,6 +1523,7 @@ export function FlashCardPage(): JSX.Element {
         {/* フラッシュカード */}
         <motion.div initial={false} className="flex justify-center">
           <FlashCard
+            key={currentWord.id}
             word={currentWord}
             onNext={handleNext}
             onPrevious={handlePrevious}
