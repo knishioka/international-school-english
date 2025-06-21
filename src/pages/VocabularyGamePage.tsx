@@ -1870,7 +1870,7 @@ export function VocabularyGamePage(): JSX.Element {
 
     if (isCorrect) {
       await playSound('success');
-      speak(currentGame.sentence.english, 'en');
+      speak(currentGame.sentence.english);
     } else {
       await playSound('error');
     }
@@ -1892,7 +1892,7 @@ export function VocabularyGamePage(): JSX.Element {
       return;
     }
     await playSound('click');
-    speak(currentGame.sentence.english, 'en');
+    speak(currentGame.sentence.english);
   };
 
   const getHintText = (): string => {

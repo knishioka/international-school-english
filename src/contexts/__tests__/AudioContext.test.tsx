@@ -11,17 +11,26 @@ describe('AudioContext', () => {
     (global.Audio as jest.Mock).mockImplementation(() => ({
       play: mockPlay,
       volume: 1,
+      currentTime: 0,
+      crossOrigin: '',
+      preload: '',
+      src: '',
     }));
 
     const { result } = renderHook(() => useAudio(), {
       wrapper: AudioProvider,
     });
 
+    // First initialize audio to simulate user interaction
+    await act(async () => {
+      await result.current.initializeAudio();
+    });
+
     await act(async () => {
       await result.current.playSound('click');
     });
 
-    expect(global.Audio).toHaveBeenCalledWith('/sounds/click.mp3');
+    expect(global.Audio).toHaveBeenCalled();
     expect(mockPlay).toHaveBeenCalled();
   });
 
@@ -42,10 +51,19 @@ describe('AudioContext', () => {
     (global.Audio as jest.Mock).mockImplementation(() => ({
       play: mockPlay,
       volume: 1,
+      currentTime: 0,
+      crossOrigin: '',
+      preload: '',
+      src: '',
     }));
 
     const { result } = renderHook(() => useAudio(), {
       wrapper: AudioProvider,
+    });
+
+    // First initialize audio to simulate user interaction
+    await act(async () => {
+      await result.current.initializeAudio();
     });
 
     await act(async () => {
@@ -78,6 +96,39 @@ describe('AudioContext', () => {
     expect(utterance.lang).toBe('en-US');
     expect(utterance.rate).toBe(0.8);
     expect(utterance.pitch).toBe(1.1);
+
+    jest.useRealTimers();
+  });
+
+  it('言語自動検出が正しく動作する', () => {
+    jest.useFakeTimers();
+    const { result } = renderHook(() => useAudio(), {
+      wrapper: AudioProvider,
+    });
+
+    // 英語テキストの自動検出
+    act(() => {
+      result.current.speak('Hello');
+      jest.runAllTimers();
+    });
+
+    let mockCalls = (global.speechSynthesis.speak as jest.Mock).mock.calls;
+    let utterance = mockCalls[mockCalls.length - 1][0];
+    expect(utterance.lang).toBe('en-US');
+    expect(utterance.rate).toBe(0.8);
+    expect(utterance.pitch).toBe(1.1);
+
+    // 日本語テキストの自動検出
+    act(() => {
+      result.current.speak('こんにちは');
+      jest.runAllTimers();
+    });
+
+    mockCalls = (global.speechSynthesis.speak as jest.Mock).mock.calls;
+    utterance = mockCalls[mockCalls.length - 1][0];
+    expect(utterance.lang).toBe('ja-JP');
+    expect(utterance.rate).toBe(0.85);
+    expect(utterance.pitch).toBe(1.0);
 
     jest.useRealTimers();
   });

@@ -58,7 +58,8 @@ export function FlashCard({
         : word.english
       : word.english;
 
-    speak(textToSpeak, isFlipped && language === 'ja' ? 'ja' : 'en');
+    // 言語を自動検出させるため、言語パラメータを指定しない
+    speak(textToSpeak);
   };
 
   const handleNext = async (): Promise<void> => {

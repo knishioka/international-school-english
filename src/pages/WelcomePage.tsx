@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -7,12 +7,55 @@ import { useAudio } from '@/contexts/AudioContext';
 export function WelcomePage(): JSX.Element {
   const navigate = useNavigate();
   const { language, setLanguage, t } = useLanguage();
-  const { playSound } = useAudio();
+  const { playSound, initializeAudio } = useAudio();
   const [name, setName] = useState('');
+  const [audioInitialized, setAudioInitialized] = useState(false);
+
+  useEffect(() => {
+    // Initialize audio on first user interaction
+    const initAudio = async (): Promise<void> => {
+      if (!audioInitialized) {
+        try {
+          await initializeAudio();
+          setAudioInitialized(true);
+        } catch (error) {
+          // Silently fail - audio might still work
+        }
+      }
+    };
+
+    // Add event listeners for first user interaction
+    const handleFirstInteraction = (): void => {
+      initAudio();
+      document.removeEventListener('touchstart', handleFirstInteraction);
+      document.removeEventListener('click', handleFirstInteraction);
+      document.removeEventListener('keydown', handleFirstInteraction);
+    };
+
+    document.addEventListener('touchstart', handleFirstInteraction);
+    document.addEventListener('click', handleFirstInteraction);
+    document.addEventListener('keydown', handleFirstInteraction);
+
+    return () => {
+      document.removeEventListener('touchstart', handleFirstInteraction);
+      document.removeEventListener('click', handleFirstInteraction);
+      document.removeEventListener('keydown', handleFirstInteraction);
+    };
+  }, [initializeAudio, audioInitialized]);
 
   const handleStart = async (): Promise<void> => {
     if (!name.trim()) {
       return;
+    }
+
+    // Ensure audio is initialized on button press
+    if (!audioInitialized) {
+      try {
+        await initializeAudio();
+        setAudioInitialized(true);
+      } catch (error) {
+        // Continue even if audio fails
+      }
     }
 
     await playSound('click');
@@ -21,6 +64,16 @@ export function WelcomePage(): JSX.Element {
   };
 
   const handleLanguageToggle = async (): Promise<void> => {
+    // Ensure audio is initialized on button press
+    if (!audioInitialized) {
+      try {
+        await initializeAudio();
+        setAudioInitialized(true);
+      } catch (error) {
+        // Continue even if audio fails
+      }
+    }
+
     await playSound('click');
     setLanguage(language === 'ja' ? 'en' : 'ja');
   };

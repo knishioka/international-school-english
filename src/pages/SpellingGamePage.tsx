@@ -1098,7 +1098,7 @@ export function SpellingGamePage(): JSX.Element {
       await playSound('success');
       // Add delay for iOS compatibility
       setTimeout(() => {
-        speak(currentWord.word, 'en');
+        speak(currentWord.word);
       }, 100);
 
       // Calculate score based on difficulty and hint usage
@@ -1142,7 +1142,7 @@ export function SpellingGamePage(): JSX.Element {
     await playSound('click');
     // Add a small delay for better iOS compatibility
     setTimeout(() => {
-      speak(currentWord.word, 'en');
+      speak(currentWord.word);
     }, 100);
   };
 
