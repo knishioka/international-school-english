@@ -127,7 +127,7 @@ describe('AudioContext', () => {
     mockCalls = (global.speechSynthesis.speak as jest.Mock).mock.calls;
     utterance = mockCalls[mockCalls.length - 1][0];
     expect(utterance.lang).toBe('ja-JP');
-    expect(utterance.rate).toBe(0.7);
+    expect(utterance.rate).toBe(0.85);
     expect(utterance.pitch).toBe(1.0);
 
     jest.useRealTimers();

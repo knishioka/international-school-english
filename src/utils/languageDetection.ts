@@ -42,7 +42,7 @@ export function getOptimalVoiceSettings(lang: 'ja' | 'en'): {
   if (lang === 'ja') {
     return {
       lang: 'ja-JP',
-      rate: 0.7, // 日本語は少し遅めに
+      rate: 0.85, // 日本語は自然な速度で
       pitch: 1.0, // 日本語は自然なピッチで
     };
   } else {
@@ -73,22 +73,8 @@ export function findBestVoice(lang: 'ja' | 'en'): SpeechSynthesisVoice | null {
 
   const targetLang = lang === 'ja' ? 'ja' : 'en';
 
-  // 1. 完全に一致する言語の音声を探す
-  const exactMatch = voices.find(
-    (voice) =>
-      voice !== null &&
-      voice !== undefined &&
-      voice.lang !== null &&
-      voice.lang !== undefined &&
-      voice.lang.toLowerCase().startsWith(targetLang) &&
-      voice.localService,
-  );
-  if (exactMatch !== undefined) {
-    return exactMatch;
-  }
-
-  // 2. 言語が一致する音声を探す（ローカルでなくても）
-  const langMatch = voices.find(
+  // 言語にマッチする音声をすべて取得
+  const matchingVoices = voices.filter(
     (voice) =>
       voice !== null &&
       voice !== undefined &&
@@ -96,17 +82,93 @@ export function findBestVoice(lang: 'ja' | 'en'): SpeechSynthesisVoice | null {
       voice.lang !== undefined &&
       voice.lang.toLowerCase().startsWith(targetLang),
   );
-  if (langMatch !== undefined) {
-    return langMatch;
+
+  if (matchingVoices.length === 0) {
+    // マッチする音声がない場合はデフォルトまたは最初の音声を返す
+    const defaultVoice = voices.find(
+      (voice) => voice !== null && voice !== undefined && voice.default === true,
+    );
+    return defaultVoice !== undefined ? defaultVoice : voices.length > 0 ? voices[0] : null;
   }
 
-  // 3. デフォルトの音声を使用
-  const defaultVoice = voices.find(
-    (voice) => voice !== null && voice !== undefined && voice.default === true,
-  );
+  // 日本語音声の場合、特別な優先順位で選択
+  if (lang === 'ja') {
+    return selectBestJapaneseVoice(matchingVoices);
+  } else {
+    return selectBestEnglishVoice(matchingVoices);
+  }
+}
+
+/**
+ * 日本語音声の中から最適なものを選択
+ * @param voices 日本語音声のリスト
+ * @returns 最適な日本語音声
+ */
+function selectBestJapaneseVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice {
+  // 1. 高品質な日本語音声を優先（ニューラルやプレミアム音声）
+  const highQualityVoice = voices.find((voice) => {
+    const name = voice.name.toLowerCase();
+    return (
+      name.includes('enhanced') ||
+      name.includes('premium') ||
+      name.includes('neural') ||
+      name.includes('高品質') ||
+      name.includes('premium') ||
+      // iOS/macOSの高品質日本語音声
+      name.includes('kyoko') ||
+      name.includes('otoya') ||
+      name.includes('siri') ||
+      // Windowsの高品質日本語音声
+      name.includes('haruka') ||
+      name.includes('ichiro') ||
+      name.includes('sayaka')
+    );
+  });
+
+  if (highQualityVoice !== undefined) {
+    return highQualityVoice;
+  }
+
+  // 2. ローカル音声を優先
+  const localVoice = voices.find((voice) => voice.localService);
+  if (localVoice !== undefined) {
+    return localVoice;
+  }
+
+  // 3. デフォルト音声
+  const defaultVoice = voices.find((voice) => voice.default);
   if (defaultVoice !== undefined) {
     return defaultVoice;
   }
 
-  return voices.length > 0 ? voices[0] : null;
+  // 4. 最初の音声を返す
+  return voices[0];
+}
+
+/**
+ * 英語音声の中から最適なものを選択
+ * @param voices 英語音声のリスト
+ * @returns 最適な英語音声
+ */
+function selectBestEnglishVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice {
+  // 1. ローカル音声を優先
+  const localVoice = voices.find((voice) => voice.localService);
+  if (localVoice !== undefined) {
+    return localVoice;
+  }
+
+  // 2. US英語を優先
+  const usVoice = voices.find((voice) => voice.lang.toLowerCase().includes('en-us'));
+  if (usVoice !== undefined) {
+    return usVoice;
+  }
+
+  // 3. デフォルト音声
+  const defaultVoice = voices.find((voice) => voice.default);
+  if (defaultVoice !== undefined) {
+    return defaultVoice;
+  }
+
+  // 4. 最初の音声を返す
+  return voices[0];
 }

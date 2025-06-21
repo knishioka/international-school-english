@@ -29,7 +29,7 @@ describe('languageDetection', () => {
     it('日本語用の設定を返す', () => {
       const settings = getOptimalVoiceSettings('ja');
       expect(settings.lang).toBe('ja-JP');
-      expect(settings.rate).toBe(0.7);
+      expect(settings.rate).toBe(0.85);
       expect(settings.pitch).toBe(1.0);
     });
 
