@@ -11,17 +11,26 @@ describe('AudioContext', () => {
     (global.Audio as jest.Mock).mockImplementation(() => ({
       play: mockPlay,
       volume: 1,
+      currentTime: 0,
+      crossOrigin: '',
+      preload: '',
+      src: '',
     }));
 
     const { result } = renderHook(() => useAudio(), {
       wrapper: AudioProvider,
     });
 
+    // First initialize audio to simulate user interaction
+    await act(async () => {
+      await result.current.initializeAudio();
+    });
+
     await act(async () => {
       await result.current.playSound('click');
     });
 
-    expect(global.Audio).toHaveBeenCalledWith('/sounds/click.mp3');
+    expect(global.Audio).toHaveBeenCalled();
     expect(mockPlay).toHaveBeenCalled();
   });
 
@@ -42,10 +51,19 @@ describe('AudioContext', () => {
     (global.Audio as jest.Mock).mockImplementation(() => ({
       play: mockPlay,
       volume: 1,
+      currentTime: 0,
+      crossOrigin: '',
+      preload: '',
+      src: '',
     }));
 
     const { result } = renderHook(() => useAudio(), {
       wrapper: AudioProvider,
+    });
+
+    // First initialize audio to simulate user interaction
+    await act(async () => {
+      await result.current.initializeAudio();
     });
 
     await act(async () => {

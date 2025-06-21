@@ -1,4 +1,4 @@
-import { createContext, useContext, ReactNode, useCallback, useRef } from 'react';
+import { createContext, useContext, ReactNode, useCallback, useRef, useState } from 'react';
 
 interface AudioContextType {
   playSound: (soundName: string) => Promise<void>;
@@ -18,6 +18,8 @@ const soundFiles: Record<string, string> = {
 export function AudioProvider({ children }: { children: ReactNode }): JSX.Element {
   const audioInitialized = useRef(false);
   const audioContext = useRef<AudioContext | null>(null);
+  const audioElementsCache = useRef<Map<string, HTMLAudioElement>>(new Map());
+  const [userInteracted, setUserInteracted] = useState(false);
 
   const initializeAudio = useCallback(async (): Promise<void> => {
     if (audioInitialized.current) {
@@ -25,6 +27,8 @@ export function AudioProvider({ children }: { children: ReactNode }): JSX.Elemen
     }
 
     try {
+      setUserInteracted(true);
+
       // Initialize AudioContext for iOS/iPad compatibility
       if ('AudioContext' in window || 'webkitAudioContext' in window) {
         const AudioContextClass =
@@ -39,62 +43,154 @@ export function AudioProvider({ children }: { children: ReactNode }): JSX.Elemen
         }
       }
 
-      // Preload a silent audio to unlock iOS audio
-      const silentAudio = new Audio(
-        'data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8t2QQAoUXrTp66hVFApGn+LwuVkeAUCL0fPTgjkIGGS57+OZFQ0PUKXh87BdGgU+ltXzzn8qBSl+yO/eizELClym4+6nUxELRJjd8sFcFAI7mtDzzXkpBR13y/DajCwKDoXM7+CUOwkUbr7q9Z1NEw1No+H0sV0aBT+V0vHJdCUELn7K8N2TRAsVW7Hn9aFYEwtOkdzyxnEtBSaAxtHzjz0LDV6q5u2nUhMPSJPi8LBdJgdAfsvtz4M2BxprweLvpngSCkt5xO/YgTQGFGS25ueXOg8bSJbg8ctlJAcxf8zw2I4/ChVes+fwp1oTDkil4PKzaxsGPJfQ8ct8KAQghM7u44Y3BxplvePlll8JDVOW3vG+ZRAQQXi86+WEQR8PKHbE7tiEKwUWbcLyqZFPFBBJnN/zxGwxBxZ+zPDbKzwNDViq5eSJXRQLRJ7g8LNdGwU8l9LxjC0oBSCC1e7chjsBGmTA5uSdRAINEHbH7tuPQhsDKX7K8OGSOwodVrLm5Z9OEgtOltf0v1wQKCN1wO3TSSUEOHjO8tiLMgoWa8Hspn0SDEJH0fi1ayIILXnJ7eOBWgENGG3D6eSSZxMOQ5je9LhfJHNGZ2cGPIzN+tiHNw4daLvmw2YaFCt6wO6lfgUSB2+24K9jHwYCJYXL79aKNAQYsePEeiwFCG/G9NiPRAsWUJ3m86BeHQQ7mdeKvXgDBTuYyPT1qGwcBT2dzfTaOzUOF2m05tKfThIMSJzh8qRAFgI5kcvxzXnKPwfg8rBEHgdSqeLzu2MRBDuX2e7XizwNEV+/3+KOWggCJ4TQ8du...',
-      );
-      await silentAudio.play();
+      // Preload all audio files
+      try {
+        for (const [soundName, soundUrl] of Object.entries(soundFiles)) {
+          const audio = new Audio();
+          audio.preload = 'auto';
+          audio.volume = 0.5;
+          audio.crossOrigin = 'anonymous';
+
+          // Use absolute URL for better iOS compatibility
+          const fullUrl = soundUrl.startsWith('/')
+            ? `${window.location.origin}${soundUrl}`
+            : soundUrl;
+          audio.src = fullUrl;
+
+          audioElementsCache.current.set(soundName, audio);
+        }
+      } catch (preloadError) {
+        // Silently handle preload errors
+      }
 
       // Initialize Speech Synthesis for iOS
       if ('speechSynthesis' in window) {
-        const testUtterance = new SpeechSynthesisUtterance(' ');
-        testUtterance.volume = 0;
-        window.speechSynthesis.speak(testUtterance);
-        window.speechSynthesis.cancel();
+        try {
+          // Wait for voices to load on iOS
+          const waitForVoices = (): Promise<void> => {
+            return new Promise((resolve) => {
+              const voices = window.speechSynthesis.getVoices();
+              if (voices.length > 0) {
+                resolve();
+              } else {
+                window.speechSynthesis.addEventListener('voiceschanged', () => resolve(), {
+                  once: true,
+                });
+              }
+            });
+          };
+
+          await waitForVoices();
+
+          const testUtterance = new SpeechSynthesisUtterance(' ');
+          testUtterance.volume = 0;
+          window.speechSynthesis.speak(testUtterance);
+          window.speechSynthesis.cancel();
+        } catch (speechError) {
+          // Silently handle speech errors
+        }
       }
 
       audioInitialized.current = true;
     } catch (error) {
-      // Silently fail - audio might still work without initialization
+      // Silently handle initialization errors
     }
   }, []);
 
-  const playSound = useCallback(async (soundName: string): Promise<void> => {
-    try {
-      const soundUrl = soundFiles[soundName];
-      if (!soundUrl) {
-        return;
+  const playSound = useCallback(
+    async (soundName: string): Promise<void> => {
+      try {
+        if (!userInteracted) {
+          return;
+        }
+
+        // Try to use cached audio element first
+        let audio = audioElementsCache.current.get(soundName);
+
+        if (!audio) {
+          const soundUrl = soundFiles[soundName];
+          if (!soundUrl) {
+            return;
+          }
+
+          audio = new Audio();
+          audio.volume = 0.5;
+          audio.crossOrigin = 'anonymous';
+
+          // Use absolute URL for better iOS compatibility
+          const fullUrl = soundUrl.startsWith('/')
+            ? `${window.location.origin}${soundUrl}`
+            : soundUrl;
+          audio.src = fullUrl;
+
+          audioElementsCache.current.set(soundName, audio);
+        }
+
+        // Reset audio to beginning
+        audio.currentTime = 0;
+
+        // Ensure audio context is resumed for iOS
+        if (audioContext.current?.state === 'suspended') {
+          await audioContext.current.resume();
+        }
+
+        try {
+          const playPromise = audio.play();
+          if (playPromise !== undefined) {
+            await playPromise;
+          }
+        } catch (playError) {
+          // Fallback: Try to use Web Audio API if available
+          if (audioContext.current && audioContext.current.state === 'running') {
+            try {
+              // Create a simple beep as fallback
+              const oscillator = audioContext.current.createOscillator();
+              const gainNode = audioContext.current.createGain();
+
+              oscillator.connect(gainNode);
+              gainNode.connect(audioContext.current.destination);
+
+              oscillator.frequency.setValueAtTime(800, audioContext.current.currentTime);
+              gainNode.gain.setValueAtTime(0.1, audioContext.current.currentTime);
+              gainNode.gain.exponentialRampToValueAtTime(
+                0.01,
+                audioContext.current.currentTime + 0.1,
+              );
+
+              oscillator.start(audioContext.current.currentTime);
+              oscillator.stop(audioContext.current.currentTime + 0.1);
+            } catch (webAudioError) {
+              // Silently handle fallback errors
+            }
+          }
+        }
+      } catch (error) {
+        // Silently handle sound play errors
       }
-
-      const audio = new Audio(soundUrl);
-      audio.volume = 0.5;
-
-      // Ensure audio context is resumed for iOS
-      if (audioContext.current?.state === 'suspended') {
-        await audioContext.current.resume();
-      }
-
-      await audio.play();
-    } catch (error) {
-      // Silently fail if audio cannot be played
-    }
-  }, []);
+    },
+    [userInteracted],
+  );
 
   const speak = useCallback((text: string, lang: 'en' | 'ja' = 'en'): void => {
     if (!('speechSynthesis' in window)) {
       return;
     }
 
-    // Cancel any ongoing speech
-    window.speechSynthesis.cancel();
+    try {
+      // Cancel any ongoing speech
+      window.speechSynthesis.cancel();
 
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = lang === 'ja' ? 'ja-JP' : 'en-US';
-    utterance.rate = 0.8; // Slower for children
-    utterance.pitch = 1.1; // Slightly higher pitch
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = lang === 'ja' ? 'ja-JP' : 'en-US';
+      utterance.rate = 0.8; // Slower for children
+      utterance.pitch = 1.1; // Slightly higher pitch
+      utterance.volume = 1.0;
 
-    // Direct execution without setTimeout to preserve user gesture context
-    window.speechSynthesis.speak(utterance);
+      // Direct execution without setTimeout to preserve user gesture context
+      window.speechSynthesis.speak(utterance);
+    } catch (error) {
+      // Silently handle speech errors
+    }
   }, []);
 
   return (

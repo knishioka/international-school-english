@@ -48,12 +48,32 @@ export function WelcomePage(): JSX.Element {
       return;
     }
 
+    // Ensure audio is initialized on button press
+    if (!audioInitialized) {
+      try {
+        await initializeAudio();
+        setAudioInitialized(true);
+      } catch (error) {
+        // Continue even if audio fails
+      }
+    }
+
     await playSound('click');
     localStorage.setItem('userName', name);
     navigate('/home');
   };
 
   const handleLanguageToggle = async (): Promise<void> => {
+    // Ensure audio is initialized on button press
+    if (!audioInitialized) {
+      try {
+        await initializeAudio();
+        setAudioInitialized(true);
+      } catch (error) {
+        // Continue even if audio fails
+      }
+    }
+
     await playSound('click');
     setLanguage(language === 'ja' ? 'en' : 'ja');
   };
