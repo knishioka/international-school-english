@@ -100,6 +100,39 @@ describe('AudioContext', () => {
     jest.useRealTimers();
   });
 
+  it('言語自動検出が正しく動作する', () => {
+    jest.useFakeTimers();
+    const { result } = renderHook(() => useAudio(), {
+      wrapper: AudioProvider,
+    });
+
+    // 英語テキストの自動検出
+    act(() => {
+      result.current.speak('Hello');
+      jest.runAllTimers();
+    });
+
+    let mockCalls = (global.speechSynthesis.speak as jest.Mock).mock.calls;
+    let utterance = mockCalls[mockCalls.length - 1][0];
+    expect(utterance.lang).toBe('en-US');
+    expect(utterance.rate).toBe(0.8);
+    expect(utterance.pitch).toBe(1.1);
+
+    // 日本語テキストの自動検出
+    act(() => {
+      result.current.speak('こんにちは');
+      jest.runAllTimers();
+    });
+
+    mockCalls = (global.speechSynthesis.speak as jest.Mock).mock.calls;
+    utterance = mockCalls[mockCalls.length - 1][0];
+    expect(utterance.lang).toBe('ja-JP');
+    expect(utterance.rate).toBe(0.7);
+    expect(utterance.pitch).toBe(1.0);
+
+    jest.useRealTimers();
+  });
+
   it('日本語の読み上げが正しく設定される', () => {
     jest.useFakeTimers();
     const { result } = renderHook(() => useAudio(), {

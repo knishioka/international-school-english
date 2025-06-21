@@ -70,13 +70,38 @@ global.Audio = jest.fn().mockImplementation(() => ({
   volume: 1,
 }));
 
+// Mock voices for speechSynthesis
+const mockVoices = [
+  {
+    lang: 'en-US',
+    localService: true,
+    default: false,
+    name: 'English US',
+    voiceURI: 'en-us',
+  },
+  {
+    lang: 'ja-JP',
+    localService: true,
+    default: false,
+    name: 'Japanese',
+    voiceURI: 'ja-jp',
+  },
+  {
+    lang: 'en-GB',
+    localService: false,
+    default: true,
+    name: 'English UK',
+    voiceURI: 'en-gb',
+  },
+] as SpeechSynthesisVoice[];
+
 // Mock speechSynthesis
 global.speechSynthesis = {
   speak: jest.fn(),
   cancel: jest.fn(),
   pause: jest.fn(),
   resume: jest.fn(),
-  getVoices: jest.fn().mockReturnValue([]),
+  getVoices: jest.fn().mockReturnValue(mockVoices),
   pending: false,
   speaking: false,
   paused: false,

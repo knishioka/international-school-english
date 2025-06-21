@@ -1,4 +1,5 @@
 import { createContext, useContext, ReactNode, useCallback, useRef, useState } from 'react';
+import { detectLanguage, getOptimalVoiceSettings, findBestVoice } from '@/utils/languageDetection';
 
 interface AudioContextType {
   playSound: (soundName: string) => Promise<void>;
@@ -171,7 +172,7 @@ export function AudioProvider({ children }: { children: ReactNode }): JSX.Elemen
     [userInteracted],
   );
 
-  const speak = useCallback((text: string, lang: 'en' | 'ja' = 'en'): void => {
+  const speak = useCallback((text: string, lang?: 'en' | 'ja'): void => {
     if (!('speechSynthesis' in window)) {
       return;
     }
@@ -180,11 +181,25 @@ export function AudioProvider({ children }: { children: ReactNode }): JSX.Elemen
       // Cancel any ongoing speech
       window.speechSynthesis.cancel();
 
+      // 言語が指定されていない場合は自動検出
+      const detectedLang = lang || detectLanguage(text);
+
+      // 最適な音声設定を取得
+      const voiceSettings = getOptimalVoiceSettings(detectedLang);
+
+      // 最適な音声を選択
+      const bestVoice = findBestVoice(detectedLang);
+
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = lang === 'ja' ? 'ja-JP' : 'en-US';
-      utterance.rate = 0.8; // Slower for children
-      utterance.pitch = 1.1; // Slightly higher pitch
+      utterance.lang = voiceSettings.lang;
+      utterance.rate = voiceSettings.rate;
+      utterance.pitch = voiceSettings.pitch;
       utterance.volume = 1.0;
+
+      // 最適な音声が見つかった場合は設定
+      if (bestVoice) {
+        utterance.voice = bestVoice;
+      }
 
       // Direct execution without setTimeout to preserve user gesture context
       window.speechSynthesis.speak(utterance);
