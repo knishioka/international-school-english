@@ -1,7 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
 import { ReactNode } from 'react';
 import { useGameFeedback } from '../useGameFeedback';
-import { AudioProvider } from '@/contexts/AudioContext';
+import { AudioProvider, useAudio } from '@/contexts/AudioContext';
 
 // AudioProviderでラップするwrapper
 const wrapper = ({ children }: { children: ReactNode }): JSX.Element => (
@@ -69,19 +69,27 @@ describe('useGameFeedback', () => {
         src: '',
       }));
 
-      const { result } = renderHook(() => useGameFeedback(), { wrapper });
+      const { result } = renderHook(
+        () => {
+          const audio = useAudio();
+          const gameFeedback = useGameFeedback();
+          return { ...gameFeedback, initializeAudio: audio.initializeAudio };
+        },
+        { wrapper },
+      );
 
-      // オーディオを初期化
+      // Initialize audio first (simulates user interaction)
       await act(async () => {
-        // AudioContextのinitializeAudioを呼ぶ代わりに、直接テスト
+        await result.current.initializeAudio();
       });
 
       await act(async () => {
         result.current.showCorrect();
       });
 
-      // 効果音が再生されることを確認（AudioProviderの内部実装による）
+      // 効果音が再生されることを確認
       expect(result.current.feedback).toBe('correct');
+      expect(mockPlay).toHaveBeenCalled();
     });
   });
 
@@ -210,7 +218,19 @@ describe('useGameFeedback', () => {
         src: '',
       }));
 
-      const { result } = renderHook(() => useGameFeedback({ soundEnabled: false }), { wrapper });
+      const { result } = renderHook(
+        () => {
+          const audio = useAudio();
+          const gameFeedback = useGameFeedback({ soundEnabled: false });
+          return { ...gameFeedback, initializeAudio: audio.initializeAudio };
+        },
+        { wrapper },
+      );
+
+      // Initialize audio first (simulates user interaction)
+      await act(async () => {
+        await result.current.initializeAudio();
+      });
 
       await act(async () => {
         result.current.showCorrect();
@@ -218,6 +238,7 @@ describe('useGameFeedback', () => {
 
       // フィードバック状態は変わるが、効果音は再生されない
       expect(result.current.isCorrect).toBe(true);
+      expect(mockPlay).not.toHaveBeenCalled();
     });
   });
 

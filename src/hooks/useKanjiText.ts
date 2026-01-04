@@ -7,6 +7,40 @@ import { useLanguage, type KanjiGrade } from '@/contexts/LanguageContext';
 export type KanjiTextMap = { [key in KanjiGrade]: string };
 
 /**
+ * 漢字レベルに応じたテキストを取得するヘルパー関数
+ * 指定されたレベルにテキストがない場合は、より低いレベルにフォールバックする
+ */
+function getTextWithFallback(
+  kanjiTextMap: KanjiTextMap | undefined,
+  grade: KanjiGrade,
+  fallbackText: string,
+): string {
+  if (!kanjiTextMap) {
+    return fallbackText;
+  }
+
+  // 指定されたレベルのテキストがあればそれを返す
+  const text = kanjiTextMap[grade];
+  if (text && text.trim() !== '') {
+    return text;
+  }
+
+  // フォールバック: より低いレベルを探す
+  const grades: KanjiGrade[] = [1, 2, 3, 4, 5, 6];
+  const lowerGrades = grades.filter((g) => g < grade).reverse();
+
+  for (const lowerGrade of lowerGrades) {
+    const lowerText = kanjiTextMap[lowerGrade];
+    if (lowerText && lowerText.trim() !== '') {
+      return lowerText;
+    }
+  }
+
+  // 最低レベルにもない場合はフォールバックテキスト
+  return fallbackText;
+}
+
+/**
  * useKanjiTextのオプション
  */
 export interface UseKanjiTextOptions {
@@ -59,29 +93,7 @@ export function useKanjiText(
 
   const getTextForGrade = useMemo(() => {
     return (grade: KanjiGrade): string => {
-      if (!kanjiTextMap) {
-        return fallbackText;
-      }
-
-      // 指定されたレベルのテキストがあればそれを返す
-      const text = kanjiTextMap[grade];
-      if (text && text.trim() !== '') {
-        return text;
-      }
-
-      // フォールバック: より低いレベルを探す
-      const grades: KanjiGrade[] = [1, 2, 3, 4, 5, 6];
-      const lowerGrades = grades.filter((g) => g < grade).reverse();
-
-      for (const lowerGrade of lowerGrades) {
-        const lowerText = kanjiTextMap[lowerGrade];
-        if (lowerText && lowerText.trim() !== '') {
-          return lowerText;
-        }
-      }
-
-      // 最低レベルにもない場合はフォールバックテキスト
-      return fallbackText;
+      return getTextWithFallback(kanjiTextMap, grade, fallbackText);
     };
   }, [kanjiTextMap, fallbackText]);
 
@@ -128,35 +140,7 @@ export function useKanjiTexts(
     const result: Record<string, string> = {};
 
     for (const [key, kanjiTextMap] of Object.entries(kanjiTextMaps)) {
-      if (!kanjiTextMap) {
-        result[key] = fallbackText;
-        continue;
-      }
-
-      // 指定されたレベルのテキストがあればそれを返す
-      const text = kanjiTextMap[currentGrade];
-      if (text && text.trim() !== '') {
-        result[key] = text;
-        continue;
-      }
-
-      // フォールバック: より低いレベルを探す
-      const grades: KanjiGrade[] = [1, 2, 3, 4, 5, 6];
-      const lowerGrades = grades.filter((g) => g < currentGrade).reverse();
-
-      let found = false;
-      for (const lowerGrade of lowerGrades) {
-        const lowerText = kanjiTextMap[lowerGrade];
-        if (lowerText && lowerText.trim() !== '') {
-          result[key] = lowerText;
-          found = true;
-          break;
-        }
-      }
-
-      if (!found) {
-        result[key] = fallbackText;
-      }
+      result[key] = getTextWithFallback(kanjiTextMap, currentGrade, fallbackText);
     }
 
     return result;

@@ -136,7 +136,9 @@ export function useGameTimer(options: UseGameTimerOptions = {}): UseGameTimerRet
   const pause = useCallback(() => {
     if (isRunning) {
       // Calculate elapsed time directly from refs to avoid stale closure
-      pausedTimeRef.current = pausedTimeRef.current + (Date.now() - startTimeRef.current);
+      const currentElapsed = pausedTimeRef.current + (Date.now() - startTimeRef.current);
+      pausedTimeRef.current = currentElapsed;
+      setElapsedTime(currentElapsed); // Update state immediately for UI sync
       setIsRunning(false);
     }
   }, [isRunning]);
