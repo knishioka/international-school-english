@@ -1,0 +1,68 @@
+import type { Sentence } from '@/types/vocabulary';
+
+export const dailySentences: Sentence[] = [
+  {
+    id: '1',
+    english: 'I eat breakfast every morning.',
+    japanese: 'わたしは まいあさ あさごはんを たべます。',
+    jaKanji: {
+      1: 'わたしは まいあさ あさごはんを たべます。',
+      2: 'わたしは 毎朝 あさごはんを 食べます。',
+      3: 'わたしは 毎朝 朝ごはんを 食べます。',
+      4: 'わたしは 毎朝 朝ご飯を 食べます。',
+      5: 'わたしは 毎朝 朝ご飯を 食べます。',
+      6: '私は 毎朝 朝ご飯を 食べます。',
+    },
+    words: ['I', 'eat', 'breakfast', 'every', 'morning'],
+    emoji: '🍳',
+    category: 'daily',
+  },
+  {
+    id: '2',
+    english: 'My mother makes delicious cookies.',
+    japanese: 'おかあさんは おいしい クッキーを つくります。',
+    jaKanji: {
+      1: 'おかあさんは おいしい クッキーを つくります。',
+      2: 'お母さんは おいしい クッキーを 作ります。',
+      3: 'お母さんは 美味しい クッキーを 作ります。',
+      4: 'お母さんは 美味しい クッキーを 作ります。',
+      5: 'お母さんは 美味しい クッキーを 作ります。',
+      6: 'お母さんは 美味しい クッキーを 作ります。',
+    },
+    words: ['My', 'mother', 'makes', 'delicious', 'cookies'],
+    emoji: '🍪',
+    category: 'daily',
+  },
+  {
+    id: '3',
+    english: 'I brush my teeth before bed.',
+    japanese: 'わたしは ねるまえに はを みがきます。',
+    jaKanji: {
+      1: 'わたしは ねるまえに はを みがきます。',
+      2: 'わたしは ねる前に 歯を みがきます。',
+      3: 'わたしは 寝る前に 歯を みがきます。',
+      4: 'わたしは 寝る前に 歯を みがきます。',
+      5: 'わたしは 寝る前に 歯を みがきます。',
+      6: '私は 寝る前に 歯を 磨きます。',
+    },
+    words: ['I', 'brush', 'my', 'teeth', 'before', 'bed'],
+    emoji: '🪥',
+    category: 'daily',
+  },
+  {
+    id: '4',
+    english: 'We play games after school.',
+    japanese: 'わたしたちは がっこうのあとで ゲームを します。',
+    jaKanji: {
+      1: 'わたしたちは 学校のあとで ゲームを します。',
+      2: 'わたしたちは 学校の後で ゲームを します。',
+      3: 'わたしたちは 学校の後で ゲームを します。',
+      4: 'わたしたちは 学校の後で ゲームを します。',
+      5: 'わたしたちは 学校の後で ゲームを します。',
+      6: '私たちは 学校の後で ゲームを します。',
+    },
+    words: ['We', 'play', 'games', 'after', 'school'],
+    emoji: '🎮',
+    category: 'daily',
+  },
+];

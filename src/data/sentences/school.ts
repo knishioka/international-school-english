@@ -1,0 +1,68 @@
+import type { Sentence } from '@/types/vocabulary';
+
+export const schoolSentences: Sentence[] = [
+  {
+    id: '5',
+    english: 'I study English at school every day.',
+    japanese: 'わたしは まいにち がっこうで えいごを べんきょうします。',
+    jaKanji: {
+      1: 'わたしは まい日 学校で えいごを べんきょうします。',
+      2: 'わたしは 毎日 学校で えいごを べんきょうします。',
+      3: 'わたしは 毎日 学校で えいごを 勉強します。',
+      4: 'わたしは 毎日 学校で 英語を 勉強します。',
+      5: 'わたしは 毎日 学校で 英語を 勉強します。',
+      6: '私は 毎日 学校で 英語を 勉強します。',
+    },
+    words: ['I', 'study', 'English', 'at', 'school', 'every', 'day'],
+    emoji: '📝',
+    category: 'school',
+  },
+  {
+    id: '6',
+    english: 'My teacher is very kind and helpful.',
+    japanese: 'せんせいは とても やさしくて たすけてくれます。',
+    jaKanji: {
+      1: '先生は とても やさしくて たすけてくれます。',
+      2: '先生は とても やさしくて たすけてくれます。',
+      3: '先生は とても やさしくて 助けてくれます。',
+      4: '先生は とても やさしくて 助けてくれます。',
+      5: '先生は とても やさしくて 助けてくれます。',
+      6: '先生は とても 優しくて 助けてくれます。',
+    },
+    words: ['My', 'teacher', 'is', 'very', 'kind', 'and', 'helpful'],
+    emoji: '👩‍🏫',
+    category: 'school',
+  },
+  {
+    id: '7',
+    english: 'We read books in the library.',
+    japanese: 'わたしたちは としょかんで ほんを よみます。',
+    jaKanji: {
+      1: 'わたしたちは 図書かんで ほんを よみます。',
+      2: 'わたしたちは 図書館で ほんを よみます。',
+      3: 'わたしたちは 図書館で 本を よみます。',
+      4: 'わたしたちは 図書館で 本を 読みます。',
+      5: 'わたしたちは 図書館で 本を 読みます。',
+      6: '私たちは 図書館で 本を 読みます。',
+    },
+    words: ['We', 'read', 'books', 'in', 'the', 'library'],
+    emoji: '📚',
+    category: 'school',
+  },
+  {
+    id: '8',
+    english: 'I like math because it is fun.',
+    japanese: 'さんすうは たのしいので すきです。',
+    jaKanji: {
+      1: 'さんすうは 楽しいので すきです。',
+      2: '算数は 楽しいので すきです。',
+      3: '算数は 楽しいので 好きです。',
+      4: '算数は 楽しいので 好きです。',
+      5: '算数は 楽しいので 好きです。',
+      6: '算数は 楽しいので 好きです。',
+    },
+    words: ['I', 'like', 'math', 'because', 'it', 'is', 'fun'],
+    emoji: '🔢',
+    category: 'school',
+  },
+];

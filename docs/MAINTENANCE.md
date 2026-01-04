@@ -6,10 +6,12 @@
 
 ### コンテンツの更新
 
+コンテンツはカテゴリ/難易度ごとに`src/data/<type>/`へ分割して管理します。新しいカテゴリを追加する場合は、該当する`index.ts`で配列連結を追加し、`src/data/categories.ts`のカテゴリ情報も更新してください。
+
 #### 1. 新しい単語の追加
 
 ```typescript
-// src/data/vocabularyWords.ts
+// src/data/vocabulary/animals.ts
 {
   id: '101', // 一意のID
   english: 'butterfly',
@@ -28,7 +30,7 @@
 #### 2. 新しい文章の追加
 
 ```typescript
-// src/data/sentences.ts
+// src/data/sentences/school.ts
 {
   id: '13', // 一意のID
   english: 'I love learning new things.',
@@ -47,7 +49,84 @@
 }
 ```
 
-#### 3. 新しいカテゴリーの追加
+#### 3. 新しいお話の追加
+
+```typescript
+// src/data/stories/moral.ts
+{
+  id: '31', // 一意のID
+  title: {
+    en: 'The Kind Fox',
+    ja: 'やさしいきつね',
+    jaKanji: {
+      1: 'やさしい きつね',
+      2: 'やさしい きつね',
+      3: '優しい きつね',
+      4: '優しい きつね',
+      5: '優しい きつね',
+      6: '優しい きつね',
+    },
+  },
+  description: {
+    en: 'Learn about kindness',
+    ja: 'やさしさを まなぼう',
+    jaKanji: {
+      1: 'やさしさを 学ぼう',
+      2: 'やさしさを 学ぼう',
+      3: '優しさを 学ぼう',
+      4: '優しさを 学ぼう',
+      5: '優しさを 学ぼう',
+      6: '優しさを 学ぼう',
+    },
+  },
+  lesson: {
+    en: 'Kindness helps everyone',
+    ja: 'やさしさは みんなを たすけます',
+    jaKanji: {
+      1: 'やさしさは みんなを たすけます',
+      2: 'やさしさは みんなを たすけます',
+      3: '優しさは みんなを たすけます',
+      4: '優しさは みんなを たすけます',
+      5: '優しさは みんなを たすけます',
+      6: '優しさは みんなを たすけます',
+    },
+  },
+  category: 'moral',
+  minGrade: 1,
+  pages: [
+    {
+      text: { en: 'A kind fox helped a friend.', ja: 'やさしいきつねが ともだちを たすけました。' },
+      jaKanji: {
+        1: 'やさしいきつねが ともだちを たすけました。',
+        2: 'やさしいきつねが ともだちを たすけました。',
+        3: '優しいきつねが 友だちを 助けました。',
+        4: '優しいきつねが 友だちを 助けました。',
+        5: '優しいきつねが 友だちを 助けました。',
+        6: '優しいきつねが 友だちを 助けました。',
+      },
+      emoji: '🦊',
+    },
+  ],
+}
+```
+
+#### 4. 新しいスペリング単語の追加
+
+```typescript
+// src/data/spelling/easy.ts
+{
+  id: '21', // 一意のID
+  word: 'blue',
+  japanese: 'あお',
+  category: 'colors',
+  hint: 'The color of the sky',
+  image: '/images/blue.jpg',
+  emoji: '🔵',
+  difficulty: 'easy',
+}
+```
+
+#### 5. 新しいカテゴリーの追加
 
 ```typescript
 // src/data/categories.ts
