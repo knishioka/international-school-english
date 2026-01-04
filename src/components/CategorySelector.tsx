@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import type { Category } from '@/types/vocabulary';
+import type { Category } from '@/types';
 
 interface CategorySelectorProps {
   categories: Category[];

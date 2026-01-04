@@ -36,8 +36,9 @@ afterEach(() => {
 
 // Suppress React Router warnings in tests
 beforeAll(() => {
-  const originalWarn = console.warn;
-  console.warn = (...args: unknown[]) => {
+  const consoleRef = globalThis['console'];
+  const originalWarn = consoleRef.warn.bind(consoleRef);
+  consoleRef.warn = (...args: unknown[]) => {
     const firstArg = args[0];
     if (typeof firstArg === 'string' && firstArg.includes('React Router Future Flag Warning')) {
       return;
