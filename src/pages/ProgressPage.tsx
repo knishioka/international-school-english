@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useAudio } from '@/contexts/AudioContext';
-import { progressService } from '@/services/progressService';
+import { useProgressStore } from '@/stores/progressStore';
 import { LearningStats } from '@/components/LearningStats';
 import { BadgeReward } from '@/components/BadgeReward';
 
@@ -25,6 +25,10 @@ export function ProgressPage(): JSX.Element {
   const { t, language } = useLanguage();
   const { playSound } = useAudio();
   const navigate = useNavigate();
+  const getProgressStats = useProgressStore((state) => state.getProgressStats);
+  const getWeeklyActivityData = useProgressStore((state) => state.getWeeklyActivityData);
+  const getCategoryProgress = useProgressStore((state) => state.getCategoryProgress);
+  const getTimeDistribution = useProgressStore((state) => state.getTimeDistribution);
   const [userName, setUserName] = useState('');
   const [stats, setStats] = useState<ProgressStats | null>(null);
   const [weeklyData, setWeeklyData] = useState<
@@ -42,15 +46,15 @@ export function ProgressPage(): JSX.Element {
     setUserName(name ?? '');
 
     if (name !== null && name.length > 0) {
-      const progressStats = progressService.getProgressStats(name);
+      const progressStats = getProgressStats(name);
       setStats(progressStats);
 
       // Get chart data
-      setWeeklyData(progressService.getWeeklyActivityData(name));
-      setCategoryProgress(progressService.getCategoryProgress(name));
-      setTimeDistribution(progressService.getTimeDistribution(name));
+      setWeeklyData(getWeeklyActivityData(name));
+      setCategoryProgress(getCategoryProgress(name));
+      setTimeDistribution(getTimeDistribution(name));
     }
-  }, []);
+  }, [getCategoryProgress, getProgressStats, getTimeDistribution, getWeeklyActivityData]);
 
   const handleBack = async (): Promise<void> => {
     await playSound('click');

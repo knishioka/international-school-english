@@ -3,17 +3,16 @@ import { BrowserRouter } from 'react-router-dom';
 import { VocabularyGamePage } from '../VocabularyGamePage';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { AudioProvider } from '@/contexts/AudioContext';
-// Removed unused import - progressService is mocked below
+import { useGameStore } from '@/stores';
 
 const mockNavigate = jest.fn();
 const mockPlaySound = jest.fn();
 const mockSpeak = jest.fn();
+const mockUpdateSentencePracticeProgress = jest.fn();
 
-// Mock progress service
-jest.mock('@/services/progressService', () => ({
-  progressService: {
-    updateSentencePracticeProgress: jest.fn(),
-  },
+jest.mock('@/stores/progressStore', () => ({
+  useProgressStore: (selector: (state: { updateSentencePracticeProgress: jest.Mock }) => unknown) =>
+    selector({ updateSentencePracticeProgress: mockUpdateSentencePracticeProgress }),
 }));
 
 jest.mock('react-router-dom', () => ({
@@ -61,6 +60,7 @@ describe('VocabularyGamePage', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     localStorage.clear();
+    useGameStore.setState({ games: {} });
   });
 
   it('文章練習のタイトルを表示する', async () => {

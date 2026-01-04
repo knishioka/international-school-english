@@ -3,6 +3,7 @@ import { SpellingGamePage } from '../SpellingGamePage';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { AudioProvider } from '@/contexts/AudioContext';
 import { BrowserRouter } from 'react-router-dom';
+import { useGameStore, useUiStore } from '@/stores';
 
 const TestWrapper = ({ children }: { children: React.ReactNode }): JSX.Element => (
   <BrowserRouter>
@@ -15,6 +16,8 @@ const TestWrapper = ({ children }: { children: React.ReactNode }): JSX.Element =
 describe('SpellingGamePage', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    useGameStore.setState({ games: {} });
+    useUiStore.setState({ isLoading: false, showHint: false, modalState: { isOpen: false } });
   });
 
   it('renders difficulty selection screen initially', () => {

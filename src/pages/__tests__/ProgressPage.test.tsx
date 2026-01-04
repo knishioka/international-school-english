@@ -3,7 +3,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { ProgressPage } from '../ProgressPage';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { AudioProvider } from '@/contexts/AudioContext';
-import { progressService } from '@/services/progressService';
 import { KanjiGrade } from '@/contexts/LanguageContext';
 
 // Mock LearningStats component which uses recharts
@@ -11,36 +10,22 @@ jest.mock('@/components/LearningStats', () => ({
   LearningStats: () => <div>Learning Stats Component</div>,
 }));
 
-const mockGetProgressStats = progressService.getProgressStats as jest.MockedFunction<
-  typeof progressService.getProgressStats
->;
-const mockGetWeeklyActivityData = progressService.getWeeklyActivityData as jest.MockedFunction<
-  typeof progressService.getWeeklyActivityData
->;
-const mockGetTimeDistribution = progressService.getTimeDistribution as jest.MockedFunction<
-  typeof progressService.getTimeDistribution
->;
-const mockGetCategoryProgress = progressService.getCategoryProgress as jest.MockedFunction<
-  typeof progressService.getCategoryProgress
->;
+const mockGetProgressStats = jest.fn();
+const mockGetWeeklyActivityData = jest.fn();
+const mockGetTimeDistribution = jest.fn();
+const mockGetCategoryProgress = jest.fn();
 
 const mockNavigate = jest.fn();
 const mockPlaySound = jest.fn();
 
-// Mock progress service
-jest.mock('@/services/progressService', () => ({
-  progressService: {
-    getProgressStats: jest.fn(),
-    getWeeklyActivityData: jest.fn(),
-    getUserProgress: jest.fn(),
-    updateSentencePracticeProgress: jest.fn(),
-    updateStoryProgress: jest.fn(),
-    getCategoryProgress: jest.fn(),
-    getTimeDistribution: jest.fn(),
-    updateKanjiGrade: jest.fn(),
-    getDailyProgressData: jest.fn(),
-    clearProgress: jest.fn(),
-  },
+jest.mock('@/stores/progressStore', () => ({
+  useProgressStore: (selector: (state: Record<string, jest.Mock>) => unknown) =>
+    selector({
+      getProgressStats: mockGetProgressStats,
+      getWeeklyActivityData: mockGetWeeklyActivityData,
+      getCategoryProgress: mockGetCategoryProgress,
+      getTimeDistribution: mockGetTimeDistribution,
+    }),
 }));
 
 jest.mock('react-router-dom', () => ({

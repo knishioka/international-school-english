@@ -3,17 +3,15 @@ import { BrowserRouter } from 'react-router-dom';
 import { StoryPage } from '../StoryPage';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { AudioProvider } from '@/contexts/AudioContext';
-import { progressService } from '@/services/progressService';
 
 const mockNavigate = jest.fn();
 const mockPlaySound = jest.fn();
 const mockSpeak = jest.fn();
+const mockUpdateStoryProgress = jest.fn();
 
-// Mock progress service
-jest.mock('@/services/progressService', () => ({
-  progressService: {
-    updateStoryProgress: jest.fn(),
-  },
+jest.mock('@/stores/progressStore', () => ({
+  useProgressStore: (selector: (state: { updateStoryProgress: jest.Mock }) => unknown) =>
+    selector({ updateStoryProgress: mockUpdateStoryProgress }),
 }));
 
 jest.mock('react-router-dom', () => ({
@@ -208,7 +206,7 @@ describe('StoryPage', () => {
     });
 
     await waitFor(() => {
-      expect(progressService.updateStoryProgress).toHaveBeenCalledWith(
+      expect(mockUpdateStoryProgress).toHaveBeenCalledWith(
         'testUser',
         '1', // story ID
         1, // first page
@@ -239,7 +237,7 @@ describe('StoryPage', () => {
     });
 
     await waitFor(() => {
-      expect(progressService.updateStoryProgress).toHaveBeenCalledWith(
+      expect(mockUpdateStoryProgress).toHaveBeenCalledWith(
         'testUser',
         '1',
         2, // second page
@@ -264,7 +262,7 @@ describe('StoryPage', () => {
       fireEvent.click(nextButton);
     });
 
-    expect(progressService.updateStoryProgress).not.toHaveBeenCalled();
+    expect(mockUpdateStoryProgress).not.toHaveBeenCalled();
   });
 
   it('戻るボタンでストーリー一覧に戻る', async () => {

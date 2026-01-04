@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useAudio } from '@/contexts/AudioContext';
 import { KanjiGradeSelector } from '@/components/KanjiGradeSelector';
-import { progressService } from '@/services/progressService';
+import { useProgressStore } from '@/stores/progressStore';
+import { useGameStore, selectGameScore } from '@/stores';
 import { sentences } from '@/data/sentences';
 import { sentenceCategories } from '@/data/categories';
 import { shuffleArrayWithSeed, getHourlyShuffleSeed, filterByCategory } from '@/utils/arrayUtils';
@@ -21,10 +22,16 @@ export function VocabularyGamePage(): JSX.Element {
   const { t, language, kanjiGrade } = useLanguage();
   const { playSound, speak } = useAudio();
   const navigate = useNavigate();
+  const gameKey = 'sentence-practice';
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [currentGame, setCurrentGame] = useState<WordOrderGame | null>(null);
   const [hintLevel, setHintLevel] = useState(0);
-  const [score, setScore] = useState(0);
+  const score = useGameStore(selectGameScore(gameKey));
+  const submitAnswer = useGameStore((state) => state.submitAnswer);
+  const resetGameState = useGameStore((state) => state.resetGame);
+  const updateSentencePracticeProgress = useProgressStore(
+    (state) => state.updateSentencePracticeProgress,
+  );
   const [userName, setUserName] = useState('');
   const [displayedItems, setDisplayedItems] = useState(12);
   const [isInitializing, setIsInitializing] = useState(true);
@@ -34,12 +41,13 @@ export function VocabularyGamePage(): JSX.Element {
   useEffect(() => {
     const name = localStorage.getItem('userName');
     setUserName(name ?? '');
+    resetGameState(gameKey);
     // Small delay to ensure smooth initial render
     const timer = setTimeout(() => {
       setIsInitializing(false);
     }, 50);
     return () => clearTimeout(timer);
-  }, []);
+  }, [gameKey, resetGameState]);
 
   // メモ化してフィルタリングされた文章を取得
   const filteredSentences = useMemo(
@@ -181,17 +189,14 @@ export function VocabularyGamePage(): JSX.Element {
     const totalScore = Math.max(baseScore - hintPenalty + bonusScore, 10); // Minimum 10 points
 
     if (isCorrect) {
-      setScore(score + totalScore);
+      submitAnswer(gameKey, true, totalScore);
+    } else {
+      submitAnswer(gameKey, false, 0);
     }
 
     // Save progress to localStorage
     if (userName.length > 0) {
-      progressService.updateSentencePracticeProgress(
-        userName,
-        currentGame.sentence.id,
-        isCorrect,
-        totalScore,
-      );
+      updateSentencePracticeProgress(userName, currentGame.sentence.id, isCorrect, totalScore);
     }
 
     if (isCorrect) {
@@ -204,6 +209,7 @@ export function VocabularyGamePage(): JSX.Element {
 
   const handleBack = async (): Promise<void> => {
     await playSound('click');
+    resetGameState(gameKey);
     navigate('/home');
   };
 
