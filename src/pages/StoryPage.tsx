@@ -7,7 +7,7 @@ import { KanjiGradeSelector } from '@/components/KanjiGradeSelector';
 import { PageFlip } from '@/components/PageFlip';
 import { progressService } from '@/services/progressService';
 import { stories } from '@/data/stories';
-import type { Story } from '@/types/vocabulary';
+import type { Story } from '@/types';
 
 // 以下のハードコードされたデータは削除（src/data/stories.tsに移動済み）
 /*

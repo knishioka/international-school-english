@@ -1,4 +1,4 @@
-import type { VocabularyWord } from '@/types/vocabulary';
+import type { VocabularyWord } from '@/types';
 
 /**
  * フラッシュカード用の語彙データ

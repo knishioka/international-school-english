@@ -8,7 +8,7 @@ import { progressService } from '@/services/progressService';
 import { sentences } from '@/data/sentences';
 import { sentenceCategories } from '@/data/categories';
 import { shuffleArrayWithSeed, getHourlyShuffleSeed, filterByCategory } from '@/utils/arrayUtils';
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 // 以下のハードコードされたデータは削除（src/data/sentences.tsに移動済み）
 /*

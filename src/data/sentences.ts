@@ -1,4 +1,4 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 /**
  * 文章練習用のセンテンスデータ

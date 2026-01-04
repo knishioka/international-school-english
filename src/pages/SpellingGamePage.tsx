@@ -5,7 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useAudio } from '@/contexts/AudioContext';
 import { spellingWords } from '@/data/spellingWords';
 import { shuffleArrayWithSeed, getHourlyShuffleSeed } from '@/utils/arrayUtils';
-import type { SpellingWord } from '@/types/vocabulary';
+import type { SpellingWord } from '@/types';
 
 // 以下のハードコードされたデータは削除（src/data/spellingWords.tsに移動済み）
 /*

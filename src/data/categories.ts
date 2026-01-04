@@ -1,4 +1,4 @@
-import type { Category } from '@/types/vocabulary';
+import type { Category } from '@/types';
 
 /**
  * 共通カテゴリーデータ
