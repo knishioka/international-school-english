@@ -324,7 +324,7 @@ export function adjustTextForGrade(
   // 簡易実装：未習漢字を検出して警告
   const unlearned = getUnlearnedKanji(text, targetGrade);
   if (unlearned.length > 0) {
-    console.warn(`未習漢字が含まれています: ${unlearned.join(', ')}`);
+    globalThis['console']?.warn(`未習漢字が含まれています: ${unlearned.join(', ')}`);
   }
 
   return text;
