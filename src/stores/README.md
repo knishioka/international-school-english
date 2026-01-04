@@ -19,6 +19,7 @@ const score = useGameStore(selectGameScore('spelling'));
 ## Language Context Migration
 
 `LanguageContext` remains in place for now because:
+
 - It provides translation helpers (`t`) and kanji-grade-specific copy.
 - It is tightly coupled to the UI text layer.
 

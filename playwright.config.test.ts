@@ -47,7 +47,7 @@ export default defineConfig({
     ? undefined
     : {
         command: SKIP_BUILD ? 'npm run preview:test' : 'npm run build:test && npm run preview:test',
-        url: `http://localhost:${TEST_PORT}/international-school-english/`,
+        url: BASE_URL,
         reuseExistingServer: REUSE_SERVER, // Allow reusing server for fast runs
         timeout: 180 * 1000, // ビルド時間を考慮して延長
         stdout: 'pipe',
