@@ -62,7 +62,7 @@ class ProgressService {
 
       return progress;
     } catch (error) {
-      console.error('Error reading progress from localStorage:', error);
+      globalThis['console']?.error('Error reading progress from localStorage:', error);
       return null;
     }
   }
@@ -71,7 +71,7 @@ class ProgressService {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
     } catch (error) {
-      console.error('Error saving progress to localStorage:', error);
+      globalThis['console']?.error('Error saving progress to localStorage:', error);
     }
   }
 

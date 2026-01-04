@@ -148,7 +148,7 @@ describe('FlashCard', () => {
 
     // Check that progress text is correct
     expect(screen.getByText('5 / 10')).toBeInTheDocument();
-    
+
     // Check that progress container exists
     const progressContainer = document.querySelector('.bg-gray-200.rounded-full');
     expect(progressContainer).toBeInTheDocument();
