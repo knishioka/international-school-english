@@ -101,7 +101,7 @@ export function VocabularyGamePage(): JSX.Element {
       };
     } catch (error) {
       // IntersectionObserverの初期化に失敗した場合は無視
-      console.warn('IntersectionObserver failed to initialize:', error);
+      globalThis['console']?.warn('IntersectionObserver failed to initialize:', error);
       return;
     }
   }, [displayedItems, shuffledSentences.length]);
