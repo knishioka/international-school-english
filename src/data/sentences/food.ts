@@ -1,10 +1,10 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 export const foodSentences: Sentence[] = [
   {
     id: '21',
-    english: 'I like to eat ice cream in summer.',
-    japanese: 'なつに アイスクリームを たべるのが すきです。',
+    en: 'I like to eat ice cream in summer.',
+    ja: 'なつに アイスクリームを たべるのが すきです。',
     jaKanji: {
       1: 'なつに アイスクリームを たべるのが すきです。',
       2: '夏に アイスクリームを 食べるのが すきです。',
@@ -19,8 +19,8 @@ export const foodSentences: Sentence[] = [
   },
   {
     id: '22',
-    english: 'My grandmother makes the best cake.',
-    japanese: 'おばあちゃんは いちばん おいしい ケーキを つくります。',
+    en: 'My grandmother makes the best cake.',
+    ja: 'おばあちゃんは いちばん おいしい ケーキを つくります。',
     jaKanji: {
       1: 'おばあちゃんは 一ばん おいしい ケーキを つくります。',
       2: 'おばあちゃんは 一番 おいしい ケーキを 作ります。',
@@ -35,8 +35,8 @@ export const foodSentences: Sentence[] = [
   },
   {
     id: '23',
-    english: 'We grow fresh vegetables in our garden.',
-    japanese: 'わたしたちは にわで あたらしい やさいを そだてます。',
+    en: 'We grow fresh vegetables in our garden.',
+    ja: 'わたしたちは にわで あたらしい やさいを そだてます。',
     jaKanji: {
       1: 'わたしたちは にわで あたらしい やさいを そだてます。',
       2: 'わたしたちは 庭で 新しい やさいを 育てます。',
@@ -51,8 +51,8 @@ export const foodSentences: Sentence[] = [
   },
   {
     id: '24',
-    english: 'She drinks milk every morning.',
-    japanese: 'かのじょは まいあさ ぎゅうにゅうを のみます。',
+    en: 'She drinks milk every morning.',
+    ja: 'かのじょは まいあさ ぎゅうにゅうを のみます。',
     jaKanji: {
       1: 'かのじょは まいあさ ぎゅうにゅうを のみます。',
       2: '彼女は 毎朝 ぎゅうにゅうを 飲みます。',
@@ -67,8 +67,8 @@ export const foodSentences: Sentence[] = [
   },
   {
     id: '25',
-    english: 'Pizza is my favorite food.',
-    japanese: 'ピザは わたしの いちばんすきな たべものです。',
+    en: 'Pizza is my favorite food.',
+    ja: 'ピザは わたしの いちばんすきな たべものです。',
     jaKanji: {
       1: 'ピザは わたしの 一ばんすきな 食べ物です。',
       2: 'ピザは わたしの 一番すきな 食べ物です。',

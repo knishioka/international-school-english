@@ -1,10 +1,10 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 export const weatherSentences: Sentence[] = [
   {
     id: '31',
-    english: 'It is sunny and warm today.',
-    japanese: 'きょうは はれていて あたたかいです。',
+    en: 'It is sunny and warm today.',
+    ja: 'きょうは はれていて あたたかいです。',
     jaKanji: {
       1: '今日は はれていて あたたかいです。',
       2: '今日は はれていて 暖かいです。',
@@ -19,8 +19,8 @@ export const weatherSentences: Sentence[] = [
   },
   {
     id: '32',
-    english: 'The rain falls from dark clouds.',
-    japanese: 'くらい くもから あめが ふります。',
+    en: 'The rain falls from dark clouds.',
+    ja: 'くらい くもから あめが ふります。',
     jaKanji: {
       1: 'くらい 雲から 雨が ふります。',
       2: '暗い 雲から 雨が ふります。',
@@ -35,8 +35,8 @@ export const weatherSentences: Sentence[] = [
   },
   {
     id: '33',
-    english: 'Snow covers the ground in winter.',
-    japanese: 'ふゆに ゆきが じめんを おおいます。',
+    en: 'Snow covers the ground in winter.',
+    ja: 'ふゆに ゆきが じめんを おおいます。',
     jaKanji: {
       1: '冬に 雪が じめんを おおいます。',
       2: '冬に 雪が 地めんを おおいます。',
@@ -51,8 +51,8 @@ export const weatherSentences: Sentence[] = [
   },
   {
     id: '34',
-    english: 'The wind blows through the trees.',
-    japanese: 'かぜが きのあいだを ふきます。',
+    en: 'The wind blows through the trees.',
+    ja: 'かぜが きのあいだを ふきます。',
     jaKanji: {
       1: 'かぜが 木のあいだを ふきます。',
       2: '風が 木のあいだを ふきます。',
@@ -67,8 +67,8 @@ export const weatherSentences: Sentence[] = [
   },
   {
     id: '35',
-    english: 'Lightning flashes in the storm.',
-    japanese: 'あらしのとき いなずまが ひかります。',
+    en: 'Lightning flashes in the storm.',
+    ja: 'あらしのとき いなずまが ひかります。',
     jaKanji: {
       1: 'あらしのとき いなずまが ひかります。',
       2: 'あらしの時 いなずまが 光ります。',

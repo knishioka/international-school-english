@@ -1,10 +1,10 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 export const clothesSentences: Sentence[] = [
   {
     id: '71',
-    english: 'I wear my favorite blue shirt.',
-    japanese: 'わたしは すきな あおい シャツを きます。',
+    en: 'I wear my favorite blue shirt.',
+    ja: 'わたしは すきな あおい シャツを きます。',
     jaKanji: {
       1: 'わたしは すきな 青い シャツを きます。',
       2: 'わたしは すきな 青い シャツを 着ます。',
@@ -19,8 +19,8 @@ export const clothesSentences: Sentence[] = [
   },
   {
     id: '72',
-    english: 'Her red dress looks very pretty.',
-    japanese: 'かのじょの あかい ドレスは とても きれいです。',
+    en: 'Her red dress looks very pretty.',
+    ja: 'かのじょの あかい ドレスは とても きれいです。',
     jaKanji: {
       1: 'かのじょの 赤い ドレスは とても きれいです。',
       2: '彼女の 赤い ドレスは とても きれいです。',
@@ -35,8 +35,8 @@ export const clothesSentences: Sentence[] = [
   },
   {
     id: '73',
-    english: 'We put on warm coats in winter.',
-    japanese: 'ふゆには あたたかい コートを きます。',
+    en: 'We put on warm coats in winter.',
+    ja: 'ふゆには あたたかい コートを きます。',
     jaKanji: {
       1: '冬には あたたかい コートを 着ます。',
       2: '冬には 暖かい コートを 着ます。',
@@ -51,8 +51,8 @@ export const clothesSentences: Sentence[] = [
   },
   {
     id: '74',
-    english: 'My new shoes are very comfortable.',
-    japanese: 'わたしの あたらしい くつは とても らくです。',
+    en: 'My new shoes are very comfortable.',
+    ja: 'わたしの あたらしい くつは とても らくです。',
     jaKanji: {
       1: 'わたしの 新しい くつは とても らくです。',
       2: 'わたしの 新しい 靴は とても 楽です。',
@@ -67,8 +67,8 @@ export const clothesSentences: Sentence[] = [
   },
   {
     id: '75',
-    english: 'The hat protects me from the sun.',
-    japanese: 'ぼうしは たいようから わたしを まもります。',
+    en: 'The hat protects me from the sun.',
+    ja: 'ぼうしは たいようから わたしを まもります。',
     jaKanji: {
       1: 'ぼうしは 太ようから わたしを 守ります。',
       2: 'ぼうしは 太陽から わたしを 守ります。',

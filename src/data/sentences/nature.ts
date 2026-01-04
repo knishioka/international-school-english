@@ -1,10 +1,10 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 export const natureSentences: Sentence[] = [
   {
     id: '9',
-    english: 'The sun shines brightly in the sky.',
-    japanese: 'たいようが そらで あかるく かがやいています。',
+    en: 'The sun shines brightly in the sky.',
+    ja: 'たいようが そらで あかるく かがやいています。',
     jaKanji: {
       1: 'たいようが そらで あかるく かがやいています。',
       2: '太ようが そらで あかるく かがやいています。',
@@ -19,8 +19,8 @@ export const natureSentences: Sentence[] = [
   },
   {
     id: '10',
-    english: 'Birds sing beautiful songs in the morning.',
-    japanese: 'とりたちは あさに うつくしい うたを うたいます。',
+    en: 'Birds sing beautiful songs in the morning.',
+    ja: 'とりたちは あさに うつくしい うたを うたいます。',
     jaKanji: {
       1: 'とりたちは あさに うつくしい うたを うたいます。',
       2: 'とりたちは 朝に うつくしい うたを うたいます。',
@@ -35,8 +35,8 @@ export const natureSentences: Sentence[] = [
   },
   {
     id: '51',
-    english: 'The cat sleeps in the warm sun.',
-    japanese: 'ねこは あたたかい おひさまの なかで ねています。',
+    en: 'The cat sleeps in the warm sun.',
+    ja: 'ねこは あたたかい おひさまの なかで ねています。',
     jaKanji: {
       1: '猫は あたたかい お日さまの 中で ねています。',
       2: '猫は 暖かい お日様の 中で ねています。',
@@ -51,8 +51,8 @@ export const natureSentences: Sentence[] = [
   },
   {
     id: '52',
-    english: 'Fish swim quickly in the river.',
-    japanese: 'さかなは かわで はやく およぎます。',
+    en: 'Fish swim quickly in the river.',
+    ja: 'さかなは かわで はやく およぎます。',
     jaKanji: {
       1: '魚は 川で 早く およぎます。',
       2: '魚は 川で 早く およぎます。',
@@ -67,8 +67,8 @@ export const natureSentences: Sentence[] = [
   },
   {
     id: '53',
-    english: 'The elephant has a long trunk.',
-    japanese: 'ぞうは ながい はなを もっています。',
+    en: 'The elephant has a long trunk.',
+    ja: 'ぞうは ながい はなを もっています。',
     jaKanji: {
       1: 'ぞうは 長い 鼻を もっています。',
       2: 'ぞうは 長い 鼻を 持っています。',
@@ -83,8 +83,8 @@ export const natureSentences: Sentence[] = [
   },
   {
     id: '54',
-    english: 'Rabbits hop across the grass.',
-    japanese: 'うさぎは くさのうえを ぴょんぴょんと はねます。',
+    en: 'Rabbits hop across the grass.',
+    ja: 'うさぎは くさのうえを ぴょんぴょんと はねます。',
     jaKanji: {
       1: 'うさぎは 草の上を ぴょんぴょんと はねます。',
       2: 'うさぎは 草の上を ぴょんぴょんと はねます。',
@@ -99,8 +99,8 @@ export const natureSentences: Sentence[] = [
   },
   {
     id: '55',
-    english: 'The monkey swings from tree to tree.',
-    japanese: 'さるは きから きへと ブランコのように とびうつります。',
+    en: 'The monkey swings from tree to tree.',
+    ja: 'さるは きから きへと ブランコのように とびうつります。',
     jaKanji: {
       1: 'さるは 木から 木へと ブランコのように とびうつります。',
       2: 'さるは 木から 木へと ブランコのように とびうつります。',

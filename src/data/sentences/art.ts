@@ -1,10 +1,10 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 export const artSentences: Sentence[] = [
   {
     id: '36',
-    english: 'I paint with bright red colors.',
-    japanese: 'わたしは あかるい あかいろで えを かきます。',
+    en: 'I paint with bright red colors.',
+    ja: 'わたしは あかるい あかいろで えを かきます。',
     jaKanji: {
       1: 'わたしは あかるい 赤いろで えを かきます。',
       2: 'わたしは 明るい 赤色で えを かきます。',
@@ -19,8 +19,8 @@ export const artSentences: Sentence[] = [
   },
   {
     id: '37',
-    english: 'The blue sky looks beautiful today.',
-    japanese: 'あおい そらが きょう うつくしく みえます。',
+    en: 'The blue sky looks beautiful today.',
+    ja: 'あおい そらが きょう うつくしく みえます。',
     jaKanji: {
       1: '青い 空が 今日 うつくしく 見えます。',
       2: '青い 空が 今日 美しく 見えます。',
@@ -35,8 +35,8 @@ export const artSentences: Sentence[] = [
   },
   {
     id: '38',
-    english: 'Green grass grows in the field.',
-    japanese: 'みどりの くさが はたけに はえます。',
+    en: 'Green grass grows in the field.',
+    ja: 'みどりの くさが はたけに はえます。',
     jaKanji: {
       1: 'みどりの 草が はたけに はえます。',
       2: '緑の 草が 畑に はえます。',
@@ -51,8 +51,8 @@ export const artSentences: Sentence[] = [
   },
   {
     id: '39',
-    english: 'She draws yellow flowers in her book.',
-    japanese: 'かのじょは ほんに きいろい はなを かきます。',
+    en: 'She draws yellow flowers in her book.',
+    ja: 'かのじょは ほんに きいろい はなを かきます。',
     jaKanji: {
       1: 'かのじょは 本に 黄いろい 花を かきます。',
       2: '彼女は 本に 黄色い 花を かきます。',
@@ -67,8 +67,8 @@ export const artSentences: Sentence[] = [
   },
   {
     id: '40',
-    english: 'Purple balloons float in the air.',
-    japanese: 'むらさきの ふうせんが そらに うかびます。',
+    en: 'Purple balloons float in the air.',
+    ja: 'むらさきの ふうせんが そらに うかびます。',
     jaKanji: {
       1: 'むらさきの ふうせんが 空に うかびます。',
       2: 'むらさきの ふうせんが 空に うかびます。',

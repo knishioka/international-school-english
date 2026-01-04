@@ -1,10 +1,10 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 export const numbersSentences: Sentence[] = [
   {
     id: '81',
-    english: 'I have ten fingers on my hands.',
-    japanese: 'わたしの てには じゅっぽんの ゆびが あります。',
+    en: 'I have ten fingers on my hands.',
+    ja: 'わたしの てには じゅっぽんの ゆびが あります。',
     jaKanji: {
       1: 'わたしの 手には 十ぽんの 指が あります。',
       2: 'わたしの 手には 十本の 指が あります。',
@@ -19,8 +19,8 @@ export const numbersSentences: Sentence[] = [
   },
   {
     id: '82',
-    english: 'Two plus three equals five.',
-    japanese: 'にたす さんは ごです。',
+    en: 'Two plus three equals five.',
+    ja: 'にたす さんは ごです。',
     jaKanji: {
       1: '二たす 三は 五です。',
       2: '二たす 三は 五です。',
@@ -35,8 +35,8 @@ export const numbersSentences: Sentence[] = [
   },
   {
     id: '83',
-    english: 'She counts from one to twenty.',
-    japanese: 'かのじょは いちから にじゅうまで かぞえます。',
+    en: 'She counts from one to twenty.',
+    ja: 'かのじょは いちから にじゅうまで かぞえます。',
     jaKanji: {
       1: 'かのじょは 一から 二十まで 数えます。',
       2: '彼女は 一から 二十まで 数えます。',
@@ -51,8 +51,8 @@ export const numbersSentences: Sentence[] = [
   },
   {
     id: '84',
-    english: 'There are seven days in one week.',
-    japanese: 'いっしゅうかんには なのかが あります。',
+    en: 'There are seven days in one week.',
+    ja: 'いっしゅうかんには なのかが あります。',
     jaKanji: {
       1: '一しゅうかんには 七日が あります。',
       2: '一週かんには 七日が あります。',
@@ -67,8 +67,8 @@ export const numbersSentences: Sentence[] = [
   },
   {
     id: '85',
-    english: 'I can solve this math problem easily.',
-    japanese: 'わたしは この さんすうの もんだいを かんたんに とけます。',
+    en: 'I can solve this math problem easily.',
+    ja: 'わたしは この さんすうの もんだいを かんたんに とけます。',
     jaKanji: {
       1: 'わたしは この 算すうの 問だいを かんたんに とけます。',
       2: 'わたしは この 算数の 問題を かんたんに とけます。',

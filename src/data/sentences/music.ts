@@ -1,10 +1,10 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 export const musicSentences: Sentence[] = [
   {
     id: '41',
-    english: 'I play the piano at home.',
-    japanese: 'わたしは いえで ピアノを ひきます。',
+    en: 'I play the piano at home.',
+    ja: 'わたしは いえで ピアノを ひきます。',
     jaKanji: {
       1: 'わたしは 家で ピアノを ひきます。',
       2: 'わたしは 家で ピアノを ひきます。',
@@ -19,8 +19,8 @@ export const musicSentences: Sentence[] = [
   },
   {
     id: '42',
-    english: 'She sings a beautiful song.',
-    japanese: 'かのじょは うつくしい うたを うたいます。',
+    en: 'She sings a beautiful song.',
+    ja: 'かのじょは うつくしい うたを うたいます。',
     jaKanji: {
       1: 'かのじょは うつくしい 歌を うたいます。',
       2: '彼女は 美しい 歌を 歌います。',
@@ -35,8 +35,8 @@ export const musicSentences: Sentence[] = [
   },
   {
     id: '43',
-    english: 'We dance to the happy music.',
-    japanese: 'わたしたちは たのしい おんがくに あわせて おどります。',
+    en: 'We dance to the happy music.',
+    ja: 'わたしたちは たのしい おんがくに あわせて おどります。',
     jaKanji: {
       1: 'わたしたちは たのしい 音がくに 合わせて おどります。',
       2: 'わたしたちは 楽しい 音楽に 合わせて おどります。',
@@ -51,8 +51,8 @@ export const musicSentences: Sentence[] = [
   },
   {
     id: '44',
-    english: 'The guitar makes lovely sounds.',
-    japanese: 'ギターは すてきな おとを だします。',
+    en: 'The guitar makes lovely sounds.',
+    ja: 'ギターは すてきな おとを だします。',
     jaKanji: {
       1: 'ギターは すてきな 音を 出します。',
       2: 'ギターは すてきな 音を 出します。',
@@ -67,8 +67,8 @@ export const musicSentences: Sentence[] = [
   },
   {
     id: '45',
-    english: 'My friend plays drums very well.',
-    japanese: 'ともだちは ドラムを とても じょうずに たたきます。',
+    en: 'My friend plays drums very well.',
+    ja: 'ともだちは ドラムを とても じょうずに たたきます。',
     jaKanji: {
       1: 'ともだちは ドラムを とても じょうずに たたきます。',
       2: '友だちは ドラムを とても じょうずに たたきます。',

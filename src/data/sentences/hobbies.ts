@@ -1,10 +1,10 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 export const hobbiesSentences: Sentence[] = [
   {
     id: '86',
-    english: 'I collect colorful stamps from different countries.',
-    japanese: 'わたしは いろいろな くにの カラフルな きってを あつめます。',
+    en: 'I collect colorful stamps from different countries.',
+    ja: 'わたしは いろいろな くにの カラフルな きってを あつめます。',
     jaKanji: {
       1: 'わたしは いろいろな 国の カラフルな 切手を 集めます。',
       2: 'わたしは いろいろな 国の カラフルな 切手を 集めます。',
@@ -19,8 +19,8 @@ export const hobbiesSentences: Sentence[] = [
   },
   {
     id: '87',
-    english: 'She enjoys knitting scarves for her family.',
-    japanese: 'かのじょは かぞくのために マフラーを あむのが すきです。',
+    en: 'She enjoys knitting scarves for her family.',
+    ja: 'かのじょは かぞくのために マフラーを あむのが すきです。',
     jaKanji: {
       1: 'かのじょは 家ぞくのために マフラーを あむのが すきです。',
       2: '彼女は 家族のために マフラーを あむのが すきです。',
@@ -35,8 +35,8 @@ export const hobbiesSentences: Sentence[] = [
   },
   {
     id: '88',
-    english: 'We like to go fishing by the lake.',
-    japanese: 'わたしたちは みずうみで つりを するのが すきです。',
+    en: 'We like to go fishing by the lake.',
+    ja: 'わたしたちは みずうみで つりを するのが すきです。',
     jaKanji: {
       1: 'わたしたちは みずうみで つりを するのが すきです。',
       2: 'わたしたちは 湖で つりを するのが すきです。',
@@ -51,8 +51,8 @@ export const hobbiesSentences: Sentence[] = [
   },
   {
     id: '89',
-    english: 'My grandfather loves to work in his garden.',
-    japanese: 'おじいちゃんは にわしごとが だいすきです。',
+    en: 'My grandfather loves to work in his garden.',
+    ja: 'おじいちゃんは にわしごとが だいすきです。',
     jaKanji: {
       1: 'おじいちゃんは 庭しごとが 大すきです。',
       2: 'おじいちゃんは 庭仕事が 大好きです。',
@@ -67,8 +67,8 @@ export const hobbiesSentences: Sentence[] = [
   },
   {
     id: '90',
-    english: 'I build model airplanes in my free time.',
-    japanese: 'わたしは ひまなときに もけいひこうきを つくります。',
+    en: 'I build model airplanes in my free time.',
+    ja: 'わたしは ひまなときに もけいひこうきを つくります。',
     jaKanji: {
       1: 'わたしは ひまな時に 模けいひこうきを 作ります。',
       2: 'わたしは ひまな時に 模けい飛行機を 作ります。',

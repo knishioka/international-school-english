@@ -1,4 +1,4 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 import { filterByCategory, sortById } from '../loaders';
 import { artSentences } from './art';
 import { clothesSentences } from './clothes';

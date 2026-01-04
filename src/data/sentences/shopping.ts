@@ -1,10 +1,10 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 export const shoppingSentences: Sentence[] = [
   {
     id: '91',
-    english: 'I save money to buy a new bicycle.',
-    japanese: 'わたしは あたらしい じてんしゃを かうために おかねを ためます。',
+    en: 'I save money to buy a new bicycle.',
+    ja: 'わたしは あたらしい じてんしゃを かうために おかねを ためます。',
     jaKanji: {
       1: 'わたしは 新しい 自てん車を 買うために お金を ためます。',
       2: 'わたしは 新しい 自転車を 買うために お金を ためます。',
@@ -19,8 +19,8 @@ export const shoppingSentences: Sentence[] = [
   },
   {
     id: '92',
-    english: 'We go to the store to buy groceries.',
-    japanese: 'わたしたちは しょくりょうひんを かいに みせに いきます。',
+    en: 'We go to the store to buy groceries.',
+    ja: 'わたしたちは しょくりょうひんを かいに みせに いきます。',
     jaKanji: {
       1: 'わたしたちは 食りょうひんを 買いに 店に 行きます。',
       2: 'わたしたちは 食料ひんを 買いに 店に 行きます。',
@@ -35,8 +35,8 @@ export const shoppingSentences: Sentence[] = [
   },
   {
     id: '93',
-    english: 'The toy costs five dollars.',
-    japanese: 'そのおもちゃは ごドルです。',
+    en: 'The toy costs five dollars.',
+    ja: 'そのおもちゃは ごドルです。',
     jaKanji: {
       1: 'そのおもちゃは 五ドルです。',
       2: 'そのおもちゃは 五ドルです。',
@@ -51,8 +51,8 @@ export const shoppingSentences: Sentence[] = [
   },
   {
     id: '94',
-    english: 'She pays with her credit card.',
-    japanese: 'かのじょは クレジットカードで はらいます。',
+    en: 'She pays with her credit card.',
+    ja: 'かのじょは クレジットカードで はらいます。',
     jaKanji: {
       1: 'かのじょは クレジットカードで はらいます。',
       2: '彼女は クレジットカードで はらいます。',
@@ -67,8 +67,8 @@ export const shoppingSentences: Sentence[] = [
   },
   {
     id: '95',
-    english: 'The shopping mall has many different stores.',
-    japanese: 'ショッピングモールには いろいろな みせが あります。',
+    en: 'The shopping mall has many different stores.',
+    ja: 'ショッピングモールには いろいろな みせが あります。',
     jaKanji: {
       1: 'ショッピングモールには いろいろな 店が あります。',
       2: 'ショッピングモールには いろいろな 店が あります。',

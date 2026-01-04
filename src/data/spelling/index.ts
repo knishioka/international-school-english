@@ -1,4 +1,4 @@
-import type { SpellingWord } from '@/types/vocabulary';
+import type { SpellingWord } from '@/types';
 import { filterByCategory, filterByDifficulty, sortById } from '../loaders';
 import { easySpellingWords } from './easy';
 import { hardSpellingWords } from './hard';

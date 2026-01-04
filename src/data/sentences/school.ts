@@ -1,10 +1,10 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 export const schoolSentences: Sentence[] = [
   {
     id: '5',
-    english: 'I study English at school every day.',
-    japanese: 'わたしは まいにち がっこうで えいごを べんきょうします。',
+    en: 'I study English at school every day.',
+    ja: 'わたしは まいにち がっこうで えいごを べんきょうします。',
     jaKanji: {
       1: 'わたしは まい日 学校で えいごを べんきょうします。',
       2: 'わたしは 毎日 学校で えいごを べんきょうします。',
@@ -19,8 +19,8 @@ export const schoolSentences: Sentence[] = [
   },
   {
     id: '6',
-    english: 'My teacher is very kind and helpful.',
-    japanese: 'せんせいは とても やさしくて たすけてくれます。',
+    en: 'My teacher is very kind and helpful.',
+    ja: 'せんせいは とても やさしくて たすけてくれます。',
     jaKanji: {
       1: '先生は とても やさしくて たすけてくれます。',
       2: '先生は とても やさしくて たすけてくれます。',
@@ -35,8 +35,8 @@ export const schoolSentences: Sentence[] = [
   },
   {
     id: '7',
-    english: 'We read books in the library.',
-    japanese: 'わたしたちは としょかんで ほんを よみます。',
+    en: 'We read books in the library.',
+    ja: 'わたしたちは としょかんで ほんを よみます。',
     jaKanji: {
       1: 'わたしたちは 図書かんで ほんを よみます。',
       2: 'わたしたちは 図書館で ほんを よみます。',
@@ -51,8 +51,8 @@ export const schoolSentences: Sentence[] = [
   },
   {
     id: '8',
-    english: 'I like math because it is fun.',
-    japanese: 'さんすうは たのしいので すきです。',
+    en: 'I like math because it is fun.',
+    ja: 'さんすうは たのしいので すきです。',
     jaKanji: {
       1: 'さんすうは 楽しいので すきです。',
       2: '算数は 楽しいので すきです。',

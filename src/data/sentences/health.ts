@@ -1,10 +1,10 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 export const healthSentences: Sentence[] = [
   {
     id: '76',
-    english: 'I exercise to stay healthy and strong.',
-    japanese: 'わたしは けんこうで つよくいるために うんどうします。',
+    en: 'I exercise to stay healthy and strong.',
+    ja: 'わたしは けんこうで つよくいるために うんどうします。',
     jaKanji: {
       1: 'わたしは けんこうで つよくいるために うんどうします。',
       2: 'わたしは 健こうで 強くいるために 運動します。',
@@ -19,8 +19,8 @@ export const healthSentences: Sentence[] = [
   },
   {
     id: '77',
-    english: 'My eyes are brown and my hair is black.',
-    japanese: 'わたしの めは ちゃいろで かみは くろいです。',
+    en: 'My eyes are brown and my hair is black.',
+    ja: 'わたしの めは ちゃいろで かみは くろいです。',
     jaKanji: {
       1: 'わたしの 目は ちゃいろで 髪は 黒いです。',
       2: 'わたしの 目は 茶いろで 髪は 黒いです。',
@@ -35,8 +35,8 @@ export const healthSentences: Sentence[] = [
   },
   {
     id: '78',
-    english: 'I wash my hands before eating.',
-    japanese: 'わたしは たべるまえに てを あらいます。',
+    en: 'I wash my hands before eating.',
+    ja: 'わたしは たべるまえに てを あらいます。',
     jaKanji: {
       1: 'わたしは 食べるまえに 手を 洗います。',
       2: 'わたしは 食べる前に 手を 洗います。',
@@ -51,8 +51,8 @@ export const healthSentences: Sentence[] = [
   },
   {
     id: '79',
-    english: 'The doctor checks if I am feeling well.',
-    japanese: 'おいしゃさんは わたしが げんきかを しらべます。',
+    en: 'The doctor checks if I am feeling well.',
+    ja: 'おいしゃさんは わたしが げんきかを しらべます。',
     jaKanji: {
       1: 'おいしゃさんは わたしが 元気かを 調べます。',
       2: 'お医者さんは わたしが 元気かを 調べます。',
@@ -67,8 +67,8 @@ export const healthSentences: Sentence[] = [
   },
   {
     id: '80',
-    english: 'I need to sleep eight hours every night.',
-    japanese: 'わたしは まいばん はちじかん ねなければなりません。',
+    en: 'I need to sleep eight hours every night.',
+    ja: 'わたしは まいばん はちじかん ねなければなりません。',
     jaKanji: {
       1: 'わたしは まいばん 八じかん ねなければなりません。',
       2: 'わたしは 毎ばん 八時間 ねなければなりません。',

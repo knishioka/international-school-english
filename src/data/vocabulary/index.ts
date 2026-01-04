@@ -1,4 +1,4 @@
-import type { VocabularyWord } from '@/types/vocabulary';
+import type { VocabularyWord } from '@/types';
 import { filterByCategory, sortById } from '../loaders';
 import { activitiesVocabularyWords } from './activities';
 import { animalsVocabularyWords } from './animals';

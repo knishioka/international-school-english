@@ -1,4 +1,4 @@
-import type { Story } from '@/types/vocabulary';
+import type { Story } from '@/types';
 import { filterByCategory, sortById } from '../loaders';
 import { courageStories } from './courage';
 import { diversityStories } from './diversity';

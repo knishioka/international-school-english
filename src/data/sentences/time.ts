@@ -1,10 +1,10 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 export const timeSentences: Sentence[] = [
   {
     id: '46',
-    english: "I wake up at seven o'clock.",
-    japanese: 'わたしは しちじに おきます。',
+    en: "I wake up at seven o'clock.",
+    ja: 'わたしは しちじに おきます。',
     jaKanji: {
       1: 'わたしは 七じに おきます。',
       2: 'わたしは 七時に おきます。',
@@ -19,8 +19,8 @@ export const timeSentences: Sentence[] = [
   },
   {
     id: '47',
-    english: 'Today is Monday morning.',
-    japanese: 'きょうは げつようびの あさです。',
+    en: 'Today is Monday morning.',
+    ja: 'きょうは げつようびの あさです。',
     jaKanji: {
       1: '今日は げつ曜日の 朝です。',
       2: '今日は 月曜日の 朝です。',
@@ -35,8 +35,8 @@ export const timeSentences: Sentence[] = [
   },
   {
     id: '48',
-    english: 'We have dinner at six thirty.',
-    japanese: 'わたしたちは ろくじはんに ばんごはんを たべます。',
+    en: 'We have dinner at six thirty.',
+    ja: 'わたしたちは ろくじはんに ばんごはんを たべます。',
     jaKanji: {
       1: 'わたしたちは 六じはんに ばんごはんを たべます。',
       2: 'わたしたちは 六時はんに 晩ごはんを 食べます。',
@@ -51,8 +51,8 @@ export const timeSentences: Sentence[] = [
   },
   {
     id: '49',
-    english: 'My birthday is in December.',
-    japanese: 'わたしの たんじょうびは じゅうにがつです。',
+    en: 'My birthday is in December.',
+    ja: 'わたしの たんじょうびは じゅうにがつです。',
     jaKanji: {
       1: 'わたしの たんじょう日は 十二月です。',
       2: 'わたしの 誕生日は 十二月です。',
@@ -67,8 +67,8 @@ export const timeSentences: Sentence[] = [
   },
   {
     id: '50',
-    english: 'Spring comes after winter ends.',
-    japanese: 'ふゆが おわると はるが きます。',
+    en: 'Spring comes after winter ends.',
+    ja: 'ふゆが おわると はるが きます。',
     jaKanji: {
       1: '冬が おわると 春が 来ます。',
       2: '冬が 終わると 春が 来ます。',

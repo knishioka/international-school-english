@@ -1,10 +1,10 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 export const houseSentences: Sentence[] = [
   {
     id: '61',
-    english: 'My bedroom has a big window.',
-    japanese: 'わたしの しんしつには おおきな まどが あります。',
+    en: 'My bedroom has a big window.',
+    ja: 'わたしの しんしつには おおきな まどが あります。',
     jaKanji: {
       1: 'わたしの しんしつには 大きな まどが あります。',
       2: 'わたしの 寝室には 大きな 窓が あります。',
@@ -19,8 +19,8 @@ export const houseSentences: Sentence[] = [
   },
   {
     id: '62',
-    english: 'We eat meals in the kitchen.',
-    japanese: 'わたしたちは だいどころで しょくじを します。',
+    en: 'We eat meals in the kitchen.',
+    ja: 'わたしたちは だいどころで しょくじを します。',
     jaKanji: {
       1: 'わたしたちは だいどころで しょくじを します。',
       2: 'わたしたちは 台所で 食事を します。',
@@ -35,8 +35,8 @@ export const houseSentences: Sentence[] = [
   },
   {
     id: '63',
-    english: 'The living room has comfortable chairs.',
-    japanese: 'いまには らくな いすが あります。',
+    en: 'The living room has comfortable chairs.',
+    ja: 'いまには らくな いすが あります。',
     jaKanji: {
       1: 'いまには らくな いすが あります。',
       2: '居間には 楽な いすが あります。',
@@ -51,8 +51,8 @@ export const houseSentences: Sentence[] = [
   },
   {
     id: '64',
-    english: 'I take a bath in the bathroom.',
-    japanese: 'わたしは おふろばで おふろに はいります。',
+    en: 'I take a bath in the bathroom.',
+    ja: 'わたしは おふろばで おふろに はいります。',
     jaKanji: {
       1: 'わたしは おふろ場で おふろに 入ります。',
       2: 'わたしは お風ろ場で お風ろに 入ります。',
@@ -67,8 +67,8 @@ export const houseSentences: Sentence[] = [
   },
   {
     id: '65',
-    english: 'The garden behind our house is beautiful.',
-    japanese: 'いえの うしろの にわは うつくしいです。',
+    en: 'The garden behind our house is beautiful.',
+    ja: 'いえの うしろの にわは うつくしいです。',
     jaKanji: {
       1: '家の うしろの 庭は うつくしいです。',
       2: '家の 後ろの 庭は 美しいです。',

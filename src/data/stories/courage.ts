@@ -1,4 +1,4 @@
-import type { Story } from '@/types/vocabulary';
+import type { Story } from '@/types';
 
 export const courageStories: Story[] = [
   {

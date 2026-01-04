@@ -1,10 +1,10 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 export const transportSentences: Sentence[] = [
   {
     id: '26',
-    english: 'I take the bus to school.',
-    japanese: 'わたしは バスで がっこうに いきます。',
+    en: 'I take the bus to school.',
+    ja: 'わたしは バスで がっこうに いきます。',
     jaKanji: {
       1: 'わたしは バスで 学校に 行きます。',
       2: 'わたしは バスで 学校に 行きます。',
@@ -19,8 +19,8 @@ export const transportSentences: Sentence[] = [
   },
   {
     id: '27',
-    english: 'The train moves very fast.',
-    japanese: 'でんしゃは とても はやく うごきます。',
+    en: 'The train moves very fast.',
+    ja: 'でんしゃは とても はやく うごきます。',
     jaKanji: {
       1: 'でんしゃは とても はやく うごきます。',
       2: '電車は とても 早く うごきます。',
@@ -35,8 +35,8 @@ export const transportSentences: Sentence[] = [
   },
   {
     id: '28',
-    english: 'We flew on an airplane yesterday.',
-    japanese: 'わたしたちは きのう ひこうきに のりました。',
+    en: 'We flew on an airplane yesterday.',
+    ja: 'わたしたちは きのう ひこうきに のりました。',
     jaKanji: {
       1: 'わたしたちは きのう ひこうきに のりました。',
       2: 'わたしたちは きのう ひこうきに 乗りました。',
@@ -51,8 +51,8 @@ export const transportSentences: Sentence[] = [
   },
   {
     id: '29',
-    english: 'The red car drives down the street.',
-    japanese: 'あかい くるまが みちを はしります。',
+    en: 'The red car drives down the street.',
+    ja: 'あかい くるまが みちを はしります。',
     jaKanji: {
       1: '赤い 車が みちを 走ります。',
       2: '赤い 車が 道を 走ります。',
@@ -67,8 +67,8 @@ export const transportSentences: Sentence[] = [
   },
   {
     id: '30',
-    english: 'My sister rides her bicycle to work.',
-    japanese: 'あねは じてんしゃで しごとに いきます。',
+    en: 'My sister rides her bicycle to work.',
+    ja: 'あねは じてんしゃで しごとに いきます。',
     jaKanji: {
       1: 'あねは じてんしゃで しごとに 行きます。',
       2: '姉は 自てん車で 仕事に 行きます。',

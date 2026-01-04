@@ -1,10 +1,10 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 export const holidaysSentences: Sentence[] = [
   {
     id: '96',
-    english: 'We celebrate Christmas with our family.',
-    japanese: 'わたしたちは かぞくと クリスマスを おいわいします。',
+    en: 'We celebrate Christmas with our family.',
+    ja: 'わたしたちは かぞくと クリスマスを おいわいします。',
     jaKanji: {
       1: 'わたしたちは 家ぞくと クリスマスを おいわいします。',
       2: 'わたしたちは 家族と クリスマスを おいわいします。',
@@ -19,8 +19,8 @@ export const holidaysSentences: Sentence[] = [
   },
   {
     id: '97',
-    english: 'Halloween is my favorite scary holiday.',
-    japanese: 'ハロウィンは わたしの いちばんすきな こわい やすみです。',
+    en: 'Halloween is my favorite scary holiday.',
+    ja: 'ハロウィンは わたしの いちばんすきな こわい やすみです。',
     jaKanji: {
       1: 'ハロウィンは わたしの 一ばんすきな こわい やすみです。',
       2: 'ハロウィンは わたしの 一番すきな こわい 休みです。',
@@ -35,8 +35,8 @@ export const holidaysSentences: Sentence[] = [
   },
   {
     id: '98',
-    english: 'Summer vacation lasts for two months.',
-    japanese: 'なつやすみは にかげつ つづきます。',
+    en: 'Summer vacation lasts for two months.',
+    ja: 'なつやすみは にかげつ つづきます。',
     jaKanji: {
       1: '夏やすみは 二か月 つづきます。',
       2: '夏休みは 二か月 つづきます。',
@@ -51,8 +51,8 @@ export const holidaysSentences: Sentence[] = [
   },
   {
     id: '99',
-    english: 'Spring flowers bloom everywhere in the park.',
-    japanese: 'はるになると こうえんの いたるところで はながさきます。',
+    en: 'Spring flowers bloom everywhere in the park.',
+    ja: 'はるになると こうえんの いたるところで はながさきます。',
     jaKanji: {
       1: '春になると 公園の いたるところで 花がさきます。',
       2: '春になると 公園の いたるところで 花が さきます。',
@@ -67,8 +67,8 @@ export const holidaysSentences: Sentence[] = [
   },
   {
     id: '100',
-    english: 'New Year brings hope and new beginnings.',
-    japanese: 'しんねんは きぼうと あたらしい はじまりを もたらします。',
+    en: 'New Year brings hope and new beginnings.',
+    ja: 'しんねんは きぼうと あたらしい はじまりを もたらします。',
     jaKanji: {
       1: '新年は 希ぼうと 新しい はじまりを もたらします。',
       2: '新年は 希望と 新しい はじまりを もたらします。',

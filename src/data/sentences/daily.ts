@@ -1,10 +1,10 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 export const dailySentences: Sentence[] = [
   {
     id: '1',
-    english: 'I eat breakfast every morning.',
-    japanese: 'わたしは まいあさ あさごはんを たべます。',
+    en: 'I eat breakfast every morning.',
+    ja: 'わたしは まいあさ あさごはんを たべます。',
     jaKanji: {
       1: 'わたしは まいあさ あさごはんを たべます。',
       2: 'わたしは 毎朝 あさごはんを 食べます。',
@@ -19,8 +19,8 @@ export const dailySentences: Sentence[] = [
   },
   {
     id: '2',
-    english: 'My mother makes delicious cookies.',
-    japanese: 'おかあさんは おいしい クッキーを つくります。',
+    en: 'My mother makes delicious cookies.',
+    ja: 'おかあさんは おいしい クッキーを つくります。',
     jaKanji: {
       1: 'おかあさんは おいしい クッキーを つくります。',
       2: 'お母さんは おいしい クッキーを 作ります。',
@@ -35,8 +35,8 @@ export const dailySentences: Sentence[] = [
   },
   {
     id: '3',
-    english: 'I brush my teeth before bed.',
-    japanese: 'わたしは ねるまえに はを みがきます。',
+    en: 'I brush my teeth before bed.',
+    ja: 'わたしは ねるまえに はを みがきます。',
     jaKanji: {
       1: 'わたしは ねるまえに はを みがきます。',
       2: 'わたしは ねる前に 歯を みがきます。',
@@ -51,8 +51,8 @@ export const dailySentences: Sentence[] = [
   },
   {
     id: '4',
-    english: 'We play games after school.',
-    japanese: 'わたしたちは がっこうのあとで ゲームを します。',
+    en: 'We play games after school.',
+    ja: 'わたしたちは がっこうのあとで ゲームを します。',
     jaKanji: {
       1: 'わたしたちは 学校のあとで ゲームを します。',
       2: 'わたしたちは 学校の後で ゲームを します。',

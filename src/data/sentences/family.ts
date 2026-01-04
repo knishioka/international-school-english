@@ -1,10 +1,10 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 export const familySentences: Sentence[] = [
   {
     id: '11',
-    english: 'My family loves to eat dinner together.',
-    japanese: 'かぞくは いっしょに ばんごはんを たべるのが すきです。',
+    en: 'My family loves to eat dinner together.',
+    ja: 'かぞくは いっしょに ばんごはんを たべるのが すきです。',
     jaKanji: {
       1: 'かぞくは いっしょに ばんごはんを たべるのが すきです。',
       2: '家ぞくは いっしょに ばんごはんを たべるのが すきです。',
@@ -19,8 +19,8 @@ export const familySentences: Sentence[] = [
   },
   {
     id: '12',
-    english: 'I help my father in the garden.',
-    japanese: 'わたしは にわで おとうさんを てつだいます。',
+    en: 'I help my father in the garden.',
+    ja: 'わたしは にわで おとうさんを てつだいます。',
     jaKanji: {
       1: 'わたしは にわで おとうさんを てつだいます。',
       2: 'わたしは にわで お父さんを てつだいます。',
@@ -35,8 +35,8 @@ export const familySentences: Sentence[] = [
   },
   {
     id: '13',
-    english: 'My family goes to the beach in summer.',
-    japanese: 'かぞくは なつに うみに いきます。',
+    en: 'My family goes to the beach in summer.',
+    ja: 'かぞくは なつに うみに いきます。',
     jaKanji: {
       1: 'かぞくは なつに うみに 行きます。',
       2: '家ぞくは 夏に うみに 行きます。',
@@ -51,8 +51,8 @@ export const familySentences: Sentence[] = [
   },
   {
     id: '14',
-    english: 'I help my father wash the car.',
-    japanese: 'わたしは おとうさんの くるまあらいを てつだいます。',
+    en: 'I help my father wash the car.',
+    ja: 'わたしは おとうさんの くるまあらいを てつだいます。',
     jaKanji: {
       1: 'わたしは お父さんの 車あらいを 手つだいます。',
       2: 'わたしは お父さんの 車あらいを 手つだいます。',
@@ -67,8 +67,8 @@ export const familySentences: Sentence[] = [
   },
   {
     id: '15',
-    english: 'My best friend and I play together.',
-    japanese: 'しんゆうと わたしは いっしょに あそびます。',
+    en: 'My best friend and I play together.',
+    ja: 'しんゆうと わたしは いっしょに あそびます。',
     jaKanji: {
       1: 'しんゆうと わたしは いっしょに あそびます。',
       2: 'しん友と わたしは いっしょに あそびます。',

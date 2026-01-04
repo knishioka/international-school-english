@@ -8,7 +8,7 @@ import { progressService } from '@/services/progressService';
 import { sentences } from '@/data/sentences';
 import { sentenceCategories } from '@/data/categories';
 import { shuffleArrayWithSeed, getHourlyShuffleSeed, filterByCategory } from '@/utils/arrayUtils';
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 interface WordOrderGame {
   sentence: Sentence;
@@ -169,7 +169,7 @@ export function VocabularyGamePage(): JSX.Element {
     }
 
     // Remove punctuation from the sentence for comparison
-    const sentenceWithoutPunctuation = currentGame.sentence.english.replace(/[.,!?]/g, '');
+    const sentenceWithoutPunctuation = currentGame.sentence.en.replace(/[.,!?]/g, '');
     const userAnswer = currentGame.selectedWords.join(' ');
     const isCorrect = userAnswer === sentenceWithoutPunctuation;
     setCurrentGame({ ...currentGame, isCorrect });
@@ -196,7 +196,7 @@ export function VocabularyGamePage(): JSX.Element {
 
     if (isCorrect) {
       await playSound('success');
-      speak(currentGame.sentence.english);
+      speak(currentGame.sentence.en);
     } else {
       await playSound('error');
     }
@@ -218,7 +218,7 @@ export function VocabularyGamePage(): JSX.Element {
       return;
     }
     await playSound('click');
-    speak(currentGame.sentence.english);
+    speak(currentGame.sentence.en);
   };
 
   const getHintText = (): string => {
@@ -237,11 +237,11 @@ export function VocabularyGamePage(): JSX.Element {
 
       case 2: {
         // Level 2: First word and sentence type
-        const sentenceType = sentence.english.endsWith('?')
+        const sentenceType = sentence.en.endsWith('?')
           ? language === 'ja'
             ? '質問文'
             : 'question'
-          : sentence.english.endsWith('!')
+          : sentence.en.endsWith('!')
             ? language === 'ja'
               ? '感嘆文'
               : 'exclamation'
@@ -341,9 +341,9 @@ export function VocabularyGamePage(): JSX.Element {
                   className="bg-white rounded-2xl shadow-lg p-6 text-left hover:shadow-xl transition-all"
                 >
                   <div className="text-4xl mb-3">{sentence.emoji}</div>
-                  <div className="text-base font-medium text-gray-800 mb-2">{sentence.english}</div>
+                  <div className="text-base font-medium text-gray-800 mb-2">{sentence.en}</div>
                   <div className="text-sm text-gray-600">
-                    {language === 'ja' ? sentence.jaKanji[kanjiGrade] : sentence.english}
+                    {language === 'ja' ? sentence.jaKanji[kanjiGrade] : sentence.en}
                   </div>
                 </motion.button>
               ))}
@@ -392,7 +392,7 @@ export function VocabularyGamePage(): JSX.Element {
               <div className="text-xl text-gray-800 mb-2">
                 {language === 'ja'
                   ? currentGame.sentence.jaKanji[kanjiGrade]
-                  : currentGame.sentence.english}
+                  : currentGame.sentence.en}
               </div>
 
               {hintLevel > 0 && (
@@ -537,9 +537,7 @@ export function VocabularyGamePage(): JSX.Element {
                 <p className="text-gray-700">
                   {language === 'ja' ? 'せいかい:' : 'Correct answer:'}
                 </p>
-                <p className="text-lg font-medium text-gray-900 mt-1">
-                  {currentGame.sentence.english}
-                </p>
+                <p className="text-lg font-medium text-gray-900 mt-1">{currentGame.sentence.en}</p>
               </motion.div>
             )}
           </motion.div>

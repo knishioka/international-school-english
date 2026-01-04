@@ -1,10 +1,10 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 export const technologySentences: Sentence[] = [
   {
     id: '66',
-    english: 'I use a computer for homework.',
-    japanese: 'わたしは しゅくだいに コンピューターを つかいます。',
+    en: 'I use a computer for homework.',
+    ja: 'わたしは しゅくだいに コンピューターを つかいます。',
     jaKanji: {
       1: 'わたしは しゅくだいに コンピューターを つかいます。',
       2: 'わたしは 宿だいに コンピューターを 使います。',
@@ -19,8 +19,8 @@ export const technologySentences: Sentence[] = [
   },
   {
     id: '67',
-    english: 'My phone rings when friends call.',
-    japanese: 'ともだちが でんわすると でんわが なります。',
+    en: 'My phone rings when friends call.',
+    ja: 'ともだちが でんわすると でんわが なります。',
     jaKanji: {
       1: 'ともだちが 電話すると 電話が 鳴ります。',
       2: '友だちが 電話すると 電話が 鳴ります。',
@@ -35,8 +35,8 @@ export const technologySentences: Sentence[] = [
   },
   {
     id: '68',
-    english: 'We watch movies on the television.',
-    japanese: 'わたしたちは テレビで えいがを みます。',
+    en: 'We watch movies on the television.',
+    ja: 'わたしたちは テレビで えいがを みます。',
     jaKanji: {
       1: 'わたしたちは テレビで えいがを 見ます。',
       2: 'わたしたちは テレビで 映がを 見ます。',
@@ -51,8 +51,8 @@ export const technologySentences: Sentence[] = [
   },
   {
     id: '69',
-    english: 'The camera takes beautiful pictures.',
-    japanese: 'カメラは うつくしい しゃしんを とります。',
+    en: 'The camera takes beautiful pictures.',
+    ja: 'カメラは うつくしい しゃしんを とります。',
     jaKanji: {
       1: 'カメラは うつくしい しゃしんを とります。',
       2: 'カメラは 美しい しゃしんを とります。',
@@ -67,8 +67,8 @@ export const technologySentences: Sentence[] = [
   },
   {
     id: '70',
-    english: 'Video games are fun to play.',
-    japanese: 'ビデオゲームは あそぶのが たのしいです。',
+    en: 'Video games are fun to play.',
+    ja: 'ビデオゲームは あそぶのが たのしいです。',
     jaKanji: {
       1: 'ビデオゲームは あそぶのが 楽しいです。',
       2: 'ビデオゲームは 遊ぶのが 楽しいです。',

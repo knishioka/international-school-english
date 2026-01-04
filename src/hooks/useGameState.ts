@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import type { GameState } from '@/types/vocabulary';
+import type { GameState } from '@/types';
 
 /**
  * ゲーム状態管理の共通ロジックを提供するカスタムフック

@@ -1,10 +1,10 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 export const feelingsSentences: Sentence[] = [
   {
     id: '56',
-    english: 'I feel happy when I see my friends.',
-    japanese: 'ともだちに あうと うれしく なります。',
+    en: 'I feel happy when I see my friends.',
+    ja: 'ともだちに あうと うれしく なります。',
     jaKanji: {
       1: 'ともだちに 会うと うれしく なります。',
       2: '友だちに 会うと うれしく なります。',
@@ -19,8 +19,8 @@ export const feelingsSentences: Sentence[] = [
   },
   {
     id: '57',
-    english: 'She is sad because her toy broke.',
-    japanese: 'おもちゃが こわれたので かのじょは かなしんでいます。',
+    en: 'She is sad because her toy broke.',
+    ja: 'おもちゃが こわれたので かのじょは かなしんでいます。',
     jaKanji: {
       1: 'おもちゃが こわれたので かのじょは かなしんでいます。',
       2: 'おもちゃが こわれたので 彼女は 悲しんでいます。',
@@ -35,8 +35,8 @@ export const feelingsSentences: Sentence[] = [
   },
   {
     id: '58',
-    english: 'We get excited about the school trip.',
-    japanese: 'わたしたちは しゅうがくりょこうが たのしみです。',
+    en: 'We get excited about the school trip.',
+    ja: 'わたしたちは しゅうがくりょこうが たのしみです。',
     jaKanji: {
       1: 'わたしたちは しゅうがくりょこうが 楽しみです。',
       2: 'わたしたちは 修学りょこうが 楽しみです。',
@@ -51,8 +51,8 @@ export const feelingsSentences: Sentence[] = [
   },
   {
     id: '59',
-    english: 'My little brother feels scared of the dark.',
-    japanese: 'おとうとは くらやみを こわがります。',
+    en: 'My little brother feels scared of the dark.',
+    ja: 'おとうとは くらやみを こわがります。',
     jaKanji: {
       1: 'おとうとは くらやみを こわがります。',
       2: '弟は くらやみを こわがります。',
@@ -67,8 +67,8 @@ export const feelingsSentences: Sentence[] = [
   },
   {
     id: '60',
-    english: 'The baby laughs when tickled.',
-    japanese: 'あかちゃんは くすぐられると わらいます。',
+    en: 'The baby laughs when tickled.',
+    ja: 'あかちゃんは くすぐられると わらいます。',
     jaKanji: {
       1: '赤ちゃんは くすぐられると 笑います。',
       2: '赤ちゃんは くすぐられると 笑います。',

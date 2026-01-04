@@ -1,10 +1,10 @@
-import type { Sentence } from '@/types/vocabulary';
+import type { Sentence } from '@/types';
 
 export const sportsSentences: Sentence[] = [
   {
     id: '16',
-    english: 'I play soccer with my friends.',
-    japanese: 'ともだちと サッカーを します。',
+    en: 'I play soccer with my friends.',
+    ja: 'ともだちと サッカーを します。',
     jaKanji: {
       1: 'ともだちと サッカーを します。',
       2: '友だちと サッカーを します。',
@@ -19,8 +19,8 @@ export const sportsSentences: Sentence[] = [
   },
   {
     id: '17',
-    english: 'She swims very fast in the pool.',
-    japanese: 'かのじょは プールで とても はやく およぎます。',
+    en: 'She swims very fast in the pool.',
+    ja: 'かのじょは プールで とても はやく およぎます。',
     jaKanji: {
       1: 'かのじょは プールで とても はやく およぎます。',
       2: '彼女は プールで とても 早く およぎます。',
@@ -35,8 +35,8 @@ export const sportsSentences: Sentence[] = [
   },
   {
     id: '18',
-    english: 'We practice basketball every week.',
-    japanese: 'わたしたちは まいしゅう バスケットボールを れんしゅうします。',
+    en: 'We practice basketball every week.',
+    ja: 'わたしたちは まいしゅう バスケットボールを れんしゅうします。',
     jaKanji: {
       1: 'わたしたちは まいしゅう バスケットボールを れんしゅうします。',
       2: 'わたしたちは 毎しゅう バスケットボールを れんしゅうします。',
@@ -51,8 +51,8 @@ export const sportsSentences: Sentence[] = [
   },
   {
     id: '19',
-    english: 'My brother likes to ride his bike.',
-    japanese: 'あには じてんしゃに のるのが すきです。',
+    en: 'My brother likes to ride his bike.',
+    ja: 'あには じてんしゃに のるのが すきです。',
     jaKanji: {
       1: 'あには じてんしゃに のるのが すきです。',
       2: '兄は 自てん車に のるのが すきです。',
@@ -67,8 +67,8 @@ export const sportsSentences: Sentence[] = [
   },
   {
     id: '20',
-    english: 'They run around the track together.',
-    japanese: 'かれらは いっしょに トラックを はしります。',
+    en: 'They run around the track together.',
+    ja: 'かれらは いっしょに トラックを はしります。',
     jaKanji: {
       1: 'かれらは いっしょに トラックを はしります。',
       2: '彼らは 一しょに トラックを 走ります。',

@@ -5,7 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useAudio } from '@/contexts/AudioContext';
 import { spellingWords } from '@/data/spellingWords';
 import { shuffleArrayWithSeed, getHourlyShuffleSeed } from '@/utils/arrayUtils';
-import type { SpellingWord } from '@/types/vocabulary';
+import type { SpellingWord } from '@/types';
 
 const difficulties = [
   { id: 'easy', name: { en: 'Easy (3-4 letters)', ja: 'かんたん (3-4もじ)' }, emoji: '😊' },

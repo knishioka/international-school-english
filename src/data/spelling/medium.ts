@@ -1,4 +1,4 @@
-import type { SpellingWord } from '@/types/vocabulary';
+import type { SpellingWord } from '@/types';
 
 export const mediumSpellingWords: SpellingWord[] = [
   {

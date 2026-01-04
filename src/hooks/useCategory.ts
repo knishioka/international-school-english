@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { filterByCategory } from '@/utils/arrayUtils';
-import type { Category } from '@/types/vocabulary';
+import type { Category } from '@/types';
 
 /**
  * カテゴリー選択機能を提供するカスタムフック
