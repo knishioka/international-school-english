@@ -6,6 +6,15 @@ import { useAudio } from '@/contexts/AudioContext';
 import { spellingWords } from '@/data/spellingWords';
 import { shuffleArrayWithSeed, getHourlyShuffleSeed } from '@/utils/arrayUtils';
 import type { SpellingWord } from '@/types/vocabulary';
+import {
+  useGameStore,
+  selectGameCorrectness,
+  selectGameIndex,
+  selectGameScore,
+  selectGameStarted,
+  useUiStore,
+  selectUiShowHint,
+} from '@/stores';
 
 // 以下のハードコードされたデータは削除（src/data/spellingWords.tsに移動済み）
 /*
@@ -1035,15 +1044,28 @@ export function SpellingGamePage(): JSX.Element {
   const { playSound, speak } = useAudio();
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
+  const gameKey = 'spelling';
 
   const [selectedDifficulty, setSelectedDifficulty] = useState<'easy' | 'medium' | 'hard'>('easy');
   const [currentWord, setCurrentWord] = useState<SpellingWord | null>(null);
   const [userInput, setUserInput] = useState('');
-  const [showHint, setShowHint] = useState(false);
-  const [gameStarted, setGameStarted] = useState(false);
-  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-  const [score, setScore] = useState(0);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const gameStarted = useGameStore(selectGameStarted(gameKey));
+  const isCorrect = useGameStore(selectGameCorrectness(gameKey));
+  const score = useGameStore(selectGameScore(gameKey));
+  const currentIndex = useGameStore(selectGameIndex(gameKey));
+  const startGameState = useGameStore((state) => state.startGame);
+  const submitAnswer = useGameStore((state) => state.submitAnswer);
+  const setCorrectness = useGameStore((state) => state.setCorrectness);
+  const nextQuestion = useGameStore((state) => state.nextQuestion);
+  const resetGameState = useGameStore((state) => state.resetGame);
+  const showHint = useUiStore(selectUiShowHint);
+  const setShowHint = useUiStore((state) => state.setShowHint);
+  const toggleHintState = useUiStore((state) => state.toggleHint);
+
+  useEffect(() => {
+    resetGameState(gameKey);
+    setShowHint(false);
+  }, [gameKey, resetGameState, setShowHint]);
 
   const filteredWords = spellingWords.filter((word) => word.difficulty === selectedDifficulty);
 
@@ -1062,24 +1084,24 @@ export function SpellingGamePage(): JSX.Element {
   const startGame = (): void => {
     if (shuffledWords.length > 0) {
       setCurrentWord(shuffledWords[0]);
-      setCurrentIndex(0);
-      setGameStarted(true);
+      startGameState(gameKey);
       setUserInput('');
       setShowHint(false);
-      setIsCorrect(null);
-      setScore(0);
     }
   };
 
   const handleBack = async (): Promise<void> => {
     await playSound('click');
+    resetGameState(gameKey);
+    setShowHint(false);
     navigate('/home');
   };
 
   const handleDifficultySelect = async (difficulty: 'easy' | 'medium' | 'hard'): Promise<void> => {
     await playSound('click');
     setSelectedDifficulty(difficulty);
-    setGameStarted(false);
+    resetGameState(gameKey);
+    setShowHint(false);
   };
 
   const handleInputChange = (value: string): void => {
@@ -1092,7 +1114,6 @@ export function SpellingGamePage(): JSX.Element {
     }
 
     const correct = userInput.trim() === currentWord.word;
-    setIsCorrect(correct);
 
     if (correct) {
       await playSound('success');
@@ -1113,8 +1134,9 @@ export function SpellingGamePage(): JSX.Element {
         points += 5;
       } // Bonus for not using hint
 
-      setScore(score + points);
+      submitAnswer(gameKey, true, points);
     } else {
+      submitAnswer(gameKey, false, 0);
       await playSound('error');
     }
   };
@@ -1125,13 +1147,12 @@ export function SpellingGamePage(): JSX.Element {
     const nextIndex = currentIndex + 1;
     if (nextIndex < shuffledWords.length) {
       setCurrentWord(shuffledWords[nextIndex]);
-      setCurrentIndex(nextIndex);
+      nextQuestion(gameKey);
       setUserInput('');
       setShowHint(false);
-      setIsCorrect(null);
     } else {
       // Game completed
-      setGameStarted(false);
+      resetGameState(gameKey);
     }
   };
 
@@ -1148,13 +1169,13 @@ export function SpellingGamePage(): JSX.Element {
 
   const toggleHint = async (): Promise<void> => {
     await playSound('click');
-    setShowHint(!showHint);
+    toggleHintState();
   };
 
   const handleTryAgain = async (): Promise<void> => {
     await playSound('click');
     setUserInput('');
-    setIsCorrect(null);
+    setCorrectness(gameKey, null);
   };
 
   const handleAlphabetClick = async (letter: string): Promise<void> => {
@@ -1255,7 +1276,10 @@ export function SpellingGamePage(): JSX.Element {
         {/* ヘッダー */}
         <div className="flex justify-between items-center mb-6">
           <button
-            onClick={() => setGameStarted(false)}
+            onClick={() => {
+              resetGameState(gameKey);
+              setShowHint(false);
+            }}
             className="text-2xl p-2 hover:bg-white/50 rounded-lg transition-colors"
             aria-label="Back to menu"
           >
@@ -1466,7 +1490,10 @@ export function SpellingGamePage(): JSX.Element {
                 {language === 'ja' ? `スコア: ${score} てん！` : `Final Score: ${score} points!`}
               </p>
               <button
-                onClick={() => setGameStarted(false)}
+                onClick={() => {
+                  resetGameState(gameKey);
+                  setShowHint(false);
+                }}
                 className="px-8 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-full hover:from-blue-600 hover:to-indigo-600 transition-all shadow-lg"
               >
                 {language === 'ja' ? 'もういちど' : 'Play Again'}

@@ -3,6 +3,7 @@ import { FlashCardPage } from '../FlashCardPage';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { AudioProvider } from '@/contexts/AudioContext';
 import { BrowserRouter } from 'react-router-dom';
+import { useGameStore } from '@/stores';
 
 const TestWrapper = ({ children }: { children: React.ReactNode }): JSX.Element => (
   <BrowserRouter>
@@ -28,6 +29,7 @@ describe('FlashCardPage', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     localStorage.clear();
+    useGameStore.setState({ games: {} });
   });
 
   it('renders category selection screen initially', () => {

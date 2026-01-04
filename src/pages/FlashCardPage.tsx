@@ -6,14 +6,20 @@ import { useAudio } from '@/contexts/AudioContext';
 import { FlashCard } from '@/components/FlashCard';
 import { vocabularyCategories, getVocabularyByCategory } from '@/data/vocabularyWords';
 import { shuffleArrayWithSeed, getHourlyShuffleSeed } from '@/utils/arrayUtils';
+import { useGameStore, selectGameIndex, selectGameStarted } from '@/stores';
 
 export function FlashCardPage(): JSX.Element {
   const { language } = useLanguage();
   const { playSound } = useAudio();
   const navigate = useNavigate();
+  const gameKey = 'flashcards';
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [gameStarted, setGameStarted] = useState(false);
+  const currentIndex = useGameStore(selectGameIndex(gameKey));
+  const gameStarted = useGameStore(selectGameStarted(gameKey));
+  const startGameState = useGameStore((state) => state.startGame);
+  const setCurrentIndex = useGameStore((state) => state.setCurrentIndex);
+  const nextQuestion = useGameStore((state) => state.nextQuestion);
+  const resetGameState = useGameStore((state) => state.resetGame);
 
   const filteredWords = getVocabularyByCategory(selectedCategory);
 
@@ -26,41 +32,46 @@ export function FlashCardPage(): JSX.Element {
   const currentWord = shuffledWords[currentIndex];
 
   useEffect(() => {
-    setCurrentIndex(0);
-  }, [selectedCategory]);
+    resetGameState(gameKey);
+  }, [gameKey, resetGameState]);
+
+  useEffect(() => {
+    setCurrentIndex(gameKey, 0);
+  }, [gameKey, selectedCategory, setCurrentIndex]);
 
   const handleBack = async (): Promise<void> => {
     await playSound('click');
+    resetGameState(gameKey);
     navigate('/home');
   };
 
   const handleCategorySelect = async (categoryId: string): Promise<void> => {
     await playSound('click');
     setSelectedCategory(categoryId);
-    setGameStarted(false);
+    resetGameState(gameKey);
   };
 
   const handleStartGame = async (): Promise<void> => {
     await playSound('click');
-    setGameStarted(true);
+    startGameState(gameKey);
   };
 
   const handleNext = (): void => {
     if (currentIndex < shuffledWords.length - 1) {
-      setCurrentIndex(currentIndex + 1);
+      nextQuestion(gameKey);
     }
   };
 
   const handlePrevious = (): void => {
     if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
+      setCurrentIndex(gameKey, currentIndex - 1);
     }
   };
 
   const handleBackToMenu = async (): Promise<void> => {
     await playSound('click');
-    setGameStarted(false);
-    setCurrentIndex(0);
+    resetGameState(gameKey);
+    setCurrentIndex(gameKey, 0);
   };
 
   if (!gameStarted) {

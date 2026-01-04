@@ -5,7 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useAudio } from '@/contexts/AudioContext';
 import { KanjiGradeSelector } from '@/components/KanjiGradeSelector';
 import { PageFlip } from '@/components/PageFlip';
-import { progressService } from '@/services/progressService';
+import { useProgressStore } from '@/stores/progressStore';
 import { stories } from '@/data/stories';
 import type { Story } from '@/types/vocabulary';
 
@@ -4334,6 +4334,7 @@ export function StoryPage(): JSX.Element {
   const { t, language, kanjiGrade } = useLanguage();
   const { playSound, speak } = useAudio();
   const navigate = useNavigate();
+  const updateStoryProgress = useProgressStore((state) => state.updateStoryProgress);
   const [selectedStory, setSelectedStory] = useState<Story | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [isReading, setIsReading] = useState(false);
@@ -4383,7 +4384,7 @@ export function StoryPage(): JSX.Element {
 
     // Save initial reading progress
     if (userName.length > 0) {
-      progressService.updateStoryProgress(
+      updateStoryProgress(
         userName,
         story.id,
         1, // First page
@@ -4407,7 +4408,7 @@ export function StoryPage(): JSX.Element {
 
     // Save reading progress
     if (userName.length > 0 && selectedStory !== null) {
-      progressService.updateStoryProgress(
+      updateStoryProgress(
         userName,
         selectedStory.id,
         newPage + 1, // Pages read (1-indexed)
