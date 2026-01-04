@@ -1090,10 +1090,14 @@ export function SpellingGamePage(): JSX.Element {
     }
   };
 
-  const handleBack = async (): Promise<void> => {
-    await playSound('click');
+  const handleReturnToMenu = (): void => {
     resetGameState(gameKey);
     setShowHint(false);
+  };
+
+  const handleBack = async (): Promise<void> => {
+    await playSound('click');
+    handleReturnToMenu();
     navigate('/home');
   };
 
@@ -1276,10 +1280,7 @@ export function SpellingGamePage(): JSX.Element {
         {/* ヘッダー */}
         <div className="flex justify-between items-center mb-6">
           <button
-            onClick={() => {
-              resetGameState(gameKey);
-              setShowHint(false);
-            }}
+            onClick={handleReturnToMenu}
             className="text-2xl p-2 hover:bg-white/50 rounded-lg transition-colors"
             aria-label="Back to menu"
           >
@@ -1490,10 +1491,7 @@ export function SpellingGamePage(): JSX.Element {
                 {language === 'ja' ? `スコア: ${score} てん！` : `Final Score: ${score} points!`}
               </p>
               <button
-                onClick={() => {
-                  resetGameState(gameKey);
-                  setShowHint(false);
-                }}
+                onClick={handleReturnToMenu}
                 className="px-8 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-full hover:from-blue-600 hover:to-indigo-600 transition-all shadow-lg"
               >
                 {language === 'ja' ? 'もういちど' : 'Play Again'}

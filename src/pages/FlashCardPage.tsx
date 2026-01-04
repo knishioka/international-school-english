@@ -35,10 +35,6 @@ export function FlashCardPage(): JSX.Element {
     resetGameState(gameKey);
   }, [gameKey, resetGameState]);
 
-  useEffect(() => {
-    setCurrentIndex(gameKey, 0);
-  }, [gameKey, selectedCategory, setCurrentIndex]);
-
   const handleBack = async (): Promise<void> => {
     await playSound('click');
     resetGameState(gameKey);
