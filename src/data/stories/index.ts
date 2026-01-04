@@ -76,6 +76,18 @@ export const storyCategories = [
     emoji: '⭐',
     color: 'bg-gray-100',
   },
+  {
+    id: 'logic',
+    name: { en: 'Logic', ja: 'ろんり' },
+    emoji: '🧠',
+    color: 'bg-teal-100',
+  },
+  {
+    id: 'diversity',
+    name: { en: 'Diversity', ja: 'たようせい' },
+    emoji: '🌍',
+    color: 'bg-cyan-100',
+  },
 ];
 
 /**

@@ -1,7 +1,7 @@
 import { stories } from '@/data/stories';
 import { sentences } from '@/data/sentences';
 import { spellingWords } from '@/data/spelling';
-import { filterByCategory, filterByDifficulty } from '@/data/loaders';
+import { filterByCategory, filterByDifficulty, sortById } from '@/data/loaders';
 
 describe('data loaders', () => {
   it('returns all stories', () => {
@@ -20,5 +20,17 @@ describe('data loaders', () => {
 
     expect(easyWords).toHaveLength(6);
     expect(easyWords.every((word) => word.difficulty === 'easy')).toBe(true);
+  });
+
+  it('sorts by id in ascending order', () => {
+    const items = [
+      { id: '10', value: 'ten' },
+      { id: '2', value: 'two' },
+      { id: '1', value: 'one' },
+    ];
+
+    const sorted = sortById(items);
+
+    expect(sorted.map((item) => item.id)).toEqual(['1', '2', '10']);
   });
 });
