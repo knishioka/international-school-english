@@ -22,11 +22,7 @@ jest.mock('@/contexts/AudioContext', () => ({
 // Mock GameCard component
 jest.mock('@/components/GameCard', () => ({
   GameCard: ({ title, icon, onClick }: { title: string; icon: string; onClick: () => void }) => (
-    <button 
-      onClick={onClick}
-      aria-label={`Play ${title} game`}
-      data-testid={`game-card-${title}`}
-    >
+    <button onClick={onClick} aria-label={`Play ${title} game`} data-testid={`game-card-${title}`}>
       <div>{icon}</div>
       <div>{title}</div>
     </button>
