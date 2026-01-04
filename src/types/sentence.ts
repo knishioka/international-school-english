@@ -1,9 +1,7 @@
-import type { KanjiText } from './common';
+import type { BilingualText, KanjiText } from './common';
 
-export interface Sentence {
+export interface Sentence extends BilingualText {
   id: string;
-  english: string;
-  japanese: string;
   jaKanji: KanjiText;
   words: string[];
   emoji: string;

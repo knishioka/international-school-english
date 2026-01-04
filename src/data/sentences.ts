@@ -8,8 +8,8 @@ export const sentences: Sentence[] = [
   // Daily Life - 日常生活
   {
     id: '1',
-    english: 'I eat breakfast every morning.',
-    japanese: 'わたしは まいあさ あさごはんを たべます。',
+    en: 'I eat breakfast every morning.',
+    ja: 'わたしは まいあさ あさごはんを たべます。',
     jaKanji: {
       1: 'わたしは まいあさ あさごはんを たべます。',
       2: 'わたしは 毎朝 あさごはんを 食べます。',
@@ -24,8 +24,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '2',
-    english: 'My mother makes delicious cookies.',
-    japanese: 'おかあさんは おいしい クッキーを つくります。',
+    en: 'My mother makes delicious cookies.',
+    ja: 'おかあさんは おいしい クッキーを つくります。',
     jaKanji: {
       1: 'おかあさんは おいしい クッキーを つくります。',
       2: 'お母さんは おいしい クッキーを 作ります。',
@@ -40,8 +40,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '3',
-    english: 'I brush my teeth before bed.',
-    japanese: 'わたしは ねるまえに はを みがきます。',
+    en: 'I brush my teeth before bed.',
+    ja: 'わたしは ねるまえに はを みがきます。',
     jaKanji: {
       1: 'わたしは ねるまえに はを みがきます。',
       2: 'わたしは ねる前に 歯を みがきます。',
@@ -56,8 +56,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '4',
-    english: 'We play games after school.',
-    japanese: 'わたしたちは がっこうのあとで ゲームを します。',
+    en: 'We play games after school.',
+    ja: 'わたしたちは がっこうのあとで ゲームを します。',
     jaKanji: {
       1: 'わたしたちは 学校のあとで ゲームを します。',
       2: 'わたしたちは 学校の後で ゲームを します。',
@@ -73,8 +73,8 @@ export const sentences: Sentence[] = [
   // School - 学校
   {
     id: '5',
-    english: 'I study English at school every day.',
-    japanese: 'わたしは まいにち がっこうで えいごを べんきょうします。',
+    en: 'I study English at school every day.',
+    ja: 'わたしは まいにち がっこうで えいごを べんきょうします。',
     jaKanji: {
       1: 'わたしは まい日 学校で えいごを べんきょうします。',
       2: 'わたしは 毎日 学校で えいごを べんきょうします。',
@@ -89,8 +89,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '6',
-    english: 'My teacher is very kind and helpful.',
-    japanese: 'せんせいは とても やさしくて たすけてくれます。',
+    en: 'My teacher is very kind and helpful.',
+    ja: 'せんせいは とても やさしくて たすけてくれます。',
     jaKanji: {
       1: '先生は とても やさしくて たすけてくれます。',
       2: '先生は とても やさしくて たすけてくれます。',
@@ -105,8 +105,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '7',
-    english: 'We read books in the library.',
-    japanese: 'わたしたちは としょかんで ほんを よみます。',
+    en: 'We read books in the library.',
+    ja: 'わたしたちは としょかんで ほんを よみます。',
     jaKanji: {
       1: 'わたしたちは 図書かんで ほんを よみます。',
       2: 'わたしたちは 図書館で ほんを よみます。',
@@ -121,8 +121,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '8',
-    english: 'I like math because it is fun.',
-    japanese: 'さんすうは たのしいので すきです。',
+    en: 'I like math because it is fun.',
+    ja: 'さんすうは たのしいので すきです。',
     jaKanji: {
       1: 'さんすうは 楽しいので すきです。',
       2: '算数は 楽しいので すきです。',
@@ -138,8 +138,8 @@ export const sentences: Sentence[] = [
   // Nature - 自然
   {
     id: '9',
-    english: 'The sun shines brightly in the sky.',
-    japanese: 'たいようが そらで あかるく かがやいています。',
+    en: 'The sun shines brightly in the sky.',
+    ja: 'たいようが そらで あかるく かがやいています。',
     jaKanji: {
       1: 'たいようが そらで あかるく かがやいています。',
       2: '太ようが そらで あかるく かがやいています。',
@@ -154,8 +154,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '10',
-    english: 'Birds sing beautiful songs in the morning.',
-    japanese: 'とりたちは あさに うつくしい うたを うたいます。',
+    en: 'Birds sing beautiful songs in the morning.',
+    ja: 'とりたちは あさに うつくしい うたを うたいます。',
     jaKanji: {
       1: 'とりたちは あさに うつくしい うたを うたいます。',
       2: 'とりたちは 朝に うつくしい うたを うたいます。',
@@ -171,8 +171,8 @@ export const sentences: Sentence[] = [
   // Family - 家族
   {
     id: '11',
-    english: 'My family loves to eat dinner together.',
-    japanese: 'かぞくは いっしょに ばんごはんを たべるのが すきです。',
+    en: 'My family loves to eat dinner together.',
+    ja: 'かぞくは いっしょに ばんごはんを たべるのが すきです。',
     jaKanji: {
       1: 'かぞくは いっしょに ばんごはんを たべるのが すきです。',
       2: '家ぞくは いっしょに ばんごはんを たべるのが すきです。',
@@ -187,8 +187,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '12',
-    english: 'I help my father in the garden.',
-    japanese: 'わたしは にわで おとうさんを てつだいます。',
+    en: 'I help my father in the garden.',
+    ja: 'わたしは にわで おとうさんを てつだいます。',
     jaKanji: {
       1: 'わたしは にわで おとうさんを てつだいます。',
       2: 'わたしは にわで お父さんを てつだいます。',
@@ -204,8 +204,8 @@ export const sentences: Sentence[] = [
   // Animals & Nature - 動物と自然 (続き)
   {
     id: '13',
-    english: 'My family goes to the beach in summer.',
-    japanese: 'かぞくは なつに うみに いきます。',
+    en: 'My family goes to the beach in summer.',
+    ja: 'かぞくは なつに うみに いきます。',
     jaKanji: {
       1: 'かぞくは なつに うみに 行きます。',
       2: '家ぞくは 夏に うみに 行きます。',
@@ -220,8 +220,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '14',
-    english: 'I help my father wash the car.',
-    japanese: 'わたしは おとうさんの くるまあらいを てつだいます。',
+    en: 'I help my father wash the car.',
+    ja: 'わたしは おとうさんの くるまあらいを てつだいます。',
     jaKanji: {
       1: 'わたしは お父さんの 車あらいを 手つだいます。',
       2: 'わたしは お父さんの 車あらいを 手つだいます。',
@@ -236,8 +236,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '15',
-    english: 'My best friend and I play together.',
-    japanese: 'しんゆうと わたしは いっしょに あそびます。',
+    en: 'My best friend and I play together.',
+    ja: 'しんゆうと わたしは いっしょに あそびます。',
     jaKanji: {
       1: 'しんゆうと わたしは いっしょに あそびます。',
       2: 'しん友と わたしは いっしょに あそびます。',
@@ -253,8 +253,8 @@ export const sentences: Sentence[] = [
   // Sports & Activities - スポーツと活動
   {
     id: '16',
-    english: 'I play soccer with my friends.',
-    japanese: 'ともだちと サッカーを します。',
+    en: 'I play soccer with my friends.',
+    ja: 'ともだちと サッカーを します。',
     jaKanji: {
       1: 'ともだちと サッカーを します。',
       2: '友だちと サッカーを します。',
@@ -269,8 +269,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '17',
-    english: 'She swims very fast in the pool.',
-    japanese: 'かのじょは プールで とても はやく およぎます。',
+    en: 'She swims very fast in the pool.',
+    ja: 'かのじょは プールで とても はやく およぎます。',
     jaKanji: {
       1: 'かのじょは プールで とても はやく およぎます。',
       2: '彼女は プールで とても 早く およぎます。',
@@ -285,8 +285,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '18',
-    english: 'We practice basketball every week.',
-    japanese: 'わたしたちは まいしゅう バスケットボールを れんしゅうします。',
+    en: 'We practice basketball every week.',
+    ja: 'わたしたちは まいしゅう バスケットボールを れんしゅうします。',
     jaKanji: {
       1: 'わたしたちは まいしゅう バスケットボールを れんしゅうします。',
       2: 'わたしたちは 毎しゅう バスケットボールを れんしゅうします。',
@@ -301,8 +301,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '19',
-    english: 'My brother likes to ride his bike.',
-    japanese: 'あには じてんしゃに のるのが すきです。',
+    en: 'My brother likes to ride his bike.',
+    ja: 'あには じてんしゃに のるのが すきです。',
     jaKanji: {
       1: 'あには じてんしゃに のるのが すきです。',
       2: '兄は 自てん車に のるのが すきです。',
@@ -317,8 +317,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '20',
-    english: 'They run around the track together.',
-    japanese: 'かれらは いっしょに トラックを はしります。',
+    en: 'They run around the track together.',
+    ja: 'かれらは いっしょに トラックを はしります。',
     jaKanji: {
       1: 'かれらは いっしょに トラックを はしります。',
       2: '彼らは 一しょに トラックを 走ります。',
@@ -334,8 +334,8 @@ export const sentences: Sentence[] = [
   // Food & Cooking - 食べ物と料理
   {
     id: '21',
-    english: 'I like to eat ice cream in summer.',
-    japanese: 'なつに アイスクリームを たべるのが すきです。',
+    en: 'I like to eat ice cream in summer.',
+    ja: 'なつに アイスクリームを たべるのが すきです。',
     jaKanji: {
       1: 'なつに アイスクリームを たべるのが すきです。',
       2: '夏に アイスクリームを 食べるのが すきです。',
@@ -350,8 +350,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '22',
-    english: 'My grandmother makes the best cake.',
-    japanese: 'おばあちゃんは いちばん おいしい ケーキを つくります。',
+    en: 'My grandmother makes the best cake.',
+    ja: 'おばあちゃんは いちばん おいしい ケーキを つくります。',
     jaKanji: {
       1: 'おばあちゃんは 一ばん おいしい ケーキを つくります。',
       2: 'おばあちゃんは 一番 おいしい ケーキを 作ります。',
@@ -366,8 +366,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '23',
-    english: 'We grow fresh vegetables in our garden.',
-    japanese: 'わたしたちは にわで あたらしい やさいを そだてます。',
+    en: 'We grow fresh vegetables in our garden.',
+    ja: 'わたしたちは にわで あたらしい やさいを そだてます。',
     jaKanji: {
       1: 'わたしたちは にわで あたらしい やさいを そだてます。',
       2: 'わたしたちは 庭で 新しい やさいを 育てます。',
@@ -382,8 +382,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '24',
-    english: 'She drinks milk every morning.',
-    japanese: 'かのじょは まいあさ ぎゅうにゅうを のみます。',
+    en: 'She drinks milk every morning.',
+    ja: 'かのじょは まいあさ ぎゅうにゅうを のみます。',
     jaKanji: {
       1: 'かのじょは まいあさ ぎゅうにゅうを のみます。',
       2: '彼女は 毎朝 ぎゅうにゅうを 飲みます。',
@@ -398,8 +398,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '25',
-    english: 'Pizza is my favorite food.',
-    japanese: 'ピザは わたしの いちばんすきな たべものです。',
+    en: 'Pizza is my favorite food.',
+    ja: 'ピザは わたしの いちばんすきな たべものです。',
     jaKanji: {
       1: 'ピザは わたしの 一ばんすきな 食べ物です。',
       2: 'ピザは わたしの 一番すきな 食べ物です。',
@@ -415,8 +415,8 @@ export const sentences: Sentence[] = [
   // Transportation - 交通
   {
     id: '26',
-    english: 'I take the bus to school.',
-    japanese: 'わたしは バスで がっこうに いきます。',
+    en: 'I take the bus to school.',
+    ja: 'わたしは バスで がっこうに いきます。',
     jaKanji: {
       1: 'わたしは バスで 学校に 行きます。',
       2: 'わたしは バスで 学校に 行きます。',
@@ -431,8 +431,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '27',
-    english: 'The train moves very fast.',
-    japanese: 'でんしゃは とても はやく うごきます。',
+    en: 'The train moves very fast.',
+    ja: 'でんしゃは とても はやく うごきます。',
     jaKanji: {
       1: 'でんしゃは とても はやく うごきます。',
       2: '電車は とても 早く うごきます。',
@@ -447,8 +447,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '28',
-    english: 'We flew on an airplane yesterday.',
-    japanese: 'わたしたちは きのう ひこうきに のりました。',
+    en: 'We flew on an airplane yesterday.',
+    ja: 'わたしたちは きのう ひこうきに のりました。',
     jaKanji: {
       1: 'わたしたちは きのう ひこうきに のりました。',
       2: 'わたしたちは きのう ひこうきに 乗りました。',
@@ -463,8 +463,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '29',
-    english: 'The red car drives down the street.',
-    japanese: 'あかい くるまが みちを はしります。',
+    en: 'The red car drives down the street.',
+    ja: 'あかい くるまが みちを はしります。',
     jaKanji: {
       1: '赤い 車が みちを 走ります。',
       2: '赤い 車が 道を 走ります。',
@@ -479,8 +479,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '30',
-    english: 'My sister rides her bicycle to work.',
-    japanese: 'あねは じてんしゃで しごとに いきます。',
+    en: 'My sister rides her bicycle to work.',
+    ja: 'あねは じてんしゃで しごとに いきます。',
     jaKanji: {
       1: 'あねは じてんしゃで しごとに 行きます。',
       2: '姉は 自てん車で 仕事に 行きます。',
@@ -496,8 +496,8 @@ export const sentences: Sentence[] = [
   // Weather - 天気
   {
     id: '31',
-    english: 'It is sunny and warm today.',
-    japanese: 'きょうは はれていて あたたかいです。',
+    en: 'It is sunny and warm today.',
+    ja: 'きょうは はれていて あたたかいです。',
     jaKanji: {
       1: '今日は はれていて あたたかいです。',
       2: '今日は はれていて 暖かいです。',
@@ -512,8 +512,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '32',
-    english: 'The rain falls from dark clouds.',
-    japanese: 'くらい くもから あめが ふります。',
+    en: 'The rain falls from dark clouds.',
+    ja: 'くらい くもから あめが ふります。',
     jaKanji: {
       1: 'くらい 雲から 雨が ふります。',
       2: '暗い 雲から 雨が ふります。',
@@ -528,8 +528,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '33',
-    english: 'Snow covers the ground in winter.',
-    japanese: 'ふゆに ゆきが じめんを おおいます。',
+    en: 'Snow covers the ground in winter.',
+    ja: 'ふゆに ゆきが じめんを おおいます。',
     jaKanji: {
       1: '冬に 雪が じめんを おおいます。',
       2: '冬に 雪が 地めんを おおいます。',
@@ -544,8 +544,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '34',
-    english: 'The wind blows through the trees.',
-    japanese: 'かぜが きのあいだを ふきます。',
+    en: 'The wind blows through the trees.',
+    ja: 'かぜが きのあいだを ふきます。',
     jaKanji: {
       1: 'かぜが 木のあいだを ふきます。',
       2: '風が 木のあいだを ふきます。',
@@ -560,8 +560,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '35',
-    english: 'Lightning flashes in the storm.',
-    japanese: 'あらしのとき いなずまが ひかります。',
+    en: 'Lightning flashes in the storm.',
+    ja: 'あらしのとき いなずまが ひかります。',
     jaKanji: {
       1: 'あらしのとき いなずまが ひかります。',
       2: 'あらしの時 いなずまが 光ります。',
@@ -577,8 +577,8 @@ export const sentences: Sentence[] = [
   // Colors & Art - 色と芸術
   {
     id: '36',
-    english: 'I paint with bright red colors.',
-    japanese: 'わたしは あかるい あかいろで えを かきます。',
+    en: 'I paint with bright red colors.',
+    ja: 'わたしは あかるい あかいろで えを かきます。',
     jaKanji: {
       1: 'わたしは あかるい 赤いろで えを かきます。',
       2: 'わたしは 明るい 赤色で えを かきます。',
@@ -593,8 +593,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '37',
-    english: 'The blue sky looks beautiful today.',
-    japanese: 'あおい そらが きょう うつくしく みえます。',
+    en: 'The blue sky looks beautiful today.',
+    ja: 'あおい そらが きょう うつくしく みえます。',
     jaKanji: {
       1: '青い 空が 今日 うつくしく 見えます。',
       2: '青い 空が 今日 美しく 見えます。',
@@ -609,8 +609,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '38',
-    english: 'Green grass grows in the field.',
-    japanese: 'みどりの くさが はたけに はえます。',
+    en: 'Green grass grows in the field.',
+    ja: 'みどりの くさが はたけに はえます。',
     jaKanji: {
       1: 'みどりの 草が はたけに はえます。',
       2: '緑の 草が 畑に はえます。',
@@ -625,8 +625,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '39',
-    english: 'She draws yellow flowers in her book.',
-    japanese: 'かのじょは ほんに きいろい はなを かきます。',
+    en: 'She draws yellow flowers in her book.',
+    ja: 'かのじょは ほんに きいろい はなを かきます。',
     jaKanji: {
       1: 'かのじょは 本に 黄いろい 花を かきます。',
       2: '彼女は 本に 黄色い 花を かきます。',
@@ -641,8 +641,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '40',
-    english: 'Purple balloons float in the air.',
-    japanese: 'むらさきの ふうせんが そらに うかびます。',
+    en: 'Purple balloons float in the air.',
+    ja: 'むらさきの ふうせんが そらに うかびます。',
     jaKanji: {
       1: 'むらさきの ふうせんが 空に うかびます。',
       2: 'むらさきの ふうせんが 空に うかびます。',
@@ -658,8 +658,8 @@ export const sentences: Sentence[] = [
   // Music & Dance - 音楽とダンス
   {
     id: '41',
-    english: 'I play the piano at home.',
-    japanese: 'わたしは いえで ピアノを ひきます。',
+    en: 'I play the piano at home.',
+    ja: 'わたしは いえで ピアノを ひきます。',
     jaKanji: {
       1: 'わたしは 家で ピアノを ひきます。',
       2: 'わたしは 家で ピアノを ひきます。',
@@ -674,8 +674,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '42',
-    english: 'She sings a beautiful song.',
-    japanese: 'かのじょは うつくしい うたを うたいます。',
+    en: 'She sings a beautiful song.',
+    ja: 'かのじょは うつくしい うたを うたいます。',
     jaKanji: {
       1: 'かのじょは うつくしい 歌を うたいます。',
       2: '彼女は 美しい 歌を 歌います。',
@@ -690,8 +690,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '43',
-    english: 'We dance to the happy music.',
-    japanese: 'わたしたちは たのしい おんがくに あわせて おどります。',
+    en: 'We dance to the happy music.',
+    ja: 'わたしたちは たのしい おんがくに あわせて おどります。',
     jaKanji: {
       1: 'わたしたちは たのしい 音がくに 合わせて おどります。',
       2: 'わたしたちは 楽しい 音楽に 合わせて おどります。',
@@ -706,8 +706,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '44',
-    english: 'The guitar makes lovely sounds.',
-    japanese: 'ギターは すてきな おとを だします。',
+    en: 'The guitar makes lovely sounds.',
+    ja: 'ギターは すてきな おとを だします。',
     jaKanji: {
       1: 'ギターは すてきな 音を 出します。',
       2: 'ギターは すてきな 音を 出します。',
@@ -722,8 +722,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '45',
-    english: 'My friend plays drums very well.',
-    japanese: 'ともだちは ドラムを とても じょうずに たたきます。',
+    en: 'My friend plays drums very well.',
+    ja: 'ともだちは ドラムを とても じょうずに たたきます。',
     jaKanji: {
       1: 'ともだちは ドラムを とても じょうずに たたきます。',
       2: '友だちは ドラムを とても じょうずに たたきます。',
@@ -739,8 +739,8 @@ export const sentences: Sentence[] = [
   // Time & Calendar - 時間とカレンダー
   {
     id: '46',
-    english: "I wake up at seven o'clock.",
-    japanese: 'わたしは しちじに おきます。',
+    en: "I wake up at seven o'clock.",
+    ja: 'わたしは しちじに おきます。',
     jaKanji: {
       1: 'わたしは 七じに おきます。',
       2: 'わたしは 七時に おきます。',
@@ -755,8 +755,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '47',
-    english: 'Today is Monday morning.',
-    japanese: 'きょうは げつようびの あさです。',
+    en: 'Today is Monday morning.',
+    ja: 'きょうは げつようびの あさです。',
     jaKanji: {
       1: '今日は げつ曜日の 朝です。',
       2: '今日は 月曜日の 朝です。',
@@ -771,8 +771,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '48',
-    english: 'We have dinner at six thirty.',
-    japanese: 'わたしたちは ろくじはんに ばんごはんを たべます。',
+    en: 'We have dinner at six thirty.',
+    ja: 'わたしたちは ろくじはんに ばんごはんを たべます。',
     jaKanji: {
       1: 'わたしたちは 六じはんに ばんごはんを たべます。',
       2: 'わたしたちは 六時はんに 晩ごはんを 食べます。',
@@ -787,8 +787,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '49',
-    english: 'My birthday is in December.',
-    japanese: 'わたしの たんじょうびは じゅうにがつです。',
+    en: 'My birthday is in December.',
+    ja: 'わたしの たんじょうびは じゅうにがつです。',
     jaKanji: {
       1: 'わたしの たんじょう日は 十二月です。',
       2: 'わたしの 誕生日は 十二月です。',
@@ -803,8 +803,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '50',
-    english: 'Spring comes after winter ends.',
-    japanese: 'ふゆが おわると はるが きます。',
+    en: 'Spring comes after winter ends.',
+    ja: 'ふゆが おわると はるが きます。',
     jaKanji: {
       1: '冬が おわると 春が 来ます。',
       2: '冬が 終わると 春が 来ます。',
@@ -820,8 +820,8 @@ export const sentences: Sentence[] = [
   // Animals - 動物 (続き)
   {
     id: '51',
-    english: 'The cat sleeps in the warm sun.',
-    japanese: 'ねこは あたたかい おひさまの なかで ねています。',
+    en: 'The cat sleeps in the warm sun.',
+    ja: 'ねこは あたたかい おひさまの なかで ねています。',
     jaKanji: {
       1: '猫は あたたかい お日さまの 中で ねています。',
       2: '猫は 暖かい お日様の 中で ねています。',
@@ -836,8 +836,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '52',
-    english: 'Fish swim quickly in the river.',
-    japanese: 'さかなは かわで はやく およぎます。',
+    en: 'Fish swim quickly in the river.',
+    ja: 'さかなは かわで はやく およぎます。',
     jaKanji: {
       1: '魚は 川で 早く およぎます。',
       2: '魚は 川で 早く およぎます。',
@@ -852,8 +852,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '53',
-    english: 'The elephant has a long trunk.',
-    japanese: 'ぞうは ながい はなを もっています。',
+    en: 'The elephant has a long trunk.',
+    ja: 'ぞうは ながい はなを もっています。',
     jaKanji: {
       1: 'ぞうは 長い 鼻を もっています。',
       2: 'ぞうは 長い 鼻を 持っています。',
@@ -868,8 +868,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '54',
-    english: 'Rabbits hop across the grass.',
-    japanese: 'うさぎは くさのうえを ぴょんぴょんと はねます。',
+    en: 'Rabbits hop across the grass.',
+    ja: 'うさぎは くさのうえを ぴょんぴょんと はねます。',
     jaKanji: {
       1: 'うさぎは 草の上を ぴょんぴょんと はねます。',
       2: 'うさぎは 草の上を ぴょんぴょんと はねます。',
@@ -884,8 +884,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '55',
-    english: 'The monkey swings from tree to tree.',
-    japanese: 'さるは きから きへと ブランコのように とびうつります。',
+    en: 'The monkey swings from tree to tree.',
+    ja: 'さるは きから きへと ブランコのように とびうつります。',
     jaKanji: {
       1: 'さるは 木から 木へと ブランコのように とびうつります。',
       2: 'さるは 木から 木へと ブランコのように とびうつります。',
@@ -901,8 +901,8 @@ export const sentences: Sentence[] = [
   // Emotions & Feelings - 感情
   {
     id: '56',
-    english: 'I feel happy when I see my friends.',
-    japanese: 'ともだちに あうと うれしく なります。',
+    en: 'I feel happy when I see my friends.',
+    ja: 'ともだちに あうと うれしく なります。',
     jaKanji: {
       1: 'ともだちに 会うと うれしく なります。',
       2: '友だちに 会うと うれしく なります。',
@@ -917,8 +917,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '57',
-    english: 'She is sad because her toy broke.',
-    japanese: 'おもちゃが こわれたので かのじょは かなしんでいます。',
+    en: 'She is sad because her toy broke.',
+    ja: 'おもちゃが こわれたので かのじょは かなしんでいます。',
     jaKanji: {
       1: 'おもちゃが こわれたので かのじょは かなしんでいます。',
       2: 'おもちゃが こわれたので 彼女は 悲しんでいます。',
@@ -933,8 +933,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '58',
-    english: 'We get excited about the school trip.',
-    japanese: 'わたしたちは しゅうがくりょこうが たのしみです。',
+    en: 'We get excited about the school trip.',
+    ja: 'わたしたちは しゅうがくりょこうが たのしみです。',
     jaKanji: {
       1: 'わたしたちは しゅうがくりょこうが 楽しみです。',
       2: 'わたしたちは 修学りょこうが 楽しみです。',
@@ -949,8 +949,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '59',
-    english: 'My little brother feels scared of the dark.',
-    japanese: 'おとうとは くらやみを こわがります。',
+    en: 'My little brother feels scared of the dark.',
+    ja: 'おとうとは くらやみを こわがります。',
     jaKanji: {
       1: 'おとうとは くらやみを こわがります。',
       2: '弟は くらやみを こわがります。',
@@ -965,8 +965,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '60',
-    english: 'The baby laughs when tickled.',
-    japanese: 'あかちゃんは くすぐられると わらいます。',
+    en: 'The baby laughs when tickled.',
+    ja: 'あかちゃんは くすぐられると わらいます。',
     jaKanji: {
       1: '赤ちゃんは くすぐられると 笑います。',
       2: '赤ちゃんは くすぐられると 笑います。',
@@ -982,8 +982,8 @@ export const sentences: Sentence[] = [
   // House & Rooms - 家と部屋
   {
     id: '61',
-    english: 'My bedroom has a big window.',
-    japanese: 'わたしの しんしつには おおきな まどが あります。',
+    en: 'My bedroom has a big window.',
+    ja: 'わたしの しんしつには おおきな まどが あります。',
     jaKanji: {
       1: 'わたしの しんしつには 大きな まどが あります。',
       2: 'わたしの 寝室には 大きな 窓が あります。',
@@ -998,8 +998,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '62',
-    english: 'We eat meals in the kitchen.',
-    japanese: 'わたしたちは だいどころで しょくじを します。',
+    en: 'We eat meals in the kitchen.',
+    ja: 'わたしたちは だいどころで しょくじを します。',
     jaKanji: {
       1: 'わたしたちは だいどころで しょくじを します。',
       2: 'わたしたちは 台所で 食事を します。',
@@ -1014,8 +1014,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '63',
-    english: 'The living room has comfortable chairs.',
-    japanese: 'いまには らくな いすが あります。',
+    en: 'The living room has comfortable chairs.',
+    ja: 'いまには らくな いすが あります。',
     jaKanji: {
       1: 'いまには らくな いすが あります。',
       2: '居間には 楽な いすが あります。',
@@ -1030,8 +1030,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '64',
-    english: 'I take a bath in the bathroom.',
-    japanese: 'わたしは おふろばで おふろに はいります。',
+    en: 'I take a bath in the bathroom.',
+    ja: 'わたしは おふろばで おふろに はいります。',
     jaKanji: {
       1: 'わたしは おふろ場で おふろに 入ります。',
       2: 'わたしは お風ろ場で お風ろに 入ります。',
@@ -1046,8 +1046,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '65',
-    english: 'The garden behind our house is beautiful.',
-    japanese: 'いえの うしろの にわは うつくしいです。',
+    en: 'The garden behind our house is beautiful.',
+    ja: 'いえの うしろの にわは うつくしいです。',
     jaKanji: {
       1: '家の うしろの 庭は うつくしいです。',
       2: '家の 後ろの 庭は 美しいです。',
@@ -1063,8 +1063,8 @@ export const sentences: Sentence[] = [
   // Technology & Gadgets - 技術
   {
     id: '66',
-    english: 'I use a computer for homework.',
-    japanese: 'わたしは しゅくだいに コンピューターを つかいます。',
+    en: 'I use a computer for homework.',
+    ja: 'わたしは しゅくだいに コンピューターを つかいます。',
     jaKanji: {
       1: 'わたしは しゅくだいに コンピューターを つかいます。',
       2: 'わたしは 宿だいに コンピューターを 使います。',
@@ -1079,8 +1079,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '67',
-    english: 'My phone rings when friends call.',
-    japanese: 'ともだちが でんわすると でんわが なります。',
+    en: 'My phone rings when friends call.',
+    ja: 'ともだちが でんわすると でんわが なります。',
     jaKanji: {
       1: 'ともだちが 電話すると 電話が 鳴ります。',
       2: '友だちが 電話すると 電話が 鳴ります。',
@@ -1095,8 +1095,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '68',
-    english: 'We watch movies on the television.',
-    japanese: 'わたしたちは テレビで えいがを みます。',
+    en: 'We watch movies on the television.',
+    ja: 'わたしたちは テレビで えいがを みます。',
     jaKanji: {
       1: 'わたしたちは テレビで えいがを 見ます。',
       2: 'わたしたちは テレビで 映がを 見ます。',
@@ -1111,8 +1111,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '69',
-    english: 'The camera takes beautiful pictures.',
-    japanese: 'カメラは うつくしい しゃしんを とります。',
+    en: 'The camera takes beautiful pictures.',
+    ja: 'カメラは うつくしい しゃしんを とります。',
     jaKanji: {
       1: 'カメラは うつくしい しゃしんを とります。',
       2: 'カメラは 美しい しゃしんを とります。',
@@ -1127,8 +1127,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '70',
-    english: 'Video games are fun to play.',
-    japanese: 'ビデオゲームは あそぶのが たのしいです。',
+    en: 'Video games are fun to play.',
+    ja: 'ビデオゲームは あそぶのが たのしいです。',
     jaKanji: {
       1: 'ビデオゲームは あそぶのが 楽しいです。',
       2: 'ビデオゲームは 遊ぶのが 楽しいです。',
@@ -1144,8 +1144,8 @@ export const sentences: Sentence[] = [
   // Clothes & Fashion - 服装
   {
     id: '71',
-    english: 'I wear my favorite blue shirt.',
-    japanese: 'わたしは すきな あおい シャツを きます。',
+    en: 'I wear my favorite blue shirt.',
+    ja: 'わたしは すきな あおい シャツを きます。',
     jaKanji: {
       1: 'わたしは すきな 青い シャツを きます。',
       2: 'わたしは すきな 青い シャツを 着ます。',
@@ -1160,8 +1160,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '72',
-    english: 'Her red dress looks very pretty.',
-    japanese: 'かのじょの あかい ドレスは とても きれいです。',
+    en: 'Her red dress looks very pretty.',
+    ja: 'かのじょの あかい ドレスは とても きれいです。',
     jaKanji: {
       1: 'かのじょの 赤い ドレスは とても きれいです。',
       2: '彼女の 赤い ドレスは とても きれいです。',
@@ -1176,8 +1176,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '73',
-    english: 'We put on warm coats in winter.',
-    japanese: 'ふゆには あたたかい コートを きます。',
+    en: 'We put on warm coats in winter.',
+    ja: 'ふゆには あたたかい コートを きます。',
     jaKanji: {
       1: '冬には あたたかい コートを 着ます。',
       2: '冬には 暖かい コートを 着ます。',
@@ -1192,8 +1192,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '74',
-    english: 'My new shoes are very comfortable.',
-    japanese: 'わたしの あたらしい くつは とても らくです。',
+    en: 'My new shoes are very comfortable.',
+    ja: 'わたしの あたらしい くつは とても らくです。',
     jaKanji: {
       1: 'わたしの 新しい くつは とても らくです。',
       2: 'わたしの 新しい 靴は とても 楽です。',
@@ -1208,8 +1208,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '75',
-    english: 'The hat protects me from the sun.',
-    japanese: 'ぼうしは たいようから わたしを まもります。',
+    en: 'The hat protects me from the sun.',
+    ja: 'ぼうしは たいようから わたしを まもります。',
     jaKanji: {
       1: 'ぼうしは 太ようから わたしを 守ります。',
       2: 'ぼうしは 太陽から わたしを 守ります。',
@@ -1225,8 +1225,8 @@ export const sentences: Sentence[] = [
   // Health & Body - 健康と体
   {
     id: '76',
-    english: 'I exercise to stay healthy and strong.',
-    japanese: 'わたしは けんこうで つよくいるために うんどうします。',
+    en: 'I exercise to stay healthy and strong.',
+    ja: 'わたしは けんこうで つよくいるために うんどうします。',
     jaKanji: {
       1: 'わたしは けんこうで つよくいるために うんどうします。',
       2: 'わたしは 健こうで 強くいるために 運動します。',
@@ -1241,8 +1241,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '77',
-    english: 'My eyes are brown and my hair is black.',
-    japanese: 'わたしの めは ちゃいろで かみは くろいです。',
+    en: 'My eyes are brown and my hair is black.',
+    ja: 'わたしの めは ちゃいろで かみは くろいです。',
     jaKanji: {
       1: 'わたしの 目は ちゃいろで 髪は 黒いです。',
       2: 'わたしの 目は 茶いろで 髪は 黒いです。',
@@ -1257,8 +1257,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '78',
-    english: 'I wash my hands before eating.',
-    japanese: 'わたしは たべるまえに てを あらいます。',
+    en: 'I wash my hands before eating.',
+    ja: 'わたしは たべるまえに てを あらいます。',
     jaKanji: {
       1: 'わたしは 食べるまえに 手を 洗います。',
       2: 'わたしは 食べる前に 手を 洗います。',
@@ -1273,8 +1273,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '79',
-    english: 'The doctor checks if I am feeling well.',
-    japanese: 'おいしゃさんは わたしが げんきかを しらべます。',
+    en: 'The doctor checks if I am feeling well.',
+    ja: 'おいしゃさんは わたしが げんきかを しらべます。',
     jaKanji: {
       1: 'おいしゃさんは わたしが 元気かを 調べます。',
       2: 'お医者さんは わたしが 元気かを 調べます。',
@@ -1289,8 +1289,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '80',
-    english: 'I need to sleep eight hours every night.',
-    japanese: 'わたしは まいばん はちじかん ねなければなりません。',
+    en: 'I need to sleep eight hours every night.',
+    ja: 'わたしは まいばん はちじかん ねなければなりません。',
     jaKanji: {
       1: 'わたしは まいばん 八じかん ねなければなりません。',
       2: 'わたしは 毎ばん 八時間 ねなければなりません。',
@@ -1306,8 +1306,8 @@ export const sentences: Sentence[] = [
   // Numbers & Math - 数字と算数
   {
     id: '81',
-    english: 'I have ten fingers on my hands.',
-    japanese: 'わたしの てには じゅっぽんの ゆびが あります。',
+    en: 'I have ten fingers on my hands.',
+    ja: 'わたしの てには じゅっぽんの ゆびが あります。',
     jaKanji: {
       1: 'わたしの 手には 十ぽんの 指が あります。',
       2: 'わたしの 手には 十本の 指が あります。',
@@ -1322,8 +1322,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '82',
-    english: 'Two plus three equals five.',
-    japanese: 'にたす さんは ごです。',
+    en: 'Two plus three equals five.',
+    ja: 'にたす さんは ごです。',
     jaKanji: {
       1: '二たす 三は 五です。',
       2: '二たす 三は 五です。',
@@ -1338,8 +1338,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '83',
-    english: 'She counts from one to twenty.',
-    japanese: 'かのじょは いちから にじゅうまで かぞえます。',
+    en: 'She counts from one to twenty.',
+    ja: 'かのじょは いちから にじゅうまで かぞえます。',
     jaKanji: {
       1: 'かのじょは 一から 二十まで 数えます。',
       2: '彼女は 一から 二十まで 数えます。',
@@ -1354,8 +1354,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '84',
-    english: 'There are seven days in one week.',
-    japanese: 'いっしゅうかんには なのかが あります。',
+    en: 'There are seven days in one week.',
+    ja: 'いっしゅうかんには なのかが あります。',
     jaKanji: {
       1: '一しゅうかんには 七日が あります。',
       2: '一週かんには 七日が あります。',
@@ -1370,8 +1370,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '85',
-    english: 'I can solve this math problem easily.',
-    japanese: 'わたしは この さんすうの もんだいを かんたんに とけます。',
+    en: 'I can solve this math problem easily.',
+    ja: 'わたしは この さんすうの もんだいを かんたんに とけます。',
     jaKanji: {
       1: 'わたしは この 算すうの 問だいを かんたんに とけます。',
       2: 'わたしは この 算数の 問題を かんたんに とけます。',
@@ -1387,8 +1387,8 @@ export const sentences: Sentence[] = [
   // Hobbies & Interests - 趣味
   {
     id: '86',
-    english: 'I collect colorful stamps from different countries.',
-    japanese: 'わたしは いろいろな くにの カラフルな きってを あつめます。',
+    en: 'I collect colorful stamps from different countries.',
+    ja: 'わたしは いろいろな くにの カラフルな きってを あつめます。',
     jaKanji: {
       1: 'わたしは いろいろな 国の カラフルな 切手を 集めます。',
       2: 'わたしは いろいろな 国の カラフルな 切手を 集めます。',
@@ -1403,8 +1403,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '87',
-    english: 'She enjoys knitting scarves for her family.',
-    japanese: 'かのじょは かぞくのために マフラーを あむのが すきです。',
+    en: 'She enjoys knitting scarves for her family.',
+    ja: 'かのじょは かぞくのために マフラーを あむのが すきです。',
     jaKanji: {
       1: 'かのじょは 家ぞくのために マフラーを あむのが すきです。',
       2: '彼女は 家族のために マフラーを あむのが すきです。',
@@ -1419,8 +1419,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '88',
-    english: 'We like to go fishing by the lake.',
-    japanese: 'わたしたちは みずうみで つりを するのが すきです。',
+    en: 'We like to go fishing by the lake.',
+    ja: 'わたしたちは みずうみで つりを するのが すきです。',
     jaKanji: {
       1: 'わたしたちは みずうみで つりを するのが すきです。',
       2: 'わたしたちは 湖で つりを するのが すきです。',
@@ -1435,8 +1435,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '89',
-    english: 'My grandfather loves to work in his garden.',
-    japanese: 'おじいちゃんは にわしごとが だいすきです。',
+    en: 'My grandfather loves to work in his garden.',
+    ja: 'おじいちゃんは にわしごとが だいすきです。',
     jaKanji: {
       1: 'おじいちゃんは 庭しごとが 大すきです。',
       2: 'おじいちゃんは 庭仕事が 大好きです。',
@@ -1451,8 +1451,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '90',
-    english: 'I build model airplanes in my free time.',
-    japanese: 'わたしは ひまなときに もけいひこうきを つくります。',
+    en: 'I build model airplanes in my free time.',
+    ja: 'わたしは ひまなときに もけいひこうきを つくります。',
     jaKanji: {
       1: 'わたしは ひまな時に 模けいひこうきを 作ります。',
       2: 'わたしは ひまな時に 模けい飛行機を 作ります。',
@@ -1468,8 +1468,8 @@ export const sentences: Sentence[] = [
   // Shopping & Money - 買い物とお金
   {
     id: '91',
-    english: 'I save money to buy a new bicycle.',
-    japanese: 'わたしは あたらしい じてんしゃを かうために おかねを ためます。',
+    en: 'I save money to buy a new bicycle.',
+    ja: 'わたしは あたらしい じてんしゃを かうために おかねを ためます。',
     jaKanji: {
       1: 'わたしは 新しい 自てん車を 買うために お金を ためます。',
       2: 'わたしは 新しい 自転車を 買うために お金を ためます。',
@@ -1484,8 +1484,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '92',
-    english: 'We go to the store to buy groceries.',
-    japanese: 'わたしたちは しょくりょうひんを かいに みせに いきます。',
+    en: 'We go to the store to buy groceries.',
+    ja: 'わたしたちは しょくりょうひんを かいに みせに いきます。',
     jaKanji: {
       1: 'わたしたちは 食りょうひんを 買いに 店に 行きます。',
       2: 'わたしたちは 食料ひんを 買いに 店に 行きます。',
@@ -1500,8 +1500,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '93',
-    english: 'The toy costs five dollars.',
-    japanese: 'そのおもちゃは ごドルです。',
+    en: 'The toy costs five dollars.',
+    ja: 'そのおもちゃは ごドルです。',
     jaKanji: {
       1: 'そのおもちゃは 五ドルです。',
       2: 'そのおもちゃは 五ドルです。',
@@ -1516,8 +1516,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '94',
-    english: 'She pays with her credit card.',
-    japanese: 'かのじょは クレジットカードで はらいます。',
+    en: 'She pays with her credit card.',
+    ja: 'かのじょは クレジットカードで はらいます。',
     jaKanji: {
       1: 'かのじょは クレジットカードで はらいます。',
       2: '彼女は クレジットカードで はらいます。',
@@ -1532,8 +1532,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '95',
-    english: 'The shopping mall has many different stores.',
-    japanese: 'ショッピングモールには いろいろな みせが あります。',
+    en: 'The shopping mall has many different stores.',
+    ja: 'ショッピングモールには いろいろな みせが あります。',
     jaKanji: {
       1: 'ショッピングモールには いろいろな 店が あります。',
       2: 'ショッピングモールには いろいろな 店が あります。',
@@ -1549,8 +1549,8 @@ export const sentences: Sentence[] = [
   // Seasons & Holidays - 季節と祝日
   {
     id: '96',
-    english: 'We celebrate Christmas with our family.',
-    japanese: 'わたしたちは かぞくと クリスマスを おいわいします。',
+    en: 'We celebrate Christmas with our family.',
+    ja: 'わたしたちは かぞくと クリスマスを おいわいします。',
     jaKanji: {
       1: 'わたしたちは 家ぞくと クリスマスを おいわいします。',
       2: 'わたしたちは 家族と クリスマスを おいわいします。',
@@ -1565,8 +1565,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '97',
-    english: 'Halloween is my favorite scary holiday.',
-    japanese: 'ハロウィンは わたしの いちばんすきな こわい やすみです。',
+    en: 'Halloween is my favorite scary holiday.',
+    ja: 'ハロウィンは わたしの いちばんすきな こわい やすみです。',
     jaKanji: {
       1: 'ハロウィンは わたしの 一ばんすきな こわい やすみです。',
       2: 'ハロウィンは わたしの 一番すきな こわい 休みです。',
@@ -1581,8 +1581,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '98',
-    english: 'Summer vacation lasts for two months.',
-    japanese: 'なつやすみは にかげつ つづきます。',
+    en: 'Summer vacation lasts for two months.',
+    ja: 'なつやすみは にかげつ つづきます。',
     jaKanji: {
       1: '夏やすみは 二か月 つづきます。',
       2: '夏休みは 二か月 つづきます。',
@@ -1597,8 +1597,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '99',
-    english: 'Spring flowers bloom everywhere in the park.',
-    japanese: 'はるになると こうえんの いたるところで はながさきます。',
+    en: 'Spring flowers bloom everywhere in the park.',
+    ja: 'はるになると こうえんの いたるところで はながさきます。',
     jaKanji: {
       1: '春になると 公園の いたるところで 花がさきます。',
       2: '春になると 公園の いたるところで 花が さきます。',
@@ -1613,8 +1613,8 @@ export const sentences: Sentence[] = [
   },
   {
     id: '100',
-    english: 'New Year brings hope and new beginnings.',
-    japanese: 'しんねんは きぼうと あたらしい はじまりを もたらします。',
+    en: 'New Year brings hope and new beginnings.',
+    ja: 'しんねんは きぼうと あたらしい はじまりを もたらします。',
     jaKanji: {
       1: '新年は 希ぼうと 新しい はじまりを もたらします。',
       2: '新年は 希望と 新しい はじまりを もたらします。',

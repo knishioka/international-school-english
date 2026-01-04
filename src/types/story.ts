@@ -1,6 +1,19 @@
 import type { KanjiGrade } from '@/contexts/LanguageContext';
 import type { BilingualText, KanjiText, MultilingualText } from './common';
 
+export type StoryCategory =
+  | 'moral'
+  | 'friendship'
+  | 'nature'
+  | 'responsibility'
+  | 'courage'
+  | 'patience'
+  | 'imagination'
+  | 'empathy'
+  | 'logic'
+  | 'self-esteem'
+  | 'diversity';
+
 export interface StoryPage {
   text: BilingualText;
   jaKanji: KanjiText;
@@ -12,18 +25,7 @@ export interface Story {
   title: MultilingualText;
   description: MultilingualText;
   lesson: MultilingualText;
-  category:
-    | 'moral'
-    | 'friendship'
-    | 'nature'
-    | 'responsibility'
-    | 'courage'
-    | 'patience'
-    | 'imagination'
-    | 'empathy'
-    | 'logic'
-    | 'self-esteem'
-    | 'diversity';
+  category: StoryCategory;
   minGrade: KanjiGrade;
   pages: StoryPage[];
 }

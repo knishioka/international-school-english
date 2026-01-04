@@ -1,3 +1,5 @@
+export type SpellingDifficulty = 'easy' | 'medium' | 'hard';
+
 export interface SpellingWord {
   id: string;
   word: string;
@@ -6,5 +8,5 @@ export interface SpellingWord {
   hint: string;
   image: string;
   emoji: string;
-  difficulty: 'easy' | 'medium' | 'hard';
+  difficulty: SpellingDifficulty;
 }
